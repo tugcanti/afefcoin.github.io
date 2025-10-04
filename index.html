@@ -87,9 +87,11 @@
 */
 const CONFIG = {
   TOKEN_ADDRESS: '0x367a584a928b641330E8B20e7C4739675741f40d',
-  CLAIM_CONTRACT_ADDRESS: '', // set to claim contract if you have one (e.g., '0x1234...'), else leave empty
+  CLAIM_CONTRACT_ADDRESS: '', // empty = use webhook/manual flow
   NETWORK: 'ethereum',
-  API_CLAIM_ENDPOINT: 'https://your-server.example.com/api/claim' // if you don't have a claim contract, set to your webhook
+  API_CLAIM_ENDPOINT: 'https://<Afef Coin>.netlify.app/.netlify/functions/claim'
+};
+
 };
 
 // display contract
