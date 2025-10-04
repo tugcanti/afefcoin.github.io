@@ -1,0 +1,13 @@
+{
+  "name": "afef-airdrop",
+  "version": "1.0.0",
+  "description": "Admin airdrop script for AFEF",
+  "main": "airdrop.js",
+  "scripts": {
+    "airdrop": "node airdrop.js"
+  },
+  "dependencies": {
+    "csv-parse": "^5.0.0",
+    "ethers": "^6.9.0"
+  }
+}
