@@ -160,3 +160,333 @@
             background-color: inherit;
             width: 50%;
         }
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            width: 25px;
+            height: 25px;
+            right: -17px;
+            background-color: var(--dark-color);
+            border: 4px solid var(--secondary-color);
+            top: 15px;
+            border-radius: 50%;
+            z-index: 1;
+        }
+        .timeline-item-left {
+            left: 0;
+        }
+        .timeline-item-right {
+            left: 50%;
+        }
+        .timeline-item-left::before {
+            content: " ";
+            height: 0;
+            position: absolute;
+            top: 22px;
+            width: 0;
+            z-index: 1;
+            right: 30px;
+            border: medium solid var(--dark-color);
+            border-width: 10px 0 10px 10px;
+            border-color: transparent transparent transparent var(--dark-color);
+        }
+        .timeline-item-right::before {
+            content: " ";
+            height: 0;
+            position: absolute;
+            top: 22px;
+            width: 0;
+            z-index: 1;
+            left: 30px;
+            border: medium solid var(--dark-color);
+            border-width: 10px 10px 10px 0;
+            border-color: transparent var(--dark-color) transparent transparent;
+        }
+        .timeline-item-right::after {
+            left: -16px;
+        }
+        .timeline-content {
+            padding: 20px 30px;
+            background-color: var(--dark-color);
+            position: relative;
+            border-radius: 6px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+        }
+        .timeline-content h3 {
+            color: var(--secondary-color);
+            margin-top: 0;
+        }
+        #contact {
+            text-align: center;
+        }
+        #contact input[type="text"],
+        #contact input[type="email"],
+        #contact textarea {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid var(--primary-color);
+            border-radius: 5px;
+            background-color: var(--bg-dark);
+            color: var(--text-color);
+        }
+        #contact textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+        #contact button {
+            background-color: var(--secondary-color);
+            color: var(--dark-color);
+            padding: 12px 25px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1.1em;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+        #contact button:hover {
+            background-color: var(--text-color);
+            transform: translateY(-2px);
+        }
+        footer {
+            background-color: #0d0d0d;
+            color: var(--text-color);
+            text-align: center;
+            padding: 30px 0;
+            margin-top: 50px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+        .social-links a {
+            font-size: 1.8em;
+            margin: 0 10px;
+            color: var(--text-color);
+        }
+        .social-links a:hover {
+            color: var(--secondary-color);
+        }
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2.5em;
+            }
+            .section-title {
+                font-size: 2em;
+            }
+            #roadmap .timeline::after {
+                left: 31px;
+            }
+            .timeline-item {
+                width: 100%;
+                padding-left: 70px;
+                padding-right: 25px;
+            }
+            .timeline-item-left::before,
+            .timeline-item-right::before {
+                left: 60px;
+                border: medium solid var(--dark-color);
+                border-width: 10px 10px 10px 0;
+                border-color: transparent var(--dark-color) transparent transparent;
+            }
+            .timeline-item-left::after,
+            .timeline-item-right::after {
+                left: 15px;
+            }
+            .timeline-item-right {
+                left: 0%;
+            }
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes slideInUp {
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animated {
+            opacity: 0;
+        }
+        .animated.visible {
+            animation: slideInUp 1s ease-out forwards;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>AFEF Coin</h1>
+            <p>The Next-Gen Fan Token for Age of Empires Mobile Players!</p>
+            <a href="#about" class="cta-button">Learn More About AFEF</a>
+        </div>
+    </header>
+
+    <main>
+        <section id="about" class="animated">
+            <div class="container">
+                <h2 class="section-title">What is AFEF Coin?</h2>
+                <p>AFEF Coin is a fan token specially designed for the community of the legendary strategy game, Age of Empires Mobile. It offers players and fans the opportunity to have a say in the project's development, participate in exclusive events, and potentially gain in-game advantages in the future.</p>
+                <p>Our mission is to empower our community by merging the Age of Empires universe with blockchain technology, adding real value to our token holders.</p>
+            </div>
+        </section>
+
+        <section id="features" class="animated">
+            <div class="container">
+                <h2 class="section-title">Token Features & Benefits</h2>
+                <div class="infographic-grid">
+                    <div class="infographic-item">
+                        <span class="infographic-icon">👑</span>
+                        <h3>Governance</h3>
+                        <p>AFEF holders will have the right to vote on important decisions regarding the future of the project.</p>
+                    </div>
+                    <div class="infographic-item">
+                        <span class="infographic-icon">💰</span>
+                        <h3>Rewards</h3>
+                        <p>Opportunities to earn AFEF through staking mechanisms and exclusive airdrops.</p>
+                    </div>
+                    <div class="infographic-item">
+                        <span class="infographic-icon">⚔️</span>
+                        <h3>In-Game Integration</h3>
+                        <p>Future possibilities for integration with Age of Empires Mobile and in-game advantages.</p>
+                    </div>
+                    <div class="infographic-item">
+                        <span class="infographic-icon">🔥</span>
+                        <h3>Burn Mechanisms</h3>
+                        <p>Strategic token burns to reduce the total supply over time, aiming to increase the value of AFEF.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="tokenomics" class="animated">
+            <div class="container">
+                <h2 class="section-title">Tokenomics</h2>
+                <p style="text-align: center; font-size: 1.1em;">The fair and transparent distribution of AFEF Coin:</p>
+                <div class="infographic-grid">
+                    <div class="infographic-item">
+                        <h3>Total Supply</h3>
+                        <p>1,000,000,000 AFEF</p> </div>
+                    <div class="infographic-item">
+                        <h3>Airdrop Allocation</h3>
+                        <p>30%</p> </div>
+                    <div class="infographic-item">
+                        <h3>Liquidity Pool</h3>
+                        <p>40%</p> </div>
+                    <div class="infographic-item">
+                        <h3>Development & Marketing</h3>
+                        <p>20%</p>
+                    </div>
+                    <div class="infographic-item">
+                        <h3>Team & Advisors</h3>
+                        <p>10%</p>
+                    </div>
+                </div>
+                <p style="text-align: center; margin-top: 30px;">
+                    <strong>Contract Address:</strong> <span style="font-family: monospace; background-color: rgba(255,255,255,0.1); padding: 5px 10px; border-radius: 5px;">0x...YourContractAddress...</span> 
+                    <button onclick="copyToClipboard('0x...YourContractAddress...')">Copy</button>
+                </p>
+            </div>
+        </section>
+
+        <section id="roadmap" class="animated">
+            <div class="container">
+                <h2 class="section-title">Roadmap</h2>
+                <div class="timeline">
+                    <div class="timeline-item timeline-item-left">
+                        <div class="timeline-content">
+                            <h3>Q4 2024 - The Beginning</h3>
+                            <p>AFEF Coin Smart Contract Development & Audit. Launch of the first Airdrop Campaign.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item timeline-item-right">
+                        <div class="timeline-content">
+                            <h3>Q1 2025 - Market Launch</h3>
+                            <p>Creation and locking of the DEX (Uniswap/PancakeSwap) Liquidity Pool. Website Launch.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item timeline-item-left">
+                        <div class="timeline-content">
+                            <h3>Q2 2025 - Community Expansion</h3>
+                            <p>Social Media Campaigns and Partnerships. Activation of the Governance Platform.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item timeline-item-right">
+                        <div class="timeline-content">
+                            <h3>Q3 2025 - Integration</h3>
+                            <p>Researching and discussing potential integration opportunities with Age of Empires Mobile.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item timeline-item-left">
+                        <div class="timeline-content">
+                            <h3>Q4 2025 - The Future</h3>
+                            <p>New features, ecosystem expansion, and goals for listing on centralized exchanges.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="animated">
+            <div class="container">
+                <h2 class="section-title">Contact Us</h2>
+                <p>Feel free to reach out for questions, collaborations, or feedback.</p>
+                <p>
+                    <strong>Email:</strong> <a href="mailto:info@afefcoin.com">info@afefcoin.com</a> <br>
+                    <strong>Telegram:</strong> <a href="https://t.me/afefcoincommunity" target="_blank">t.me/afefcoincommunity</a> <br>
+                    **Twitter (X):** <a href="https://twitter.com/afefcoinofficial" target="_blank">@afefcoinofficial</a>
+                </p>
+                
+                <form name="contact" method="POST" data-netlify="true">
+                    <input type="hidden" name="form-name" value="contact">
+                    <input type="text" name="name" placeholder="Your Name" required>
+                    <input type="email" name="email" placeholder="Your Email" required>
+                    <textarea name="message" placeholder="Your Message" required></textarea>
+                    <button type="submit">Send Message</button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 AFEF Coin. All Rights Reserved.</p>
+            <div class="social-links">
+                 <a href="https://twitter.com/afefcoinofficial" target="_blank" aria-label="Twitter"><img src="https://img.icons8.com/ios-filled/24/F5DEB3/twitterx.png" alt="Twitter"></a>
+                <a href="https://t.me/afefcoincommunity" target="_blank" aria-label="Telegram"><img src="https://img.icons8.com/ios-filled/24/F5DEB3/telegram-app.png" alt="Telegram"></a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Simple animation trigger on scroll
+        document.addEventListener('DOMContentLoaded', () => {
+            const sections = document.querySelectorAll('.animated');
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.1
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+        });
+
+        // Copy to clipboard function
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                alert('Contract address copied to clipboard: ' + text);
+            }).catch(err => {
+                console.error('Failed to copy:', err);
+            });
+        }
+    </script>
+</body>
+</html>
