@@ -10,108 +10,216 @@
     <script type="text/javascript" src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 
     <style>
-        /* All CSS remains the same */
+        /* VIBRANT & PROFESSIONAL COLOR PALETTE */
         :root {
-            --primary-color: #0D47A1;
-            --secondary-color: #FDD835;
-            --text-color: #ECEFF1;
-            --dark-color: #1A237E;
-            --bg-dark: #0D1B2A;
-            --light-grey: #90A4AE;
+            --primary-color: #0D47A1;   /* Deep, Royal Blue */
+            --secondary-color: #FDD835; /* Vibrant, Sun Gold */
+            --text-color: #ECEFF1;      /* Clean, Light Grey/White */
+            --dark-color: #1A237E;      /* Dark Indigo for sections */
+            --bg-dark: #0D1B2A;         /* Very Dark Navy Background */
+            --light-grey: #90A4AE;      /* Lighter grey for text */
+            --gradient-start: #1A237E;
+            --gradient-end: #0D1B2A;
         }
+
+        /* General Body & Typography */
         body {
-            font-family: 'Open Sans', sans-serif; margin: 0; padding: 0; background-color: var(--bg-dark); color: var(--text-color); line-height: 1.6; overflow-x: hidden; scroll-behavior: smooth;
+            font-family: 'Open Sans', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-dark);
+            color: var(--text-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
         }
         h1, h2, h3, h4, h5, h6 {
-            font-family: 'Cinzel', serif; color: var(--secondary-color); text-align: center; margin-bottom: 20px;
+            font-family: 'Cinzel', serif;
+            color: var(--secondary-color);
+            text-align: center;
+            margin-bottom: 20px;
         }
         a {
-            color: var(--secondary-color); text-decoration: none; transition: color 0.3s ease;
+            color: var(--secondary-color);
+            text-decoration: none;
+            transition: color 0.3s ease;
         }
         a:hover {
             color: white;
         }
         .container {
-            max-width: 1200px; margin: 0 auto; padding: 0 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
         }
+
+        /* Navigation Bar */
         nav {
-            background-color: rgba(13, 27, 42, 0.85); backdrop-filter: blur(10px); padding: 15px 0; position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+            background-color: rgba(13, 27, 42, 0.85);
+            backdrop-filter: blur(10px);
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
         }
         nav .container {
-            display: flex; justify-content: space-between; align-items: center;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
         nav .logo {
-            font-family: 'Cinzel', serif; font-size: 1.8em; color: var(--secondary-color); font-weight: bold;
+            font-family: 'Cinzel', serif;
+            font-size: 1.8em;
+            color: var(--secondary-color);
+            font-weight: bold;
+        }
+        .nav-right-cluster {
+            display: flex;
+            align-items: center;
+            gap: 20px;
         }
         nav .nav-links {
-            display: flex; align-items: center; /* Align items vertically */
+            display: flex;
         }
         nav .nav-links a {
-            color: var(--text-color); margin-left: 30px; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; position: relative;
-        }
-        /* Style for the identity menu */
-        [data-netlify-identity-menu] {
-            margin-left: 30px;
-        }
-        [data-netlify-identity-button] {
             color: var(--text-color);
-            background-color: var(--primary-color);
+            margin-left: 30px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+        }
+        nav .nav-links a::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -5px;
+            width: 0;
+            height: 2px;
+            background-color: var(--secondary-color);
+            transition: width 0.3s ease;
+        }
+        nav .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Netlify Identity Widget Styling */
+        [data-netlify-identity-menu] button {
+            background: transparent;
             border: 2px solid var(--secondary-color);
+            color: var(--secondary-color);
             padding: 8px 15px;
             border-radius: 5px;
+            font-family: 'Open Sans', sans-serif;
             font-weight: bold;
             text-transform: uppercase;
             cursor: pointer;
             transition: all 0.3s ease;
         }
-        [data-netlify-identity-button]:hover {
+        [data-netlify-identity-menu] button:hover {
             background-color: var(--secondary-color);
             color: var(--bg-dark);
         }
-        nav .nav-links a::after {
-            content: ''; position: absolute; left: 0; bottom: -5px; width: 0; height: 2px; background-color: var(--secondary-color); transition: width 0.3s ease;
-        }
-        nav .nav-links a:hover::after {
-            width: 100%;
-        }
+
+        /* Hamburger Menu Icon */
         .hamburger {
-            display: none; cursor: pointer; flex-direction: column; gap: 5px;
+            display: none;
+            cursor: pointer;
+            flex-direction: column;
+            gap: 5px;
         }
         .hamburger .bar {
-            width: 25px; height: 3px; background-color: var(--text-color); transition: all 0.3s ease;
+            width: 25px;
+            height: 3px;
+            background-color: var(--text-color);
+            transition: all 0.3s ease;
         }
+        
+        /* Header Section */
         header {
-            background: linear-gradient(rgba(13, 27, 42, 0.7), rgba(13, 27, 42, 0.7)), url('https://via.placeholder.com/1500x700/0D1B2A/FDD835?text=EPIC+AGE+OF+EMPIRES+BANNER') no-repeat center center/cover; color: var(--text-color); padding: 120px 0; text-align: center; position: relative; animation: fadeIn 2s ease-out;
+            background: linear-gradient(rgba(13, 27, 42, 0.7), rgba(13, 27, 42, 0.7)), url('https://via.placeholder.com/1500x800/0D1B2A/FDD835?text=AGE+OF+EMPIRES+BANNER') no-repeat center center/cover;
+            color: var(--text-color);
+            padding: 140px 0;
+            text-align: center;
+            position: relative;
+            animation: fadeIn 2s ease-out;
+            clip-path: polygon(0 0, 100% 0, 100% 90%, 0 100%);
         }
         header h1 {
-            font-size: 4.5em; margin-bottom: 15px; text-shadow: 3px 3px 6px rgba(0,0,0,0.8); letter-spacing: 2px;
+            font-size: 5em;
+            margin-bottom: 15px;
+            text-shadow: 3px 3px 8px rgba(0,0,0,0.9);
+            letter-spacing: 3px;
         }
         header p {
-            font-size: 1.4em; max-width: 900px; margin: 0 auto 40px auto; text-shadow: 1px 1px 3px rgba(0,0,0,0.6);
+            font-size: 1.5em;
+            max-width: 900px;
+            margin: 0 auto 40px auto;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
         }
         .cta-button {
-            display: inline-block; background-color: var(--secondary-color); color: var(--bg-dark); padding: 18px 35px; border-radius: 8px; font-weight: bold; font-family: 'Cinzel', serif; font-size: 1.1em; transition: all 0.3s ease; box-shadow: 0 6px 12px rgba(0,0,0,0.4); text-transform: uppercase; border: 2px solid var(--secondary-color);
+            display: inline-block;
+            background: linear-gradient(45deg, var(--secondary-color), #FFEB3B);
+            color: var(--bg-dark);
+            padding: 20px 40px;
+            border-radius: 50px;
+            font-weight: bold;
+            font-family: 'Cinzel', serif;
+            font-size: 1.2em;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 20px rgba(253, 216, 53, 0.4);
+            text-transform: uppercase;
+            border: none;
         }
         .cta-button:hover {
-            background-color: transparent; color: var(--secondary-color); transform: translateY(-5px) scale(1.02); box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 12px 25px rgba(253, 216, 53, 0.6);
         }
+
+        /* General Section Styling */
         section {
-            padding: 80px 20px; margin-bottom: 40px; background-color: var(--dark-color); border-radius: 12px; box-shadow: 0 8px 16px rgba(0,0,0,0.5); animation: slideInUp 1s ease-out forwards; opacity: 0; transform: translateY(50px); position: relative;
-        }
-        section:nth-child(even) {
-            background-color: var(--primary-color);
+            padding: 100px 20px;
+            background: linear-gradient(160deg, var(--gradient-start), var(--gradient-end));
+            margin: 0 auto 40px auto;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+            animation: slideInUp 1s ease-out forwards;
+            opacity: 0;
+            transform: translateY(50px);
+            position: relative;
+            max-width: 1400px; /* Wider content area */
         }
         .section-title {
-            font-size: 3em; margin-bottom: 50px; position: relative; text-shadow: 1px 1px 3px rgba(0,0,0,0.6);
+            font-size: 3.5em;
+            margin-bottom: 60px;
+            position: relative;
+            text-shadow: 2px 2px 5px rgba(0,0,0,0.7);
         }
         .section-title::after {
-            content: ''; position: absolute; bottom: -15px; left: 50%; transform: translateX(-50%); width: 100px; height: 4px; background-color: var(--secondary-color); border-radius: 2px;
+            content: '✧';
+            position: absolute;
+            bottom: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.8em;
+            color: var(--secondary-color);
         }
+
+        /* All other styles (infographic, roadmap, etc.) */
         .infographic-item {
-            background-color: var(--bg-dark); padding: 30px; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.3); position: relative; overflow: hidden; transition: transform 0.4s ease, box-shadow 0.4s ease; border-left: 6px solid var(--secondary-color);
+            background-color: rgba(13, 27, 42, 0.5);
+            padding: 35px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.4);
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            border: 1px solid rgba(253, 216, 53, 0.2);
+            backdrop-filter: blur(5px);
         }
         .infographic-item:hover {
-            transform: translateY(-8px) scale(1.03); box-shadow: 0 12px 24px rgba(0,0,0,0.6); border-left-color: white;
+            transform: translateY(-10px) scale(1.03);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.7);
+            border-color: var(--secondary-color);
         }
         .infographic-item h3 {
             font-size: 1.8em; margin-top: 0; margin-bottom: 20px;
@@ -120,73 +228,87 @@
             font-size: 1.15em;
         }
         .infographic-icon {
-            font-size: 4em; color: var(--primary-color); margin-bottom: 20px;
+            font-size: 4em; color: var(--secondary-color); margin-bottom: 20px; text-shadow: 0 0 15px var(--secondary-color);
         }
         #tokenomics .infographic-grid, #features .infographic-grid {
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 40px; text-align: center;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 40px;
+            text-align: center;
         }
-        .etherscan-link, .donation-button {
-            display: inline-block; margin: 20px auto; background-color: var(--secondary-color); color: var(--bg-dark); padding: 12px 25px; border-radius: 5px; font-weight: bold; transition: background-color 0.3s ease, transform 0.3s ease; box-shadow: 0 4px 8px rgba(0,0,0,0.3); text-transform: uppercase;
+        .etherscan-link {
+             display: inline-block; margin: 20px auto; background-color: var(--secondary-color); color: var(--bg-dark); padding: 12px 25px; border-radius: 5px; font-weight: bold; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(253, 216, 53, 0.3); text-transform: uppercase;
         }
-        .etherscan-link:hover, .donation-button:hover {
-            background-color: var(--text-color); color: var(--dark-color); transform: translateY(-3px); box-shadow: 0 6px 12px rgba(0,0,0,0.4);
+        .etherscan-link:hover {
+             transform: translateY(-3px) scale(1.03); box-shadow: 0 8px 20px rgba(253, 216, 53, 0.5);
         }
         #roadmap .timeline {
             position: relative; max-width: 1000px; margin: 0 auto; padding: 40px 0;
         }
         #roadmap .timeline::after {
-            content: ''; position: absolute; width: 8px; background-color: var(--secondary-color); top: 0; bottom: 0; left: 50%; margin-left: -4px;
+            content: ''; position: absolute; width: 4px; background: linear-gradient(to bottom, transparent, var(--secondary-color), transparent); top: 0; bottom: 0; left: 50%; margin-left: -2px;
         }
         .timeline-item {
             padding: 10px 40px; position: relative; background-color: inherit; width: 50%;
         }
         .timeline-item::after {
-            content: ''; position: absolute; width: 30px; height: 30px; right: -20px; background-color: var(--bg-dark); border: 6px solid var(--secondary-color); top: 20px; border-radius: 50%; z-index: 1;
+            content: ''; position: absolute; width: 25px; height: 25px; right: -17px; background-color: var(--bg-dark); border: 4px solid var(--secondary-color); top: 20px; border-radius: 50%; z-index: 1; box-shadow: 0 0 15px var(--secondary-color);
         }
-        .timeline-item-left { left: 0; }
-        .timeline-item-right { left: 50%; }
-        .timeline-item-left::before { content: " "; height: 0; position: absolute; top: 28px; width: 0; z-index: 1; right: 35px; border: medium solid var(--dark-color); border-width: 10px 0 10px 10px; border-color: transparent transparent transparent var(--dark-color); }
-        .timeline-item-right::before { content: " "; height: 0; position: absolute; top: 28px; width: 0; z-index: 1; left: 35px; border: medium solid var(--dark-color); border-width: 10px 10px 10px 0; border-color: transparent var(--dark-color) transparent transparent; }
-        .timeline-item-right::after { left: -19px; }
-        .timeline-content { padding: 25px 35px; background-color: var(--dark-color); position: relative; border-radius: 8px; box-shadow: 0 6px 12px rgba(0,0,0,0.4); }
-        .timeline-content h3 { font-size: 1.6em; }
+        .timeline-content { padding: 25px 35px; background-color: rgba(13, 27, 42, 0.7); backdrop-filter: blur(5px); position: relative; border-radius: 10px; box-shadow: 0 6px 12px rgba(0,0,0,0.4); }
         #contact { text-align: center; }
-        #contact input[type="text"], #contact input[type="email"], #contact textarea { width: calc(100% - 40px); max-width: 600px; padding: 12px; margin-bottom: 25px; border: 1px solid var(--primary-color); border-radius: 8px; background-color: var(--bg-dark); color: var(--text-color); font-size: 1.1em; }
-        #contact textarea { resize: vertical; min-height: 120px; }
-        #contact button { background-color: var(--secondary-color); color: var(--bg-dark); padding: 15px 30px; border: none; border-radius: 8px; cursor: pointer; font-size: 1.2em; font-weight: bold; transition: background-color 0.3s ease, transform 0.3s ease; box-shadow: 0 4px 8px rgba(0,0,0,0.3); }
-        #contact button:hover { background-color: var(--text-color); transform: translateY(-3px); }
-        footer { background-color: #0d0d0d; color: var(--text-color); text-align: center; padding: 40px 0; margin-top: 60px; border-top: 1px solid rgba(255,255,255,0.15); }
-        .social-links a { font-size: 2.2em; margin: 0 15px; color: var(--text-color); }
-        .social-links a:hover { color: var(--secondary-color); transform: scale(1.1); }
-        #donate .wallet-address { font-family: monospace; background-color: rgba(0,0,0,0.2); padding: 10px 15px; border-radius: 5px; display: inline-block; margin-top: 20px; font-size: 1.1em; word-break: break-all; }
-        @media (max-width: 850px) { /* Adjusted breakpoint for menu */
-            nav .nav-links {
-                display: none; flex-direction: column; width: 100%; position: absolute; top: 70px; left: 0; background-color: rgba(13, 27, 42, 0.95); backdrop-filter: blur(10px); padding: 20px 0;
+        #contact input, #contact textarea { width: calc(100% - 40px); max-width: 600px; padding: 15px; margin-bottom: 25px; border: 1px solid var(--primary-color); border-radius: 8px; background-color: var(--bg-dark); color: var(--text-color); font-size: 1.1em; }
+        #contact button { background-color: var(--secondary-color); color: var(--bg-dark); padding: 15px 30px; border: none; border-radius: 8px; cursor: pointer; font-size: 1.2em; font-weight: bold; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(253, 216, 53, 0.3); }
+        #contact button:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(253, 216, 53, 0.5); }
+        footer { background-color: #0d0d0d; color: var(--text-color); text-align: center; padding: 50px 0; margin-top: 60px; border-top: 1px solid rgba(255,255,255,0.15); }
+        .social-links a { font-size: 2.2em; margin: 0 15px; color: var(--text-color); transition: transform 0.3s ease, color 0.3s ease; }
+        .social-links a:hover { color: var(--secondary-color); transform: scale(1.2); }
+        #donate .wallet-address { font-family: monospace; background-color: rgba(0,0,0,0.2); padding: 15px; border-radius: 8px; display: inline-block; margin-top: 20px; font-size: 1.2em; word-break: break-all; border: 1px solid var(--primary-color); }
+        #donate button { margin-left: 15px; }
+
+        /* Responsive Design for Mobile Menu */
+        @media (max-width: 992px) {
+            .nav-links { display: none; } /* Hide the main links */
+            .hamburger { display: flex; } /* Show hamburger */
+            
+            /* Logic for the slide-out menu */
+            .mobile-nav-menu {
+                display: none;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                width: 100vw;
+                height: 100vh;
+                position: fixed;
+                top: 0;
+                left: 0;
+                background-color: rgba(13, 27, 42, 0.98);
+                backdrop-filter: blur(15px);
+                z-index: 999;
             }
-            nav .nav-links.active {
+            .mobile-nav-menu.active {
                 display: flex;
             }
-            nav .nav-links a {
-                margin: 15px 0; text-align: center;
+            .mobile-nav-menu a {
+                margin: 20px 0;
+                font-size: 1.8em;
+                font-family: 'Cinzel', serif;
             }
-            [data-netlify-identity-menu] {
-                margin: 15px 0; text-align: center;
-            }
-            .hamburger {
-                display: flex;
+            .hamburger.active {
+                z-index: 1001; /* Ensure hamburger is above the menu */
             }
             .hamburger.active .bar:nth-child(2) { opacity: 0; }
             .hamburger.active .bar:nth-child(1) { transform: translateY(8px) rotate(45deg); }
             .hamburger.active .bar:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
-            header h1 { font-size: 3.5em; }
-            header p { font-size: 1.1em; }
-            .section-title { font-size: 2.5em; }
-            #roadmap .timeline::after { left: 31px; }
+        }
+        @media (max-width: 768px) {
+            header h1 { font-size: 3em; }
+            .section-title { font-size: 2.2em; }
             .timeline-item { width: 100%; padding-left: 70px; padding-right: 25px; }
-            .timeline-item-left::before, .timeline-item-right::before { left: 60px; border: medium solid var(--dark-color); border-width: 10px 10px 10px 0; border-color: transparent var(--dark-color) transparent transparent; }
-            .timeline-item-left::after, .timeline-item-right::after { left: 15px; }
+            #roadmap .timeline::after, .timeline-item-left::before, .timeline-item-right::before, .timeline-item-left::after, .timeline-item-right::after { left: 31px; }
             .timeline-item-right { left: 0%; }
         }
+
+        /* Animations */
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
         @keyframes slideInUp { from { opacity: 0; transform: translateY(50px); } to { opacity: 1; transform: translateY(0); } }
         .animated { opacity: 0; }
@@ -197,54 +319,89 @@
     <nav>
         <div class="container">
             <a href="#" class="logo">AFEF Token</a>
-            <div class="hamburger">
-                <div class="bar"></div>
-                <div class="bar"></div>
-                <div class="bar"></div>
-            </div>
-            <div class="nav-links">
-                <a href="#about">About</a>
-                <a href="#features">Features</a>
-                <a href="#tokenomics">Tokenomics</a>
-                <a href="#roadmap">Roadmap</a>
-                <a href="#transactions">Transactions</a>
-                <a href="#donate">Donate</a>
-                <a href="#contact">Contact</a>
+            <div class="nav-right-cluster">
                 <div data-netlify-identity-menu></div>
+                <div class="nav-links">
+                    <a href="#about">About</a>
+                    <a href="#features">Features</a>
+                    <a href="#tokenomics">Tokenomics</a>
+                    <a href="#roadmap">Roadmap</a>
+                    <a href="#transactions">Transactions</a>
+                    <a href="#donate">Donate</a>
+                    <a href="#contact">Contact</a>
+                </div>
+                <div class="hamburger">
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                </div>
             </div>
         </div>
     </nav>
+
+    <div class="mobile-nav-menu">
+        <a href="#about">About</a>
+        <a href="#features">Features</a>
+        <a href="#tokenomics">Tokenomics</a>
+        <a href="#roadmap">Roadmap</a>
+        <a href="#transactions">Transactions</a>
+        <a href="#donate">Donate</a>
+        <a href="#contact">Contact</a>
+    </div>
 
     <header>
         </header>
 
     <main>
-        </main>
+        <section id="about" class="animated">
+            </section>
+        <section id="features" class="animated">
+            </section>
+        <section id="tokenomics" class="animated">
+            </section>
+        <section id="roadmap" class="animated">
+            </section>
+        <section id="transactions" class="animated">
+            </section>
+        <section id="donate" class="animated">
+            </section>
+        <section id="contact" class="animated">
+            </section>
+    </main>
 
     <footer>
         </footer>
 
     <script>
-        // All other JavaScript...
         const hamburger = document.querySelector('.hamburger');
-        const navLinks = document.querySelector('.nav-links');
-        const allNavLinks = document.querySelectorAll('.nav-links a');
+        const mobileNav = document.querySelector('.mobile-nav-menu');
+        const allMobileNavLinks = document.querySelectorAll('.mobile-nav-menu a');
 
+        // Toggle menu on hamburger click
         hamburger.addEventListener('click', () => {
             hamburger.classList.toggle('active');
-            navLinks.classList.toggle('active');
+            mobileNav.classList.toggle('active');
         });
 
-        allNavLinks.forEach(link => {
+        // Close menu on link click for mobile menu
+        allMobileNavLinks.forEach(link => {
             link.addEventListener('click', () => {
-                if (navLinks.classList.contains('active')) {
+                if (mobileNav.classList.contains('active')) {
                     hamburger.classList.remove('active');
-                    navLinks.classList.remove('active');
+                    mobileNav.classList.remove('active');
                 }
             });
         });
 
-        // The rest of the script remains the same...
+        // Scroll animation script (remains the same)
+        document.addEventListener('DOMContentLoaded', () => {
+            // ... (rest of the script is the same)
+        });
+
+        // Copy to clipboard function (remains the same)
+        function copyToClipboard(text) {
+            // ... (rest of the script is the same)
+        }
     </script>
 </body>
 </html>
