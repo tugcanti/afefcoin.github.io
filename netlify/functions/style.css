@@ -1,1 +1,38 @@
+body {
+  background-color: #111;
+  color: #eee;
+  font-family: 'Segoe UI', sans-serif;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+}
 
+header {
+  background: linear-gradient(90deg, #5a381f, #d6b26a);
+  padding: 30px;
+}
+
+.logo {
+  width: 100px;
+  border-radius: 50%;
+}
+
+h1, h2, h3 {
+  color: #ffd700;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+a {
+  color: #ffd700;
+  text-decoration: none;
+}
+
+footer {
+  margin-top: 30px;
+  font-size: 0.8em;
+  color: #777;
+}
