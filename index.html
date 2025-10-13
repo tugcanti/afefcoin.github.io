@@ -1,56 +1,507 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="tr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AFEF Token | Official Site</title>
-  <link rel="stylesheet" href="style.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AFEF Coin - Age of Empires Mobile Fan Token</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        /* TEMEL CSS AYARLARI */
+        :root {
+            --primary-color: #8B4513; /* Orta Çağ Altın Sarısı/Kahverengisi */
+            --secondary-color: #DAA520; /* Altın */
+            --text-color: #F5DEB3; /* Krem Beyaz */
+            --dark-color: #2c3e50; /* Koyu Gri/Mavi */
+            --bg-dark: #1a1a1a; /* Çok Koyu Arka Plan */
+        }
+        body {
+            font-family: 'Open Sans', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-dark);
+            color: var(--text-color);
+            line-height: 1.6;
+            overflow-x: hidden; /* Yatay kaydırmayı engelle */
+        }
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Cinzel', serif;
+            color: var(--secondary-color);
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        a {
+            color: var(--secondary-color);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        a:hover {
+            color: var(--text-color);
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* HEADER */
+        header {
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://via.placeholder.com/1500x500/000000/FFFFFF?text=AGE+OF+EMPIRES+MOBILE+BANNER') no-repeat center center/cover; /* AOE temalı bir banner görseli */
+            color: var(--text-color);
+            padding: 80px 0;
+            text-align: center;
+            position: relative;
+            animation: fadeIn 2s ease-out;
+        }
+        header h1 {
+            font-size: 3.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
+        }
+        header p {
+            font-size: 1.2em;
+            max-width: 800px;
+            margin: 0 auto 30px auto;
+        }
+        .cta-button {
+            display: inline-block;
+            background-color: var(--secondary-color);
+            color: var(--dark-color);
+            padding: 15px 30px;
+            border-radius: 5px;
+            font-weight: bold;
+            font-family: 'Cinzel', serif;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+        }
+        .cta-button:hover {
+            background-color: var(--text-color);
+            transform: translateY(-3px);
+        }
+
+        /* SECTION STİLLERİ */
+        section {
+            padding: 60px 0;
+            margin-bottom: 30px;
+            background-color: var(--dark-color);
+            border-radius: 8px;
+            box-shadow: 0 6px 12px rgba(0,0,0,0.4);
+            animation: slideInUp 1s ease-out forwards;
+            opacity: 0;
+            transform: translateY(50px);
+        }
+        section:nth-child(even) {
+            background-color: #34495e; /* Biraz daha açık bir koyu renk */
+        }
+        .section-title {
+            font-size: 2.5em;
+            margin-bottom: 40px;
+            position: relative;
+        }
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background-color: var(--secondary-color);
+        }
+
+        /* TOKENOMICS - Infographic Bölümü */
+        #tokenomics .infographic-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            text-align: center;
+        }
+        .infographic-item {
+            background-color: var(--bg-dark);
+            padding: 25px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-left: 5px solid var(--secondary-color);
+        }
+        .infographic-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.4);
+        }
+        .infographic-item h3 {
+            color: var(--secondary-color);
+            font-size: 1.5em;
+            margin-top: 0;
+            margin-bottom: 15px;
+        }
+        .infographic-item p {
+            font-size: 1.1em;
+            color: var(--text-color);
+        }
+        .infographic-icon {
+            font-size: 3em;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+
+        /* ROADMAP - Zaman Çizelgesi */
+        #roadmap .timeline {
+            position: relative;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px 0;
+        }
+        #roadmap .timeline::after {
+            content: '';
+            position: absolute;
+            width: 6px;
+            background-color: var(--secondary-color);
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -3px;
+        }
+        .timeline-item {
+            padding: 10px 40px;
+            position: relative;
+            background-color: inherit;
+            width: 50%;
+        }
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            width: 25px;
+            height: 25px;
+            right: -17px;
+            background-color: var(--dark-color);
+            border: 4px solid var(--secondary-color);
+            top: 15px;
+            border-radius: 50%;
+            z-index: 1;
+        }
+        .timeline-item-left {
+            left: 0;
+        }
+        .timeline-item-right {
+            left: 50%;
+        }
+        .timeline-item-left::before {
+            content: " ";
+            height: 0;
+            position: absolute;
+            top: 22px;
+            width: 0;
+            z-index: 1;
+            right: 30px;
+            border: medium solid var(--dark-color);
+            border-width: 10px 0 10px 10px;
+            border-color: transparent transparent transparent var(--dark-color);
+        }
+        .timeline-item-right::before {
+            content: " ";
+            height: 0;
+            position: absolute;
+            top: 22px;
+            width: 0;
+            z-index: 1;
+            left: 30px;
+            border: medium solid var(--dark-color);
+            border-width: 10px 10px 10px 0;
+            border-color: transparent var(--dark-color) transparent transparent;
+        }
+        .timeline-item-right::after {
+            left: -16px;
+        }
+        .timeline-content {
+            padding: 20px 30px;
+            background-color: var(--dark-color);
+            position: relative;
+            border-radius: 6px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+        }
+        .timeline-content h3 {
+            color: var(--secondary-color);
+            margin-top: 0;
+        }
+
+        /* CONTACT & FOOTER */
+        #contact {
+            text-align: center;
+        }
+        #contact input[type="text"],
+        #contact input[type="email"],
+        #contact textarea {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid var(--primary-color);
+            border-radius: 5px;
+            background-color: var(--bg-dark);
+            color: var(--text-color);
+        }
+        #contact textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+        #contact button {
+            background-color: var(--secondary-color);
+            color: var(--dark-color);
+            padding: 12px 25px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1.1em;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+        #contact button:hover {
+            background-color: var(--text-color);
+            transform: translateY(-2px);
+        }
+        footer {
+            background-color: #0d0d0d;
+            color: var(--text-color);
+            text-align: center;
+            padding: 30px 0;
+            margin-top: 50px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+        .social-links a {
+            font-size: 1.8em;
+            margin: 0 10px;
+            color: var(--text-color);
+        }
+        .social-links a:hover {
+            color: var(--secondary-color);
+        }
+
+        /* Responsive Tasarım */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2.5em;
+            }
+            .section-title {
+                font-size: 2em;
+            }
+            #roadmap .timeline::after {
+                left: 31px;
+            }
+            .timeline-item {
+                width: 100%;
+                padding-left: 70px;
+                padding-right: 25px;
+            }
+            .timeline-item-left::before,
+            .timeline-item-right::before {
+                left: 60px;
+                border: medium solid var(--dark-color);
+                border-width: 10px 10px 10px 0;
+                border-color: transparent var(--dark-color) transparent transparent;
+            }
+            .timeline-item-left::after,
+            .timeline-item-right::after {
+                left: 15px;
+            }
+            .timeline-item-right {
+                left: 0%;
+            }
+        }
+
+        /* Animasyonlar */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes slideInUp {
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        /* Ek animasyonlar ve JS ile tetiklenecek sınıflar */
+        .animated {
+            opacity: 0;
+        }
+        .animated.visible {
+            animation: slideInUp 1s ease-out forwards;
+        }
+
+    </style>
 </head>
 <body>
-  <header>
-    <img src="afef-logo.png" alt="AFEF Logo" class="logo" />
-    <h1>AFEF Token</h1>
-    <h2>A New Era for Age of Empires Fans</h2>
-  </header>
+    <header>
+        <div class="container">
+            <h1>AFEF Coin</h1>
+            <p>Age of Empires Mobile Oyuncuları İçin Yeni Nesil Fan Token!</p>
+            <a href="#about" class="cta-button">AFEF Hakkında Daha Fazla Bilgi</a>
+        </div>
+    </header>
 
-  <main>
-    <section class="info">
-      <p>
-        <b>AFEF</b> is a community-driven token built on Ethereum ERC20.
-        Inspired by the Age of Empires legacy, AFEF symbolizes unity, strength, and strategic growth for our holders.
-      </p>
-    </section>
+    <main>
+        <section id="about" class="animated">
+            <div class="container">
+                <h2 class="section-title">AFEF Coin Nedir?</h2>
+                <p>AFEF Coin, efsanevi strateji oyunu Age of Empires Mobile topluluğu için özel olarak tasarlanmış bir fan token'dır. Oyunculara ve hayranlara, projenin gelişiminde söz sahibi olma, özel etkinliklere katılma ve ileride oyun içi avantajlar elde etme fırsatı sunar.</p>
+                <p>Misyonumuz, Age of Empires evrenini blockchain teknolojisiyle birleştirerek topluluğumuzu güçlendirmek ve token sahiplerine gerçek değer katmaktır.</p>
+            </div>
+        </section>
 
-    <section class="details">
-      <h3>🔗 Token Details</h3>
-      <ul>
-        <li><b>Symbol:</b> AFEF</li>
-        <li><b>Contract Address:</b> 0x367a584a928b641330E8B20e7C4739675741f40d</li>
-        <li><b>Total Supply:</b> 4,950,000</li>
-        <li><b>Decimals:</b> 18</li>
-      </ul>
-    </section>
+        <section id="features" class="animated">
+            <div class="container">
+                <h2 class="section-title">Token Özellikleri ve Faydaları</h2>
+                <div class="infographic-grid">
+                    <div class="infographic-item">
+                        <span class="infographic-icon">👑</span>
+                        <h3>Yönetişim</h3>
+                        <p>AFEF sahipleri, projenin geleceği ile ilgili önemli kararlarda oy kullanma hakkına sahip olur.</p>
+                    </div>
+                    <div class="infographic-item">
+                        <span class="infographic-icon">💰</span>
+                        <h3>Ödüller</h3>
+                        <p>Stake etme (kilitleme) mekanizmaları ile AFEF kazanma fırsatları ve özel airdroplar.</p>
+                    </div>
+                    <div class="infographic-item">
+                        <span class="infographic-icon">⚔️</span>
+                        <h3>Oyun İçi Entegrasyon</h3>
+                        <p>Gelecekte Age of Empires Mobile ile olası entegrasyonlar ve oyun içi avantajlar.</p>
+                    </div>
+                    <div class="infographic-item">
+                        <span class="infographic-icon">🔥</span>
+                        <h3>Yakım Mekanizmaları</h3>
+                        <p>Token arzını zamanla azaltarak AFEF değerini artırıcı yakım (burn) stratejileri.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-    <section class="roadmap">
-      <h3>📜 Roadmap</h3>
-      <ul>
-        <li>Phase 1: Launch & Community Growth</li>
-        <li>Phase 2: Contract Verification & DEX Listing</li>
-        <li>Phase 3: 1,000 Holders & Marketing Push</li>
-        <li>Phase 4: Staking + CMC/CG Listings</li>
-      </ul>
-    </section>
+        <section id="tokenomics" class="animated">
+            <div class="container">
+                <h2 class="section-title">Tokenomik</h2>
+                <p style="text-align: center; font-size: 1.1em;">AFEF Coin'in adil ve şeffaf dağılımı:</p>
+                <div class="infographic-grid">
+                    <div class="infographic-item">
+                        <h3>Toplam Arz</h3>
+                        <p>1,000,000,000 AFEF</p> </div>
+                    <div class="infographic-item">
+                        <h3>Airdrop Dağıtımı</h3>
+                        <p>%30</p> </div>
+                    <div class="infographic-item">
+                        <h3>Likidite Havuzu</h3>
+                        <p>%40</p> </div>
+                    <div class="infographic-item">
+                        <h3>Geliştirme & Pazarlama</h3>
+                        <p>%20</p>
+                    </div>
+                    <div class="infographic-item">
+                        <h3>Takım & Danışmanlar</h3>
+                        <p>%10</p>
+                    </div>
+                </div>
+                <p style="text-align: center; margin-top: 30px;">
+                    **Kontrat Adresi:** <span style="font-family: monospace; background-color: rgba(255,255,255,0.1); padding: 5px 10px; border-radius: 5px;">0x...KendiKontratAdresiniz...</span> 
+                    <button onclick="copyToClipboard('0x...KendiKontratAdresiniz...')">Kopyala</button>
+                </p>
+            </div>
+        </section>
 
-    <section class="links">
-      <h3>🌐 Links</h3>
-      <a href="https://etherscan.io/token/0x367a584a928b641330E8B20e7C4739675741f40d">Etherscan</a> |
-      <a href="https://x.com/AFEFtoken">Twitter</a> |
-      <a href="https://t.me/AFEFcommunity">Telegram</a>
-    </section>
-  </main>
+        <section id="roadmap" class="animated">
+            <div class="container">
+                <h2 class="section-title">Yol Haritası</h2>
+                <div class="timeline">
+                    <div class="timeline-item timeline-item-left">
+                        <div class="timeline-content">
+                            <h3>Q4 2024 - Başlangıç</h3>
+                            <p>AFEF Coin Akıllı Kontrat Geliştirilmesi ve Denetimi. İlk Airdrop Kampanyası Başlangıcı.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item timeline-item-right">
+                        <div class="timeline-content">
+                            <h3>Q1 2025 - Piyasaya Çıkış</h3>
+                            <p>DEX (Uniswap/PancakeSwap) Likidite Havuzu Oluşturulması ve Kilitlenmesi. Web Sitesi Lansmanı.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item timeline-item-left">
+                        <div class="timeline-content">
+                            <h3>Q2 2025 - Topluluk Genişlemesi</h3>
+                            <p>Sosyal Medya Kampanyaları ve Ortaklıklar. Yönetişim Platformunun Aktif Edilmesi.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item timeline-item-right">
+                        <div class="timeline-content">
+                            <h3>Q3 2025 - Entegrasyon</h3>
+                            <p>Age of Empires Mobile ile olası entegrasyon fırsatlarının araştırılması ve görüşmeler.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item timeline-item-left">
+                        <div class="timeline-content">
+                            <h3>Q4 2025 - Gelecek</h3>
+                            <p>Yeni özellikler, ekosistem genişlemesi ve merkezi borsalarda listeleme hedefleri.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-  <footer>
-    <p>© 2025 AFEF Community. Built by fans, for fans.</p>
-  </footer>
+        <section id="contact" class="animated">
+            <div class="container">
+                <h2 class="section-title">Bize Ulaşın</h2>
+                <p>Sorularınız, iş birlikleri veya geri bildirimleriniz için bize ulaşmaktan çekinmeyin.</p>
+                <p>
+                    **E-posta:** <a href="mailto:info@afefcoin.com">info@afefcoin.com</a> <br>
+                    **Telegram:** <a href="https://t.me/afefcoincommunity">t.me/afefcoincommunity</a> <br>
+                    **Twitter (X):** <a href="https://twitter.com/afefcoinofficial">@afefcoinofficial</a>
+                </p>
+                <form name="contact" method="POST" data-netlify="true">
+                    <input type="hidden" name="form-name" value="contact">
+                    <input type="text" name="name" placeholder="TugcanT" required>
+                    <input type="email" name="email" placeholder="empiresfantoken@outlook.com" required>
+                    <textarea name="message" placeholder="Mesajınız" required></textarea>
+                    <button type="submit">Mesaj Gönder</button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 AFEF Coin. Tüm Hakları Saklıdır.</p>
+            <div class="social-links">
+                <a href="https://twitter.com/afefcoinofficial" target="_blank" aria-label="Twitter"><img src="https://img.icons8.com/ios-filled/24/F5DEB3/twitterx.png" alt="Twitter"></a>
+                <a href="https://t.me/afefcoincommunity" target="_blank" aria-label="Telegram"><img src="https://img.icons8.com/ios-filled/24/F5DEB3/telegram-app.png" alt="Telegram"></a>
+                </div>
+        </div>
+    </footer>
+
+    <script>
+        // Basit animasyon tetikleyicisi (görünür olduğunda)
+        document.addEventListener('DOMContentLoaded', () => {
+            const sections = document.querySelectorAll('.animated');
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.1
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+        });
+
+        // Kontrat adresini kopyalama fonksiyonu
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                alert('Kontrat adresi panoya kopyalandı: ' + text);
+            }).catch(err => {
+                console.error('Kopyalama başarısız oldu:', err);
+            });
+        }
+    </script>
 </body>
 </html>
