@@ -138,6 +138,20 @@
             color: var(--primary-color);
             margin-bottom: 15px;
         }
+        .etherscan-link {
+            display: inline-block;
+            margin-top: 10px;
+            background-color: var(--primary-color);
+            color: var(--text-color);
+            padding: 8px 15px;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+        .etherscan-link:hover {
+            background-color: var(--secondary-color);
+            color: var(--dark-color);
+        }
         #roadmap .timeline {
             position: relative;
             max-width: 1000px;
@@ -379,10 +393,13 @@
                         <p>10%</p>
                     </div>
                 </div>
-                <p style="text-align: center; margin-top: 30px;">
-                    <strong>Contract Address:</strong> <span style="font-family: monospace; background-color: rgba(255,255,255,0.1); padding: 5px 10px; border-radius: 5px;">0x...YourContractAddress...</span> 
-                    <button onclick="copyToClipboard(0x367a584a928b641330E8B20e7C4739675741f40d)">Copy</button>
-                </p>
+                <div style="text-align: center; margin-top: 30px; word-break: break-all;">
+                    <strong>Contract Address:</strong>
+                    <p style="font-family: monospace; background-color: rgba(255,255,255,0.1); padding: 5px 10px; border-radius: 5px; display: inline-block; margin-top: 10px;">
+                        0x367a584a928b641330E8B20e7C4739675741f40d
+                    </p>
+                    <a href="https://etherscan.io/token/0x367a584a928b641330E8B20e7C4739675741f40d" target="_blank" class="etherscan-link">View on Etherscan</a>
+                </div>
             </div>
         </section>
 
@@ -429,9 +446,9 @@
                 <h2 class="section-title">Contact Us</h2>
                 <p>Feel free to reach out for questions, collaborations, or feedback.</p>
                 <p>
-                    <strong>Email:</strong> <a href="mailto:empiresfantoken@outlook.com">info@afefcoin.com</a> <br>
-                    <strong>Telegram:</strong> <a href="https://t.me/afeftoken" target="_blank">t.me/afefcoincommunity</a> <br>
-                    **Twitter (X):** <a href="https://x.com/afeftoken?s=21" target="_blank">@afefcoinofficial</a>
+                    <strong>Email:</strong> <a href="mailto:empiresfantoken@outlook.com">empiresfantoken@outlook.com</a> <br>
+                    <strong>Telegram:</strong> <a href="https://t.me/afeftoken" target="_blank">t.me/afeftoken</a> <br>
+                    <strong>X (Twitter):</strong> <a href="https://x.com/afeftoken?s=21" target="_blank">@afeftoken</a>
                 </p>
                 
                 <form name="contact" method="POST" data-netlify="true">
@@ -479,7 +496,7 @@
             });
         });
 
-        // Copy to clipboard function
+        // Copy to clipboard function is no longer needed, but we'll keep it just in case
         function copyToClipboard(text) {
             navigator.clipboard.writeText(text).then(() => {
                 alert('Contract address copied to clipboard: ' + text);
