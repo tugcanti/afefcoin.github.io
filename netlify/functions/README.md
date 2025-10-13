@@ -23,5 +23,5 @@ Security: Do NOT commit PRIVATE_KEY to GitHub.
 - **Symbol:** AFEF  
 - **Network:** Ethereum  
 - **Decimals:** 18  
-- **Contract:** [0xYourTokenAddressHere](https://etherscan.io/token/0xYourTokenAddressHere)  
+- **Contract:** [0x367a584a928b641330E8B20e7C4739675741f40d](https://etherscan.io/token/0xYourTokenAddressHere)  
 - **Official Website:** [afefcoin.github.io](https://afefcoin.github.io)
