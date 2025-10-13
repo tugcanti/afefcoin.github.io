@@ -183,7 +183,7 @@
             border-radius: 2px;
         }
 
-        /* Other styles for infographic, roadmap, etc. remain largely the same, but will inherit the new vibrant colors */
+        /* Other styles for infographic, roadmap, etc. */
         .infographic-item {
             background-color: var(--bg-dark);
             padding: 30px;
@@ -214,7 +214,6 @@
             gap: 40px;
             text-align: center;
         }
-
         .etherscan-link, .donation-button {
             display: inline-block;
             margin: 20px auto;
@@ -233,8 +232,6 @@
             transform: translateY(-3px);
             box-shadow: 0 6px 12px rgba(0,0,0,0.4);
         }
-
-        /* Roadmap, Contact, Footer, etc. are styled similarly and will inherit new colors */
         #roadmap .timeline {
             position: relative; max-width: 1000px; margin: 0 auto; padding: 40px 0;
         }
@@ -267,32 +264,29 @@
         /* Responsive Design for Mobile Menu */
         @media (max-width: 768px) {
             nav .nav-links {
-                display: none; /* Hide links by default */
+                display: none;
                 flex-direction: column;
                 width: 100%;
                 position: absolute;
-                top: 70px; /* Position below nav bar */
+                top: 70px;
                 left: 0;
                 background-color: rgba(13, 27, 42, 0.95);
                 backdrop-filter: blur(10px);
                 padding: 20px 0;
             }
             nav .nav-links.active {
-                display: flex; /* Show when active */
+                display: flex;
             }
             nav .nav-links a {
                 margin: 15px 0;
                 text-align: center;
             }
             .hamburger {
-                display: flex; /* Show hamburger icon on mobile */
+                display: flex;
             }
-            /* Hamburger animation */
             .hamburger.active .bar:nth-child(2) { opacity: 0; }
             .hamburger.active .bar:nth-child(1) { transform: translateY(8px) rotate(45deg); }
-            .hamburger.active .bar:nth-chidl(3) { transform: translateY(-8px) rotate(-45deg); }
-
-            /* Other responsive adjustments */
+            .hamburger.active .bar:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
             header h1 { font-size: 3.5em; }
             header p { font-size: 1.1em; }
             .section-title { font-size: 2.5em; }
@@ -406,99 +400,20 @@
         </section>
 
         <section id="roadmap" class="animated">
-            <div class="container">
-                <h2 class="section-title">Roadmap</h2>
-                <div class="timeline">
-                    <div class="timeline-item timeline-item-left">
-                        <div class="timeline-content">
-                            <h3>Q4 2024 - The Genesis</h3>
-                            <p>AFEF Token Smart Contract Development & Rigorous Audit. Kick-off of the inaugural Airdrop Campaign to reward early supporters.</p>
-                        </div>
-                    </div>
-                    <div class="timeline-item timeline-item-right">
-                        <div class="timeline-content">
-                            <h3>Q1 2025 - Market Debut</h3>
-                            <p>Strategic creation and locking of the Decentralized Exchange (DEX) Liquidity Pool. Official Website Launch and public access.</p>
-                        </div>
-                    </div>
-                    <div class="timeline-item timeline-item-left">
-                        <div class="timeline-content">
-                            <h3>Q2 2025 - Community & Growth</h3>
-                            <p>Intensive Social Media Campaigns and Key Strategic Partnerships. Activation of the fully functional Governance Platform for token holders.</p>
-                        </div>
-                    </div>
-                    <div class="timeline-item timeline-item-right">
-                        <div class="timeline-content">
-                            <h3>Q3 2025 - Game Integration</h3>
-                            <p>Dedicated research and active discussions for potential integration opportunities and collaborations with Age of Empires Mobile developers.</p>
-                        </div>
-                    </div>
-                    <div class="timeline-item timeline-item-left">
-                        <div class="timeline-content">
-                            <h3>Q4 2025 - Horizon Expansion</h3>
-                            <p>Introduction of new platform features, continuous ecosystem expansion, and pursuit of listings on major centralized exchanges (CEX).</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+            </section>
         
         <section id="transactions" class="animated">
-            <div class="container">
-                <h2 class="section-title">Transactions History</h2>
-                <p style="text-align: center; font-size: 1.1em;">Explore AFEF Token's on-chain activity and ensure transparency.</p>
-                <p style="text-align: center; font-size: 1em; color: var(--light-grey);">
-                    While we're building our in-house transaction viewer, you can view all AFEF Token transactions directly on Etherscan:
-                </p>
-                <div style="text-align: center; margin-top: 20px;">
-                    <a href="https://etherscan.io/token/0x367a584a928b641330E8B20e7C4739675741f40d" target="_blank" class="etherscan-link">View All Transactions on Etherscan <i class="fas fa-external-link-alt"></i></a>
-                </div>
-            </div>
-        </section>
+            </section>
         
         <section id="donate" class="animated">
-            <div class="container">
-                <h2 class="section-title">Support AFEF Token Development</h2>
-                <p style="text-align: center; font-size: 1.1em;">Your contributions help us grow, develop new features, and expand our community. Every donation fuels the Age of Empires Mobile fan token revolution!</p>
-                <p style="text-align: center; margin-top: 30px;">
-                    <strong>Donation Wallet (ERC-20 Compatible):</strong>
-                    <p class="wallet-address">
-                        0xB280e1DD3EEa9027cC04798A22F85b54e5B888bD
-                    </p>
-                    <button onclick="copyToClipboard('0xB280e1DD3EEa9027cC04798A22F85b54e5B888bD')">Copy Wallet Address <i class="fas fa-copy"></i></button>
-                </p>
-            </div>
-        </section>
+            </section>
 
         <section id="contact" class="animated">
-            <div class="container">
-                <h2 class="section-title">Contact Us</h2>
-                <p>Feel free to reach out for any questions, collaboration opportunities, or feedback. We're eager to hear from you!</p>
-                <p>
-                    <strong>Email:</strong> <a href="mailto:empiresfantoken@outlook.com">empiresfantoken@outlook.com</a> <br>
-                    <strong>Telegram:</strong> <a href="https://t.me/afeftoken" target="_blank">t.me/afeftoken</a> <br>
-                    <strong>X (Twitter):</strong> <a href="https://x.com/afeftoken?s=21" target="_blank">@afeftoken</a>
-                </p>
-                <form name="contact" method="POST" data-netlify="true">
-                    <input type="hidden" name="form-name" value="contact">
-                    <input type="text" name="name" placeholder="Your Name" required>
-                    <input type="email" name="email" placeholder="Your Email" required>
-                    <textarea name="message" placeholder="Your Message" required></textarea>
-                    <button type="submit">Send Message</button>
-                </form>
-            </div>
-        </section>
+            </section>
     </main>
 
     <footer>
-        <div class="container">
-            <p>&copy; 2024 AFEF Token. All Rights Reserved.</p>
-            <div class="social-links">
-                 <a href="https://x.com/afeftoken?s=21" target="_blank" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-                <a href="https://t.me/afeftoken" target="_blank" aria-label="Telegram"><i class="fab fa-telegram-plane"></i></a>
-            </div>
-        </div>
-    </footer>
+        </footer>
 
     <script>
         const hamburger = document.querySelector('.hamburger');
