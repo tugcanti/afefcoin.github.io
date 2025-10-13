@@ -19,3 +19,9 @@ AFEF Airdrop Site & Admin Tools
  - Run: `npm run airdrop`
 
 Security: Do NOT commit PRIVATE_KEY to GitHub.
+## 🪙 AFEF Token Info
+- **Symbol:** AFEF  
+- **Network:** Ethereum  
+- **Decimals:** 18  
+- **Contract:** [0xYourTokenAddressHere](https://etherscan.io/token/0xYourTokenAddressHere)  
+- **Official Website:** [afefcoin.github.io](https://afefcoin.github.io)
