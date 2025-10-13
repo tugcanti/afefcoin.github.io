@@ -1,598 +1,242 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AFEF Token - The Fan Token for Age of Empires Mobile</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-    
-    <script type="text/javascript" src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>AFEF Token — Official Site</title>
+  <meta name="description" content="AFEF — community fan token for strategy enthusiasts. Official site: token info, airdrop, and roadmap." />
+  <meta property="og:title" content="AFEF Token — Official Site" />
+  <meta property="og:description" content="AFEF — fan token for strategy game enthusiasts. Contract, roadmap and airdrop info." />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="AFEF Token" />
+  <link rel="icon" href="data:,">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 
-    <style>
-        /* DIAMOND VERSION - VIBRANT & PROFESSIONAL COLOR PALETTE */
-        :root {
-            --primary-color: #0D47A1;   /* Deep, Royal Blue */
-            --secondary-color: #FDD835; /* Vibrant, Sun Gold */
-            --glow-color: rgba(253, 216, 53, 0.7); /* Glow effect color */
-            --text-color: #ECEFF1;      /* Clean, Light Grey/White */
-            --dark-color: #1A237E;      /* Dark Indigo for sections */
-            --bg-dark: #0A192F;         /* Even Darker, more professional Navy Background */
-            --light-grey: #90A4AE;      /* Lighter grey for text */
-        }
+  <style>
+    :root{
+      --bg:#061425;
+      --card:#071827;
+      --accent:#d4a23a;
+      --muted:#9fb0c2;
+      --glass: rgba(255,255,255,0.03);
+      --radius:14px;
+      --maxw:1100px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0;font-family:Inter,system-ui,Segoe UI,Arial;background:linear-gradient(180deg,var(--bg),#051021);color:#eaf6ff;-webkit-font-smoothing:antialiased}
+    a{color:var(--accent);text-decoration:none}
+    a:hover{text-decoration:underline}
 
-        /* General Body & Typography */
-        html {
-            scroll-behavior: smooth;
-        }
-        body {
-            font-family: 'Open Sans', sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: var(--bg-dark);
-            background-image: linear-gradient(180deg, var(--bg-dark) 0%, #0D1B2A 100%);
-            color: var(--text-color);
-            line-height: 1.7;
-            overflow-x: hidden;
-        }
-        h1, h2, h3, h4, h5, h6 {
-            font-family: 'Cinzel', serif;
-            color: var(--secondary-color);
-            text-align: center;
-            margin-bottom: 20px;
-            text-shadow: 0 0 10px var(--glow-color);
-        }
-        a {
-            color: var(--secondary-color);
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-        a:hover {
-            color: white;
-        }
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
+    /* NAV */
+    nav{position:sticky;top:0;background:linear-gradient(180deg, rgba(6,20,37,0.85), rgba(6,20,37,0.65));backdrop-filter:blur(6px);border-bottom:1px solid rgba(212,162,58,0.12);z-index:40}
+    .nav-inner{max-width:var(--maxw);margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:14px}
+    .brand{display:flex;align-items:center;gap:12px}
+    .logo-wrap{width:48px;height:48px;border-radius:10px;background:linear-gradient(180deg,#3b2b12,#6f4c21);display:flex;align-items:center;justify-content:center;box-shadow:0 6px 18px rgba(0,0,0,0.5)}
+    .logo-text{font-family:Cinzel,serif;color:var(--accent);font-weight:600;font-size:1.1rem}
+    .nav-links{display:flex;gap:18px;align-items:center}
+    .nav-links a{font-weight:600;color:#dfeef9;font-size:0.92rem}
+    .cta-small{background:var(--accent);color:#081426;padding:8px 12px;border-radius:10px;font-weight:700}
 
-        /* Navigation Bar */
-        nav {
-            background-color: rgba(13, 27, 42, 0.8);
-            backdrop-filter: blur(12px);
-            padding: 15px 0;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            border-bottom: 1px solid rgba(253, 216, 53, 0.2);
-        }
-        nav .container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        nav .logo {
-            font-family: 'Cinzel', serif;
-            font-size: 1.8em;
-            color: var(--secondary-color);
-            font-weight: bold;
-            text-shadow: 0 0 8px var(--glow-color);
-        }
-        .nav-right-cluster {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-        }
-        nav .nav-links {
-            display: flex;
-        }
-        nav .nav-links a {
-            color: var(--text-color);
-            margin-left: 30px;
-            font-weight: bold;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            position: relative;
-            transition: all 0.3s ease;
-        }
-        nav .nav-links a:hover {
-            color: var(--secondary-color);
-            transform: translateY(-2px);
-        }
-        nav .nav-links a::after {
-            content: '';
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
-            bottom: -5px;
-            width: 0;
-            height: 2px;
-            background-color: var(--secondary-color);
-            transition: width 0.3s ease;
-        }
-        nav .nav-links a:hover::after {
-            width: 100%;
-        }
+    /* hamburger */
+    .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer}
+    .hamburger div{width:24px;height:3px;background:#e7f6ff;border-radius:2px}
 
-        /* Netlify Identity Widget Styling */
-        [data-netlify-identity-menu] button {
-            background: transparent;
-            border: 2px solid var(--secondary-color);
-            color: var(--secondary-color);
-            padding: 8px 15px;
-            border-radius: 5px;
-            font-family: 'Open Sans', sans-serif;
-            font-weight: bold;
-            text-transform: uppercase;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 0 10px transparent;
-        }
-        [data-netlify-identity-menu] button:hover {
-            background-color: var(--secondary-color);
-            color: var(--bg-dark);
-            box-shadow: 0 0 15px var(--glow-color);
-        }
+    /* HERO */
+    header.hero{padding:52px 20px 60px;display:flex;align-items:center;justify-content:center}
+    .hero-inner{max-width:var(--maxw);display:grid;grid-template-columns:1fr 420px;gap:34px;align-items:center}
+    .hero-left h1{font-family:Cinzel,serif;font-size:3rem;margin:0 0 12px;color:var(--accent);text-shadow:0 6px 30px rgba(212,162,58,0.08)}
+    .hero-left p{color:var(--muted);font-size:1.05rem;margin:0 0 18px;line-height:1.6}
+    .hero-actions{display:flex;gap:12px;flex-wrap:wrap}
+    .btn{padding:12px 18px;border-radius:12px;border:none;font-weight:700;cursor:pointer}
+    .btn-primary{background:linear-gradient(90deg,var(--accent),#ffd36a);color:#061426;box-shadow:0 10px 30px rgba(212,162,58,0.15)}
+    .btn-outline{background:transparent;border:1px solid rgba(255,255,255,0.06);color:#dfeef9}
 
-        /* Hamburger Menu Icon */
-        .hamburger {
-            display: none;
-            cursor: pointer;
-            flex-direction: column;
-            gap: 5px;
-            z-index: 1001; /* Ensure it's on top */
-        }
-        .hamburger .bar {
-            width: 28px;
-            height: 3px;
-            background-color: var(--text-color);
-            border-radius: 2px;
-            transition: all 0.3s ease;
-        }
-        
-        /* Header Section */
-        header {
-            background: linear-gradient(rgba(10, 25, 47, 0.7), rgba(10, 25, 47, 0.8)), url('https://via.placeholder.com/1500x800/0A192F/FDD835?text=AGE+OF+EMPIRES') no-repeat center center/cover;
-            padding: 150px 0;
-            text-align: center;
-            position: relative;
-            animation: fadeIn 2s ease-out;
-            clip-path: polygon(0 0, 100% 0, 100% 88%, 0 100%);
-            border-bottom: 3px solid var(--secondary-color);
-        }
-        header h1 {
-            font-size: 5.5em;
-            margin-bottom: 15px;
-            text-shadow: 0 0 25px var(--glow-color), 0 0 10px var(--glow-color);
-            letter-spacing: 3px;
-        }
-        header p {
-            font-size: 1.5em;
-            max-width: 900px;
-            margin: 0 auto 40px auto;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
-        }
-        .cta-button {
-            display: inline-block;
-            background: linear-gradient(45deg, var(--secondary-color), #FFC107);
-            color: var(--bg-dark);
-            padding: 20px 40px;
-            border-radius: 50px;
-            font-weight: bold;
-            font-family: 'Cinzel', serif;
-            font-size: 1.3em;
-            transition: all 0.3s ease;
-            box-shadow: 0 8px 25px rgba(253, 216, 53, 0.5);
-            text-transform: uppercase;
-            border: none;
-        }
-        .cta-button:hover {
-            transform: translateY(-5px) scale(1.05);
-            box-shadow: 0 15px 30px rgba(253, 216, 53, 0.7);
-        }
+    .hero-right{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:20px;border-radius:12px;border:1px solid rgba(255,255,255,0.03);box-shadow:0 8px 30px rgba(0,0,0,0.5)}
+    .shield{width:100%;height:220px;border-radius:10px;background:linear-gradient(180deg,#2a1f12,#0f0b07);display:flex;align-items:center;justify-content:center;flex-direction:column;color:var(--accent)}
+    .shield h2{margin:0;font-family:Cinzel,serif;font-size:36px;letter-spacing:4px}
+    .shield small{display:block;color:var(--muted);font-size:12px;margin-top:6px}
 
-        /* General Section Styling */
-        section {
-            padding: 100px 20px;
-            background: transparent;
-            margin: 0 auto 40px auto;
-            animation: slideInUp 1s ease-out forwards;
-            opacity: 0;
-            transform: translateY(50px);
-            position: relative;
-            max-width: 1400px;
-        }
-        .section-title {
-            font-size: 3.5em;
-            margin-bottom: 60px;
-            position: relative;
-        }
-        .section-title::after {
-            content: '✧';
-            position: absolute;
-            bottom: -30px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 0.8em;
-            color: var(--secondary-color);
-        }
+    /* SECTIONS */
+    .section{max-width:var(--maxw);margin:40px auto;padding:32px}
+    .section h2{font-family:Cinzel,serif;color:var(--accent);margin-bottom:10px}
+    .grid{display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
+    .card{background:var(--card);padding:18px;border-radius:12px;border:1px solid rgba(255,255,255,0.03);box-shadow:0 8px 24px rgba(3,6,11,0.6)}
+    .card h3{margin:0 0 8px;color:#fff}
+    .muted{color:var(--muted);font-size:0.98rem}
 
-        /* Infographic cards with glassmorphism */
-        .infographic-item {
-            background-color: rgba(26, 35, 126, 0.2);
-            backdrop-filter: blur(10px);
-            padding: 35px;
-            border-radius: 15px;
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
-            transition: transform 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease;
-            border: 1px solid rgba(253, 216, 53, 0.2);
-        }
-        .infographic-item:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
-            border-color: var(--secondary-color);
-        }
-        .infographic-item h3 {
-            font-size: 1.8em; margin-top: 0; margin-bottom: 20px;
-        }
-        .infographic-item p {
-            font-size: 1.15em;
-        }
-        .infographic-icon {
-            font-size: 4em; color: var(--secondary-color); margin-bottom: 20px; text-shadow: 0 0 20px var(--glow-color);
-        }
-        #tokenomics .infographic-grid, #features .infographic-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 40px;
-            text-align: center;
-        }
-        .etherscan-link {
-             display: inline-block; margin: 20px auto; background-color: var(--secondary-color); color: var(--bg-dark); padding: 12px 25px; border-radius: 5px; font-weight: bold; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(253, 216, 53, 0.3); text-transform: uppercase;
-        }
-        .etherscan-link:hover {
-             transform: translateY(-3px) scale(1.03); box-shadow: 0 8px 20px rgba(253, 216, 53, 0.5);
-        }
-        #roadmap .timeline {
-            position: relative; max-width: 1000px; margin: 0 auto; padding: 40px 0;
-        }
-        #roadmap .timeline::after {
-            content: ''; position: absolute; width: 4px; background: linear-gradient(to bottom, transparent, var(--secondary-color), transparent); top: 0; bottom: 0; left: 50%; margin-left: -2px;
-        }
-        .timeline-item {
-            padding: 10px 40px; position: relative; background-color: inherit; width: 50%;
-        }
-        .timeline-item::after {
-            content: ''; position: absolute; width: 25px; height: 25px; right: -17px; background-color: var(--bg-dark); border: 4px solid var(--secondary-color); top: 20px; border-radius: 50%; z-index: 1; box-shadow: 0 0 15px var(--glow-color);
-        }
-        .timeline-content { padding: 25px 35px; background: rgba(13, 27, 42, 0.7); backdrop-filter: blur(8px); position: relative; border-radius: 10px; box-shadow: 0 6px 12px rgba(0,0,0,0.4); border: 1px solid rgba(253, 216, 53, 0.1); }
-        #contact { text-align: center; }
-        #contact input, #contact textarea { width: calc(100% - 40px); max-width: 600px; padding: 15px; margin-bottom: 25px; border: 1px solid var(--primary-color); border-radius: 8px; background-color: var(--bg-dark); color: var(--text-color); font-size: 1.1em; }
-        #contact button { background-color: var(--secondary-color); color: var(--bg-dark); padding: 15px 30px; border: none; border-radius: 8px; cursor: pointer; font-size: 1.2em; font-weight: bold; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(253, 216, 53, 0.3); }
-        #contact button:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(253, 216, 53, 0.5); }
-        footer { background-color: #0d0d0d; color: var(--text-color); text-align: center; padding: 50px 0; margin-top: 60px; border-top: 1px solid rgba(255,255,255,0.15); }
-        .social-links a { font-size: 2.2em; margin: 0 15px; color: var(--text-color); transition: transform 0.3s ease, color 0.3s ease; }
-        .social-links a:hover { color: var(--secondary-color); transform: scale(1.2); }
-        #donate .wallet-address { font-family: monospace; background-color: rgba(0,0,0,0.2); padding: 15px; border-radius: 8px; display: inline-block; margin-top: 20px; font-size: 1.2em; word-break: break-all; border: 1px solid var(--primary-color); }
-        
-        /* Responsive Design for Mobile Menu */
-        @media (max-width: 992px) {
-            .nav-links { display: none; }
-            .hamburger { display: flex; }
-            
-            .mobile-nav-menu {
-                display: none;
-                flex-direction: column;
-                align-items: center;
-                justify-content: center;
-                width: 100vw;
-                height: 100vh;
-                position: fixed;
-                top: 0;
-                left: 0;
-                background-color: rgba(13, 27, 42, 0.98);
-                backdrop-filter: blur(15px);
-                z-index: 999;
-                transition: opacity 0.3s ease;
-                opacity: 0;
-                pointer-events: none;
-            }
-            .mobile-nav-menu.active {
-                display: flex;
-                opacity: 1;
-                pointer-events: all;
-            }
-            .mobile-nav-menu a {
-                margin: 20px 0;
-                font-size: 1.8em;
-                font-family: 'Cinzel', serif;
-                opacity: 0;
-                transform: translateY(20px);
-                transition: opacity 0.3s ease, transform 0.3s ease;
-            }
-            .mobile-nav-menu.active a {
-                opacity: 1;
-                transform: translateY(0);
-            }
-            /* Staggered animation for menu links */
-            .mobile-nav-menu.active a:nth-child(1) { transition-delay: 0.1s; }
-            .mobile-nav-menu.active a:nth-child(2) { transition-delay: 0.15s; }
-            .mobile-nav-menu.active a:nth-child(3) { transition-delay: 0.2s; }
-            .mobile-nav-menu.active a:nth-child(4) { transition-delay: 0.25s; }
-            .mobile-nav-menu.active a:nth-child(5) { transition-delay: 0.3s; }
-            .mobile-nav-menu.active a:nth-child(6) { transition-delay: 0.35s; }
-            .hamburger.active .bar:nth-child(2) { opacity: 0; }
-            .hamburger.active .bar:nth-child(1) { transform: translateY(8px) rotate(45deg); }
-            .hamburger.active .bar:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
-        }
-        @media (max-width: 768px) {
-            header h1 { font-size: 3em; }
-            .section-title { font-size: 2.2em; }
-            .timeline-item { width: 100%; padding-left: 70px; padding-right: 25px; }
-            #roadmap .timeline::after, .timeline-item-left::before, .timeline-item-right::before, .timeline-item-left::after, .timeline-item-right::after { left: 31px; }
-            .timeline-item-right { left: 0%; }
-        }
+    /* token box */
+    .token-box{display:flex;gap:12px;align-items:center;justify-content:space-between;padding:12px;border-radius:10px;background:linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border:1px solid rgba(212,162,58,0.06)}
+    .contract{font-family:monospace;background:rgba(0,0,0,0.12);padding:8px 10px;border-radius:8px;color:#f0f6ff}
+    .copy-btn{background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--accent);padding:8px 10px;border-radius:8px;cursor:pointer}
 
-        /* Animations */
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-        @keyframes slideInUp { from { opacity: 0; transform: translateY(50px); } to { opacity: 1; transform: translateY(0); } }
-        .animated { opacity: 0; }
-        .animated.visible { animation: slideInUp 1s ease-out forwards; }
-    </style>
+    /* roadmap */
+    .timeline{display:flex;flex-direction:column;gap:16px}
+    .timeline .step{display:flex;gap:14px;align-items:flex-start}
+    .timeline .dot{width:14px;height:14px;border-radius:50%;background:var(--accent);margin-top:6px;box-shadow:0 6px 18px rgba(212,162,58,0.12)}
+    .timeline .text{color:var(--muted)}
+
+    /* footer */
+    footer{padding:28px 20px;background:#02050a;border-top:1px solid rgba(255,255,255,0.03);color:var(--muted);text-align:center}
+
+    /* responsive */
+    @media (max-width:960px){
+      .hero-inner{grid-template-columns:1fr}
+      .hero-right{order:-1}
+      .nav-links{display:none}
+      .hamburger{display:flex}
+    }
+  </style>
 </head>
 <body>
-    <nav>
-        <div class="container">
-            <a href="#" class="logo">AFEF Token</a>
-            <div class="nav-right-cluster">
-                <div data-netlify-identity-menu></div>
-                <div class="hamburger">
-                    <div class="bar"></div>
-                    <div class="bar"></div>
-                    <div class="bar"></div>
-                </div>
-            </div>
-        </div>
-        <div class="nav-links">
-            <a href="#about">About</a>
-            <a href="#features">Features</a>
-            <a href="#tokenomics">Tokenomics</a>
-            <a href="#roadmap">Roadmap</a>
-            <a href="#transactions">Transactions</a>
-            <a href="#donate">Donate</a>
-            <a href="#contact">Contact</a>
-        </div>
-    </nav>
 
-    <div class="mobile-nav-menu">
+  <nav role="navigation" aria-label="Main Menu">
+    <div class="nav-inner">
+      <div class="brand">
+        <div class="logo-wrap" aria-hidden="true">
+          <!-- Replace with your logo file if available -->
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 1L14.4 6.6L20.5 7.4L15.8 11.3L17.2 17.3L12 14.4L6.8 17.3L8.2 11.3L3.5 7.4L9.6 6.6L12 1Z" fill="#D4A23A"/>
+          </svg>
+        </div>
+        <div class="logo-text">AFEF Token</div>
+      </div>
+
+      <div class="nav-links" aria-hidden="false">
         <a href="#about">About</a>
-        <a href="#features">Features</a>
+        <a href="#features">Benefits</a>
         <a href="#tokenomics">Tokenomics</a>
         <a href="#roadmap">Roadmap</a>
-        <a href="#transactions">Transactions</a>
-        <a href="#donate">Donate</a>
-        <a href="#contact">Contact</a>
+        <a href="#contact" class="cta-small">Contact</a>
+      </div>
+
+      <div style="display:flex;align-items:center;gap:12px">
+        <a class="cta-small" href="https://etherscan.io/token/0x367a584a928b641330E8B20e7C4739675741f40d" target="_blank" rel="noopener">Etherscan</a>
+        <div class="hamburger" aria-label="Open menu" role="button" tabindex="0">
+          <div></div><div></div><div></div>
+        </div>
+      </div>
     </div>
+  </nav>
 
-    <header>
-        <div class="container">
-            <h1>AFEF Token</h1>
-            <p>The Next-Gen Fan Token for Age of Empires Mobile Players!</p>
-            <a href="#about" class="cta-button">Explore AFEF Universe</a>
+  <header class="hero" role="banner">
+    <div class="hero-inner">
+      <div class="hero-left">
+        <h1>AFEF Token</h1>
+        <p class="muted">A community-focused fan token. We aim to grow the AFEF community through early airdrops, transparent tokenomics, and future game/advertising integration concepts. (Note: not affiliated with any official game IP.)</p>
+
+        <div class="hero-actions">
+          <button class="btn btn-primary" onclick="location.href='#tokenomics'">Tokenomics</button>
+          <button class="btn btn-outline" onclick="openInNewTab('https://afeftoken.netlify.app')">Official Site</button>
         </div>
-    </header>
+      </div>
 
-    <main>
-        <section id="about" class="animated">
-            <div class="container">
-                <h2 class="section-title">What is AFEF Token?</h2>
-                <p>AFEF Token is a fan token specially designed for the thriving community of the legendary strategy game, Age of Empires Mobile. It empowers players and loyal fans with unique opportunities to influence the project's evolution, gain access to exclusive events, and potentially unlock powerful in-game advantages in the future.</p>
-                <p>Our core mission is to seamlessly merge the rich Age of Empires universe with cutting-edge blockchain technology, fostering a stronger, more engaged community and delivering tangible value to every AFEF token holder.</p>
-            </div>
-        </section>
-
-        <section id="features" class="animated">
-            <div class="container">
-                <h2 class="section-title">Token Features & Benefits</h2>
-                <div class="infographic-grid">
-                    <div class="infographic-item">
-                        <span class="infographic-icon"><i class="fas fa-crown"></i></span>
-                        <h3>Governance</h3>
-                        <p>AFEF holders will wield direct voting power on pivotal decisions shaping the project's future development and direction.</p>
-                    </div>
-                    <div class="infographic-item">
-                        <span class="infographic-icon"><i class="fas fa-coins"></i></span>
-                        <h3>Rewards</h3>
-                        <p>Engage in lucrative staking mechanisms to earn additional AFEF and participate in exclusive airdrop campaigns for early adopters.</p>
-                    </div>
-                    <div class="infographic-item">
-                        <span class="infographic-icon"><i class="fas fa-hammer"></i></span>
-                        <h3>In-Game Utility</h3>
-                        <p>Anticipate future integration possibilities with Age of Empires Mobile, potentially unlocking unique in-game assets, buffs, or special access.</p>
-                    </div>
-                    <div class="infographic-item">
-                        <span class="infographic-icon"><i class="fas fa-fire-alt"></i></span>
-                        <h3>Burn Mechanisms</h3>
-                        <p>Strategic and transparent token burning initiatives designed to gradually reduce the total supply of AFEF, fostering scarcity and long-term value appreciation.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="tokenomics" class="animated">
-            <div class="container">
-                <h2 class="section-title">Tokenomics</h2>
-                <p style="text-align: center; font-size: 1.1em;">Discover the fair and transparent distribution model of AFEF Token:</p>
-                <div class="infographic-grid">
-                    <div class="infographic-item">
-                        <h3>Total Supply</h3>
-                        <p>1,000,000,000 AFEF</p>
-                    </div>
-                    <div class="infographic-item">
-                        <h3>Airdrop Allocation</h3>
-                        <p>30%</p>
-                    </div>
-                    <div class="infographic-item">
-                        <h3>Liquidity Pool</h3>
-                        <p>40%</p>
-                    </div>
-                    <div class="infographic-item">
-                        <h3>Development & Marketing</h3>
-                        <p>20%</p>
-                    </div>
-                    <div class="infographic-item">
-                        <h3>Team & Advisors</h3>
-                        <p>10%</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="roadmap" class="animated">
-            <div class="container">
-                <h2 class="section-title">Roadmap</h2>
-                <div class="timeline">
-                    <div class="timeline-item timeline-item-left">
-                        <div class="timeline-content">
-                            <h3>Q4 2024 - The Genesis</h3>
-                            <p>AFEF Token Smart Contract Development & Rigorous Audit. Kick-off of the inaugural Airdrop Campaign to reward early supporters.</p>
-                        </div>
-                    </div>
-                    <div class="timeline-item timeline-item-right">
-                        <div class="timeline-content">
-                            <h3>Q1 2025 - Market Debut</h3>
-                            <p>Strategic creation and locking of the Decentralized Exchange (DEX) Liquidity Pool. Official Website Launch and public access.</p>
-                        </div>
-                    </div>
-                    <div class="timeline-item timeline-item-left">
-                        <div class="timeline-content">
-                            <h3>Q2 2025 - Community & Growth</h3>
-                            <p>Intensive Social Media Campaigns and Key Strategic Partnerships. Activation of the fully functional Governance Platform for token holders.</p>
-                        </div>
-                    </div>
-                    <div class="timeline-item timeline-item-right">
-                        <div class="timeline-content">
-                            <h3>Q3 2025 - Game Integration</h3>
-                            <p>Dedicated research and active discussions for potential integration opportunities and collaborations with Age of Empires Mobile developers.</p>
-                        </div>
-                    </div>
-                    <div class="timeline-item timeline-item-left">
-                        <div class="timeline-content">
-                            <h3>Q4 2025 - Horizon Expansion</h3>
-                            <p>Introduction of new platform features, continuous ecosystem expansion, and pursuit of listings on major centralized exchanges (CEX).</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        
-        <section id="transactions" class="animated">
-            <div class="container">
-                <h2 class="section-title">Transactions History</h2>
-                <p style="text-align: center; font-size: 1.1em;">Explore AFEF Token's on-chain activity and ensure transparency.</p>
-                <p style="text-align: center; font-size: 1em; color: var(--light-grey);">
-                    While we're building our in-house transaction viewer, you can view all AFEF Token transactions directly on Etherscan:
-                </p>
-                <div style="text-align: center; margin-top: 20px;">
-                    <a href="https://etherscan.io/token/0x367a584a928b641330E8B20e7C4739675741f40d" target="_blank" class="etherscan-link">View All Transactions on Etherscan <i class="fas fa-external-link-alt"></i></a>
-                </div>
-            </div>
-        </section>
-        
-        <section id="donate" class="animated">
-            <div class="container">
-                <h2 class="section-title">Support AFEF Token Development</h2>
-                <p style="text-align: center; font-size: 1.1em;">Your contributions help us grow, develop new features, and expand our community. Every donation fuels the Age of Empires Mobile fan token revolution!</p>
-                <p style="text-align: center; margin-top: 30px;">
-                    <strong>Donation Wallet (ERC-20 Compatible):</strong>
-                    <p class="wallet-address">
-                        0x...YOUR_DONATION_WALLET_ADDRESS...
-                    </p>
-                    <button onclick="copyToClipboard('0x...YOUR_DONATION_WALLET_ADDRESS...')">Copy Wallet Address <i class="fas fa-copy"></i></button>
-                </p>
-            </div>
-        </section>
-
-        <section id="contact" class="animated">
-            <div class="container">
-                <h2 class="section-title">Contact Us</h2>
-                <p>Feel free to reach out for any questions, collaboration opportunities, or feedback. We're eager to hear from you!</p>
-                <p>
-                    <strong>Email:</strong> <a href="mailto:empiresfantoken@outlook.com">empiresfantoken@outlook.com</a> <br>
-                    <strong>Telegram:</strong> <a href="https://t.me/afeftoken" target="_blank">t.me/afeftoken</a> <br>
-                    <strong>X (Twitter):</strong> <a href="https://x.com/afeftoken?s=21" target="_blank">@afeftoken</a>
-                </p>
-                <form name="contact" method="POST" data-netlify="true">
-                    <input type="hidden" name="form-name" value="contact">
-                    <input type="text" name="name" placeholder="Your Name" required>
-                    <input type="email" name="email" placeholder="Your Email" required>
-                    <textarea name="message" placeholder="Your Message" required></textarea>
-                    <button type="submit">Send Message</button>
-                </form>
-            </div>
-        </section>
-    </main>
-
-    <footer>
-        <div class="container">
-            <p>&copy; 2025 AFEF Token. All Rights Reserved.</p>
-            <div class="social-links">
-                 <a href="https://x.com/afeftoken?s=21" target="_blank" aria-label="Twitter"><i class="fab fa-x-twitter"></i></a>
-                <a href="https://t.me/afeftoken" target="_blank" aria-label="Telegram"><i class="fab fa-telegram-plane"></i></a>
-            </div>
+      <aside class="hero-right" aria-labelledby="token-card" role="region">
+        <div id="token-card" class="shield" role="img" aria-label="AFEF logo and token details">
+          <h2>AFEF</h2>
+          <small>Fan Token</small>
         </div>
-    </footer>
 
-    <script>
-        const hamburger = document.querySelector('.hamburger');
-        const mobileNav = document.querySelector('.mobile-nav-menu');
-        const allMobileNavLinks = document.querySelectorAll('.mobile-nav-menu a');
+        <div style="margin-top:14px" class="token-box" aria-live="polite">
+          <div>
+            <div style="font-size:0.9rem;color:var(--muted)">Contract Address</div>
+            <div class="contract" id="contractAddr">0x367a584a928b641330E8B20e7C4739675741f40d</div>
+          </div>
+          <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px">
+            <button class="copy-btn" id="copyContractBtn" title="Copy address">Copy</button>
+            <a class="copy-btn" href="https://app.uniswap.org/#/swap?outputCurrency=0x367a584a928b641330E8B20e7C4739675741f40d" target="_blank" rel="noopener">Swap</a>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </header>
 
-        // Toggle menu on hamburger click
-        hamburger.addEventListener('click', () => {
-            hamburger.classList.toggle('active');
-            mobileNav.classList.toggle('active');
-        });
+  <main>
+    <section id="about" class="section" aria-labelledby="about-title">
+      <h2 id="about-title">What is AFEF?</h2>
+      <p class="muted">AFEF is a community token designed for strategy game fans. Our mission is transparency, fair distribution, and long-term value creation. We plan airdrops for early adopters, community governance, and token-based rewards.</p>
+    </section>
 
-        // Close menu on link click for mobile menu
-        allMobileNavLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                if (mobileNav.classList.contains('active')) {
-                    hamburger.classList.remove('active');
-                    mobileNav.classList.remove('active');
-                }
-            });
-        });
+    <section id="features" class="section" aria-labelledby="features-title">
+      <h2 id="features-title">Benefits</h2>
+      <div class="grid">
+        <div class="card">
+          <h3>Governance</h3>
+          <p class="muted">Token holders will have the right to vote on roadmap and key decisions.</p>
+        </div>
+        <div class="card">
+          <h3>Rewards</h3>
+          <p class="muted">Staking and special airdrops will provide advantages to early supporters.</p>
+        </div>
+        <div class="card">
+          <h3>Gaming Potential</h3>
+          <p class="muted">Future integration ideas may offer exclusive in-game benefits for token holders.</p>
+        </div>
+        <div class="card">
+          <h3>Transparency</h3>
+          <p class="muted">The contract is verifiable on Etherscan; airdrop and liquidity events will be publicly shared.</p>
+        </div>
+      </div>
+    </section>
 
-        // Scroll animation script
-        document.addEventListener('DOMContentLoaded', () => {
-            const sections = document.querySelectorAll('.animated');
-            const observerOptions = {
-                root: null,
-                rootMargin: '0px',
-                threshold: 0.1
-            };
-            const observer = new IntersectionObserver((entries, observer) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('visible');
-                        observer.unobserve(entry.target);
-                    }
-                });
-            }, observerOptions);
-            sections.forEach(section => {
-                observer.observe(section);
-            });
-        });
+    <section id="tokenomics" class="section" aria-labelledby="tokenomics-title">
+      <h2 id="tokenomics-title">Tokenomics</h2>
+      <p class="muted" style="text-align:center">Total Supply: <strong>4,950,000 AFEF</strong></p>
 
-        // Copy to clipboard function
-        function copyToClipboard(text) {
-            navigator.clipboard.writeText(text).then(() => {
-                alert('Wallet address copied to clipboard: ' + text);
-            }).catch(err => {
-                console.error('Failed to copy:', err);
-            });
-        }
-    </script>
-</body>
-</html>
+      <div class="grid" style="margin-top:18px">
+        <div class="card">
+          <h3>40% Liquidity</h3>
+          <p class="muted">Allocated to the liquidity pool.</p>
+        </div>
+        <div class="card">
+          <h3>30% Airdrop & Community</h3>
+          <p class="muted">Reserved for community incentives and early supporters.</p>
+        </div>
+        <div class="card">
+          <h3>20% Development & Marketing</h3>
+          <p class="muted">For project development and marketing budget.</p>
+        </div>
+        <div class="card">
+          <h3>10% Team & Advisors</h3>
+          <p class="muted">Locked allocation for the team and advisors.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="roadmap" class="section" aria-labelledby="roadmap-title">
+      <h2 id="roadmap-title">Roadmap</h2>
+      <div class="timeline">
+        <div class="step"><div class="dot"></div><div class="text"><strong>Q4 2024</strong> — Smart contract, airdrop launch, and community building.</div></div>
+        <div class="step"><div class="dot"></div><div class="text"><strong>Q1 2025</strong> — Liquidity addition, LP lock, and official website launch.</div></div>
+        <div class="step"><div class="dot"></div><div class="text"><strong>Q2 2025</strong> — Marketing campaigns, exchange applications.</div></div>
+        <div class="step"><div class="dot"></div><div class="text"><strong>Q3 2025</strong> — Staking features and extra utilities.</div></div>
+      </div>
+    </section>
+
+    <section id="transactions" class="section" aria-labelledby="transactions-title">
+      <h2 id="transactions-title">On-Chain Visibility</h2>
+      <p class="muted">All transactions are traceable on Etherscan. For verification and circulation info:</p>
+      <p style="text-align:center;margin-top:12px">
+        <a class="etherscan-link" href="https://etherscan.io/token/0x367a584a928b641330E8B20e7C4739675741f40d" target="_blank" rel="noopener">Etherscan: AFEF Token</a>
+      </p>
+    </section>
+
+    <section id="donate" class="section" aria-labelledby="donate-title">
+      <h2 id="donate-title">Support</h2>
+      <p class="muted">We accept donations for project development and marketing. Every contribution helps us grow.</p>
+      <div style="text-align:center;margin-top:18px">
+        <div class="contract" id="donationAddr">0x367a584a928b641330E8B20e7C4739675741f40d</div>
+        <div style="margin-top:10px">
+          <button class="copy-btn" onclick="copyToClipboard(document.getElementById('donationAddr').textContent)">Copy Address</button>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="section" aria-labelledby="contact-title">
+      <h2 id="contact-title">Contact</h2>
+      <p class="muted">Reach us for questions or partnership proposals.</p>
+
+      <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+        <input type="hidden" name="form-name" value="contact">
+        <p style="text-align:center"><input type="text" name="name" placeholder="Your Name" required style="max-width:400px;padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.05);"></p>
+        <p style="text-align:center"><input type="email" name="email" placeholder="Your Email" required style="max-width:400px;padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.05);"></p>
+        <p style="text-align:center"><textarea name="message" placeholder="Your Message" required style="max-width:600px;height:120px;padding:12px;border-radius:8px
