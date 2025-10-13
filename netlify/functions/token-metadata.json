@@ -1,0 +1,14 @@
+{
+  "name": "Age of Empires Fan",
+  "symbol": "AFEF",
+  "address": "0x367a584a928b641330E8B20e7C4739675741f40d",
+  "decimals": 18,
+  "totalSupply": "4950000",
+  "description": "AFEF is a community-driven ERC20 token inspired by the strategy, unity, and empire-building spirit of Age of Empires.",
+  "website": "https://afefcoin.github.io",
+  "image": "https://afefcoin.github.io/afef-logo.png",
+  "socials": {
+    "twitter": "https://x.com/AFEFtoken",
+    "telegram": "https://t.me/AFEFcommunity"
+  }
+}
