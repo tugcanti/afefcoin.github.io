@@ -5,15 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AFEF Coin - The Fan Token for Age of Empires Mobile</title>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> <style>
-        /* Base CSS variables for theming */
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* NEW VIBRANT COLOR PALETTE */
         :root {
-            --primary-color: #8B4513; /* Medieval Gold/Brown */
-            --secondary-color: #DAA520; /* Gold */
-            --text-color: #F5DEB3; /* Cream White */
-            --dark-color: #2c3e50; /* Dark Grey/Blue */
-            --bg-dark: #1a1a1a; /* Very Dark Background */
-            --light-grey: #4a6479; /* Lighter grey for elements */
+            --primary-color: #0D47A1;   /* Deep, Royal Blue */
+            --secondary-color: #FDD835; /* Vibrant, Sun Gold */
+            --text-color: #ECEFF1;      /* Clean, Light Grey/White */
+            --dark-color: #1A237E;      /* Dark Indigo for sections */
+            --bg-dark: #0D1B2A;         /* Very Dark Navy Background */
+            --light-grey: #90A4AE;      /* Lighter grey for text */
         }
 
         /* General Body & Typography */
@@ -25,7 +26,7 @@
             color: var(--text-color);
             line-height: 1.6;
             overflow-x: hidden;
-            scroll-behavior: smooth; /* Smooth scrolling for anchor links */
+            scroll-behavior: smooth;
         }
         h1, h2, h3, h4, h5, h6 {
             font-family: 'Cinzel', serif;
@@ -39,19 +40,20 @@
             transition: color 0.3s ease;
         }
         a:hover {
-            color: var(--text-color);
+            color: white;
         }
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 20px;
+            padding: 0 20px; /* Padding added here for consistency */
         }
 
         /* Navigation Bar */
         nav {
-            background-color: var(--dark-color);
+            background-color: rgba(13, 27, 42, 0.85); /* Semi-transparent background */
+            backdrop-filter: blur(10px); /* Frosted glass effect */
             padding: 15px 0;
-            position: sticky; /* Keeps nav bar at the top */
+            position: sticky;
             top: 0;
             z-index: 1000;
             box-shadow: 0 2px 10px rgba(0,0,0,0.5);
@@ -66,6 +68,9 @@
             font-size: 1.8em;
             color: var(--secondary-color);
             font-weight: bold;
+        }
+        nav .nav-links {
+            display: flex; /* Default for desktop */
         }
         nav .nav-links a {
             color: var(--text-color);
@@ -88,24 +93,38 @@
         nav .nav-links a:hover::after {
             width: 100%;
         }
+
+        /* Hamburger Menu Icon */
+        .hamburger {
+            display: none; /* Hidden on desktop */
+            cursor: pointer;
+            flex-direction: column;
+            gap: 5px;
+        }
+        .hamburger .bar {
+            width: 25px;
+            height: 3px;
+            background-color: var(--text-color);
+            transition: all 0.3s ease;
+        }
         
         /* Header Section */
         header {
-            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://via.placeholder.com/1500x700/000000/FFFFFF?text=EPIC+AGE+OF+EMPIRES+MOBILE+BANNER') no-repeat center center/cover; /* Placeholder, use a real AoE banner */
+            background: linear-gradient(rgba(13, 27, 42, 0.7), rgba(13, 27, 42, 0.7)), url('https://via.placeholder.com/1500x700/0D1B2A/FDD835?text=EPIC+AGE+OF+EMPIRES+BANNER') no-repeat center center/cover;
             color: var(--text-color);
-            padding: 120px 0; /* More padding for a grander feel */
+            padding: 120px 0;
             text-align: center;
             position: relative;
             animation: fadeIn 2s ease-out;
         }
         header h1 {
-            font-size: 4.5em; /* Larger heading */
+            font-size: 4.5em;
             margin-bottom: 15px;
             text-shadow: 3px 3px 6px rgba(0,0,0,0.8);
             letter-spacing: 2px;
         }
         header p {
-            font-size: 1.4em; /* Larger subheading */
+            font-size: 1.4em;
             max-width: 900px;
             margin: 0 auto 40px auto;
             text-shadow: 1px 1px 3px rgba(0,0,0,0.6);
@@ -113,28 +132,30 @@
         .cta-button {
             display: inline-block;
             background-color: var(--secondary-color);
-            color: var(--dark-color);
-            padding: 18px 35px; /* Larger button */
-            border-radius: 8px; /* Slightly more rounded */
+            color: var(--bg-dark);
+            padding: 18px 35px;
+            border-radius: 8px;
             font-weight: bold;
             font-family: 'Cinzel', serif;
             font-size: 1.1em;
-            transition: background-color 0.3s ease, transform 0.3s ease;
+            transition: all 0.3s ease;
             box-shadow: 0 6px 12px rgba(0,0,0,0.4);
             text-transform: uppercase;
+            border: 2px solid var(--secondary-color);
         }
         .cta-button:hover {
-            background-color: var(--text-color);
-            transform: translateY(-5px) scale(1.02); /* More pronounced hover effect */
+            background-color: transparent;
+            color: var(--secondary-color);
+            transform: translateY(-5px) scale(1.02);
             box-shadow: 0 10px 20px rgba(0,0,0,0.5);
         }
 
-        /* Section Styles */
+        /* General Section Styling */
         section {
-            padding: 80px 0; /* More padding */
+            padding: 80px 20px;
             margin-bottom: 40px;
             background-color: var(--dark-color);
-            border-radius: 12px; /* More rounded corners */
+            border-radius: 12px;
             box-shadow: 0 8px 16px rgba(0,0,0,0.5);
             animation: slideInUp 1s ease-out forwards;
             opacity: 0;
@@ -142,10 +163,10 @@
             position: relative;
         }
         section:nth-child(even) {
-            background-color: #34495e; /* Slightly lighter dark for contrast */
+            background-color: var(--primary-color);
         }
         .section-title {
-            font-size: 3em; /* Larger section titles */
+            font-size: 3em;
             margin-bottom: 50px;
             position: relative;
             text-shadow: 1px 1px 3px rgba(0,0,0,0.6);
@@ -156,56 +177,49 @@
             bottom: -15px;
             left: 50%;
             transform: translateX(-50%);
-            width: 100px; /* Wider underline */
-            height: 4px; /* Thicker underline */
+            width: 100px;
+            height: 4px;
             background-color: var(--secondary-color);
             border-radius: 2px;
         }
 
-        /* Infographic Grid */
-        #tokenomics .infographic-grid, #features .infographic-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 40px; /* Increased gap */
-            text-align: center;
-        }
+        /* Other styles for infographic, roadmap, etc. remain largely the same, but will inherit the new vibrant colors */
         .infographic-item {
             background-color: var(--bg-dark);
-            padding: 30px; /* More padding */
-            border-radius: 10px; /* More rounded */
+            padding: 30px;
+            border-radius: 10px;
             box-shadow: 0 4px 10px rgba(0,0,0,0.3);
             position: relative;
             overflow: hidden;
             transition: transform 0.4s ease, box-shadow 0.4s ease;
-            border-left: 6px solid var(--secondary-color); /* Thicker border */
+            border-left: 6px solid var(--secondary-color);
         }
         .infographic-item:hover {
-            transform: translateY(-8px) scale(1.03); /* More pronounced hover */
+            transform: translateY(-8px) scale(1.03);
             box-shadow: 0 12px 24px rgba(0,0,0,0.6);
-            border-left-color: var(--text-color); /* Highlight on hover */
+            border-left-color: white;
         }
         .infographic-item h3 {
-            color: var(--secondary-color);
-            font-size: 1.8em; /* Larger item titles */
-            margin-top: 0;
-            margin-bottom: 20px;
+            font-size: 1.8em; margin-top: 0; margin-bottom: 20px;
         }
         .infographic-item p {
             font-size: 1.15em;
-            color: var(--text-color);
         }
         .infographic-icon {
-            font-size: 4em; /* Larger icons */
-            color: var(--primary-color);
-            margin-bottom: 20px;
+            font-size: 4em; color: var(--primary-color); margin-bottom: 20px;
+        }
+        #tokenomics .infographic-grid, #features .infographic-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 40px;
+            text-align: center;
         }
 
-        /* Etherscan Link Styling */
         .etherscan-link, .donation-button {
             display: inline-block;
             margin: 20px auto;
-            background-color: var(--primary-color);
-            color: var(--text-color);
+            background-color: var(--secondary-color);
+            color: var(--bg-dark);
             padding: 12px 25px;
             border-radius: 5px;
             font-weight: bold;
@@ -214,197 +228,105 @@
             text-transform: uppercase;
         }
         .etherscan-link:hover, .donation-button:hover {
-            background-color: var(--secondary-color);
+            background-color: var(--text-color);
             color: var(--dark-color);
             transform: translateY(-3px);
             box-shadow: 0 6px 12px rgba(0,0,0,0.4);
         }
 
-        /* Roadmap Timeline */
+        /* Roadmap, Contact, Footer, etc. are styled similarly and will inherit new colors */
         #roadmap .timeline {
-            position: relative;
-            max-width: 1000px;
-            margin: 0 auto;
-            padding: 40px 0; /* More padding */
+            position: relative; max-width: 1000px; margin: 0 auto; padding: 40px 0;
         }
         #roadmap .timeline::after {
-            width: 8px; /* Thicker timeline line */
-            background-color: var(--secondary-color);
-            left: 50%;
-            margin-left: -4px;
+            content: ''; position: absolute; width: 8px; background-color: var(--secondary-color); top: 0; bottom: 0; left: 50%; margin-left: -4px;
         }
         .timeline-item {
-            padding: 10px 40px;
-            position: relative;
-            background-color: inherit;
-            width: 50%;
+            padding: 10px 40px; position: relative; background-color: inherit; width: 50%;
         }
         .timeline-item::after {
-            width: 30px; /* Larger circle */
-            height: 30px;
-            right: -20px;
-            border: 6px solid var(--secondary-color); /* Thicker border */
-            top: 20px;
+            content: ''; position: absolute; width: 30px; height: 30px; right: -20px; background-color: var(--bg-dark); border: 6px solid var(--secondary-color); top: 20px; border-radius: 50%; z-index: 1;
         }
-        .timeline-item-left::before {
-            right: 35px;
-        }
-        .timeline-item-right::before {
-            left: 35px;
-        }
-        .timeline-item-right::after {
-            left: -19px;
-        }
-        .timeline-content {
-            padding: 25px 35px; /* More padding */
-            background-color: var(--dark-color);
-            position: relative;
-            border-radius: 8px;
-            box-shadow: 0 6px 12px rgba(0,0,0,0.4);
-        }
-        .timeline-content h3 {
-            font-size: 1.6em;
-        }
+        .timeline-item-left { left: 0; }
+        .timeline-item-right { left: 50%; }
+        .timeline-item-left::before { content: " "; height: 0; position: absolute; top: 28px; width: 0; z-index: 1; right: 35px; border: medium solid var(--dark-color); border-width: 10px 0 10px 10px; border-color: transparent transparent transparent var(--dark-color); }
+        .timeline-item-right::before { content: " "; height: 0; position: absolute; top: 28px; width: 0; z-index: 1; left: 35px; border: medium solid var(--dark-color); border-width: 10px 10px 10px 0; border-color: transparent var(--dark-color) transparent transparent; }
+        .timeline-item-right::after { left: -19px; }
+        .timeline-content { padding: 25px 35px; background-color: var(--dark-color); position: relative; border-radius: 8px; box-shadow: 0 6px 12px rgba(0,0,0,0.4); }
+        .timeline-content h3 { font-size: 1.6em; }
+        #contact { text-align: center; }
+        #contact input[type="text"], #contact input[type="email"], #contact textarea { width: calc(100% - 40px); max-width: 600px; padding: 12px; margin-bottom: 25px; border: 1px solid var(--primary-color); border-radius: 8px; background-color: var(--bg-dark); color: var(--text-color); font-size: 1.1em; }
+        #contact textarea { resize: vertical; min-height: 120px; }
+        #contact button { background-color: var(--secondary-color); color: var(--bg-dark); padding: 15px 30px; border: none; border-radius: 8px; cursor: pointer; font-size: 1.2em; font-weight: bold; transition: background-color 0.3s ease, transform 0.3s ease; box-shadow: 0 4px 8px rgba(0,0,0,0.3); }
+        #contact button:hover { background-color: var(--text-color); transform: translateY(-3px); }
+        footer { background-color: #0d0d0d; color: var(--text-color); text-align: center; padding: 40px 0; margin-top: 60px; border-top: 1px solid rgba(255,255,255,0.15); }
+        .social-links a { font-size: 2.2em; margin: 0 15px; color: var(--text-color); }
+        .social-links a:hover { color: var(--secondary-color); transform: scale(1.1); }
+        #donate .wallet-address { font-family: monospace; background-color: rgba(0,0,0,0.2); padding: 10px 15px; border-radius: 5px; display: inline-block; margin-top: 20px; font-size: 1.1em; word-break: break-all; }
 
-        /* Contact & Footer */
-        #contact {
-            text-align: center;
-        }
-        #contact input[type="text"],
-        #contact input[type="email"],
-        #contact textarea {
-            width: calc(100% - 40px); /* Slightly wider */
-            max-width: 600px; /* Max width for consistency */
-            padding: 12px;
-            margin-bottom: 25px;
-            border: 1px solid var(--primary-color);
-            border-radius: 8px;
-            background-color: var(--bg-dark);
-            color: var(--text-color);
-            font-size: 1.1em;
-        }
-        #contact textarea {
-            resize: vertical;
-            min-height: 120px;
-        }
-        #contact button {
-            background-color: var(--secondary-color);
-            color: var(--dark-color);
-            padding: 15px 30px;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 1.2em;
-            font-weight: bold;
-            transition: background-color 0.3s ease, transform 0.3s ease;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
-        }
-        #contact button:hover {
-            background-color: var(--text-color);
-            transform: translateY(-3px);
-        }
-        footer {
-            background-color: #0d0d0d;
-            color: var(--text-color);
-            text-align: center;
-            padding: 40px 0; /* More padding */
-            margin-top: 60px;
-            border-top: 1px solid rgba(255,255,255,0.15);
-        }
-        .social-links a {
-            font-size: 2.2em; /* Larger icons */
-            margin: 0 15px;
-            color: var(--text-color);
-        }
-        .social-links a:hover {
-            color: var(--secondary-color);
-            transform: scale(1.1);
-        }
-
-        /* Donation Section */
-        #donate .wallet-address {
-            font-family: monospace;
-            background-color: rgba(255,255,255,0.1);
-            padding: 10px 15px;
-            border-radius: 5px;
-            display: inline-block;
-            margin-top: 20px;
-            font-size: 1.1em;
-            word-break: break-all;
-        }
-
-        /* Responsive Design */
+        /* Responsive Design for Mobile Menu */
         @media (max-width: 768px) {
-            nav .container {
-                flex-direction: column;
-            }
             nav .nav-links {
-                margin-top: 20px;
+                display: none; /* Hide links by default */
+                flex-direction: column;
+                width: 100%;
+                position: absolute;
+                top: 70px; /* Position below nav bar */
+                left: 0;
+                background-color: rgba(13, 27, 42, 0.95);
+                backdrop-filter: blur(10px);
+                padding: 20px 0;
+            }
+            nav .nav-links.active {
+                display: flex; /* Show when active */
             }
             nav .nav-links a {
-                margin: 0 15px;
+                margin: 15px 0;
+                text-align: center;
             }
-            header h1 {
-                font-size: 3.5em;
+            .hamburger {
+                display: flex; /* Show hamburger icon on mobile */
             }
-            header p {
-                font-size: 1.1em;
-            }
-            .section-title {
-                font-size: 2.5em;
-            }
-            #roadmap .timeline::after {
-                left: 31px;
-            }
-            .timeline-item {
-                width: 100%;
-                padding-left: 70px;
-                padding-right: 25px;
-            }
-            .timeline-item-left::before,
-            .timeline-item-right::before {
-                left: 60px;
-                border: medium solid var(--dark-color);
-                border-width: 10px 10px 10px 0;
-                border-color: transparent var(--dark-color) transparent transparent;
-            }
-            .timeline-item-left::after,
-            .timeline-item-right::after {
-                left: 15px;
-            }
-            .timeline-item-right {
-                left: 0%;
-            }
+            /* Hamburger animation */
+            .hamburger.active .bar:nth-child(2) { opacity: 0; }
+            .hamburger.active .bar:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+            .hamburger.active .bar:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+
+            /* Other responsive adjustments */
+            header h1 { font-size: 3.5em; }
+            header p { font-size: 1.1em; }
+            .section-title { font-size: 2.5em; }
+            #roadmap .timeline::after { left: 31px; }
+            .timeline-item { width: 100%; padding-left: 70px; padding-right: 25px; }
+            .timeline-item-left::before, .timeline-item-right::before { left: 60px; border: medium solid var(--dark-color); border-width: 10px 10px 10px 0; border-color: transparent var(--dark-color) transparent transparent; }
+            .timeline-item-left::after, .timeline-item-right::after { left: 15px; }
+            .timeline-item-right { left: 0%; }
         }
 
         /* Animations */
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-        @keyframes slideInUp {
-            from { opacity: 0; transform: translateY(50px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        .animated {
-            opacity: 0;
-        }
-        .animated.visible {
-            animation: slideInUp 1s ease-out forwards;
-        }
-
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes slideInUp { from { opacity: 0; transform: translateY(50px); } to { opacity: 1; transform: translateY(0); } }
+        .animated { opacity: 0; }
+        .animated.visible { animation: slideInUp 1s ease-out forwards; }
     </style>
 </head>
 <body>
     <nav>
         <div class="container">
             <a href="#" class="logo">AFEF Coin</a>
+            <div class="hamburger">
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+            </div>
             <div class="nav-links">
                 <a href="#about">About</a>
                 <a href="#features">Features</a>
                 <a href="#tokenomics">Tokenomics</a>
                 <a href="#roadmap">Roadmap</a>
-                <a href="#transactions">Transactions</a> <a href="#donate">Donate</a> <a href="#contact">Contact</a>
+                <a href="#transactions">Transactions</a>
+                <a href="#donate">Donate</a>
+                <a href="#contact">Contact</a>
             </div>
         </div>
     </nav>
@@ -431,19 +353,23 @@
                 <h2 class="section-title">Token Features & Benefits</h2>
                 <div class="infographic-grid">
                     <div class="infographic-item">
-                        <span class="infographic-icon"><i class="fas fa-crown"></i></span> <h3>Governance</h3>
+                        <span class="infographic-icon"><i class="fas fa-crown"></i></span>
+                        <h3>Governance</h3>
                         <p>AFEF holders will wield direct voting power on pivotal decisions shaping the project's future development and direction.</p>
                     </div>
                     <div class="infographic-item">
-                        <span class="infographic-icon"><i class="fas fa-coins"></i></span> <h3>Rewards</h3>
+                        <span class="infographic-icon"><i class="fas fa-coins"></i></span>
+                        <h3>Rewards</h3>
                         <p>Engage in lucrative staking mechanisms to earn additional AFEF and participate in exclusive airdrop campaigns for early adopters.</p>
                     </div>
                     <div class="infographic-item">
-                        <span class="infographic-icon"><i class="fas fa-hammer"></i></span> <h3>In-Game Utility</h3>
+                        <span class="infographic-icon"><i class="fas fa-hammer"></i></span>
+                        <h3>In-Game Utility</h3>
                         <p>Anticipate future integration possibilities with Age of Empires Mobile, potentially unlocking unique in-game assets, buffs, or special access.</p>
                     </div>
                     <div class="infographic-item">
-                        <span class="infographic-icon"><i class="fas fa-fire-alt"></i></span> <h3>Burn Mechanisms</h3>
+                        <span class="infographic-icon"><i class="fas fa-fire-alt"></i></span>
+                        <h3>Burn Mechanisms</h3>
                         <p>Strategic and transparent token burning initiatives designed to gradually reduce the total supply of AFEF, fostering scarcity and long-term value appreciation.</p>
                     </div>
                 </div>
@@ -457,13 +383,16 @@
                 <div class="infographic-grid">
                     <div class="infographic-item">
                         <h3>Total Supply</h3>
-                        <p>1,000,000,000 AFEF</p> </div>
+                        <p>1,000,000,000 AFEF</p>
+                    </div>
                     <div class="infographic-item">
                         <h3>Airdrop Allocation</h3>
-                        <p>30%</p> </div>
+                        <p>30%</p>
+                    </div>
                     <div class="infographic-item">
                         <h3>Liquidity Pool</h3>
-                        <p>40%</p> </div>
+                        <p>40%</p>
+                    </div>
                     <div class="infographic-item">
                         <h3>Development & Marketing</h3>
                         <p>20%</p>
@@ -496,7 +425,7 @@
                     <div class="timeline-item timeline-item-right">
                         <div class="timeline-content">
                             <h3>Q1 2025 - Market Debut</h3>
-                            <p>Strategic creation and locking of the Decentralized Exchange (DEX) Liquidity Pool (e.g., Uniswap/PancakeSwap). Official Website Launch and public access.</p>
+                            <p>Strategic creation and locking of the Decentralized Exchange (DEX) Liquidity Pool. Official Website Launch and public access.</p>
                         </div>
                     </div>
                     <div class="timeline-item timeline-item-left">
@@ -520,7 +449,7 @@
                 </div>
             </div>
         </section>
-
+        
         <section id="transactions" class="animated">
             <div class="container">
                 <h2 class="section-title">Transactions History</h2>
@@ -531,9 +460,9 @@
                 <div style="text-align: center; margin-top: 20px;">
                     <a href="https://etherscan.io/token/0x367a584a928b641330E8B20e7C4739675741f40d" target="_blank" class="etherscan-link">View All Transactions on Etherscan <i class="fas fa-external-link-alt"></i></a>
                 </div>
-                </div>
+            </div>
         </section>
-
+        
         <section id="donate" class="animated">
             <div class="container">
                 <h2 class="section-title">Support AFEF Coin Development</h2>
@@ -541,9 +470,9 @@
                 <p style="text-align: center; margin-top: 30px;">
                     <strong>Donation Wallet (ERC-20 Compatible):</strong>
                     <p class="wallet-address">
-                        0xB280e1DD3EEa9027cC04798A22F85b54e5B888bD </p>
-                    <button onclick="copyToClipboard('0xB280e1DD3EEa9027cC04798A22F85b54e5B888bD')">Copy Wallet Address <i class="fas fa-copy"></i></button>
-                    <a href="https://etherscan.io/address/0xB280e1DD3EEa9027cC04798A22F85b54e5B888bD" target="_blank" class="etherscan-link donation-button">View Wallet on Etherscan <i class="fas fa-external-link-alt"></i></a>
+                        0xB280e1DD3EEa9027cC04798A22F85b54e5B888bD
+                    </p>
+                    <button onclick="copyToClipboard('0xB280e1DD3EEa9027cC04798A22F85b54e5B888bD.')">Copy Wallet Address <i class="fas fa-copy"></i></button>
                 </p>
             </div>
         </section>
@@ -557,7 +486,6 @@
                     <strong>Telegram:</strong> <a href="https://t.me/afeftoken" target="_blank">t.me/afeftoken</a> <br>
                     <strong>X (Twitter):</strong> <a href="https://x.com/afeftoken?s=21" target="_blank">@afeftoken</a>
                 </p>
-                
                 <form name="contact" method="POST" data-netlify="true">
                     <input type="hidden" name="form-name" value="contact">
                     <input type="text" name="name" placeholder="Your Name" required>
@@ -580,6 +508,14 @@
     </footer>
 
     <script>
+        const hamburger = document.querySelector('.hamburger');
+        const navLinks = document.querySelector('.nav-links');
+
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navLinks.classList.toggle('active');
+        });
+
         // Simple animation trigger on scroll
         document.addEventListener('DOMContentLoaded', () => {
             const sections = document.querySelectorAll('.animated');
@@ -588,7 +524,6 @@
                 rootMargin: '0px',
                 threshold: 0.1
             };
-
             const observer = new IntersectionObserver((entries, observer) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
@@ -597,13 +532,12 @@
                     }
                 });
             }, observerOptions);
-
             sections.forEach(section => {
                 observer.observe(section);
             });
         });
 
-        // Copy to clipboard function for donation address
+        // Copy to clipboard function
         function copyToClipboard(text) {
             navigator.clipboard.writeText(text).then(() => {
                 alert('Wallet address copied to clipboard: ' + text);
