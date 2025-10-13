@@ -5,15 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AFEF Coin - The Fan Token for Age of Empires Mobile</title>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
-    <style>
-        /* CSS styles are the same, no translation needed */
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> <style>
+        /* Base CSS variables for theming */
         :root {
             --primary-color: #8B4513; /* Medieval Gold/Brown */
             --secondary-color: #DAA520; /* Gold */
             --text-color: #F5DEB3; /* Cream White */
             --dark-color: #2c3e50; /* Dark Grey/Blue */
             --bg-dark: #1a1a1a; /* Very Dark Background */
+            --light-grey: #4a6479; /* Lighter grey for elements */
         }
+
+        /* General Body & Typography */
         body {
             font-family: 'Open Sans', sans-serif;
             margin: 0;
@@ -22,6 +25,7 @@
             color: var(--text-color);
             line-height: 1.6;
             overflow-x: hidden;
+            scroll-behavior: smooth; /* Smooth scrolling for anchor links */
         }
         h1, h2, h3, h4, h5, h6 {
             font-family: 'Cinzel', serif;
@@ -42,131 +46,192 @@
             margin: 0 auto;
             padding: 20px;
         }
-        header {
-            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://via.placeholder.com/1500x500/000000/FFFFFF?text=AGE+OF+EMPIRES+MOBILE+BANNER') no-repeat center center/cover;
+
+        /* Navigation Bar */
+        nav {
+            background-color: var(--dark-color);
+            padding: 15px 0;
+            position: sticky; /* Keeps nav bar at the top */
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+        }
+        nav .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        nav .logo {
+            font-family: 'Cinzel', serif;
+            font-size: 1.8em;
+            color: var(--secondary-color);
+            font-weight: bold;
+        }
+        nav .nav-links a {
             color: var(--text-color);
-            padding: 80px 0;
+            margin-left: 30px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+        }
+        nav .nav-links a::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -5px;
+            width: 0;
+            height: 2px;
+            background-color: var(--secondary-color);
+            transition: width 0.3s ease;
+        }
+        nav .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        /* Header Section */
+        header {
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://via.placeholder.com/1500x700/000000/FFFFFF?text=EPIC+AGE+OF+EMPIRES+MOBILE+BANNER') no-repeat center center/cover; /* Placeholder, use a real AoE banner */
+            color: var(--text-color);
+            padding: 120px 0; /* More padding for a grander feel */
             text-align: center;
             position: relative;
             animation: fadeIn 2s ease-out;
         }
         header h1 {
-            font-size: 3.5em;
-            margin-bottom: 10px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
+            font-size: 4.5em; /* Larger heading */
+            margin-bottom: 15px;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.8);
+            letter-spacing: 2px;
         }
         header p {
-            font-size: 1.2em;
-            max-width: 800px;
-            margin: 0 auto 30px auto;
+            font-size: 1.4em; /* Larger subheading */
+            max-width: 900px;
+            margin: 0 auto 40px auto;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.6);
         }
         .cta-button {
             display: inline-block;
             background-color: var(--secondary-color);
             color: var(--dark-color);
-            padding: 15px 30px;
-            border-radius: 5px;
+            padding: 18px 35px; /* Larger button */
+            border-radius: 8px; /* Slightly more rounded */
             font-weight: bold;
             font-family: 'Cinzel', serif;
+            font-size: 1.1em;
             transition: background-color 0.3s ease, transform 0.3s ease;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.4);
+            text-transform: uppercase;
         }
         .cta-button:hover {
             background-color: var(--text-color);
-            transform: translateY(-3px);
+            transform: translateY(-5px) scale(1.02); /* More pronounced hover effect */
+            box-shadow: 0 10px 20px rgba(0,0,0,0.5);
         }
+
+        /* Section Styles */
         section {
-            padding: 60px 0;
-            margin-bottom: 30px;
+            padding: 80px 0; /* More padding */
+            margin-bottom: 40px;
             background-color: var(--dark-color);
-            border-radius: 8px;
-            box-shadow: 0 6px 12px rgba(0,0,0,0.4);
+            border-radius: 12px; /* More rounded corners */
+            box-shadow: 0 8px 16px rgba(0,0,0,0.5);
             animation: slideInUp 1s ease-out forwards;
             opacity: 0;
             transform: translateY(50px);
+            position: relative;
         }
         section:nth-child(even) {
-            background-color: #34495e;
+            background-color: #34495e; /* Slightly lighter dark for contrast */
         }
         .section-title {
-            font-size: 2.5em;
-            margin-bottom: 40px;
+            font-size: 3em; /* Larger section titles */
+            margin-bottom: 50px;
             position: relative;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.6);
         }
         .section-title::after {
             content: '';
             position: absolute;
-            bottom: -10px;
+            bottom: -15px;
             left: 50%;
             transform: translateX(-50%);
-            width: 80px;
-            height: 3px;
+            width: 100px; /* Wider underline */
+            height: 4px; /* Thicker underline */
             background-color: var(--secondary-color);
+            border-radius: 2px;
         }
-        #tokenomics .infographic-grid {
+
+        /* Infographic Grid */
+        #tokenomics .infographic-grid, #features .infographic-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
+            gap: 40px; /* Increased gap */
             text-align: center;
         }
         .infographic-item {
             background-color: var(--bg-dark);
-            padding: 25px;
-            border-radius: 5px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            padding: 30px; /* More padding */
+            border-radius: 10px; /* More rounded */
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
             position: relative;
             overflow: hidden;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            border-left: 5px solid var(--secondary-color);
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            border-left: 6px solid var(--secondary-color); /* Thicker border */
         }
         .infographic-item:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 16px rgba(0,0,0,0.4);
+            transform: translateY(-8px) scale(1.03); /* More pronounced hover */
+            box-shadow: 0 12px 24px rgba(0,0,0,0.6);
+            border-left-color: var(--text-color); /* Highlight on hover */
         }
         .infographic-item h3 {
             color: var(--secondary-color);
-            font-size: 1.5em;
+            font-size: 1.8em; /* Larger item titles */
             margin-top: 0;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
         }
         .infographic-item p {
-            font-size: 1.1em;
+            font-size: 1.15em;
             color: var(--text-color);
         }
         .infographic-icon {
-            font-size: 3em;
+            font-size: 4em; /* Larger icons */
             color: var(--primary-color);
-            margin-bottom: 15px;
+            margin-bottom: 20px;
         }
-        .etherscan-link {
+
+        /* Etherscan Link Styling */
+        .etherscan-link, .donation-button {
             display: inline-block;
-            margin-top: 10px;
+            margin: 20px auto;
             background-color: var(--primary-color);
             color: var(--text-color);
-            padding: 8px 15px;
+            padding: 12px 25px;
             border-radius: 5px;
             font-weight: bold;
-            transition: background-color 0.3s ease;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+            text-transform: uppercase;
         }
-        .etherscan-link:hover {
+        .etherscan-link:hover, .donation-button:hover {
             background-color: var(--secondary-color);
             color: var(--dark-color);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.4);
         }
+
+        /* Roadmap Timeline */
         #roadmap .timeline {
             position: relative;
             max-width: 1000px;
             margin: 0 auto;
-            padding: 20px 0;
+            padding: 40px 0; /* More padding */
         }
         #roadmap .timeline::after {
-            content: '';
-            position: absolute;
-            width: 6px;
+            width: 8px; /* Thicker timeline line */
             background-color: var(--secondary-color);
-            top: 0;
-            bottom: 0;
             left: 50%;
-            margin-left: -3px;
+            margin-left: -4px;
         }
         .timeline-item {
             padding: 10px 40px;
@@ -175,115 +240,118 @@
             width: 50%;
         }
         .timeline-item::after {
-            content: '';
-            position: absolute;
-            width: 25px;
-            height: 25px;
-            right: -17px;
-            background-color: var(--dark-color);
-            border: 4px solid var(--secondary-color);
-            top: 15px;
-            border-radius: 50%;
-            z-index: 1;
-        }
-        .timeline-item-left {
-            left: 0;
-        }
-        .timeline-item-right {
-            left: 50%;
+            width: 30px; /* Larger circle */
+            height: 30px;
+            right: -20px;
+            border: 6px solid var(--secondary-color); /* Thicker border */
+            top: 20px;
         }
         .timeline-item-left::before {
-            content: " ";
-            height: 0;
-            position: absolute;
-            top: 22px;
-            width: 0;
-            z-index: 1;
-            right: 30px;
-            border: medium solid var(--dark-color);
-            border-width: 10px 0 10px 10px;
-            border-color: transparent transparent transparent var(--dark-color);
+            right: 35px;
         }
         .timeline-item-right::before {
-            content: " ";
-            height: 0;
-            position: absolute;
-            top: 22px;
-            width: 0;
-            z-index: 1;
-            left: 30px;
-            border: medium solid var(--dark-color);
-            border-width: 10px 10px 10px 0;
-            border-color: transparent var(--dark-color) transparent transparent;
+            left: 35px;
         }
         .timeline-item-right::after {
-            left: -16px;
+            left: -19px;
         }
         .timeline-content {
-            padding: 20px 30px;
+            padding: 25px 35px; /* More padding */
             background-color: var(--dark-color);
             position: relative;
-            border-radius: 6px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+            border-radius: 8px;
+            box-shadow: 0 6px 12px rgba(0,0,0,0.4);
         }
         .timeline-content h3 {
-            color: var(--secondary-color);
-            margin-top: 0;
+            font-size: 1.6em;
         }
+
+        /* Contact & Footer */
         #contact {
             text-align: center;
         }
         #contact input[type="text"],
         #contact input[type="email"],
         #contact textarea {
-            width: calc(100% - 20px);
-            padding: 10px;
-            margin-bottom: 20px;
+            width: calc(100% - 40px); /* Slightly wider */
+            max-width: 600px; /* Max width for consistency */
+            padding: 12px;
+            margin-bottom: 25px;
             border: 1px solid var(--primary-color);
-            border-radius: 5px;
+            border-radius: 8px;
             background-color: var(--bg-dark);
             color: var(--text-color);
+            font-size: 1.1em;
         }
         #contact textarea {
             resize: vertical;
-            min-height: 100px;
+            min-height: 120px;
         }
         #contact button {
             background-color: var(--secondary-color);
             color: var(--dark-color);
-            padding: 12px 25px;
+            padding: 15px 30px;
             border: none;
-            border-radius: 5px;
+            border-radius: 8px;
             cursor: pointer;
-            font-size: 1.1em;
+            font-size: 1.2em;
+            font-weight: bold;
             transition: background-color 0.3s ease, transform 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
         }
         #contact button:hover {
             background-color: var(--text-color);
-            transform: translateY(-2px);
+            transform: translateY(-3px);
         }
         footer {
             background-color: #0d0d0d;
             color: var(--text-color);
             text-align: center;
-            padding: 30px 0;
-            margin-top: 50px;
-            border-top: 1px solid rgba(255,255,255,0.1);
+            padding: 40px 0; /* More padding */
+            margin-top: 60px;
+            border-top: 1px solid rgba(255,255,255,0.15);
         }
         .social-links a {
-            font-size: 1.8em;
-            margin: 0 10px;
+            font-size: 2.2em; /* Larger icons */
+            margin: 0 15px;
             color: var(--text-color);
         }
         .social-links a:hover {
             color: var(--secondary-color);
+            transform: scale(1.1);
         }
+
+        /* Donation Section */
+        #donate .wallet-address {
+            font-family: monospace;
+            background-color: rgba(255,255,255,0.1);
+            padding: 10px 15px;
+            border-radius: 5px;
+            display: inline-block;
+            margin-top: 20px;
+            font-size: 1.1em;
+            word-break: break-all;
+        }
+
+        /* Responsive Design */
         @media (max-width: 768px) {
+            nav .container {
+                flex-direction: column;
+            }
+            nav .nav-links {
+                margin-top: 20px;
+            }
+            nav .nav-links a {
+                margin: 0 15px;
+            }
             header h1 {
-                font-size: 2.5em;
+                font-size: 3.5em;
+            }
+            header p {
+                font-size: 1.1em;
             }
             .section-title {
-                font-size: 2em;
+                font-size: 2.5em;
             }
             #roadmap .timeline::after {
                 left: 31px;
@@ -308,6 +376,8 @@
                 left: 0%;
             }
         }
+
+        /* Animations */
         @keyframes fadeIn {
             from { opacity: 0; }
             to { opacity: 1; }
@@ -322,14 +392,28 @@
         .animated.visible {
             animation: slideInUp 1s ease-out forwards;
         }
+
     </style>
 </head>
 <body>
+    <nav>
+        <div class="container">
+            <a href="#" class="logo">AFEF Coin</a>
+            <div class="nav-links">
+                <a href="#about">About</a>
+                <a href="#features">Features</a>
+                <a href="#tokenomics">Tokenomics</a>
+                <a href="#roadmap">Roadmap</a>
+                <a href="#transactions">Transactions</a> <a href="#donate">Donate</a> <a href="#contact">Contact</a>
+            </div>
+        </div>
+    </nav>
+
     <header>
         <div class="container">
             <h1>AFEF Coin</h1>
             <p>The Next-Gen Fan Token for Age of Empires Mobile Players!</p>
-            <a href="#about" class="cta-button">Learn More About AFEF</a>
+            <a href="#about" class="cta-button">Explore AFEF Universe</a>
         </div>
     </header>
 
@@ -337,8 +421,8 @@
         <section id="about" class="animated">
             <div class="container">
                 <h2 class="section-title">What is AFEF Coin?</h2>
-                <p>AFEF Coin is a fan token specially designed for the community of the legendary strategy game, Age of Empires Mobile. It offers players and fans the opportunity to have a say in the project's development, participate in exclusive events, and potentially gain in-game advantages in the future.</p>
-                <p>Our mission is to empower our community by merging the Age of Empires universe with blockchain technology, adding real value to our token holders.</p>
+                <p>AFEF Coin is a fan token specially designed for the thriving community of the legendary strategy game, Age of Empires Mobile. It empowers players and loyal fans with unique opportunities to influence the project's evolution, gain access to exclusive events, and potentially unlock powerful in-game advantages in the future.</p>
+                <p>Our core mission is to seamlessly merge the rich Age of Empires universe with cutting-edge blockchain technology, fostering a stronger, more engaged community and delivering tangible value to every AFEF token holder.</p>
             </div>
         </section>
 
@@ -347,24 +431,20 @@
                 <h2 class="section-title">Token Features & Benefits</h2>
                 <div class="infographic-grid">
                     <div class="infographic-item">
-                        <span class="infographic-icon">👑</span>
-                        <h3>Governance</h3>
-                        <p>AFEF holders will have the right to vote on important decisions regarding the future of the project.</p>
+                        <span class="infographic-icon"><i class="fas fa-crown"></i></span> <h3>Governance</h3>
+                        <p>AFEF holders will wield direct voting power on pivotal decisions shaping the project's future development and direction.</p>
                     </div>
                     <div class="infographic-item">
-                        <span class="infographic-icon">💰</span>
-                        <h3>Rewards</h3>
-                        <p>Opportunities to earn AFEF through staking mechanisms and exclusive airdrops.</p>
+                        <span class="infographic-icon"><i class="fas fa-coins"></i></span> <h3>Rewards</h3>
+                        <p>Engage in lucrative staking mechanisms to earn additional AFEF and participate in exclusive airdrop campaigns for early adopters.</p>
                     </div>
                     <div class="infographic-item">
-                        <span class="infographic-icon">⚔️</span>
-                        <h3>In-Game Integration</h3>
-                        <p>Future possibilities for integration with Age of Empires Mobile and in-game advantages.</p>
+                        <span class="infographic-icon"><i class="fas fa-hammer"></i></span> <h3>In-Game Utility</h3>
+                        <p>Anticipate future integration possibilities with Age of Empires Mobile, potentially unlocking unique in-game assets, buffs, or special access.</p>
                     </div>
                     <div class="infographic-item">
-                        <span class="infographic-icon">🔥</span>
-                        <h3>Burn Mechanisms</h3>
-                        <p>Strategic token burns to reduce the total supply over time, aiming to increase the value of AFEF.</p>
+                        <span class="infographic-icon"><i class="fas fa-fire-alt"></i></span> <h3>Burn Mechanisms</h3>
+                        <p>Strategic and transparent token burning initiatives designed to gradually reduce the total supply of AFEF, fostering scarcity and long-term value appreciation.</p>
                     </div>
                 </div>
             </div>
@@ -373,7 +453,7 @@
         <section id="tokenomics" class="animated">
             <div class="container">
                 <h2 class="section-title">Tokenomics</h2>
-                <p style="text-align: center; font-size: 1.1em;">The fair and transparent distribution of AFEF Coin:</p>
+                <p style="text-align: center; font-size: 1.1em;">Discover the fair and transparent distribution model of AFEF Coin:</p>
                 <div class="infographic-grid">
                     <div class="infographic-item">
                         <h3>Total Supply</h3>
@@ -393,12 +473,12 @@
                         <p>10%</p>
                     </div>
                 </div>
-                <div style="text-align: center; margin-top: 30px; word-break: break-all;">
+                <div style="text-align: center; margin-top: 30px;">
                     <strong>Contract Address:</strong>
-                    <p style="font-family: monospace; background-color: rgba(255,255,255,0.1); padding: 5px 10px; border-radius: 5px; display: inline-block; margin-top: 10px;">
+                    <p class="wallet-address">
                         0x367a584a928b641330E8B20e7C4739675741f40d
                     </p>
-                    <a href="https://etherscan.io/token/0x367a584a928b641330E8B20e7C4739675741f40d" target="_blank" class="etherscan-link">View on Etherscan</a>
+                    <a href="https://etherscan.io/token/0x367a584a928b641330E8B20e7C4739675741f40d" target="_blank" class="etherscan-link">View on Etherscan <i class="fas fa-external-link-alt"></i></a>
                 </div>
             </div>
         </section>
@@ -409,42 +489,69 @@
                 <div class="timeline">
                     <div class="timeline-item timeline-item-left">
                         <div class="timeline-content">
-                            <h3>Q4 2024 - The Beginning</h3>
-                            <p>AFEF Coin Smart Contract Development & Audit. Launch of the first Airdrop Campaign.</p>
+                            <h3>Q4 2024 - The Genesis</h3>
+                            <p>AFEF Coin Smart Contract Development & Rigorous Audit. Kick-off of the inaugural Airdrop Campaign to reward early supporters.</p>
                         </div>
                     </div>
                     <div class="timeline-item timeline-item-right">
                         <div class="timeline-content">
-                            <h3>Q1 2025 - Market Launch</h3>
-                            <p>Creation and locking of the DEX (Uniswap/PancakeSwap) Liquidity Pool. Website Launch.</p>
+                            <h3>Q1 2025 - Market Debut</h3>
+                            <p>Strategic creation and locking of the Decentralized Exchange (DEX) Liquidity Pool (e.g., Uniswap/PancakeSwap). Official Website Launch and public access.</p>
                         </div>
                     </div>
                     <div class="timeline-item timeline-item-left">
                         <div class="timeline-content">
-                            <h3>Q2 2025 - Community Expansion</h3>
-                            <p>Social Media Campaigns and Partnerships. Activation of the Governance Platform.</p>
+                            <h3>Q2 2025 - Community & Growth</h3>
+                            <p>Intensive Social Media Campaigns and Key Strategic Partnerships. Activation of the fully functional Governance Platform for token holders.</p>
                         </div>
                     </div>
                     <div class="timeline-item timeline-item-right">
                         <div class="timeline-content">
-                            <h3>Q3 2025 - Integration</h3>
-                            <p>Researching and discussing potential integration opportunities with Age of Empires Mobile.</p>
+                            <h3>Q3 2025 - Game Integration</h3>
+                            <p>Dedicated research and active discussions for potential integration opportunities and collaborations with Age of Empires Mobile developers.</p>
                         </div>
                     </div>
                     <div class="timeline-item timeline-item-left">
                         <div class="timeline-content">
-                            <h3>Q4 2025 - The Future</h3>
-                            <p>New features, ecosystem expansion, and goals for listing on centralized exchanges.</p>
+                            <h3>Q4 2025 - Horizon Expansion</h3>
+                            <p>Introduction of new platform features, continuous ecosystem expansion, and pursuit of listings on major centralized exchanges (CEX).</p>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
+        <section id="transactions" class="animated">
+            <div class="container">
+                <h2 class="section-title">Transactions History</h2>
+                <p style="text-align: center; font-size: 1.1em;">Explore AFEF Coin's on-chain activity and ensure transparency.</p>
+                <p style="text-align: center; font-size: 1em; color: var(--light-grey);">
+                    While we're building our in-house transaction viewer, you can view all AFEF Coin transactions directly on Etherscan:
+                </p>
+                <div style="text-align: center; margin-top: 20px;">
+                    <a href="https://etherscan.io/token/0x367a584a928b641330E8B20e7C4739675741f40d" target="_blank" class="etherscan-link">View All Transactions on Etherscan <i class="fas fa-external-link-alt"></i></a>
+                </div>
+                </div>
+        </section>
+
+        <section id="donate" class="animated">
+            <div class="container">
+                <h2 class="section-title">Support AFEF Coin Development</h2>
+                <p style="text-align: center; font-size: 1.1em;">Your contributions help us grow, develop new features, and expand our community. Every donation fuels the Age of Empires Mobile fan token revolution!</p>
+                <p style="text-align: center; margin-top: 30px;">
+                    <strong>Donation Wallet (ERC-20 Compatible):</strong>
+                    <p class="wallet-address">
+                        0xB280e1DD3EEa9027cC04798A22F85b54e5B888bD </p>
+                    <button onclick="copyToClipboard('0xB280e1DD3EEa9027cC04798A22F85b54e5B888bD')">Copy Wallet Address <i class="fas fa-copy"></i></button>
+                    <a href="https://etherscan.io/address/0xB280e1DD3EEa9027cC04798A22F85b54e5B888bD" target="_blank" class="etherscan-link donation-button">View Wallet on Etherscan <i class="fas fa-external-link-alt"></i></a>
+                </p>
+            </div>
+        </section>
+
         <section id="contact" class="animated">
             <div class="container">
                 <h2 class="section-title">Contact Us</h2>
-                <p>Feel free to reach out for questions, collaborations, or feedback.</p>
+                <p>Feel free to reach out for any questions, collaboration opportunities, or feedback. We're eager to hear from you!</p>
                 <p>
                     <strong>Email:</strong> <a href="mailto:empiresfantoken@outlook.com">empiresfantoken@outlook.com</a> <br>
                     <strong>Telegram:</strong> <a href="https://t.me/afeftoken" target="_blank">t.me/afeftoken</a> <br>
@@ -466,8 +573,8 @@
         <div class="container">
             <p>&copy; 2024 AFEF Coin. All Rights Reserved.</p>
             <div class="social-links">
-                 <a href="https://x.com/afeftoken?s=21" target="_blank" aria-label="Twitter"><img src="https://img.icons8.com/ios-filled/24/F5DEB3/twitterx.png" alt="Twitter"></a>
-                <a href="https://t.me/afeftoken" target="_blank" aria-label="Telegram"><img src="https://img.icons8.com/ios-filled/24/F5DEB3/telegram-app.png" alt="Telegram"></a>
+                 <a href="https://x.com/afeftoken?s=21" target="_blank" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                <a href="https://t.me/afeftoken" target="_blank" aria-label="Telegram"><i class="fab fa-telegram-plane"></i></a>
             </div>
         </div>
     </footer>
@@ -496,10 +603,10 @@
             });
         });
 
-        // Copy to clipboard function is no longer needed, but we'll keep it just in case
+        // Copy to clipboard function for donation address
         function copyToClipboard(text) {
             navigator.clipboard.writeText(text).then(() => {
-                alert('Contract address copied to clipboard: ' + text);
+                alert('Wallet address copied to clipboard: ' + text);
             }).catch(err => {
                 console.error('Failed to copy:', err);
             });
