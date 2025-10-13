@@ -218,7 +218,7 @@
             <p>A community-driven fan token for strategy enthusiasts. Early participants benefit from transparent distribution, future integrations, and rewards.</p>
             <div class="hero-actions">
                 <a href="#web3" class="btn btn-primary">Connect Wallet</a>
-                <a href="https://www.uniswap.org" target="_blank" class="btn btn-outline">Trade on Uniswap</a>
+                <a href="https://app.uniswap.org/swap" target="_blank" class="btn btn-outline">Trade on Uniswap</a>
             </div>
         </div>
     </header>
@@ -290,16 +290,30 @@
             navLinks.classList.toggle('active');
         });
 
+        // Function to close the menu
+        function closeMenu() {
+            if (navLinks.classList.contains('active')) {
+                navLinks.classList.remove('active');
+            }
+        }
+
+        // Close menu when a link is clicked
         allNavLinksInMenu.forEach(link => {
-            link.addEventListener('click', () => {
-                if (navLinks.classList.contains('active')) {
-                    navLinks.classList.remove('active');
-                }
-            });
+            link.addEventListener('click', closeMenu);
+        });
+        
+        // NEW: Close menu when clicking outside of it
+        document.addEventListener('click', function(event) {
+            const isClickInsideNav = navLinks.contains(event.target);
+            const isClickOnHamburger = hamburger.contains(event.target);
+
+            if (!isClickInsideNav && !isClickOnHamburger) {
+                closeMenu();
+            }
         });
 
+
         // --- Web3 Placeholder Logic ---
-        // This is a simplified placeholder. A full implementation requires libraries like ethers.js or web3.js
         const connectWalletBtn = document.getElementById('connect-wallet-btn');
         const walletStatusEl = document.getElementById('wallet-status');
         const balanceEl = document.getElementById('balance');
@@ -307,32 +321,31 @@
         connectWalletBtn.addEventListener('click', async () => {
             if (typeof window.ethereum !== 'undefined') {
                 try {
-                    // Request account access
                     const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
                     const account = accounts[0];
                     
-                    // Update UI
-                    walletStatusEl.textContent = 'Wallet Connected';
+                    walletStatusEl.textContent = `Connected: ${account.substring(0, 6)}...${account.substring(account.length - 4)}`;
                     connectWalletBtn.textContent = 'Wallet Connected!';
                     connectWalletBtn.disabled = true;
-
-                    // Display shortened address (optional but good for UX)
-                    walletStatusEl.textContent = `Connected: ${account.substring(0, 6)}...${account.substring(account.length - 4)}`;
-
-                    // Placeholder for fetching balance
-                    // In a real app, you would use ethers.js here to call the AFEF contract's balanceOf function
                     balanceEl.textContent = '12,345 AFEF'; // Placeholder balance
 
                 } catch (error) {
-                    console.error("User rejected the request.");
+                    console.error("User rejected the request:", error);
                     walletStatusEl.textContent = 'Connection Failed';
                 }
             } else {
-                alert('MetaMask is not installed. Please install it to use this feature.');
+                // Improved User Experience for mobile
+                const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+                if (isMobile) {
+                    alert('To use this feature, please open this site in the MetaMask app browser.');
+                    // Optional: Try to deep link to MetaMask
+                    window.location.href = 'https://metamask.app.link/dapp/afeftoken.netlify.app';
+                } else {
+                    alert('MetaMask is not installed. Please install the browser extension to use this feature.');
+                }
                 walletStatusEl.textContent = 'MetaMask Not Found';
             }
         });
-
     </script>
 </body>
 </html>
