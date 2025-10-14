@@ -4,12 +4,11 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>AFEF Token — Official Website</title>
-    <meta name="description" content="AFEF — A community fan token for strategy game enthusiasts. Join the airdrop, discover token info, and our roadmap." />
     
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-    <script type="text/javascript" src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.7.77/Tone.js"></script>
+    <!-- Auth0 SDK -->
+    <script src="https://cdn.auth0.com/js/auth0-spa-js/2.0/auth0-spa-js.production.js"></script>
 
     <style>
         :root {
@@ -20,29 +19,18 @@
         body { font-family: 'Inter', sans-serif; background-color: var(--bg-start); color: var(--text-main); scroll-behavior: smooth; }
         h1, h2, h3, h4, h5, h6 { font-family: 'Poppins', sans-serif; }
         .glass-card { background: var(--card-bg); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border: 1px solid var(--card-border); }
-        
         #aurora-background { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; background: linear-gradient(160deg, var(--bg-start), var(--bg-end)); overflow: hidden; }
         .aurora-shape { position: absolute; border-radius: 50%; filter: blur(100px); opacity: 0.3; will-change: transform; }
         .aurora-1 { width: 500px; height: 500px; background: var(--accent-primary); top: -200px; left: -200px; animation: aurora-move1 30s infinite alternate; }
         .aurora-2 { width: 400px; height: 400px; background: var(--accent-secondary); bottom: -150px; right: -150px; animation: aurora-move2 35s infinite alternate-reverse; }
         @keyframes aurora-move1 { from { transform: scale(1) translate(0, 0) rotate(0deg); } to { transform: scale(1.3) translate(150px, 80px) rotate(90deg); } }
         @keyframes aurora-move2 { from { transform: scale(1) translate(0, 0) rotate(0deg); } to { transform: scale(1.4) translate(-120px, -60px) rotate(-90deg); } }
-
-        .scroll-animate { opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease-out, transform 0.6s ease-out; }
-        .scroll-animate.visible { opacity: 1; transform: translateY(0); }
-        .live-dot { animation: pulse 2s infinite; }
-        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
-        
         #hamburger-btn { width: 24px; height: 24px; position: relative; }
         #hamburger-btn span { display: block; width: 100%; height: 2px; background-color: white; border-radius: 2px; position: absolute; transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out; }
         #hamburger-btn span:nth-child(1) { top: 4px; } #hamburger-btn span:nth-child(2) { top: 11px; } #hamburger-btn span:nth-child(3) { top: 18px; }
         #hamburger-btn.open span:nth-child(1) { top: 11px; transform: rotate(135deg); }
         #hamburger-btn.open span:nth-child(2) { opacity: 0; }
         #hamburger-btn.open span:nth-child(3) { top: 11px; transform: rotate(-135deg); }
-        
-        .faq-item details > summary { list-style: none; } .faq-item details > summary::-webkit-details-marker { display: none; }
-        .faq-item summary svg { transition: transform 0.3s ease; }
-        .faq-item details[open] summary svg { transform: rotate(45deg); }
     </style>
 </head>
 <body class="overflow-x-hidden">
@@ -53,81 +41,127 @@
         <nav class="glass-card max-w-6xl mx-auto my-4 rounded-xl px-6 py-3">
             <div class="flex items-center justify-between">
                 <a href="#" id="home-link" class="flex items-center gap-3"><div class="w-10 h-10 bg-gradient-to-br from-pink-500 to-blue-500 rounded-lg flex items-center justify-center"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 22S3 17 3 10.5V5L12 2L21 5V10.5C21 17 12 22 12 22Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M8 11.5 H16 M8 11.5 L7 8 L9.5 9 L12 7 L14.5 9 L17 8 L16 11.5 Z" stroke="white" stroke-width="1.5" fill="white" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="text-xl font-bold font-['Poppins'] text-white">AFEF Token</span></a>
-                <div id="main-nav-links" class="hidden md:flex items-center gap-6 text-sm font-semibold text-gray-300"><a href="#about" class="hover:text-white transition-colors">About</a><a href="#tokenomics" class="hover:text-white transition-colors">Tokenomics</a><a href="#faq" class="hover:text-white transition-colors">FAQ</a><a href="#roadmap" class="hover:text-white transition-colors">Roadmap</a></div>
+                <div id="main-nav-links" class="hidden md:flex items-center gap-6 text-sm font-semibold text-gray-300"><a href="#about" class="hover:text-white transition-colors">About</a><a href="#roadmap" class="hover:text-white transition-colors">Roadmap</a></div>
                 <div class="flex items-center gap-4">
-                    <div data-netlify-identity-menu class="hidden md:block"></div>
+                    <div id="auth-ui" class="hidden md:block">
+                        <button id="btn-login" class="bg-blue-500 text-white font-semibold py-2 px-4 rounded-lg text-sm">Login</button>
+                        <div id="user-profile" class="hidden items-center gap-3 relative group">
+                            <img id="user-avatar" class="w-8 h-8 rounded-full" src="" alt="Avatar">
+                            <div class="absolute top-full right-0 mt-2 w-48 bg-gray-800 rounded-lg shadow-lg opacity-0 group-hover:opacity-100 transition-opacity">
+                                <a href="#" id="btn-dashboard" class="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-700">Go to Dashboard</a>
+                                <a href="#" id="btn-logout" class="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-700">Logout</a>
+                            </div>
+                        </div>
+                    </div>
                     <button id="hamburger-btn" class="md:hidden text-white z-50"><span></span><span></span><span></span></button>
                 </div>
             </div>
         </nav>
-        <div id="mobile-menu" class="hidden md:hidden glass-card max-w-6xl mx-auto rounded-xl p-4 text-center"><div id="mobile-main-nav-links"><a href="#about" class="mobile-menu-link block py-2 text-gray-300 hover:text-white">About</a><a href="#tokenomics" class="mobile-menu-link block py-2 text-gray-300 hover:text-white">Tokenomics</a><a href="#faq" class="mobile-menu-link block py-2 text-gray-300 hover:text-white">FAQ</a><a href="#roadmap" class="mobile-menu-link block py-2 text-gray-300 hover:text-white">Roadmap</a></div><div data-netlify-identity-menu class="mt-4"></div></div>
+        <div id="mobile-menu" class="hidden md:hidden glass-card max-w-6xl mx-auto rounded-xl p-4 text-center">
+            <a href="#about" class="mobile-menu-link block py-2 text-gray-300 hover:text-white">About</a>
+            <a href="#roadmap" class="mobile-menu-link block py-2 text-gray-300 hover:text-white">Roadmap</a>
+            <div id="mobile-auth-ui" class="mt-4"></div>
+        </div>
     </header>
 
-    <main id="main-content">
-        <section class="relative text-center py-24 md:py-32 overflow-hidden"><div class="container mx-auto px-6 relative"><h1 class="text-4xl md:text-6xl font-bold text-white leading-tight tracking-tight mb-4">A Community Token<br>for Strategy Enthusiasts</h1><p class="max-w-2xl mx-auto text-lg text-gray-300 mb-8">AFEF is a community-driven project built on the mission of fair distribution and long-term value.</p><div class="flex flex-wrap gap-4 justify-center"><a href="#airdrop" class="bg-gradient-to-r from-pink-500 to-blue-500 text-white font-bold py-3 px-8 rounded-full transition-transform hover:scale-105">Join the Airdrop!</a><button id="connect-wallet-hero-btn" class="glass-card text-white font-bold py-3 px-8 rounded-full transition-transform hover:scale-105 border-2 border-transparent hover:border-pink-500">Connect Your Wallet</button></div></div></section>
-        <section class="py-12 scroll-animate"><div class="container mx-auto px-6"><div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center"><div class="glass-card rounded-xl p-6"><p class="text-sm text-gray-400 flex items-center justify-center gap-2"><span class="w-2 h-2 rounded-full bg-green-400 live-dot"></span>LIVE TOKEN HOLDERS</p><p id="stats-holders" class="text-3xl font-bold text-white mt-2" data-target="8654">0</p></div><div class="glass-card rounded-xl p-6"><p class="text-sm text-gray-400">TOTAL TRANSACTIONS</p><p id="stats-transactions" class="text-3xl font-bold text-white mt-2" data-target="157234">0</p></div><div class="glass-card rounded-xl p-6"><p class="text-sm text-gray-400">MARKET CAP</p><p id="stats-marketcap" class="text-3xl font-bold text-white mt-2" data-target="9854321">0</p></div></div></div></section>
-        <section id="airdrop" class="pt-20 scroll-animate"><div class="container mx-auto px-6"><div class="text-center mb-12"><h2 class="text-4xl font-bold text-white">Airdrop Registrations Closing!</h2><p class="text-gray-400 mt-2">Your last chance to secure a spot in history.</p></div><div class="flex justify-center gap-4 md:gap-8 text-white mb-8"><div class="text-center"><div id="countdown-days" class="text-4xl md:text-5xl font-bold">00</div><div class="text-xs text-gray-400">DAYS</div></div><div class="text-4xl md:text-5xl font-bold text-pink-500">:</div><div class="text-center"><div id="countdown-hours" class="text-4xl md:text-5xl font-bold">00</div><div class="text-xs text-gray-400">HOURS</div></div><div class="text-4xl md:text-5xl font-bold text-pink-500">:</div><div class="text-center"><div id="countdown-minutes" class="text-4xl md:text-5xl font-bold">00</div><div class="text-xs text-gray-400">MINUTES</div></div><div class="text-4xl md:text-5xl font-bold text-pink-500">:</div><div class="text-center"><div id="countdown-seconds" class="text-4xl md:text-5xl font-bold">00</div><div class="text-xs text-gray-400">SECONDS</div></div></div><div class="max-w-lg mx-auto glass-card rounded-2xl p-8"><form name="airdrop-submissions" method="POST" data-netlify="true"><input type="hidden" name="form-name" value="airdrop-submissions"><div class="mb-4"><input class="w-full bg-gray-900/50 border border-gray-700 rounded-lg px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-pink-500" type="text" name="name" placeholder="Your Name or Nickname" required></div><div class="mb-4"><input class="w-full bg-gray-900/50 border border-gray-700 rounded-lg px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-pink-500" type="email" name="email" placeholder="Your Email Address" required></div><div class="mb-6"><input class="w-full bg-gray-900/50 border border-gray-700 rounded-lg px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-pink-500" type="text" name="wallet_address" placeholder="Your ERC-20 Wallet Address (0x...)" required></div><button class="w-full bg-gradient-to-r from-pink-500 to-blue-500 text-white font-bold py-3 px-8 rounded-full transition-transform hover:scale-105" type="submit">Secure My Spot!</button></form></div></div></section>
-        <section id="faq" class="py-20 scroll-animate"><div class="container mx-auto px-6 max-w-3xl"><div class="text-center mb-12"><h2 class="text-4xl font-bold text-white">Frequently Asked Questions</h2><p class="text-gray-400 mt-2">Everything you need to know.</p></div><div class="space-y-4"><div class="faq-item glass-card rounded-xl"><details><summary class="flex justify-between items-center p-6 cursor-pointer"><h3 class="font-semibold text-lg">What is AFEF Token?</h3><svg class="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path></svg></summary><div class="p-6 pt-0 text-gray-300"><p>AFEF is a community-driven fan token created for strategy game lovers. It aims to offer exclusive advantages and a say in the project to its holders.</p></div></details></div><div class="faq-item glass-card rounded-xl"><details><summary class="flex justify-between items-center p-6 cursor-pointer"><h3 class="font-semibold text-lg">How can I join the airdrop?</h3><svg class="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path></svg></summary><div class="p-6 pt-0 text-gray-300"><p>You can join the airdrop by filling out the form in the "Join the Airdrop" section above. You just need to enter your name, email, and ERC-20 wallet address.</p></div></details></div></div></div></section>
-        <section id="connect" class="py-20 scroll-animate"><div class="container mx-auto px-6"><div class="text-center mb-12"><h2 class="text-4xl font-bold text-white">Connect & Verify</h2><p class="text-gray-400 mt-2">Explore our contract and connect your wallet.</p></div><div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto"><a href="https://etherscan.io/address/0x367a584a928b641330E8B20e7C4739675741f40d" target="_blank" class="glass-card rounded-2xl p-8 text-center transition-transform hover:-translate-y-2"><h3 class="text-2xl font-bold text-white mb-2">View on Etherscan</h3><p class="text-gray-400">Verify our smart contract, check transactions, and see holder details for full transparency.</p></a><div class="glass-card rounded-2xl p-8 text-center transition-transform hover:-translate-y-2 cursor-pointer" onclick="openWalletModal()"><h3 class="text-2xl font-bold text-white mb-2">Connect Wallet</h3><p class="text-gray-400">Link your Web3 wallet to interact with our platform for staking, voting, and rewards.</p></div></div></div></section>
+    <main id="main-content" style="display: none;">
+        <!-- Ana sayfa içeriği buraya dinamik olarak eklenecek -->
     </main>
 
-    <div id="dashboard" class="hidden container mx-auto px-6 py-16">
-        <!-- Dashboard content -->
+    <div id="dashboard" style="display: none;" class="container mx-auto px-6 py-16">
+        <!-- Yönetim paneli içeriği buraya dinamik olarak eklenecek -->
     </div>
     
-    <footer class="py-12"><div class="container mx-auto px-6 text-center"><div class="flex justify-center gap-6 mb-6"><a href="https://x.com/afeftoken?s=21" target="_blank" class="text-gray-400 hover:text-white transition-colors" title="X (Twitter)"><svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path></svg></a><a href="https://t.me/afeftoken" target="_blank" class="text-gray-400 hover:text-white transition-colors" title="Telegram"><svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.17.91-.494 1.208-.822 1.23-.696.047-1.225-.46-1.9-1.04-.546-.46-1.1-1.03-1.656-1.5-1.024-.867-.48-1.39.3-.837.542.38.974.697 1.38.965.43.288.833.14.962-.224a10.45 10.45 0 0 0 .504-2.12 1.48 1.48 0 0 0-.15-.748L9.34 13.92c-.733.696-1.23.336-1.46-.372l-1.43-4.665c-.235-.74.15-1.09.68-1.15.54-.06 1.18.23 6.3 3.09 1.1.6 1.95.9 2.4.9z"></path></svg></a><a href="mailto:empiresfantoken@outlook.com" class="text-gray-400 hover:text-white transition-colors" title="Email"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg></a></div><p class="text-gray-500 text-sm">&copy; <span id="year"></span> AFEF Token. All rights reserved.</p></div></footer>
-    <div id="notification-modal" class="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm flex items-center justify-center p-4 z-[100] opacity-0 pointer-events-none transition-opacity duration-300"><div class="glass-card rounded-2xl p-8 max-w-sm w-full text-center"><h3 id="modal-title" class="text-xl font-bold text-white mb-2">Notification</h3><p id="modal-message" class="text-gray-300 mb-6"></p><button id="modal-close-btn" class="bg-pink-500 text-white font-bold py-2 px-6 rounded-full">Close</button></div></div>
-    <div id="wallet-modal" class="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm flex items-center justify-center p-4 z-[100] opacity-0 pointer-events-none transition-opacity duration-300"><div class="glass-card rounded-2xl p-8 max-w-sm w-full"><div class="flex justify-between items-center mb-6"><h3 class="text-xl font-bold text-white">Connect a Wallet</h3><button id="wallet-modal-close-btn" class="text-gray-400 hover:text-white text-2xl">&times;</button></div><div class="space-y-4"><button id="connect-metamask" class="w-full flex items-center gap-4 p-4 bg-gray-900/50 rounded-lg hover:bg-gray-800/50 transition-colors"><img src="https://upload.wikimedia.org/wikipedia/commons/3/36/MetaMask_Fox.svg" class="w-8 h-8" alt="MetaMask"><span>MetaMask</span></button><button class="w-full flex items-center gap-4 p-4 bg-gray-900/50 rounded-lg hover:bg-gray-800/50 transition-colors"><img src="https://walletconnect.com/favicon.ico" class="w-8 h-8 rounded-full" alt="WalletConnect"><span>WalletConnect</span></button><button class="w-full flex items-center gap-4 p-4 bg-gray-900/50 rounded-lg hover:bg-gray-800/50 transition-colors"><img src="https://www.coinbase.com/favicon.ico" class="w-8 h-8" alt="Coinbase Wallet"><span>Coinbase Wallet</span></button></div></div></div>
-
+    <footer class="py-12"><div class="container mx-auto px-6 text-center"><p class="text-gray-500 text-sm">&copy; <span id="year"></span> AFEF Token. All rights reserved.</p></div></footer>
+    
     <script>
         document.getElementById('year').textContent = new Date().getFullYear();
-        const mainContent = document.getElementById('main-content'), dashboard = document.getElementById('dashboard'), hamburgerBtn = document.getElementById('hamburger-btn'), mobileMenu = document.getElementById('mobile-menu'), mobileMenuLinks = document.querySelectorAll('.mobile-menu-link'), notificationModal = document.getElementById('notification-modal'), modalTitle = document.getElementById('modal-title'), modalMessage = document.getElementById('modal-message'), modalCloseBtn = document.getElementById('modal-close-btn'), walletModal = document.getElementById('wallet-modal'), walletModalCloseBtn = document.getElementById('wallet-modal-close-btn'), connectWalletHeroBtn = document.getElementById('connect-wallet-hero-btn'), connectMetamaskBtn = document.getElementById('connect-metamask'), homeLink = document.getElementById('home-link');
+        const mainContent = document.getElementById('main-content');
+        const dashboard = document.getElementById('dashboard');
+        const homeLink = document.getElementById('home-link');
+        let auth0Client = null;
+
+        const configureClient = async () => {
+          auth0Client = await auth0.createAuth0Client({
+            domain: "afeftoken.eu.auth0.com",
+            clientId: "KNrpDdjhDAjk9j1y87gxYJ5tsH11IIhp",
+            authorizationParams: {
+              redirect_uri: window.location.origin
+            }
+          });
+        };
+
+        window.onload = async () => {
+            await configureClient();
+            await updateUI();
+
+            const isAuthenticated = await auth0Client.isAuthenticated();
+            if (window.location.search.includes("code=") && window.location.search.includes("state=")) {
+                await auth0Client.handleRedirectCallback();
+                window.history.replaceState({}, document.title, "/");
+            }
+            
+            if (await auth0Client.isAuthenticated()) {
+                showDashboard();
+            } else {
+                showMainContent();
+            }
+            updateUI(); // Ensure UI is updated after routing
+        };
+
+        const updateUI = async () => {
+            const isAuthenticated = await auth0Client.isAuthenticated();
+            const loginBtn = document.getElementById('btn-login');
+            const userProfile = document.getElementById('user-profile');
+            const mobileAuthUI = document.getElementById('mobile-auth-ui');
+
+            if (isAuthenticated) {
+                loginBtn.style.display = 'none';
+                userProfile.style.display = 'flex';
+                const user = await auth0Client.getUser();
+                document.getElementById('user-avatar').src = user.picture;
+                mobileAuthUI.innerHTML = `<button id="btn-logout-mobile" class="bg-red-500 text-white font-semibold py-2 px-4 rounded-lg text-sm w-full">Logout</button>`;
+                document.getElementById('btn-logout-mobile').addEventListener('click', logout);
+            } else {
+                loginBtn.style.display = 'block';
+                userProfile.style.display = 'none';
+                mobileAuthUI.innerHTML = `<button id="btn-login-mobile" class="bg-blue-500 text-white font-semibold py-2 px-4 rounded-lg text-sm w-full">Login</button>`;
+                document.getElementById('btn-login-mobile').addEventListener('click', login);
+            }
+        };
+
+        const showDashboard = () => { mainContent.style.display = 'none'; dashboard.style.display = 'block'; };
+        const showMainContent = () => { dashboard.style.display = 'none'; mainContent.style.display = 'block'; };
         
-        function showDashboard(user) { mainContent.style.display = 'none'; dashboard.style.display = 'block'; }
-        function showMainContent() { dashboard.style.display = 'none'; mainContent.style.display = 'block'; }
-        
+        const login = async () => { await auth0Client.loginWithRedirect(); };
+        const logout = () => { auth0Client.logout({ logoutParams: { returnTo: window.location.origin } }); };
+
+        document.getElementById('btn-login').addEventListener('click', login);
+        document.getElementById('btn-logout').addEventListener('click', logout);
+        document.getElementById('btn-dashboard').addEventListener('click', showDashboard);
         homeLink.addEventListener('click', (e) => { e.preventDefault(); showMainContent(); });
-        netlifyIdentity.on('login', user => { showDashboard(user); netlifyIdentity.close(); });
-        netlifyIdentity.on('logout', showMainContent);
-        netlifyIdentity.on('init', user => { if(window.location.hash.includes('recovery_token')) { netlifyIdentity.open(); } else { user ? showDashboard(user) : showMainContent(); }});
-        document.getElementById('logout-btn')?.addEventListener('click', () => netlifyIdentity.logout());
 
+        const hamburgerBtn = document.getElementById('hamburger-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
         hamburgerBtn.addEventListener('click', () => { mobileMenu.classList.toggle('hidden'); hamburgerBtn.classList.toggle('open'); });
-        mobileMenuLinks.forEach(link => { link.addEventListener('click', () => { mobileMenu.classList.add('hidden'); hamburgerBtn.classList.remove('open'); }); });
-        document.addEventListener('click', (event) => { const isClickInsideNav = document.querySelector('header').contains(event.target); if (!isClickInsideNav && !mobileMenu.classList.contains('hidden')) { mobileMenu.classList.add('hidden'); hamburgerBtn.classList.remove('open'); } });
-        
-        function showNotification(title, message) { modalTitle.textContent = title; modalMessage.textContent = message; notificationModal.classList.remove('opacity-0', 'pointer-events-none'); }
-        function closeNotification() { notificationModal.classList.add('opacity-0', 'pointer-events-none'); }
-        modalCloseBtn.addEventListener('click', closeNotification);
-        
-        function openWalletModal() { walletModal.classList.remove('opacity-0', 'pointer-events-none'); }
-        function closeWalletModal() { walletModal.classList.add('opacity-0', 'pointer-events-none'); }
-        connectWalletHeroBtn.addEventListener('click', openWalletModal);
-        walletModalCloseBtn.addEventListener('click', closeWalletModal);
 
-        async function connectMetaMask() {
-            closeWalletModal();
-            if (typeof window.ethereum === 'undefined') { return showNotification('MetaMask Not Found', 'Please install the MetaMask browser extension.'); }
-            try {
-                const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
-                showNotification('Success!', 'Your wallet has been connected successfully.');
-            } catch (error) { showNotification('Connection Rejected', 'You rejected the wallet connection request.'); }
-        }
-        connectMetamaskBtn.addEventListener('click', connectMetaMask);
-
-        const countdownDate = new Date();
-        countdownDate.setDate(countdownDate.getDate() + 29);
-        setInterval(() => {
-            const now = new Date().getTime(); const distance = countdownDate.getTime() - now;
-            document.getElementById('countdown-days').innerText = Math.floor(distance / (1000 * 60 * 60 * 24)).toString().padStart(2, '0');
-            document.getElementById('countdown-hours').innerText = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)).toString().padStart(2, '0');
-            document.getElementById('countdown-minutes').innerText = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)).toString().padStart(2, '0');
-            document.getElementById('countdown-seconds').innerText = Math.floor((distance % (1000 * 60)) / 1000).toString().padStart(2, '0');
-        }, 1000);
-
-        const animateCountUp = (el) => { const target = parseInt(el.dataset.target, 10); let current = 0; const step = Math.max(1, Math.floor(target / 100)); const updateCount = () => { if (current < target) { current += step; if (current > target) current = target; const prefix = el.id === 'stats-marketcap' ? '$' : ''; el.innerText = prefix + current.toLocaleString('en-US'); requestAnimationFrame(updateCount); } else { const prefix = el.id === 'stats-marketcap' ? '$' : ''; el.innerText = prefix + target.toLocaleString('en-US'); } }; requestAnimationFrame(updateCount); };
-        const observer = new IntersectionObserver((entries, obs) => { entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('visible'); if(entry.target.hasAttribute('data-target')) { animateCountUp(entry.target); obs.unobserve(entry.target); } } }); }, { threshold: 0.1 });
-        document.querySelectorAll('.scroll-animate, [data-target]').forEach(el => observer.observe(el));
+        mainContent.innerHTML = `
+            <section class="relative text-center py-24 md:py-32 overflow-hidden">
+                <div class="container mx-auto px-6 relative">
+                    <h1 class="text-4xl md:text-6xl font-bold text-white leading-tight tracking-tight mb-4">A Community Token<br>for Strategy Enthusiasts</h1>
+                    <p class="max-w-2xl mx-auto text-lg text-gray-300 mb-8">AFEF is a community-driven project built on the mission of fair distribution and long-term value.</p>
+                </div>
+            </section>
+        `;
+        dashboard.innerHTML = `
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4">
+                <h1 class="text-3xl md:text-4xl font-bold text-white">My Dashboard</h1>
+            </div>
+            <div class="glass-card rounded-2xl p-8">
+                <h2 class="text-2xl font-bold text-white">Welcome!</h2>
+                <p class="text-gray-300 mt-2">This is your personal dashboard. More features coming soon!</p>
+            </div>
+        `;
     </script>
 </body>
 </html>
