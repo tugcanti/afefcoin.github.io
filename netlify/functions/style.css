@@ -1,38 +1,92 @@
+* {
+  margin: 0; padding: 0; box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
 body {
-  background-color: #111;
-  color: #eee;
-  font-family: 'Segoe UI', sans-serif;
-  text-align: center;
-  margin: 0;
-  padding: 0;
+  background: linear-gradient(180deg, #1b1b1b 0%, #000 100%);
+  color: #fff;
+  overflow-x: hidden;
 }
 
 header {
-  background: linear-gradient(90deg, #5a381f, #d6b26a);
-  padding: 30px;
+  display: flex; justify-content: space-between; align-items: center;
+  background: rgba(0,0,0,0.85); padding: 1rem 2rem;
+  position: fixed; top: 0; width: 100%; z-index: 100;
 }
 
 .logo {
-  width: 100px;
-  border-radius: 50%;
+  font-size: 1.3rem; cursor: pointer; font-weight: 600;
 }
 
-h1, h2, h3 {
-  color: #ffd700;
+nav {
+  display: flex; gap: 1.5rem;
 }
 
-ul {
-  list-style: none;
-  padding: 0;
+nav a {
+  color: gold; text-decoration: none;
+  transition: color 0.3s;
 }
 
-a {
-  color: #ffd700;
-  text-decoration: none;
+nav a:hover {
+  color: #fff;
+}
+
+.btn {
+  background: gold; color: black; padding: 6px 12px;
+  border-radius: 5px;
+}
+
+#menuToggle {
+  display: none;
+  background: none; border: none; color: gold; font-size: 1.8rem;
+}
+
+.hero {
+  background: url('https://images.unsplash.com/photo-1526318472351-bc6f8aa52c32?auto=format&fit=crop&w=1400&q=80') no-repeat center/cover;
+  height: 100vh; display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  text-align: center; padding-top: 60px;
+}
+
+.hero h1 { font-size: 2.5rem; color: gold; }
+.hero p { margin: 1rem 0; font-size: 1.2rem; }
+.cta {
+  background: gold; color: black; padding: 10px 20px;
+  text-decoration: none; border-radius: 5px;
+  font-weight: bold;
+}
+
+section {
+  padding: 5rem 2rem;
+  text-align: center;
+}
+
+#about, #airdrop, #donate, #contact {
+  background: rgba(255,255,255,0.05);
+  margin: 2rem; border-radius: 15px;
+  padding: 3rem 2rem;
+}
+
+input, button {
+  padding: 10px 15px; margin-top: 10px;
+  border: none; border-radius: 5px;
+}
+
+button {
+  background: gold; color: #000; font-weight: bold;
+  cursor: pointer;
 }
 
 footer {
-  margin-top: 30px;
-  font-size: 0.8em;
-  color: #777;
+  background: rgba(0,0,0,0.9);
+  padding: 1rem; text-align: center;
+  color: #999;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  nav { display: none; flex-direction: column; background: #111; position: absolute; top: 60px; right: 0; padding: 1rem; }
+  nav.active { display: flex; }
+  #menuToggle { display: block; }
 }
