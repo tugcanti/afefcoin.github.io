@@ -9,208 +9,159 @@
     <meta property="og:description" content="AFEF — Community-driven fan token. Contract, roadmap, and early airdrop info." />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="AFEF Token" />
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2224%22 height=%2224%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22%23d4a23a%22 stroke-width=%222%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22><path d=%22M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z%22></path><path d=%22M2 12l10 4 10-4%22></path><path d=%22M12 22V12%22></path></svg>">
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23BFA168' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z'%3E%3C/path%3E%3Cpath d='M15.4 9.4C14.4 9.8 13.2 10.5 12 10.5C10.8 10.5 9.6 9.8 8.6 9.4L12 7.5L15.4 9.4Z'%3E%3C/path%3E%3C/svg%3E">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     <script type="text/javascript" src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 
     <style>
         :root {
-            --bg: #061425;
-            --card: rgba(7, 24, 39, 0.7);
-            --accent: #d4a23a;
-            --muted: #9fb0c2;
+            --bg-dark: #1a1611;
+            --bg-light: #2c251d;
+            --accent-gold: #BFA168;
+            --accent-gold-dark: #8C6D39;
+            --text-light: #f5f5f5;
+            --text-muted: #a3a3a3;
             --maxw: 1100px;
-            --radius: 14px;
+            --radius: 12px;
+            --glow-color: rgba(191, 161, 104, 0.5);
         }
 
         *, *::before, *::after { box-sizing: border-box; }
         
+        html { scroll-behavior: smooth; }
         body {
             margin: 0;
             font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
-            background-color: var(--bg);
-            background-image: linear-gradient(180deg, var(--bg) 0%, #051021 100%);
-            color: #eaf6ff;
+            background-color: var(--bg-dark);
+            background-image: linear-gradient(180deg, var(--bg-dark) 0%, #110F0C 100%), url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"%3E%3Crect width="100" height="100" fill="transparent"/%3E%3Cpath d="M 10 10 L 90 90 M 90 10 L 10 90" stroke="%232c251d" stroke-width="0.5"/%3E%3C/svg%3E');
+            color: var(--text-light);
             -webkit-font-smoothing: antialiased;
             overflow-x: hidden;
-            scroll-behavior: smooth;
-        }
-
-        /* ANIMATED BANNER */
-        .banner {
-            background: linear-gradient(270deg, #d4a23a, #8f5b1e, #d4a23a, #8f5b1e);
-            background-size: 600% 600%;
-            animation: moveBg 15s ease infinite;
-            color: #061425;
-            font-weight: 700;
-            text-align: center;
-            padding: 12px 0;
-            font-size: 0.9rem;
-            letter-spacing: 1px;
-        }
-        @keyframes moveBg {
-            0% { background-position: 0% 50% }
-            50% { background-position: 100% 50% }
-            100% { background-position: 0% 50% }
         }
 
         /* NAVIGATION */
         nav {
-            position: sticky;
-            top: 0;
-            background: rgba(6, 20, 37, 0.85);
+            position: sticky; top: 0;
+            background: rgba(26, 22, 17, 0.85);
             backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(212, 162, 58, 0.15);
+            border-bottom: 1px solid rgba(191, 161, 104, 0.2);
             z-index: 100;
         }
         .nav-inner {
-            max-width: var(--maxw);
-            margin: 0 auto;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
+            max-width: var(--maxw); margin: 0 auto;
+            display: flex; align-items: center; justify-content: space-between;
             padding: 14px 20px;
         }
         .brand { display: flex; align-items: center; gap: 12px; text-decoration: none; }
-        .logo-wrap {
-            width: 44px; height: 44px;
-            border-radius: 10px;
-            display: flex; align-items: center; justify-content: center;
-        }
-        .logo-text {
-            font-family: 'Cinzel', serif;
-            color: var(--accent);
-            font-weight: 600;
-            font-size: 1.2rem;
-        }
-        .nav-links { display: flex; gap: 24px; align-items: center; }
-        .nav-links a { font-weight: 600; color: #dfeef9; font-size: 0.95rem; text-decoration: none; transition: color 0.2s; }
-        .nav-links a:hover { color: var(--accent); }
+        .logo-wrap { display: flex; align-items: center; justify-content: center; }
+        .logo-text { font-family: 'Cinzel', serif; color: var(--accent-gold); font-weight: 700; font-size: 1.3rem; }
+        .nav-links { display: flex; gap: 28px; align-items: center; }
+        .nav-links a { font-weight: 600; color: var(--text-light); font-size: 0.95rem; text-decoration: none; transition: color 0.3s; }
+        .nav-links a:hover { color: var(--accent-gold); }
         
         [data-netlify-identity-menu] button {
-             background: transparent; border: 1px solid var(--accent); color: var(--accent);
-             padding: 8px 14px; border-radius: 10px; font-weight: 700; font-size: 0.9rem;
-             cursor: pointer; transition: all 0.2s;
+             background: transparent; border: 1px solid var(--accent-gold); color: var(--accent-gold);
+             padding: 8px 14px; border-radius: 8px; font-weight: 700; font-size: 0.9rem;
+             cursor: pointer; transition: all 0.3s;
         }
-        [data-netlify-identity-menu] button:hover { background: var(--accent); color: #081426; }
-
+        [data-netlify-identity-menu] button:hover { background: var(--accent-gold); color: var(--bg-dark); box-shadow: 0 0 15px var(--glow-color); }
         .hamburger { display: none; }
 
         /* HERO SECTION */
         header.hero {
-            padding: 80px 20px;
-            text-align: center;
+            padding: 100px 20px;
             position: relative;
-            background-image: linear-gradient(rgba(6, 20, 37, 0.9), rgba(6, 20, 37, 1)), url(https://images.pexels.com/photos/167684/pexels-photo-167684.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2);
-            background-size: cover;
-            background-position: center;
-            border-bottom: 1px solid rgba(212, 162, 58, 0.2);
+            background-image: linear-gradient(rgba(26, 22, 17, 0.95), var(--bg-dark)), url(https://images.pexels.com/photos/167684/pexels-photo-167684.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2);
+            background-size: cover; background-position: center;
+            border-bottom: 1px solid rgba(191, 161, 104, 0.2);
         }
         .hero-inner {
-            display: grid;
-            grid-template-columns: 2fr 1fr;
-            max-width: var(--maxw);
-            margin: 0 auto;
-            gap: 40px;
-            align-items: center;
-            text-align: left;
+            display: grid; grid-template-columns: 2fr 1fr;
+            max-width: var(--maxw); margin: 0 auto;
+            gap: 40px; align-items: center; text-align: left;
         }
         .hero h1 {
-            font-family: 'Cinzel', serif;
-            font-size: clamp(2.8rem, 7vw, 4.5rem);
-            margin: 0 0 16px;
-            color: var(--accent);
-            text-shadow: 0 0 30px rgba(212, 162, 58, 0.4);
-            letter-spacing: 1px;
-            line-height: 1.1;
-            text-align: left;
+            font-family: 'Cinzel', serif; font-size: clamp(3rem, 7vw, 4.8rem);
+            margin: 0 0 16px; color: var(--accent-gold);
+            text-shadow: 0 0 30px var(--glow-color);
+            line-height: 1.1; text-align: left;
         }
-        .hero p { color: var(--muted); font-size: 1.1rem; margin: 0 0 24px; line-height: 1.7; text-align: left; }
-        .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+        .hero p { color: var(--text-muted); font-size: 1.15rem; margin: 0 0 32px; line-height: 1.7; text-align: left; }
+        .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; }
         .btn {
-            padding: 14px 22px;
-            border-radius: var(--radius);
-            border: none;
-            font-weight: 700;
-            cursor: pointer;
-            text-decoration: none;
-            display: inline-block;
-            transition: all 0.2s;
+            padding: 16px 28px; border-radius: var(--radius); border: none; font-weight: 700;
+            cursor: pointer; text-decoration: none; display: inline-block;
+            transition: all 0.3s;
         }
         .btn:hover { transform: translateY(-3px); box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3); }
         .btn-primary {
-            background: linear-gradient(90deg, var(--accent), #ffd36a);
-            color: #061426;
-            box-shadow: 0 10px 30px rgba(212, 162, 58, 0.25);
+            background: linear-gradient(45deg, var(--accent-gold-dark), var(--accent-gold));
+            color: var(--bg-dark);
+            box-shadow: 0 10px 30px rgba(191, 161, 104, 0.25);
         }
         .btn-outline {
             background: transparent;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            color: #dfeef9;
+            border: 2px solid var(--accent-gold-dark);
+            color: var(--accent-gold);
         }
-        .hero-logo-container {
-            animation: float 6s ease-in-out infinite;
-        }
+        .btn-outline:hover { background: var(--accent-gold-dark); color: var(--bg-dark); }
+        .hero-logo-container { animation: float 6s ease-in-out infinite; }
         @keyframes float {
             0% { transform: translateY(0px); }
-            50% { transform: translateY(-20px); }
+            50% { transform: translateY(-15px); }
             100% { transform: translateY(0px); }
         }
 
         /* SECTIONS & CARDS */
         .section { max-width: var(--maxw); margin: 80px auto; padding: 0 20px; }
-        .section h2 { font-family: 'Cinzel', serif; font-size: 2.5rem; color: var(--accent); margin-bottom: 16px; text-align: center; }
-        .section-subtitle { text-align: center; color: var(--muted); margin-top: -10px; margin-bottom: 32px; max-width: 600px; margin-left: auto; margin-right: auto; }
-        .grid { display: grid; gap: 20px; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); }
+        .section h2 { font-family: 'Cinzel', serif; font-size: 2.8rem; color: var(--accent-gold); margin-bottom: 16px; text-align: center; }
+        .section-subtitle { text-align: center; color: var(--text-muted); margin-top: -10px; margin-bottom: 40px; max-width: 600px; margin-left: auto; margin-right: auto; }
+        .grid { display: grid; gap: 24px; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); }
         .card {
-            background: var(--card);
-            padding: 24px;
-            border-radius: var(--radius);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            box-shadow: 0 8px 40px rgba(3, 6, 11, 0.7);
+            background: var(--bg-light); padding: 28px; border-radius: var(--radius);
+            border: 1px solid rgba(191, 161, 104, 0.1);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
             transition: transform 0.3s ease, border-color 0.3s ease;
         }
-        .card:hover { transform: translateY(-5px); border-color: rgba(212, 162, 58, 0.3); }
-        .card h3 { margin: 0 0 8px; color: #fff; font-size: 1.1rem; }
-        .muted { color: var(--muted); font-size: 1rem; line-height: 1.6; }
+        .card:hover { transform: translateY(-5px); border-color: rgba(191, 161, 104, 0.4); }
+        .card h3 { margin: 0 0 10px; color: var(--text-light); font-size: 1.2rem; }
+        .muted { color: var(--text-muted); font-size: 1rem; line-height: 1.6; }
 
         /* CONTACT SECTION */
-        #contact p { text-align: center; }
-        .contact-links a { display: block; margin-bottom: 8px; font-weight: 600; }
+        .contact-links a { display: block; margin-bottom: 10px; font-weight: 600; text-align: center; }
 
         /* FOOTER */
         footer {
-            padding: 32px 20px;
-            margin-top: 80px;
-            background: #02050a;
-            border-top: 1px solid rgba(255, 255, 255, 0.03);
-            color: var(--muted);
-            text-align: center;
-            font-size: 0.9rem;
+            padding: 40px 20px; margin-top: 80px;
+            background: #110F0C; border-top: 1px solid rgba(191, 161, 104, 0.1);
+            color: var(--text-muted); text-align: center; font-size: 0.9rem;
         }
+        .footer-socials { margin-top: 20px; display: flex; justify-content: center; gap: 20px; }
+        .footer-socials a { color: var(--text-muted); font-size: 1.5rem; transition: color 0.3s, transform 0.3s; }
+        .footer-socials a:hover { color: var(--accent-gold); transform: scale(1.1); }
 
         /* Responsive */
         @media (max-width: 960px) {
             .hero-inner { grid-template-columns: 1fr; text-align: center; }
-            .hero-right { display: none; } /* Hide the animated logo on mobile to save space */
+            .hero-right { display: none; }
             .hero-left, .hero p, .hero h1 { text-align: center; }
             .hero-actions { justify-content: center; }
             .nav-links {
-                display: none;
-                flex-direction: column;
-                position: absolute;
-                top: 100%;
-                left: 0;
-                width: 100%;
-                background: rgba(6, 20, 37, 0.98);
-                backdrop-filter: blur(10px);
-                padding: 20px 0;
-                gap: 20px;
-                border-bottom: 1px solid rgba(212, 162, 58, 0.15);
+                display: none; flex-direction: column;
+                position: fixed; top: 0; left: 0;
+                width: 100%; height: 100%;
+                background: rgba(10, 20, 37, 0.98); backdrop-filter: blur(15px);
+                padding: 20px 0; gap: 30px;
+                align-items: center; justify-content: center;
+                opacity: 0; pointer-events: none; transition: opacity 0.3s ease;
             }
-            .nav-links.active { display: flex; }
-            .hamburger { display: flex; flex-direction: column; gap: 5px; cursor: pointer; }
-            .hamburger div { width: 25px; height: 3px; background: #e7f6ff; border-radius: 2px; }
+            .nav-links.active { display: flex; opacity: 1; pointer-events: auto; }
+            .nav-links a { font-size: 1.5rem; font-family: 'Cinzel', serif; }
+            .hamburger { display: flex; flex-direction: column; gap: 5px; cursor: pointer; z-index: 101; }
+            .hamburger div { width: 28px; height: 3px; background: #e7f6ff; border-radius: 2px; transition: transform 0.3s ease; }
+            .hamburger.active .bar-1 { transform: translateY(8px) rotate(45deg); }
+            .hamburger.active .bar-2 { opacity: 0; }
+            .hamburger.active .bar-3 { transform: translateY(-8px) rotate(-45deg); }
         }
     </style>
 </head>
@@ -222,19 +173,18 @@
             <a href="#" class="brand">
                 <div class="logo-wrap">
                     <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M5 11.23C5 14.21 6.33 16.94 8.21 18.73L12 22.5L15.79 18.73C17.67 16.94 19 14.21 19 11.23V5.5L12 2.5L5 5.5V11.23Z" stroke="#D4A23A" stroke-width="1.5" stroke-linejoin="round"/>
-                        <path d="M15 6.4C14.2 6.6 13.1 7.2 12 7.2C10.9 7.2 9.8 6.6 9 6.4L12 4.5L15 6.4Z" stroke="#D4A23A" stroke-width="1.5" stroke-linejoin="round"/>
-                        <path d="M9 6.4V9.2C9.8 9.4 10.9 10.2 12 10.2C13.1 10.2 14.2 9.4 15 9.2V6.4" stroke="#D4A23A" stroke-width="1.5" stroke-linejoin="round"/>
+                        <path d="M5 11.23C5 14.21 6.33 16.94 8.21 18.73L12 22.5L15.79 18.73C17.67 16.94 19 14.21 19 11.23V5.5L12 2.5L5 5.5V11.23Z" stroke="#BFA168" stroke-width="1.5" stroke-linejoin="round"/>
+                        <path d="M15.4 9.4C14.4 9.8 13.2 10.5 12 10.5C10.8 10.5 9.6 9.8 8.6 9.4L12 7.5L15.4 9.4Z" stroke="#BFA168" stroke-width="1.5" stroke-linejoin="round"/>
                     </svg>
                 </div>
                 <div class="logo-text">AFEF Token</div>
             </a>
-            <div class="hamburger"><div></div><div></div><div></div></div>
+            <div class="hamburger"><div class="bar-1"></div><div class="bar-2"></div><div class="bar-3"></div></div>
             <div class="nav-links">
                 <a href="#about">About</a>
                 <a href="#tokenomics">Tokenomics</a>
                 <a href="#roadmap">Roadmap</a>
-                <a href="https://t.me/afeftoken" target="_blank">Telegram</a>
+                <a href="#transactions">Transactions</a>
                 <div data-netlify-identity-menu></div>
             </div>
         </div>
@@ -243,33 +193,34 @@
     <header class="hero">
         <div class="hero-inner">
             <div class="hero-left">
-                <h1>AFEF Token</h1>
-                <p class="muted">A community-driven fan token for strategy enthusiasts. Early participants benefit from transparent distribution, future integrations, and rewards.</p>
+                <h1>AFEF TOKEN</h1>
+                <p class="muted">The community-driven fan token for strategy enthusiasts. Inspired by the golden age of empires, AFEF rewards holders with a stake in our collective future.</p>
                 <div class="hero-actions">
                     <a href="#web3" class="btn btn-primary">Connect Wallet</a>
-                    <a href="https://app.uniswap.org/swap" target="_blank" class="btn btn-outline">Trade Token</a>
+                    <a href="https://app.uniswap.org/swap" target="_blank" class="btn btn-outline">Trade on Uniswap</a>
                 </div>
             </div>
 
             <aside class="hero-right">
                 <div class="hero-logo-container">
-                    <svg width="250" height="250" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <svg width="250" height="250" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <defs>
-                            <linearGradient id="shieldGradient" x1="0%" y1="0%" x2="0%" y2="100%">
-                                <stop offset="0%" style="stop-color:#1E1208; stop-opacity:1" />
-                                <stop offset="100%" style="stop-color:#0F0B07; stop-opacity:1" />
+                            <linearGradient id="shieldFill" x1="0%" y1="0%" x2="0%" y2="100%">
+                                <stop offset="0%" style="stop-color:#2c251d;"/>
+                                <stop offset="100%" style="stop-color:#1a1611;"/>
                             </linearGradient>
                             <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
-                                <feGaussianBlur stdDeviation="1.5" result="coloredBlur"/>
+                                <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
                                 <feMerge>
                                     <feMergeNode in="coloredBlur"/>
                                     <feMergeNode in="SourceGraphic"/>
                                 </feMerge>
                             </filter>
                         </defs>
-                        <path d="M5 11.23C5 14.21 6.33 16.94 8.21 18.73L12 22.5L15.79 18.73C17.67 16.94 19 14.21 19 11.23V5.5L12 2.5L5 5.5V11.23Z" fill="url(#shieldGradient)" stroke="#D4A23A" stroke-width="0.5" filter="url(#glow)"/>
-                        <path d="M15 6.4C14.2 6.6 13.1 7.2 12 7.2C10.9 7.2 9.8 6.6 9 6.4L12 4.5L15 6.4Z" stroke="#D4A23A" stroke-width="0.7" stroke-linejoin="round"/>
-                        <path d="M9 6.4V9.2C9.8 9.4 10.9 10.2 12 10.2C13.1 10.2 14.2 9.4 15 9.2V6.4" stroke="#D4A23A" stroke-width="0.7" stroke-linejoin="round"/>
+                        <path d="M10 23.46C10 29.42 13.66 34.88 18.42 38.46L24 44L29.58 38.46C34.34 34.88 38 29.42 38 23.46V12L24 6L10 12V23.46Z" fill="url(#shieldFill)" stroke="#BFA168" stroke-width="1.5" filter="url(#glow)"/>
+                        <path d="M18 17L24 14L30 17L24 20L18 17Z" fill="#BFA168"/>
+                        <path d="M18 22L24 19L30 22L24 25L18 22Z" fill="#BFA168" opacity="0.6"/>
+                        <path d="M18 27L24 24L30 27L24 30L18 27Z" fill="#BFA168" opacity="0.3"/>
                     </svg>
                 </div>
             </aside>
@@ -279,7 +230,7 @@
     <main>
         <section id="about" class="section">
             <h2>About AFEF Token</h2>
-            <p class="section-subtitle">AFEF is a community token built for strategy game lovers. Our mission is to ensure transparency, fair distribution, and long-term value for our holders. We plan to introduce governance voting, staking rewards, and game-linked features in future updates as the project evolves.</p>
+            <p class="section-subtitle">AFEF is a community token built for strategy game lovers. Our mission is to ensure transparency, fair distribution, and long-term value for our holders. We plan to introduce governance voting, staking rewards, and game-linked features as the project evolves.</p>
         </section>
 
         <section id="tokenomics" class="section">
@@ -298,9 +249,17 @@
             <p class="section-subtitle">Our strategic plan for the upcoming phases of the project.</p>
             <div class="grid">
                 <div class="card"><h3>Q4 2024 - Genesis</h3><p class="muted">Smart contract deployment, security audit, and the official community launch.</p></div>
-                <div class="card"><h3>Q1 2025 - Market Debut</h3><p class="muted">Liquidity pool creation on a major DEX (e.g., Uniswap) and locking LP tokens for trust.</p></div>
+                <div class="card"><h3>Q1 2025 - Market Debut</h3><p class="muted">Liquidity pool creation on a major DEX and locking LP tokens for trust.</p></div>
                 <div class="card"><h3>Q2 2025 - Expansion</h3><p class="muted">Intensive marketing campaigns, partnerships, and initial CEX listing applications.</p></div>
                 <div class="card"><h3>Q3 2025 - Utility</h3><p class="muted">Launch of the first utility features, such as staking rewards and a governance portal.</p></div>
+            </div>
+        </section>
+
+        <section id="transactions" class="section">
+            <h2>On-Chain Transparency</h2>
+            <p class="section-subtitle">All AFEF Token transactions are publicly verifiable on the blockchain. Explore our contract and activity on Etherscan.</p>
+            <div style="text-align:center;">
+                 <a href="https://etherscan.io/token/0x367a584a928b641330E8B20e7C4739675741f40d" target="_blank" class="btn btn-outline">View on Etherscan</a>
             </div>
         </section>
 
@@ -309,7 +268,7 @@
             <p class="section-subtitle">Connect your wallet to check your AFEF balance and interact with our platform.</p>
             <div class="card" style="text-align: center; max-width: 450px; margin: 0 auto;">
                 <h3 id="wallet-status">Wallet Not Connected</h3>
-                <p class="muted">Your AFEF Balance: <strong id="balance" style="color: var(--accent); font-size: 1.2rem;">--</strong></p>
+                <p class="muted">Your AFEF Balance: <strong id="balance" style="color: var(--accent-gold); font-size: 1.2rem;">--</strong></p>
                 <button class="btn btn-primary" style="margin-top: 16px;" id="connect-wallet-btn">Connect Wallet</button>
             </div>
         </section>
@@ -317,9 +276,9 @@
         <section id="contact" class="section">
             <h2>Contact & Community</h2>
             <p class="section-subtitle">Have questions, feedback, or want to collaborate? Reach out to us.</p>
-            <div class="contact-links" style="text-align:center; margin-top:12px; font-weight: 600; line-height: 2;">
+            <div class="contact-links" style="line-height: 2; font-weight: 600; text-align:center;">
                 <a href="mailto:empiresfantoken@outlook.com">Email: empiresfantoken@outlook.com</a>
-                <a href="https://t.me/afeftoken" target="_blank">Telegram: t.me/afeftoken</a>
+                <a href="https://t.me/afeftoken" target="_blank">Telegram: @afeftoken</a>
                 <a href="https://x.com/afeftoken?s=21" target="_blank">X (Twitter): @afeftoken</a>
             </div>
         </section>
@@ -328,6 +287,11 @@
     <footer>
         <p>&copy; <span id="year"></span> AFEF Token. All rights reserved.</p>
         <p style="font-size: 0.8rem; opacity: 0.7;">This project is a fan-created initiative and is not affiliated with any official game publisher.</p>
+        <div class="footer-socials">
+            <a href="https://x.com/afeftoken?s=21" target="_blank" aria-label="X-Twitter"><i class="fa-brands fa-x-twitter"></i></a>
+            <a href="https://t.me/afeftoken" target="_blank" aria-label="Telegram"><i class="fa-brands fa-telegram"></i></a>
+            <a href="https://etherscan.io/token/0x367a584a928b641330E8B20e7C4739675741f40d" target="_blank" aria-label="Etherscan"><i class="fa-solid fa-cube"></i></a>
+        </div>
     </footer>
 
     <script>
@@ -341,11 +305,13 @@
 
         hamburger.addEventListener('click', () => {
             navLinks.classList.toggle('active');
+            hamburger.classList.toggle('active');
         });
 
         function closeMenu() {
             if (navLinks.classList.contains('active')) {
                 navLinks.classList.remove('active');
+                hamburger.classList.remove('active');
             }
         }
 
