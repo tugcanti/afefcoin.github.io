@@ -1,426 +1,94 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>AFEF Token — Official Site</title>
-<meta name="description" content="AFEF Token — Community fan token. Token info, airdrop, roadmap, wallet connect." />
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
-<style>
-  :root{
-    --bg:#050b17;
-    --accent:#d4a23a;
-    --muted:#b9c6db;
-    --card:#0a1426;
-    --radius:12px;
-    --maxw:1200px;
-    --shadow: 0 12px 40px rgba(2,6,12,0.6);
-  }
-  *{box-sizing:border-box}
-  html,body{height:100%;margin:0;font-family:Inter,system-ui,Segoe UI,Arial;background:linear-gradient(180deg,#071428 0%, #040815 100%);color:#eaf6ff;-webkit-font-smoothing:antialiased;scroll-behavior:smooth}
-  a{color:var(--accent)}
-
-  /* background layers container */
-  .bg-wrap{position:fixed;inset:0;z-index:-5;pointer-events:none;overflow:hidden}
-  .bg-canvas{position:absolute;inset:0}
-  .bg-svg{position:absolute;left:50%;transform:translateX(-50%);bottom:-6vh;width:160vw;opacity:0.9;will-change:transform;pointer-events:none}
-
-  /* castle silhouette */
-  .castle { height:58vh; background-repeat:no-repeat; background-position:center bottom; background-size:cover; }
-
-  /* knight silhouettes layer */
-  .knights { height:42vh; background-repeat:no-repeat; background-position:center bottom; background-size:contain; opacity:0.9; will-change:transform }
-
-  /* mist & glow */
-  .mist { position:absolute;left:-10%;top:-10%;width:120%;height:50%; background:radial-gradient(ellipse at 30% 40%, rgba(212,162,58,0.035), transparent 10%), radial-gradient(ellipse at 80% 30%, rgba(180,120,30,0.02), transparent 10%); filter:blur(36px); opacity:0.95; animation: drift 18s ease-in-out infinite; will-change:transform }
-  @keyframes drift{0%{transform:translateX(-4%)}50%{transform:translateX(4%)}100%{transform:translateX(-4%)}}
-
-  /* NAV */
-  nav{position:sticky;top:0;background:linear-gradient(180deg, rgba(4,7,12,0.84), rgba(4,7,12,0.56));backdrop-filter:blur(6px);border-bottom:1px solid rgba(212,162,58,0.06);z-index:40}
-  .nav-inner{max-width:var(--maxw);margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:12px 18px;gap:12px}
-  .brand{display:flex;align-items:center;gap:12px;cursor:pointer}
-  .logo-svg{width:44px;height:44px;flex-shrink:0}
-  .brand-text{font-family:Cinzel,serif;color:var(--accent);font-weight:700}
-  .nav-links{display:flex;gap:16px;align-items:center}
-  .nav-links a{color:#e6f5ff;font-weight:600}
-  .cta{background:var(--accent);color:#061426;padding:8px 12px;border-radius:10px;font-weight:700;text-decoration:none}
-  .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer}
-  .hamburger span{width:24px;height:3px;background:#eaf6ff;border-radius:3px;display:block}
-
-  @media(max-width:920px){
-    .nav-links > a:not(.cta){display:none}
-    .hamburger{display:flex}
-    .mobile-menu{display:none;position:fixed;top:68px;right:12px;left:12px;background:rgba(5,9,15,0.98);border-radius:12px;padding:14px;box-shadow:var(--shadow);z-index:48}
-    .mobile-menu.open{display:block}
-    .cta{display:none}
-  }
-
-  /* HERO */
-  header.hero{padding:64px 18px 36px}
-  .hero-inner{max-width:var(--maxw);margin:0 auto;display:grid;grid-template-columns:1fr 380px;gap:28px;align-items:center}
-  .hero-title{font-family:Cinzel,serif;color:var(--accent);font-size:2.6rem;margin:0 0 12px;text-shadow:0 0 24px rgba(212,162,58,0.12)}
-  .hero-desc{color:var(--muted);margin:0 0 18px;line-height:1.5}
-  .hero-actions{display:flex;gap:12px;flex-wrap:wrap}
-  .btn{padding:12px 16px;border-radius:10px;border:0;font-weight:700;cursor:pointer}
-  .btn-primary{background:linear-gradient(90deg,var(--accent),#ffd36a);color:#061426}
-  .btn-ghost{background:transparent;border:1px solid rgba(255,255,255,0.06);color:#eaf6ff}
-
-  .hero-card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:18px;border-radius:12px;border:1px solid rgba(255,255,255,0.03);box-shadow:var(--shadow)}
-  .shield {display:flex;align-items:center;justify-content:center;flex-direction:column;height:220px;border-radius:10px;background:linear-gradient(180deg,#3b2b12,#0f0b07);color:var(--accent)}
-  .shield svg{width:78px;height:78px;fill:var(--accent)}
-  .shield h2{font-family:Cinzel,serif;margin:8px 0 0;font-size:30px}
-  .contract{font-family:monospace;background:rgba(0,0,0,0.18);padding:8px 10px;border-radius:8px;display:inline-block;margin-top:8px;color:#f0f6ff}
-  .copy-btn{background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--accent);padding:8px 10px;border-radius:8px;cursor:pointer;margin-top:10px}
-
-  /* SECTIONS */
-  .section{max-width:var(--maxw);margin:40px auto;padding:28px}
-  h2.section-title{font-family:Cinzel,serif;color:var(--accent);text-align:center;margin-bottom:12px}
-  p.lead{color:var(--muted);text-align:center;margin-bottom:18px}
-  .grid{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
-  .card{background:var(--card);padding:18px;border-radius:12px;border:1px solid rgba(255,255,255,0.03);text-align:center}
-  .inf-card{display:flex;gap:12px;align-items:center;justify-content:flex-start;padding:14px;border-radius:12px;background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.02))}
-  .inf-icon{width:56px;height:56px;border-radius:10px;background:linear-gradient(180deg,#2b1c0f,#1a1209);display:flex;align-items:center;justify-content:center;color:var(--accent);font-weight:700}
-
-  /* AIRDROP */
-  .airdrop-form{max-width:760px;margin:18px auto;padding:18px;border-radius:12px;border:1px solid rgba(255,255,255,0.03);background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01))}
-  .air-row{display:flex;gap:8px;flex-wrap:wrap}
-  .input{flex:1;padding:12px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:#071021;color:#fff}
-
-  /* DONATE */
-  .donate{max-width:760px;margin:18px auto;padding:18px;border-radius:12px;border:1px solid rgba(255,255,255,0.03);background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.02))}
-  .muted{color:var(--muted)}
-
-  /* FOOTER */
-  footer{padding:28px 18px;text-align:center;color:var(--muted);border-top:1px solid rgba(255,255,255,0.02);margin-top:30px}
-
-  /* small */
-  @media(max-width:760px){
-    .hero-inner{grid-template-columns:1fr}
-    .hero-title{font-size:1.8rem}
-  }
-
-  /* reduced motion preference */
-  @media (prefers-reduced-motion: reduce){
-    .mist, .bg-canvas, .knights{animation:none !important;transition:none !important}
-  }
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AFEF Token | The Legacy Awakens</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
-<!-- BACKGROUND: canvas particles + SVG layers -->
-<div class="bg-wrap" aria-hidden="true">
-  <canvas id="bgCanvas" class="bg-canvas"></canvas>
-  <div class="mist"></div>
-
-  <!-- castle silhouette SVG as data URI -->
-  <div class="bg-svg castle" id="castleLayer" style="background-image:url('data:image/svg+xml;utf8,<?xml version=\"1.0\" encoding=\"UTF-8\"?><svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 1200 300\"><g fill=\"%230e1114\"><rect width=\"1200\" height=\"300\" fill=\"%230e1114\"/></g><g fill=\"%2310131a\"><path d=\"M40 220 L70 120 L110 220 Z M160 220 L190 90 L230 220 Z M280 220 L320 140 L360 220 Z M420 220 L450 100 L490 220 Z M540 220 L570 80 L610 220 Z M700 220 L730 110 L770 220 Z M840 220 L870 60 L910 220 Z M980 220 L1010 125 L1050 220 Z\"/></g></svg>')"></div>
-
-  <!-- knights silhouettes -->
-  <div class="bg-svg knights" id="knightLayer" style="background-image:url('data:image/svg+xml;utf8,<?xml version=\"1.0\" encoding=\"UTF-8\"?><svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 1200 200\"><g fill=\"%230a0c0f\"><path d=\"M100 140 L140 40 L180 140 Z M420 140 L460 40 L500 140 Z M780 140 L820 40 L860 140 Z\"/></g></svg>')"></div>
-</div>
-
-<!-- NAV -->
-<nav>
-  <div class="nav-inner">
-    <div class="brand" id="siteLogo" tabindex="0" aria-label="AFEF Token home">
-      <!-- inline logo shield+crown -->
-      <svg class="logo-svg" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-        <defs><linearGradient id="gA" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#f6df9d"/><stop offset="1" stop-color="#d4a23a"/></linearGradient></defs>
-        <path d="M32 2 L44 8 L52 18 L52 30 C52 42 40 52 32 58 C24 52 12 42 12 30 L12 18 L20 8 Z" fill="#1c120a"/>
-        <path d="M24 14 C28 10 36 10 40 14 L38 20 L24 20 Z" fill="url(#gA)"/>
-      </svg>
-      <div class="brand-text">AFEF Token</div>
-    </div>
-
-    <div class="nav-links" id="navLinks">
+  <header class="header">
+    <div class="logo" id="siteLogo">🛡️👑 AFEF TOKEN</div>
+    <nav id="navMenu" class="nav-menu">
       <a href="#about">About</a>
       <a href="#tokenomics">Tokenomics</a>
       <a href="#airdrop">Airdrop</a>
       <a href="#donate">Donate</a>
       <a href="#contact">Contact</a>
-      <a class="cta" id="etherscanBtn" href="#" target="_blank" rel="noopener">Etherscan</a>
-      <a class="cta" href="#" onclick="openModal()">Connect</a>
+      <a href="https://etherscan.io/" target="_blank">Etherscan</a>
+      <a href="https://x.com/afeftoken" target="_blank">X (Twitter)</a>
+      <button id="connectWallet" class="wallet-btn">Connect Wallet</button>
+    </nav>
+    <div id="menuToggle" class="menu-toggle">☰</div>
+  </header>
+
+  <!-- Gothic Animated Banner -->
+  <section class="hero">
+    <div class="bg-layer" id="castleLayer"></div>
+    <div class="bg-layer" id="knightLayer"></div>
+    <div class="hero-content">
+      <h1>The Legacy of AFEF</h1>
+      <p>Forged in the spirit of ancient empires — unite your strength, claim your reward.</p>
+      <a href="#airdrop" class="cta-btn">Join Airdrop</a>
     </div>
-
-    <div style="display:flex;gap:10px;align-items:center">
-      <div class="hamburger" id="hamburger" aria-label="Open menu" role="button" tabindex="0"><span></span><span></span><span></span></div>
-    </div>
-  </div>
-
-  <!-- mobile menu -->
-  <div id="mobileMenu" class="mobile-menu" aria-hidden="true">
-    <a href="#about">About</a>
-    <a href="#tokenomics">Tokenomics</a>
-    <a href="#airdrop">Airdrop</a>
-    <a href="#donate">Donate</a>
-    <a href="#contact">Contact</a>
-    <a id="mobileConnect" href="#" onclick="openModal()">Connect</a>
-    <a id="mobileEtherscan" href="#" target="_blank">Etherscan</a>
-  </div>
-</nav>
-
-<!-- HERO -->
-<header class="hero">
-  <div class="hero-inner">
-    <div>
-      <h1 class="hero-title">AFEF Token — Build your empire</h1>
-      <p class="hero-desc">Community-driven fan token with fair distribution, governance plans, and airdrops. Join early supporters and become part of our castle-building story.</p>
-      <div class="hero-actions">
-        <button class="btn btn-primary" onclick="scrollToId('airdrop')">Join Airdrop</button>
-        <button class="btn btn-ghost" onclick="connectWallet()">Connect Wallet</button>
-        <button class="btn btn-ghost" onclick="openExternal()">Official Site</button>
-      </div>
-
-      <div style="margin-top:16px;color:var(--muted)">Wallet: <span id="walletDisplay">Not connected</span></div>
-    </div>
-
-    <aside class="hero-card">
-      <div class="shield" role="img" aria-label="AFEF shield logo">
-        <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <path d="M32 2 L44 8 L52 18 L52 30 C52 42 40 52 32 58 C24 52 12 42 12 30 L12 18 L20 8 Z" fill="#2b1c12"/>
-          <path d="M24 14 C28 10 36 10 40 14 L38 20 L24 20 Z" fill="#d4a23a"/>
-        </svg>
-        <h2>AFEF</h2>
-        <small class="muted">Fan Token</small>
-
-        <div style="margin-top:14px;">
-          <div class="muted">Contract</div>
-          <div class="contract" id="contractAddress">0x367a584a928b641330E8B20e7C4739675741f40d</div>
-          <div><button class="copy-btn" id="copyContract">Copy Address</button></div>
-        </div>
-      </div>
-    </aside>
-  </div>
-</header>
-
-<!-- MAIN -->
-<main>
-  <section id="about" class="section">
-    <h2 class="section-title">About AFEF</h2>
-    <p class="lead muted">AFEF is a fan-first token for strategy and empire fans. We aim for transparency, community governance, and meaningful airdrops to reward our supporters. This project is not an official product of any game publisher.</p>
   </section>
 
-  <section id="tokenomics" class="section">
-    <h2 class="section-title">Tokenomics</h2>
-    <p class="lead muted">Total Supply: <strong>4,950,000 AFEF</strong></p>
+  <!-- About -->
+  <section id="about">
+    <h2>About AFEF</h2>
+    <p>AFEF Token represents courage, community, and heritage. Inspired by medieval honor and the spirit of the empire builders, AFEF aims to unite holders worldwide under one symbol of loyalty.</p>
+  </section>
 
-    <div class="grid">
+  <!-- Tokenomics Infographic -->
+  <section id="tokenomics">
+    <h2>Tokenomics</h2>
+    <div class="infographics">
       <div class="inf-card">
         <div class="inf-icon">💧</div>
-        <div><div class="inf-title">40% Liquidity</div><div class="muted">Reserved for liquidity pools & market depth</div></div>
+        <div><strong>40%</strong> Liquidity Pool<br><small>Ensuring long-term stability</small></div>
       </div>
       <div class="inf-card">
         <div class="inf-icon">🎁</div>
-        <div><div class="inf-title">30% Airdrop & Community</div><div class="muted">Rewards for early supporters</div></div>
+        <div><strong>30%</strong> Airdrop Rewards<br><small>Community distribution</small></div>
       </div>
       <div class="inf-card">
-        <div class="inf-icon">🚀</div>
-        <div><div class="inf-title">20% Dev & Marketing</div><div class="muted">Funding growth & listings</div></div>
+        <div class="inf-icon">🏰</div>
+        <div><strong>20%</strong> Treasury<br><small>For project development</small></div>
       </div>
       <div class="inf-card">
-        <div class="inf-icon">🛡️</div>
-        <div><div class="inf-title">10% Team & Advisors</div><div class="muted">Locked & vested allocations</div></div>
+        <div class="inf-icon">🔥</div>
+        <div><strong>10%</strong> Burn Reserve<br><small>Deflationary mechanism</small></div>
       </div>
     </div>
   </section>
 
-  <section id="airdrop" class="section">
-    <h2 class="section-title">Airdrop Registration</h2>
-    <p class="lead muted">Enter your details to apply for the next AFEF airdrop. One application per wallet. We will verify addresses on-chain.</p>
-
-    <form name="airdrop" method="POST" data-netlify="true" class="airdrop-form" onsubmit="return validateAirdrop(event)">
+  <!-- Airdrop -->
+  <section id="airdrop">
+    <h2>Claim Airdrop</h2>
+    <form id="airdropForm" name="airdrop" method="POST" data-netlify="true">
       <input type="hidden" name="form-name" value="airdrop">
-      <input type="text" name="name" placeholder="Your name (optional)" class="input" />
-      <input type="text" name="wallet" id="airdropWallet" placeholder="Your Ethereum address (0x...)" class="input" required />
-      <div style="display:flex;gap:10px;margin-top:10px">
-        <button class="btn btn-primary" type="submit">Apply</button>
-        <button class="btn btn-ghost" type="button" onclick="fillConnectedWallet()">Use connected wallet</button>
-      </div>
-      <div class="muted" style="margin-top:8px;font-size:0.9rem">We will never ask for your private keys. Submitting does not require sending funds.</div>
+      <input type="text" id="airdropWallet" name="wallet" placeholder="Your Ethereum address" required>
+      <button type="submit">Claim Tokens</button>
     </form>
   </section>
 
-  <section id="donate" class="section">
-    <h2 class="section-title">Support AFEF</h2>
-    <p class="lead muted">Donations help cover development, hosting, airdrop automation and community growth. Any donation is appreciated and will be used transparently for the project.</p>
-    <div class="donate">
-      <div style="font-size:0.95rem">Donation contract (ERC-20 compatible):</div>
-      <div class="contract" id="donationAddress">0x367a584a928b641330E8B20e7C4739675741f40d</div>
-      <div style="margin-top:10px"><button class="copy-btn" onclick="copyToClipboard(document.getElementById('donationAddress').textContent)">Copy Donation Address</button></div>
-    </div>
+  <!-- Donate -->
+  <section id="donate">
+    <h2>Support AFEF</h2>
+    <p>Your donation helps us expand liquidity and strengthen the ecosystem.</p>
+    <p><strong>Contract Address:</strong><br>0x000000000000000000000000000000000AFEF</p>
   </section>
 
-  <section id="contact" class="section">
-    <h2 class="section-title">Contact</h2>
-    <p class="lead muted">For press, partnerships or support, email: <a id="contactEmail" href="mailto:empiresfantoken@outlook.com">empiresfantoken@outlook.com</a> — follow us on X: <a id="xLink" href="https://x.com/afefcoin" target="_blank">@afefcoin</a></p>
+  <!-- Contact -->
+  <section id="contact">
+    <h2>Contact</h2>
+    <p>For partnerships and inquiries: <a href="mailto:contact@afefcoin.com">contact@afefcoin.com</a></p>
   </section>
-</main>
 
-<footer>
-  <div>© <span id="year"></span> AFEF Token — Not affiliated with any game publisher.</div>
-</footer>
+  <footer>
+    <p>© 2025 AFEF Token | Built with honor & powered by Ethereum</p>
+  </footer>
 
-<!-- LOGIN MODAL -->
-<div id="loginModal" class="modal" style="display:none;align-items:center;justify-content:center;position:fixed;inset:0;background:rgba(0,0,0,0.6);z-index:60">
-  <div style="background:#0a1426;padding:20px;border-radius:12px;max-width:420px;width:94%;box-shadow:var(--shadow);border:1px solid rgba(255,255,255,0.04);">
-    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
-      <h3 style="color:var(--accent);margin:0">Connect Wallet</h3>
-      <button onclick="closeModal()" style="background:transparent;border:0;color:var(--muted);font-size:20px;cursor:pointer">&times;</button>
-    </div>
-    <p class="muted">Connect MetaMask to autofill your wallet and interact. We do not store private keys.</p>
-    <div style="display:flex;gap:10px;margin-top:12px">
-      <button class="btn btn-primary" onclick="connectWallet()">MetaMask</button>
-      <button class="btn btn-ghost" onclick="closeModal()">Close</button>
-    </div>
-  </div>
-</div>
-
-<script>
-/* ========== CONFIG - edit these if you want ========== */
-const CONTRACT_ADDRESS = '0x367a584a928b641330E8B20e7C4739675741f40d';
-const CONTACT_EMAIL = 'empiresfantoken@outlook.com';
-const X_LINK = 'https://x.com/afefcoin';
-
-/* ========== DOM refs ========== */
-document.getElementById('contractAddress').textContent = CONTRACT_ADDRESS;
-document.getElementById('donationAddress').textContent = CONTRACT_ADDRESS;
-document.getElementById('etherscanBtn').href = `https://etherscan.io/token/${CONTRACT_ADDRESS}`;
-document.getElementById('mobileEtherscan') && (document.getElementById('mobileEtherscan').href = `https://etherscan.io/token/${CONTRACT_ADDRESS}`);
-document.getElementById('contactEmail').href = `mailto:${CONTACT_EMAIL}`;
-document.getElementById('xLink').href = X_LINK;
-document.getElementById('year').textContent = new Date().getFullYear();
-
-/* ========== mobile menu ========== */
-const hamburger = document.getElementById('hamburger');
-const mobileMenu = document.getElementById('mobileMenu');
-hamburger && hamburger.addEventListener('click', (e)=> {
-  e.stopPropagation();
-  mobileMenu.classList.toggle('open');
-  mobileMenu.setAttribute('aria-hidden', !mobileMenu.classList.contains('open'));
-});
-// close mobile menu on outside click
-document.addEventListener('click', (e) => {
-  if (mobileMenu.classList.contains('open')) {
-    const path = e.composedPath ? e.composedPath() : (e.path||[]);
-    if (!path.includes(mobileMenu) && !path.includes(hamburger)) {
-      mobileMenu.classList.remove('open');
-      mobileMenu.setAttribute('aria-hidden','true');
-    }
-  }
-});
-// logo -> go top
-document.getElementById('siteLogo').addEventListener('click', ()=> { window.scrollTo({top:0,behavior:'smooth'}); mobileMenu.classList.remove('open'); });
-
-/* ========== login modal ========== */
-function openModal(){ document.getElementById('loginModal').style.display = 'flex'; mobileMenu.classList.remove('open'); }
-function closeModal(){ document.getElementById('loginModal').style.display = 'none'; }
-document.addEventListener('keydown', (e)=> { if (e.key === 'Escape') closeModal(); });
-// close modal by clicking backdrop
-document.getElementById('loginModal').addEventListener('click', (e)=> { if (e.target === e.currentTarget) closeModal(); });
-
-/* ========== copy helpers ========== */
-async function copyToClipboard(text){
-  try { await navigator.clipboard.writeText(text); alert('Copied: ' + text); }
-  catch(e){ const t = document.createElement('textarea'); t.value = text; document.body.appendChild(t); t.select(); document.execCommand('copy'); document.body.removeChild(t); alert('Copied: ' + text); }
-}
-document.getElementById('copyContract').addEventListener('click', ()=> copyToClipboard(CONTRACT_ADDRESS));
-
-/* ========== MetaMask connect (basic) ========== */
-let currentAccount = null;
-async function connectWallet(){
-  if (!window.ethereum) return alert('MetaMask not detected. Please install MetaMask.');
-  try {
-    const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
-    currentAccount = accounts[0];
-    document.getElementById('walletDisplay').textContent = short(currentAccount);
-    // autofill airdrop wallet if present
-    const airdropEl = document.getElementById('airdropWallet');
-    if (airdropEl) airdropEl.value = currentAccount;
-    closeModal();
-  } catch(err) { console.error(err); alert('Connection failed or rejected.'); }
-}
-function short(a){ return a ? (a.slice(0,6) + '...' + a.slice(-4)) : 'Not connected' }
-if (window.ethereum) {
-  window.ethereum.on('accountsChanged', (acc)=> {
-    currentAccount = acc[0] || null;
-    document.getElementById('walletDisplay').textContent = currentAccount ? short(currentAccount) : 'Not connected';
-  });
-}
-
-/* ========== airdrop form validation ========== */
-function validateAirdrop(e){
-  const wallet = (document.querySelector('input[name="wallet"]')||{}).value || '';
-  if (!/^0x[a-fA-F0-9]{40}$/.test(wallet.trim())){ alert('Please enter a valid Ethereum address (0x...).'); e.preventDefault(); return false; }
-  return true;
-}
-function fillConnectedWallet(){ if (currentAccount) document.getElementById('airdropWallet').value = currentAccount; else { openModal(); } }
-
-/* ========== UI helpers ========== */
-function scrollToId(id){ document.getElementById(id).scrollIntoView({behavior:'smooth'}); }
-function openExternal(){ window.open(location.origin, '_blank', 'noopener'); }
-
-/* ========== Animated particles (canvas) + parallax layers ========== */
-const canvas = document.getElementById('bgCanvas');
-const ctx = canvas.getContext('2d');
-let W = canvas.width = innerWidth, H = canvas.height = innerHeight;
-window.addEventListener('resize', ()=> { W = canvas.width = innerWidth; H = canvas.height = innerHeight; initParticles(); });
-
-let particles = [];
-function initParticles(){
-  particles = [];
-  const count = Math.max(40, Math.floor(W/30)); // fewer on small screens
-  for(let i=0;i<count;i++){
-    particles.push({
-      x: Math.random()*W,
-      y: Math.random()*H,
-      r: (Math.random()*1.8)+0.6,
-      vx: (Math.random()-0.5)*0.2,
-      vy: (Math.random()-0.5)*0.2,
-      alpha: 0.25 + Math.random()*0.35
-    });
-  }
-}
-initParticles();
-
-function frame(){
-  ctx.clearRect(0,0,W,H);
-  ctx.fillStyle = 'rgba(212,162,58,0.08)';
-  for(const p of particles){
-    ctx.globalAlpha = p.alpha;
-    ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2); ctx.fill();
-    p.x += p.vx; p.y += p.vy;
-    if (p.x < -10) p.x = W+10; if (p.x > W+10) p.x = -10;
-    if (p.y < -10) p.y = H+10; if (p.y > H+10) p.y = -10;
-  }
-  ctx.globalAlpha = 1;
-  requestAnimationFrame(frame);
-}
-frame();
-
-// parallax on scroll for castle & knights
-const castle = document.getElementById('castleLayer');
-const knights = document.getElementById('knightLayer');
-window.addEventListener('scroll', throttle(()=>{
-  const y = window.scrollY;
-  castle.style.transform = `translateX(-50%) translateY(${y * 0.02}px)`;
-  knights.style.transform = `translateX(-50%) translateY(${y * 0.04}px)`;
-}, 16));
-function throttle(fn, wait){
-  let time = 0;
-  return function(...args){ const now = Date.now(); if (now - time >= wait){ time = now; fn.apply(this,args); } };
-}
-
-/* respect reduced motion */
-if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches){
-  // stop animations
-  document.querySelectorAll('.mist').forEach(n => n.style.animation = 'none');
-}
-
-/* accessibility: close mobile menu or modal with ESC */
-document.addEventListener('keydown', (e)=> { if (e.key === 'Escape'){ mobileMenu.classList.remove('open'); closeModal(); } });
-
-/* modal helpers (close modal wrapper used for connect) */
-function closeModal(){ document.getElementById('loginModal').style.display = 'none'; }
-</script>
+  <script src="script.js"></script>
 </body>
 </html>
