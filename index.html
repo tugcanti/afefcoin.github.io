@@ -1,414 +1,395 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>AFEF Token — Official Website</title>
-    <meta name="description" content="AFEF — A community fan token for strategy game enthusiasts. Join the airdrop, discover token info, and our roadmap." />
-    <meta property="og:title" content="AFEF Token — Official Site" />
-    <meta property="og:description" content="AFEF — Community-driven fan token. Join the airdrop, view the contract, and see our roadmap." />
-    <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="AFEF Token" />
-    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23d4a23a' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z'%3E%3C/path%3E%3Cpath d='M8 11.5h8M8 11.5L7 8l2 1L12 7l3 2 2-1-1 3.5H8z' stroke-width='1'%3E%3C/path%3E%3C/svg%3E">
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
-    
-    <script type="text/javascript" src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>AFEF Token — Official Site</title>
+  <meta name="description" content="AFEF — community fan token. Token info, airdrop, roadmap." />
+  <link rel="icon" href="data:,">
+  <meta name="robots" content="index,follow" />
+  <style>
+    /* ---------- THEME & LAYOUT ---------- */
+    :root{
+      --bg1:#070914;    /* deep navy */
+      --bg2:#0b1320;    /* darker */
+      --accent:#d4a23a; /* gold */
+      --muted:#9fb0c2;
+      --glass: rgba(255,255,255,0.03);
+      --maxw:1100px;
+      --radius:12px;
+      --shadow: 0 10px 30px rgba(2,6,12,0.6);
+      --fast: 200ms;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;color:#eaf6ff;background:var(--bg1);-webkit-font-smoothing:antialiased}
+    a{color:var(--accent);text-decoration:none}
+    img{max-width:100%;height:auto;display:block}
 
-    <style>
-        :root {
-            --bg: #0A0A10;
-            --card: #101018;
-            --accent: #d4a23a;
-            --muted: #a0a0b0;
-            --maxw: 1100px;
-            --radius: 14px;
-        }
+    /* ---------- ANIMATED BACKGROUND (GOTHIC CASTLE + PARALLAX-LIKE) ---------- */
+    .bg-wrap{position:fixed;inset:0;z-index:-2;overflow:hidden;pointer-events:none}
+    .bg-layer{
+      position:absolute;left:50%;transform:translateX(-50%);
+      width:160vw;height:120vh;
+      background-repeat:no-repeat;background-position:center bottom;
+      will-change:transform,filter,opacity;
+      opacity:0.95;
+    }
+    /* distant sky */
+    .bg-layer.sky{top:-10vh;background-image:linear-gradient(180deg,#02040a 0%, #071026 40%, #101a2b 100%);}
+    /* moving mist / glow */
+    .bg-layer.mist{
+      top:0; mix-blend-mode:screen; filter:blur(30px) saturate(120%);
+      background-image: radial-gradient(ellipse at 20% 20%, rgba(212,162,58,0.06), transparent 10%),
+                        radial-gradient(ellipse at 85% 40%, rgba(180,120,30,0.05), transparent 10%);
+      animation: mistMove 14s linear infinite;
+    }
+    @keyframes mistMove {
+      0%{transform:translateX(-5%) translateY(0)}
+      50%{transform:translateX(5%) translateY(2%)}
+      100%{transform:translateX(-5%) translateY(0)}
+    }
+    /* castle silhouette (vector inline as background) */
+    .bg-layer.castle{
+      bottom:-14vh;height:80vh;
+      background-size:contain;
+      background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 300"><g fill="%2310131a"><path d="M0 220 L1200 220 L1200 300 L0 300 Z" /><path d="M40 220 L70 120 L110 220 Z M160 220 L190 90 L230 220 Z M280 220 L320 140 L360 220 Z M420 220 L450 100 L490 220 Z M540 220 L570 80 L610 220 Z M700 220 L730 110 L770 220 Z M840 220 L870 60 L910 220 Z M980 220 L1010 125 L1050 220 Z" /></g></svg>');
+      opacity:0.95;
+    }
+    /* knight/flag silhouettes layer */
+    .bg-layer.silhouettes{
+      bottom:-18vh;height:70vh;background-size:contain;
+      background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 200"><g fill="%23080a0f"><path d="M160 120 L200 40 L240 120 Z M450 120 L490 40 L530 120 Z M760 120 L800 40 L840 120 Z"/></g></svg>');
+      opacity:0.9; transform-origin:center bottom;
+      animation: silhouettesFloat 8s ease-in-out infinite;
+    }
+    @keyframes silhouettesFloat{0%{transform:translateY(0)}50%{transform:translateY(-6px)}100%{transform:translateY(0)}}
 
-        *, *::before, *::after { box-sizing: border-box; }
-        
-        body {
-            margin: 0;
-            font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
-            background-color: var(--bg);
-            color: #eaf6ff;
-            -webkit-font-smoothing: antialiased;
-            overflow-x: hidden;
-            scroll-behavior: smooth;
-        }
+    /* slight parallax effect on scroll (via JS below) will adjust translateY */
 
-        /* --- NAVIGATION --- */
-        nav {
-            position: sticky;
-            top: 0;
-            background-color: rgba(10, 10, 16, 0.8);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(212, 162, 58, 0.15);
-            z-index: 1000;
-        }
-        .nav-inner {
-            max-width: var(--maxw);
-            margin: 0 auto;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 14px 20px;
-        }
-        .brand { display: flex; align-items: center; gap: 12px; text-decoration: none; }
-        .logo-wrap {
-            width: 44px; height: 44px;
-            border-radius: 10px;
-            background: linear-gradient(180deg, #3b2b12, #6f4c21);
-            display: flex; align-items: center; justify-content: center;
-            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.5);
-        }
-        .logo-text {
-            font-family: 'Cinzel', serif;
-            color: var(--accent);
-            font-weight: 600;
-            font-size: 1.2rem;
-        }
-        .nav-links { display: flex; gap: 24px; align-items: center; }
-        .nav-links a { font-weight: 600; color: #dfeef9; font-size: 0.95rem; text-decoration: none; transition: color 0.2s; }
-        .nav-links a:hover { color: var(--accent); }
-        .hamburger { display: none; }
+    /* ---------- PAGE LAYOUT ---------- */
+    .wrap{max-width:var(--maxw);margin:0 auto;padding:18px}
+    nav{position:sticky;top:0;z-index:40;background:linear-gradient(180deg, rgba(6,10,18,0.6), rgba(6,10,18,0.4));backdrop-filter:blur(6px);border-bottom:1px solid rgba(212,162,58,0.08)}
+    .nav-inner{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 18px}
+    .brand{display:flex;align-items:center;gap:10px}
+    .logo{display:flex;align-items:center;gap:10px;cursor:pointer}
+    .logo svg{width:42px;height:42px;display:block}
+    .logo h1{font-family:serif;margin:0;font-size:1.05rem;color:var(--accent);letter-spacing:1px}
+    .nav-links{display:flex;align-items:center;gap:18px}
+    .nav-links a{color:#e8f3ff;font-weight:600;font-size:0.95rem}
+    .nav-cta{background:var(--accent);color:#061426;padding:8px 12px;border-radius:10px;font-weight:700}
+    /* mobile */
+    .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:8px}
+    .hamburger span{width:24px;height:3px;background:#eaf6ff;border-radius:2px;display:block}
+    .mobile-menu{display:none;position:fixed;top:70px;left:12px;right:12px;background:rgba(3,6,12,0.95);border-radius:10px;padding:16px;box-shadow:var(--shadow);z-index:45}
+    .mobile-menu a{display:block;padding:10px;color:#eaf6ff;border-bottom:1px solid rgba(255,255,255,0.03)}
+    @media(max-width:920px){
+      .nav-links{display:flex;gap:10px}
+      .nav-links > a:not(.nav-cta){display:none}
+      .hamburger{display:flex}
+      .nav-cta{display:none}
+      .mobile-menu{display:none}
+      .mobile-menu.open{display:block}
+    }
 
-        [data-netlify-identity-menu] .netlify-identity-button {
-            background: transparent; border: 1px solid var(--accent); color: var(--accent);
-            padding: 8px 14px; border-radius: 10px; font-weight: 700; font-size: 0.9rem;
-            cursor: pointer; transition: all 0.2s;
-        }
-        [data-netlify-identity-menu] .netlify-identity-button:hover { background: var(--accent); color: #081426; }
+    /* ---------- HERO ---------- */
+    header.hero{padding:44px 18px 10px}
+    .hero-grid{display:grid;grid-template-columns:1fr 360px;gap:28px;align-items:center}
+    .hero-title{font-family:serif;color:var(--accent);font-size:2.6rem;margin:0 0 12px}
+    .lead{color:var(--muted);margin:0 0 18px;line-height:1.5}
+    .hero-cta{display:flex;gap:12px;flex-wrap:wrap}
+    .card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:18px;border-radius:12px;border:1px solid rgba(255,255,255,0.03);box-shadow:var(--shadow)}
+    .token-block{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px;border-radius:10px;background:rgba(0,0,0,0.08)}
 
-        /* --- HERO SECTION WITH ANIMATED BACKGROUND --- */
-        header.hero {
-            padding: 100px 20px;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-            background-color: var(--bg);
-        }
-        header.hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 200%;
-            height: 100%;
-            z-index: 0;
-            background-image: url('https://i.imgur.com/GQqHm23.png');
-            background-size: cover;
-            background-position: center center;
-            opacity: 0.15;
-            animation: panBackground 80s linear infinite alternate;
-        }
-        header.hero::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(ellipse at center, transparent 30%, var(--bg) 95%);
-        }
-        @keyframes panBackground {
-            from { transform: translateX(0%); }
-            to { transform: translateX(-50%); }
-        }
-        .hero-inner { 
-            position: relative;
-            z-index: 1;
-            max-width: 750px; 
-            margin: 0 auto; 
-        }
-        .hero h1 {
-            font-family: 'Cinzel', serif;
-            font-size: clamp(2.8rem, 7vw, 4.5rem);
-            margin: 0 0 16px;
-            color: var(--accent);
-            text-shadow: 0 0 10px rgba(212, 162, 58, 0.3), 0 0 30px rgba(212, 162, 58, 0.2);
-            letter-spacing: 1.5px;
-            animation: fadeInGlow 2s ease-in-out;
-        }
-        @keyframes fadeInGlow {
-            from { opacity: 0; text-shadow: 0 0 5px rgba(212, 162, 58, 0.1); }
-            to { opacity: 1; text-shadow: 0 0 10px rgba(212, 162, 58, 0.3), 0 0 30px rgba(212, 162, 58, 0.2); }
-        }
+    /* ---------- SECTIONS ---------- */
+    section{padding:40px 18px}
+    .container{max-width:var(--maxw);margin:0 auto}
+    h2{font-family:serif;color:var(--accent);margin:0 0 14px}
+    .grid{display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+    .muted{color:var(--muted)}
 
-        .hero p { color: var(--muted); font-size: 1.15rem; margin: 0 0 24px; line-height: 1.7; }
-        .hero-actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
-        .btn { padding: 14px 22px; border-radius: var(--radius); border: none; font-weight: 700; cursor: pointer; text-decoration: none; display: inline-block; transition: all 0.3s ease; }
-        .btn:hover { transform: translateY(-3px); box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3); }
-        .btn-primary { background: linear-gradient(90deg, var(--accent), #e7b85f); color: #061426; box-shadow: 0 10px 30px rgba(212, 162, 58, 0.25); }
-        .btn-primary:hover { box-shadow: 0 15px 40px rgba(212, 162, 58, 0.35); }
-        .btn-outline { background: transparent; border: 1px solid rgba(212, 162, 58, 0.5); color: #dfeef9; }
-        .btn-outline:hover { background: rgba(212, 162, 58, 0.1); border-color: var(--accent); }
+    /* ---------- LOGIN MODAL ---------- */
+    .modal-backdrop{position:fixed;inset:0;background:rgba(0,0,0,0.6);display:none;align-items:center;justify-content:center;z-index:60}
+    .modal-backdrop.open{display:flex}
+    .modal{width:100%;max-width:420px;background:linear-gradient(180deg,#061426,#081428);padding:20px;border-radius:12px;box-shadow:0 20px 60px rgba(0,0,0,0.6);border:1px solid rgba(212,162,58,0.06)}
+    .modal h3{margin:0 0 12px;color:var(--accent)}
+    .input{width:100%;padding:12px;margin:8px 0;border-radius:8px;border:1px solid rgba(255,255,255,0.03);background:rgba(255,255,255,0.02);color:#eef9ff}
+    .modal-actions{display:flex;gap:10px;justify-content:flex-end;margin-top:12px}
+    .btn-ghost{background:transparent;border:1px solid rgba(255,255,255,0.06);padding:10px 14px;border-radius:8px;color:#eaf6ff;cursor:pointer}
 
-        /* --- SECTIONS & CARDS --- */
-        .section { max-width: var(--maxw); margin: 60px auto; padding: 0 20px; }
-        .section h2 { font-family: 'Cinzel', serif; font-size: 2.5rem; color: var(--accent); margin-bottom: 16px; text-align: center; }
-        .section-subtitle { text-align: center; color: var(--muted); margin-top: -10px; margin-bottom: 32px; max-width: 600px; margin-left: auto; margin-right: auto; }
-        .grid { display: grid; gap: 20px; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); }
-        .card { background: var(--card); padding: 24px; border-radius: var(--radius); border: 1px solid rgba(255, 255, 255, 0.05); box-shadow: 0 8px 30px rgba(3, 6, 11, 0.6); transition: all 0.3s ease; }
-        .card:hover { transform: translateY(-5px); box-shadow: 0 12px 40px rgba(3, 6, 11, 0.8); border-color: rgba(212, 162, 58, 0.3); }
-        .card h3 { margin: 0 0 8px; color: #fff; font-size: 1.1rem; }
-        .muted { color: var(--muted); font-size: 1rem; line-height: 1.6; }
-        
-        /* AIRDROP FORM */
-        .form-card-container { max-width: 550px; margin: 0 auto; }
-        .form-card input {
-            width: 100%; padding: 14px; margin-bottom: 16px; border-radius: 10px;
-            border: 1px solid rgba(255, 255, 255, 0.1); background: #051021;
-            color: #eaf6ff; font-size: 1rem;
-        }
-        .form-card input::placeholder { color: var(--muted); }
-        .form-card .btn { width: 100%; }
-
-        /* --- INTERACTIVE CONNECT SECTION --- */
-        .interactive-card { cursor: pointer; text-decoration: none; color: #eaf6ff; }
-        .interactive-card.connected { border-color: #39ff14 !important; box-shadow: 0 0 40px rgba(57, 255, 20, 0.2); }
-
-        /* --- MODAL --- */
-        .modal-overlay {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(10, 10, 16, 0.8); backdrop-filter: blur(8px);
-            z-index: 2000; display: none; align-items: center; justify-content: center;
-            opacity: 0; transition: opacity 0.3s ease;
-        }
-        .modal-overlay.active { display: flex; opacity: 1; }
-        .modal-content {
-            background: var(--card); padding: 30px 40px; border-radius: var(--radius);
-            border: 1px solid rgba(212, 162, 58, 0.2); box-shadow: 0 10px 50px rgba(0, 0, 0, 0.5);
-            max-width: 450px; width: 90%; text-align: center; position: relative;
-            transform: scale(0.9); transition: transform 0.3s ease;
-        }
-        .modal-overlay.active .modal-content { transform: scale(1); }
-        .modal-close { position: absolute; top: 15px; right: 15px; font-size: 1.5rem; color: var(--muted); cursor: pointer; transition: color 0.2s; }
-        .modal-close:hover { color: #fff; }
-        .modal-content h3 { font-family: 'Cinzel', serif; color: var(--accent); margin-top: 0; }
-        
-        /* --- FOOTER --- */
-        footer { padding: 40px 20px; margin-top: 80px; background: #000; border-top: 1px solid rgba(212, 162, 58, 0.1); color: var(--muted); text-align: center; font-size: 0.9rem; }
-        .social-links { display: flex; justify-content: center; gap: 25px; margin-bottom: 20px; }
-        .social-links a { color: var(--muted); text-decoration: none; transition: all 0.2s; }
-        .social-links a:hover { color: var(--accent); transform: scale(1.1); }
-        .social-links svg { width: 28px; height: 28px; }
-
-        /* --- Responsive --- */
-        @media (max-width: 960px) {
-            .nav-links { 
-                display: none; 
-                flex-direction: column; 
-                position: absolute; 
-                top: 100%; 
-                left: 0; 
-                width: 100%; 
-                background: rgba(10, 10, 16, 0.98); 
-                backdrop-filter: blur(10px); 
-                padding: 20px 0; 
-                gap: 20px; 
-                border-bottom: 1px solid rgba(212, 162, 58, 0.15); 
-                align-items: center; 
-            }
-            .nav-links.active { display: flex; }
-            .hamburger { display: flex; flex-direction: column; gap: 5px; cursor: pointer; }
-            .hamburger div { width: 25px; height: 3px; background: #e7f6ff; border-radius: 2px; }
-        }
-    </style>
+    /* ---------- FOOTER ---------- */
+    footer{padding:30px 18px;text-align:center;border-top:1px solid rgba(255,255,255,0.02);color:var(--muted)}
+    .socials{display:flex;gap:12px;justify-content:center;margin-top:10px}
+    .socials a{color:var(--muted);padding:8px;border-radius:8px;border:1px solid rgba(255,255,255,0.02)}
+  </style>
 </head>
 <body>
-    <nav>
-        <div class="nav-inner">
-            <a href="#" class="brand">
-                <div class="logo-wrap">
-                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M12 22S3 17 3 10.5V5L12 2L21 5V10.5C21 17 12 22 12 22Z" stroke="#D4A23A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                        <path d="M8 11.5 H16 M8 11.5 L7 8 L9.5 9 L12 7 L14.5 9 L17 8 L16 11.5 Z" stroke="#D4A23A" stroke-width="1" fill="#D4A23A" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
-                </div>
-                <div class="logo-text">AFEF Token</div>
-            </a>
-            <div class="hamburger"><div></div><div></div><div></div></div>
-            <div class="nav-links">
-                <a href="#about">About</a>
-                <a href="#tokenomics">Tokenomics</a>
-                <a href="#roadmap">Roadmap</a>
-                <div data-netlify-identity-menu></div>
-            </div>
+
+  <!-- BACKGROUND LAYERS -->
+  <div class="bg-wrap" aria-hidden="true">
+    <div class="bg-layer sky"></div>
+    <div class="bg-layer mist"></div>
+    <div class="bg-layer castle"></div>
+    <div class="bg-layer silhouettes"></div>
+  </div>
+
+  <!-- NAV / BANNER -->
+  <div style="background:linear-gradient(90deg, rgba(212,162,58,0.12), rgba(212,162,58,0.06));text-align:center;padding:8px 6px;font-weight:700;color:#081426">
+    AFEF Token — New era: Gothic expansion & community airdrop live!
+  </div>
+
+  <nav>
+    <div class="nav-inner wrap">
+      <div class="brand">
+        <div class="logo" id="siteLogo" role="button" tabindex="0" aria-label="Return to home">
+          <!-- simple shield + crown svg -->
+          <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <rect width="64" height="64" rx="8" fill="#2b1c0f"/>
+            <path d="M32 6 L36 18 L44 18 L38 24 L41 36 L32 30 L23 36 L26 24 L20 18 L28 18 Z" fill="#d4a23a"/>
+          </svg>
+          <h1>AFEF Token</h1>
         </div>
-    </nav>
+      </div>
 
-    <header class="hero">
-        <div class="hero-inner">
-            <h1>AFEF Token</h1>
-            <p>A community-driven fan token for strategy enthusiasts. Early participants benefit from transparent distribution, future integrations, and rewards.</p>
-            <div class="hero-actions">
-                <a href="#airdrop" class="btn btn-primary">Join The Airdrop!</a>
-                <a href="https://app.uniswap.org/" target="_blank" class="btn btn-outline">Trade on Uniswap</a>
-            </div>
+      <div class="nav-links" id="navLinks">
+        <a href="#about">About</a>
+        <a href="#tokenomics">Tokenomics</a>
+        <a href="#roadmap">Roadmap</a>
+        <a href="#contact">Contact</a>
+        <a class="nav-cta" id="openLogin">Login / Sign Up</a>
+      </div>
+
+      <div style="display:flex;gap:10px;align-items:center">
+        <a class="nav-cta" href="#" id="xLink">X</a>
+        <div class="hamburger" id="hamburger" aria-label="Open menu" role="button" tabindex="0">
+          <span></span><span></span><span></span>
         </div>
-    </header>
-
-    <main>
-        <section id="airdrop" class="section">
-            <h2>Join the Airdrop</h2>
-            <p class="section-subtitle">Be among the first to receive AFEF Tokens. Fill out the form to secure your spot in history.</p>
-            <div class="card form-card-container">
-                <form name="airdrop-submissions" method="POST" data-netlify="true" class="form-card">
-                    <input type="hidden" name="form-name" value="airdrop-submissions">
-                    <p><input type="text" name="name" placeholder="Your Name or Nickname" required></p>
-                    <p><input type="email" name="email" placeholder="Your Email Address" required></p>
-                    <p><input type="text" name="wallet_address" placeholder="Your ERC-20 Wallet Address (0x...)" required></p>
-                    <p><button class="btn btn-primary" type="submit">Secure My Spot!</button></p>
-                </form>
-            </div>
-        </section>
-
-        <section id="about" class="section">
-            <h2>About AFEF Token</h2>
-            <p class="section-subtitle">AFEF is a community token built for strategy game lovers. Our mission is to ensure transparency, fair distribution, and long-term value for our holders.</p>
-        </section>
-        
-        <section id="tokenomics" class="section">
-             <h2>Tokenomics</h2>
-             <p class="section-subtitle">Total Supply: <strong>4,950,000 AFEF</strong></p>
-             <div class="grid">
-                 <div class="card"><h3>40% Liquidity Pool</h3><p class="muted">A significant portion is locked in liquidity pools to ensure market stability and trust.</p></div>
-                 <div class="card"><h3>30% Airdrop & Community</h3><p class="muted">Dedicated to rewarding our early adopters, supporters, and active community members.</p></div>
-                 <div class="card"><h3>20% Development & Marketing</h3><p class="muted">Fuels continuous project growth, new features, and global marketing campaigns.</p></div>
-                 <div class="card"><h3>10% Team & Advisors</h3><p class="muted">A vested allocation for the core team and advisors, locked to align with long-term goals.</p></div>
-             </div>
-        </section>
-        
-        <section id="connect" class="section">
-             <h2>Connect & Verify</h2>
-             <p class="section-subtitle">Explore our contract and connect your wallet to prepare for future integrations.</p>
-             <div class="grid">
-                 <a href="https://etherscan.io/" target="_blank" class="card interactive-card">
-                     <h3>View on Etherscan</h3>
-                     <p class="muted">Verify our smart contract, check transactions, and see holder details on the Ethereum blockchain.</p>
-                 </a>
-                 <div id="connectWalletBtn" class="card interactive-card">
-                     <h3 id="connectWalletTitle">Connect Wallet</h3>
-                     <p class="muted" id="connectWalletDesc">Link your Web3 wallet (e.g., MetaMask) to interact with our platform for staking, voting, and rewards.</p>
-                 </div>
-             </div>
-        </section>
-        
-        <section id="roadmap" class="section">
-            <h2>Roadmap</h2>
-            <p class="section-subtitle">Our strategic plan for the upcoming phases of the project.</p>
-            <div class="grid">
-                <div class="card"><h3>Q4 2024 - Genesis</h3><p class="muted">Smart contract deployment, security audit, and the official community launch.</p></div>
-                <div class="card"><h3>Q1 2025 - Market Debut</h3><p class="muted">Liquidity pool creation on a major DEX and locking LP tokens for trust.</p></div>
-                <div class="card"><h3>Q2 2025 - Expansion</h3><p class="muted">Intensive marketing campaigns, partnerships, and initial CEX listing applications.</p></div>
-                <div class="card"><h3>Q3 2025 - Utility</h3><p class="muted">Launch of the first utility features, such as staking rewards and a governance portal.</p></div>
-            </div>
-        </section>
-    </main>
-
-    <footer>
-        <div class="social-links">
-            <a href="https://x.com/afeftoken?s=21" target="_blank" title="X (Twitter)">
-                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path></svg>
-            </a>
-            <a href="https://t.me/afeftoken" target="_blank" title="Telegram">
-                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.17.91-.494 1.208-.822 1.23-.696.047-1.225-.46-1.9-1.04-.546-.46-1.1-1.03-1.656-1.5-1.024-.867-.48-1.39.3-.837.542.38.974.697 1.38.965.43.288.833.14.962-.224a10.45 10.45 0 0 0 .504-2.12 1.48 1.48 0 0 0-.15-.748L9.34 13.92c-.733.696-1.23.336-1.46-.372l-1.43-4.665c-.235-.74.15-1.09.68-1.15.54-.06 1.18.23 6.3 3.09 1.1.6 1.95.9 2.4.9z"></path></svg>
-            </a>
-            <a href="mailto:empiresfantoken@outlook.com" title="Email">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"></path></svg>
-            </a>
-        </div>
-        <p>&copy; <span id="year"></span> AFEF Token. All rights reserved.</p>
-        <p style="font-size: 0.8rem; opacity: 0.7;">This project is a fan-created initiative and is not affiliated with any official game publisher.</p>
-    </footer>
-
-    <div id="notificationModal" class="modal-overlay">
-        <div class="modal-content">
-            <span class="modal-close">&times;</span>
-            <h3 id="notificationTitle">Notification</h3>
-            <p id="notificationMessage" class="muted" style="line-height: 1.6;"></p>
-        </div>
+      </div>
     </div>
 
-    <script>
-        document.getElementById('year').textContent = new Date().getFullYear();
+    <!-- mobile menu (closes on outside click) -->
+    <div class="mobile-menu" id="mobileMenu" role="menu" aria-hidden="true">
+      <a href="#about">About</a>
+      <a href="#tokenomics">Tokenomics</a>
+      <a href="#roadmap">Roadmap</a>
+      <a href="#contact">Contact</a>
+      <a id="mobileLogin" href="#login">Login / Sign Up</a>
+    </div>
+  </nav>
 
-        const hamburger = document.querySelector('.hamburger');
-        const navLinks = document.querySelector('.nav-links');
-        const allNavLinksInMenu = document.querySelectorAll('.nav-links a');
-        const netlifyIdentityMenu = document.querySelector('[data-netlify-identity-menu]');
+  <!-- HERO -->
+  <header class="hero">
+    <div class="hero-grid wrap container">
+      <div>
+        <h2 class="hero-title">AFEF Token — A New Gothic Era</h2>
+        <p class="lead muted">Community-driven fan token with fair distribution, transparent team actions and planned utilities. Join our airdrop and help build the empire.</p>
+        <div class="hero-cta">
+          <button class="btn btn-primary" onclick="document.getElementById('tokenomics').scrollIntoView({behavior:'smooth'})">Tokenomics</button>
+          <button class="btn btn-ghost" onclick="openExternalSite()">Official Site</button>
+        </div>
+      </div>
 
-        hamburger.addEventListener('click', () => { navLinks.classList.toggle('active'); });
+      <aside>
+        <div class="card">
+          <div style="display:flex;justify-content:space-between;align-items:center">
+            <div>
+              <div style="font-size:0.85rem;color:var(--muted)">Contract</div>
+              <div style="font-family:monospace">0x367a584a928b641330E8B20e7C4739675741f40d</div>
+            </div>
+            <div style="text-align:right">
+              <button class="btn-ghost" id="copyAddress">Copy</button>
+            </div>
+          </div>
+        </div>
+        <div style="height:12px"></div>
+        <div class="card token-block">
+          <div>
+            <strong>AFEF</strong><div class="muted">Fan Token</div>
+          </div>
+          <div>
+            <a href="#" class="btn-ghost" id="buyLink">Buy</a>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </header>
 
-        function closeMenu() {
-            if (navLinks.classList.contains('active')) {
-                navLinks.classList.remove('active');
-            }
+  <!-- MAIN CONTENT -->
+  <main>
+    <section id="about" class="section">
+      <div class="container">
+        <h2>About AFEF</h2>
+        <p class="muted">AFEF is built for strategy game fans who want a community token with governance, rewards and potential game-linked utilities. We operate transparently and prioritize community trust.</p>
+      </div>
+    </section>
+
+    <section id="tokenomics" class="section">
+      <div class="container">
+        <h2>Tokenomics</h2>
+        <div class="grid">
+          <div class="card"><h3>40% Liquidity</h3><p class="muted">Reserved for liquidity pools and market depth.</p></div>
+          <div class="card"><h3>30% Airdrop & Community</h3><p class="muted">Rewards for early supporters and community programs.</p></div>
+          <div class="card"><h3>20% Development & Marketing</h3><p class="muted">Funding for growth and integrations.</p></div>
+          <div class="card"><h3>10% Team & Advisors</h3><p class="muted">Locked allocations to align incentives.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="roadmap" class="section">
+      <div class="container">
+        <h2>Roadmap</h2>
+        <div class="muted">Q4 2024 — Contract & community launch · Q1 2025 — Liquidity + LP lock · Q2 2025 — Marketing & listings · Q3 2025 — Staking & utilities</div>
+      </div>
+    </section>
+
+    <section id="contact" class="section">
+      <div class="container">
+        <h2>Contact</h2>
+        <p class="muted">For partnership or press, contact: <a id="contactEmail" href="mailto:replace@example.com">replace@example.com</a></p>
+      </div>
+    </section>
+  </main>
+
+  <!-- LOGIN / SIGNUP MODAL (Netlify form ready) -->
+  <div class="modal-backdrop" id="modalBackdrop" aria-hidden="true">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <h3 id="modalTitle">Login / Sign Up</h3>
+      <form name="login" method="POST" data-netlify="true" onsubmit="onLoginSubmit(event)">
+        <input type="hidden" name="form-name" value="login">
+        <input class="input" type="email" name="email" placeholder="Email" required />
+        <input class="input" type="password" name="password" placeholder="Password" required />
+        <div class="modal-actions">
+          <button type="button" class="btn-ghost" id="closeModal">Cancel</button>
+          <button type="submit" class="btn btn-primary">Login / Register</button>
+        </div>
+      </form>
+      <p style="margin-top:8px;color:var(--muted);font-size:0.9rem">By signing up you agree to our community rules. We do not share private keys or financial advice.</p>
+    </div>
+  </div>
+
+  <footer>
+    <div class="container">
+      <div>© <span id="year"></span> AFEF Token — Not affiliated with any game publisher.</div>
+      <div class="socials" style="margin-top:10px">
+        <a id="xLinkFooter" href="#" target="_blank" rel="noopener">X</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    /**********************
+     * CONFIG - Update these:
+     **********************/
+    const X_LINK = 'https://x.com/your_x_account';           // <<-- set your X account link
+    const CONTACT_EMAIL = 'empiresfantoken@outlook.com';     // <<-- set contact email
+    const CONTRACT_ADDRESS = '0x367a584a928b641330E8B20e7C4739675741f40d';
+
+    /**********************
+     * DOM Refs
+     **********************/
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const siteLogo = document.getElementById('siteLogo');
+    const modalBackdrop = document.getElementById('modalBackdrop');
+    const openLogin = document.getElementById('openLogin');
+    const mobileLogin = document.getElementById('mobileLogin');
+    const closeModalBtn = document.getElementById('closeModal');
+    const copyAddressBtn = document.getElementById('copyAddress');
+    const contactEmailA = document.getElementById('contactEmail');
+    const xLinkTop = document.getElementById('xLink');
+    const xLinkFooter = document.getElementById('xLinkFooter');
+    const buyLink = document.getElementById('buyLink');
+
+    // apply configured links
+    contactEmailA.href = 'mailto:' + CONTACT_EMAIL;
+    contactEmailA.textContent = CONTACT_EMAIL;
+    xLinkTop.href = X_LINK; xLinkFooter.href = X_LINK;
+    document.querySelector('.card div[style*="monospace"]').textContent = CONTRACT_ADDRESS;
+    buyLink.href = `https://app.uniswap.org/#/swap?outputCurrency=${CONTRACT_ADDRESS}`;
+
+    // hamburger open/close and outside click close
+    hamburger.addEventListener('click', (e) => {
+      e.stopPropagation();
+      mobileMenu.classList.toggle('open');
+      mobileMenu.setAttribute('aria-hidden', !mobileMenu.classList.contains('open'));
+    });
+
+    // close mobile menu when clicking outside
+    document.addEventListener('click', (e) => {
+      if (mobileMenu.classList.contains('open')) {
+        const path = e.composedPath ? e.composedPath() : (e.path || []);
+        if (!path.includes(mobileMenu) && !path.includes(hamburger)) {
+          mobileMenu.classList.remove('open');
+          mobileMenu.setAttribute('aria-hidden', 'true');
         }
+      }
+    });
 
-        allNavLinksInMenu.forEach(link => { link.addEventListener('click', closeMenu); });
-        
-        // OPTIMIZED MENU: Close mobile nav when Netlify Identity is clicked
-        if (netlifyIdentityMenu) { 
-            netlifyIdentityMenu.addEventListener('click', (event) => {
-                if(event.target.classList.contains('netlify-identity-button')) {
-                    setTimeout(closeMenu, 150);
-                }
-            });
-        }
-        
-        const connectWalletBtn = document.getElementById('connectWalletBtn');
-        const connectWalletTitle = document.getElementById('connectWalletTitle');
-        const connectWalletDesc = document.getElementById('connectWalletDesc');
+    // logo -> go home (scroll to top)
+    siteLogo.addEventListener('click', () => { window.scrollTo({top:0, behavior:'smooth'}); mobileMenu.classList.remove('open'); });
 
-        const notificationModal = document.getElementById('notificationModal');
-        const notificationTitle = document.getElementById('notificationTitle');
-        const notificationMessage = document.getElementById('notificationMessage');
-        const closeModalBtn = notificationModal.querySelector('.modal-close');
+    // open login modal (top & mobile)
+    openLogin.addEventListener('click', () => openModal());
+    mobileLogin && mobileLogin.addEventListener('click', (e)=>{ e.preventDefault(); openModal(); });
 
-        function showNotification(title, message) {
-            notificationTitle.textContent = title;
-            notificationMessage.textContent = message;
-            notificationModal.classList.add('active');
-        }
-        
-        function closeNotification() {
-            notificationModal.classList.remove('active');
-        }
+    function openModal(){
+      modalBackdrop.classList.add('open'); modalBackdrop.setAttribute('aria-hidden','false');
+      // close mobile menu if open
+      mobileMenu.classList.remove('open');
+    }
+    closeModalBtn.addEventListener('click', () => closeModal());
+    modalBackdrop.addEventListener('click', (e) => { if(e.target===modalBackdrop) closeModal(); });
 
-        closeModalBtn.addEventListener('click', closeNotification);
-        notificationModal.addEventListener('click', (event) => {
-            if (event.target === notificationModal) {
-                closeNotification();
-            }
-        });
+    function closeModal(){ modalBackdrop.classList.remove('open'); modalBackdrop.setAttribute('aria-hidden','true'); }
 
-        async function connectWallet() {
-            if (typeof window.ethereum === 'undefined') {
-                showNotification('MetaMask Not Found', 'Please install the MetaMask browser extension to connect your wallet. You can download it from metamask.io.');
-                return;
-            }
+    // copy contract address
+    copyAddressBtn.addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText(CONTRACT_ADDRESS);
+        alert('Contract address copied: ' + CONTRACT_ADDRESS);
+      } catch(e) { fallbackCopy(CONTRACT_ADDRESS); }
+    });
+    function fallbackCopy(text) {
+      const el = document.createElement('textarea'); el.value = text; document.body.appendChild(el); el.select();
+      document.execCommand('copy'); document.body.removeChild(el);
+      alert('Contract address copied: ' + text);
+    }
 
-            try {
-                const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
-                const account = accounts[0];
-                connectWalletTitle.textContent = 'Connected';
-                connectWalletDesc.textContent = `${account.substring(0, 6)}...${account.substring(account.length - 4)}`;
-                connectWalletBtn.classList.add('connected');
-                showNotification('Success!', 'Your wallet has been connected successfully.');
-                
-            } catch (error) {
-                console.error("Wallet connection error:", error);
-                if (error.code === 4001) {
-                    showNotification('Connection Rejected', 'You rejected the connection request in your wallet. Please try again.');
-                } else {
-                    showNotification('Error', 'An unexpected error occurred while connecting your wallet.');
-                }
-            }
-        }
-        connectWalletBtn.addEventListener('click', connectWallet);
-    </script>
+    // login form - Netlify handles actual storage; keep UX simple
+    function onLoginSubmit(e){
+      // You may add client-side validation or analytics here.
+      // Netlify will handle the POST. We'll show a quick message and close modal.
+      setTimeout(()=>{ alert('Thanks — if an account was created you will receive confirmation by email.'); closeModal(); }, 600);
+    }
+
+    // simple parallax-like background on scroll (lightweight)
+    const castle = document.querySelector('.bg-layer.castle');
+    const silhouettes = document.querySelector('.bg-layer.silhouettes');
+    window.addEventListener('scroll', throttle(() => {
+      const y = window.scrollY;
+      castle.style.transform = `translateY(${y * 0.02}px) scale(1.02)`;
+      silhouettes.style.transform = `translateY(${y * 0.03}px)`;
+    }, 16));
+
+    // throttle utility
+    function throttle(fn, wait){
+      let t = 0;
+      return function(...args){ const now = Date.now(); if(now - t >= wait){ t = now; fn.apply(this, args); } };
+    }
+
+    // set year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // keyboard accessibility: close mobile menu with ESC
+    document.addEventListener('keydown', (e) => { if(e.key === 'Escape'){ mobileMenu.classList.remove('open'); closeModal(); } });
+
+    // performance: reduce motion for users who prefer reduced motion
+    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if(prefersReduced) {
+      document.querySelectorAll('.bg-layer, .mist').forEach(n => n.style.animation = 'none');
+    }
+
+    // helper for opening external site
+    function openExternalSite(){ window.open(location.origin, '_blank', 'noopener'); }
+  </script>
 </body>
 </html>
-
