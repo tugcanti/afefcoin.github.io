@@ -9,6 +9,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
     <!-- Auth0 SDK -->
     <script src="https://cdn.auth0.com/js/auth0-spa-js/2.0/auth0-spa-js.production.js"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
 
     <style>
         :root {
@@ -25,6 +27,7 @@
         .aurora-2 { width: 400px; height: 400px; background: var(--accent-secondary); bottom: -150px; right: -150px; animation: aurora-move2 35s infinite alternate-reverse; }
         @keyframes aurora-move1 { from { transform: scale(1) translate(0, 0) rotate(0deg); } to { transform: scale(1.3) translate(150px, 80px) rotate(90deg); } }
         @keyframes aurora-move2 { from { transform: scale(1) translate(0, 0) rotate(0deg); } to { transform: scale(1.4) translate(-120px, -60px) rotate(-90deg); } }
+        
         #hamburger-btn { width: 24px; height: 24px; position: relative; }
         #hamburger-btn span { display: block; width: 100%; height: 2px; background-color: white; border-radius: 2px; position: absolute; transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out; }
         #hamburger-btn span:nth-child(1) { top: 4px; } #hamburger-btn span:nth-child(2) { top: 11px; } #hamburger-btn span:nth-child(3) { top: 18px; }
@@ -38,18 +41,24 @@
     <div id="aurora-background"><div class="aurora-shape aurora-1"></div><div class="aurora-shape aurora-2"></div></div>
 
     <header class="sticky top-0 z-50">
-        <nav class="glass-card max-w-6xl mx-auto my-4 rounded-xl px-6 py-3">
+        <nav class="glass-card max-w-7xl mx-auto my-4 rounded-xl px-6 py-3">
             <div class="flex items-center justify-between">
                 <a href="#" id="home-link" class="flex items-center gap-3"><div class="w-10 h-10 bg-gradient-to-br from-pink-500 to-blue-500 rounded-lg flex items-center justify-center"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 22S3 17 3 10.5V5L12 2L21 5V10.5C21 17 12 22 12 22Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M8 11.5 H16 M8 11.5 L7 8 L9.5 9 L12 7 L14.5 9 L17 8 L16 11.5 Z" stroke="white" stroke-width="1.5" fill="white" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="text-xl font-bold font-['Poppins'] text-white">AFEF Token</span></a>
-                <div id="main-nav-links" class="hidden md:flex items-center gap-6 text-sm font-semibold text-gray-300"><a href="#about" class="hover:text-white transition-colors">About</a><a href="#roadmap" class="hover:text-white transition-colors">Roadmap</a></div>
+                <div id="main-nav-links" class="hidden md:flex items-center gap-6 text-sm font-semibold text-gray-300">
+                    <a href="#about" class="hover:text-white transition-colors">About</a>
+                    <a href="#tokenomics" class="hover:text-white transition-colors">Tokenomics</a>
+                    <a href="#roadmap" class="hover:text-white transition-colors">Roadmap</a>
+                    <a href="#airdrop" class="hover:text-white transition-colors">Airdrop</a>
+                    <a href="#contract" class="hover:text-white transition-colors">Contract</a>
+                </div>
                 <div class="flex items-center gap-4">
                     <div id="auth-ui" class="hidden md:block">
-                        <button id="btn-login" class="bg-blue-500 text-white font-semibold py-2 px-4 rounded-lg text-sm">Login</button>
+                        <button id="btn-login" class="bg-blue-500 hover:bg-blue-600 transition-colors text-white font-semibold py-2 px-4 rounded-lg text-sm">Login</button>
                         <div id="user-profile" class="hidden items-center gap-3 relative group">
                             <img id="user-avatar" class="w-8 h-8 rounded-full" src="" alt="Avatar">
-                            <div class="absolute top-full right-0 mt-2 w-48 bg-gray-800 rounded-lg shadow-lg opacity-0 group-hover:opacity-100 transition-opacity">
-                                <a href="#" id="btn-dashboard" class="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-700">Go to Dashboard</a>
-                                <a href="#" id="btn-logout" class="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-700">Logout</a>
+                            <div class="absolute top-full right-0 mt-2 w-48 bg-gray-800 rounded-lg shadow-lg opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto transition-opacity">
+                                <a href="#" id="btn-dashboard" class="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-700 rounded-t-lg">Go to Dashboard</a>
+                                <a href="#" id="btn-logout" class="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-700 rounded-b-lg">Logout</a>
                             </div>
                         </div>
                     </div>
@@ -59,20 +68,113 @@
         </nav>
         <div id="mobile-menu" class="hidden md:hidden glass-card max-w-6xl mx-auto rounded-xl p-4 text-center">
             <a href="#about" class="mobile-menu-link block py-2 text-gray-300 hover:text-white">About</a>
+            <a href="#tokenomics" class="mobile-menu-link block py-2 text-gray-300 hover:text-white">Tokenomics</a>
             <a href="#roadmap" class="mobile-menu-link block py-2 text-gray-300 hover:text-white">Roadmap</a>
+            <a href="#airdrop" class="mobile-menu-link block py-2 text-gray-300 hover:text-white">Airdrop</a>
+            <a href="#contract" class="mobile-menu-link block py-2 text-gray-300 hover:text-white">Contract</a>
             <div id="mobile-auth-ui" class="mt-4"></div>
         </div>
     </header>
 
-    <main id="main-content" style="display: none;">
-        <!-- Ana sayfa içeriği buraya dinamik olarak eklenecek -->
+    <main id="main-content" style="display: none;" class="container mx-auto px-6 py-16 space-y-24 md:space-y-32">
+        <section class="relative text-center pt-16 md:pt-24">
+            <h1 class="text-4xl md:text-6xl font-bold text-white leading-tight tracking-tight mb-4">A Community Token<br>for Strategy Enthusiasts</h1>
+            <p class="max-w-2xl mx-auto text-lg text-gray-300 mb-8">AFEF is a community-driven project built on the mission of fair distribution and long-term value.</p>
+            <a href="#airdrop" class="bg-pink-500 hover:bg-pink-600 transition-colors text-white font-bold py-3 px-8 rounded-lg">Claim Airdrop</a>
+        </section>
+
+        <section id="about">
+            <h2 class="text-3xl font-bold text-center mb-12 text-white">About AFEF Token</h2>
+            <div class="glass-card rounded-2xl p-8 md:p-12 text-center max-w-4xl mx-auto">
+                <i data-lucide="shield-check" class="w-16 h-16 mx-auto text-blue-400 mb-6"></i>
+                <p class="text-gray-300 leading-relaxed">AFEF, symbolized by the shield and crown, represents a new standard in decentralized finance. Our core mission is to create a secure, community-governed ecosystem where every member has a voice. We believe in fair launches, transparent tokenomics, and building a project with true long-term utility and value. Join us in forging a new dynasty in the world of crypto.</p>
+            </div>
+        </section>
+
+        <section id="tokenomics">
+            <h2 class="text-3xl font-bold text-center mb-12 text-white">Tokenomics</h2>
+            <div class="glass-card p-8 md:p-12 max-w-5xl mx-auto flex flex-col md:flex-row items-center gap-12 rounded-2xl">
+                <div class="w-full md:w-1/3 flex justify-center"><div style="width: 200px; height: 200px; border-radius: 50%; background-image: conic-gradient(#60a5fa 0% 40%, #f472b6 40% 70%, #6ee7b7 70% 90%, #fde047 90% 100%);"></div></div>
+                <div class="w-full md:w-2/3 grid grid-cols-2 gap-x-8 gap-y-6 text-left">
+                    <div class="flex items-center"><div class="w-4 h-4 rounded-full bg-blue-400 mr-3"></div><div><p class="font-bold text-lg">Liquidity Pool</p><p class="text-muted">40%</p></div></div>
+                    <div class="flex items-center"><div class="w-4 h-4 rounded-full bg-pink-400 mr-3"></div><div><p class="font-bold text-lg">Airdrop & Community</p><p class="text-muted">30%</p></div></div>
+                    <div class="flex items-center"><div class="w-4 h-4 rounded-full bg-emerald-400 mr-3"></div><div><p class="font-bold text-lg">Team & Advisors</p><p class="text-muted">20%</p></div></div>
+                    <div class="flex items-center"><div class="w-4 h-4 rounded-full bg-yellow-400 mr-3"></div><div><p class="font-bold text-lg">Marketing & Treasury</p><p class="text-muted">10%</p></div></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="roadmap">
+             <h2 class="text-3xl font-bold text-center mb-16 text-white">Our Roadmap</h2>
+             <div class="relative max-w-3xl mx-auto">
+                 <div class="absolute left-1/2 h-full w-0.5 bg-gray-700 transform -translate-x-1/2"></div>
+                 <!-- Roadmap Item 1 -->
+                 <div class="relative mb-8 flex justify-between items-center w-full">
+                     <div class="w-1/2 pr-8 text-right"><div class="glass-card p-4 rounded-lg"><strong>Phase 1:</strong> Project Launch & Airdrop</div></div>
+                     <div class="absolute left-1/2 transform -translate-x-1/2 w-5 h-5 bg-blue-500 rounded-full border-4 border-gray-900"></div>
+                 </div>
+                 <!-- Roadmap Item 2 -->
+                 <div class="relative mb-8 flex justify-between items-center w-full flex-row-reverse">
+                     <div class="w-1/2 pl-8 text-left"><div class="glass-card p-4 rounded-lg"><strong>Phase 2:</strong> CEX Listings & Partnerships</div></div>
+                     <div class="absolute left-1/2 transform -translate-x-1/2 w-5 h-5 bg-blue-500 rounded-full border-4 border-gray-900"></div>
+                 </div>
+                 <!-- Roadmap Item 3 -->
+                  <div class="relative mb-8 flex justify-between items-center w-full">
+                     <div class="w-1/2 pr-8 text-right"><div class="glass-card p-4 rounded-lg"><strong>Phase 3:</strong> Utility Development (Staking)</div></div>
+                     <div class="absolute left-1/2 transform -translate-x-1/2 w-5 h-5 bg-blue-500 rounded-full border-4 border-gray-900"></div>
+                 </div>
+             </div>
+        </section>
+
+        <section id="airdrop">
+             <h2 class="text-3xl font-bold text-center mb-12 text-white">Community Airdrop</h2>
+             <div class="glass-card p-8 md:p-12 max-w-2xl mx-auto rounded-2xl">
+                <i data-lucide="gift" class="w-16 h-16 mx-auto text-pink-400 mb-6"></i>
+                <h3 class="text-2xl font-bold mb-4">Claim Your Stake</h3>
+                <p class="text-gray-300 mb-8">Login to check your eligibility for the AFEF airdrop.</p>
+                <button id="btn-login-airdrop" class="bg-blue-500 hover:bg-blue-600 transition-colors text-white font-bold py-3 px-8 rounded-lg">Login to Check</button>
+             </div>
+        </section>
+        
+        <section id="contract">
+             <h2 class="text-3xl font-bold text-center mb-12 text-white">Official Contract</h2>
+             <div class="glass-card p-8 max-w-4xl mx-auto rounded-2xl text-center">
+                 <p class="text-gray-400 mb-2">Etherscan Contract Address:</p>
+                 <div class="flex items-center justify-center bg-gray-900/50 p-3 rounded-lg mb-6 max-w-md mx-auto">
+                     <p id="contract-address" class="font-mono text-sm break-all mr-4">0x367a584a928b641330E8B20e7C4739675741f40d</p>
+                     <button id="copy-address-btn" title="Copy Address"><i data-lucide="copy" class="w-5 h-5 text-gray-400 hover:text-white"></i></button>
+                 </div>
+                 <a href="https://etherscan.io/address/0x367a584a928b641330E8B20e7C4739675741f40d" target="_blank" rel="noopener noreferrer" class="inline-block bg-blue-500 hover:bg-blue-600 transition-colors text-white font-bold py-3 px-6 rounded-lg">View on Etherscan</a>
+             </div>
+        </section>
+
     </main>
 
     <div id="dashboard" style="display: none;" class="container mx-auto px-6 py-16">
-        <!-- Yönetim paneli içeriği buraya dinamik olarak eklenecek -->
+         <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4">
+             <h1 class="text-3xl md:text-4xl font-bold text-white">My Dashboard</h1>
+         </div>
+         <div class="glass-card rounded-2xl p-8">
+             <h2 class="text-2xl font-bold text-white">Welcome Back!</h2>
+             <p class="text-gray-300 mt-2">This is your personal dashboard. You can view your token balance and other information here. More features coming soon!</p>
+             <!-- More dashboard content can be added here -->
+         </div>
     </div>
     
-    <footer class="py-12"><div class="container mx-auto px-6 text-center"><p class="text-gray-500 text-sm">&copy; <span id="year"></span> AFEF Token. All rights reserved.</p></div></footer>
+    <footer class="py-12 border-t border-gray-800 mt-24">
+        <div class="container mx-auto px-6 text-center">
+            <div class="flex justify-center space-x-6 mb-6">
+                <a href="https://x.com/afeftoken?s=21" target="_blank" rel="noopener noreferrer" class="text-gray-500 hover:text-white transition"><i data-lucide="twitter" class="w-6 h-6"></i></a>
+                <a href="https://t.me/afeftoken" target="_blank" rel="noopener noreferrer" class="text-gray-500 hover:text-white transition"><i data-lucide="send" class="w-6 h-6"></i></a>
+                <a href="mailto:empiresfantoken@outlook.com" class="text-gray-500 hover:text-white transition"><i data-lucide="mail" class="w-6 h-6"></i></a>
+            </div>
+            <p class="text-gray-500 text-sm">&copy; <span id="year"></span> AFEF Token. All rights reserved.</p>
+        </div>
+    </footer>
+    
+    <div id="toast" class="fixed bottom-5 right-5 bg-blue-500 text-white px-6 py-3 rounded-lg shadow-lg transform translate-y-20 opacity-0 transition-all duration-300">
+        Address copied to clipboard!
+    </div>
     
     <script>
         document.getElementById('year').textContent = new Date().getFullYear();
@@ -93,30 +195,33 @@
 
         window.onload = async () => {
             await configureClient();
-            await updateUI();
-
-            const isAuthenticated = await auth0Client.isAuthenticated();
+            
             if (window.location.search.includes("code=") && window.location.search.includes("state=")) {
                 await auth0Client.handleRedirectCallback();
                 window.history.replaceState({}, document.title, "/");
             }
             
-            if (await auth0Client.isAuthenticated()) {
+            const isAuthenticated = await auth0Client.isAuthenticated();
+            if (isAuthenticated) {
                 showDashboard();
             } else {
                 showMainContent();
             }
-            updateUI(); // Ensure UI is updated after routing
+            await updateUI();
+            lucide.createIcons();
         };
 
         const updateUI = async () => {
             const isAuthenticated = await auth0Client.isAuthenticated();
             const loginBtn = document.getElementById('btn-login');
+            const airdropLoginBtn = document.getElementById('btn-login-airdrop');
             const userProfile = document.getElementById('user-profile');
             const mobileAuthUI = document.getElementById('mobile-auth-ui');
 
             if (isAuthenticated) {
                 loginBtn.style.display = 'none';
+                airdropLoginBtn.textContent = 'Go to Dashboard';
+                airdropLoginBtn.onclick = showDashboard;
                 userProfile.style.display = 'flex';
                 const user = await auth0Client.getUser();
                 document.getElementById('user-avatar').src = user.picture;
@@ -124,6 +229,8 @@
                 document.getElementById('btn-logout-mobile').addEventListener('click', logout);
             } else {
                 loginBtn.style.display = 'block';
+                airdropLoginBtn.textContent = 'Login to Check';
+                airdropLoginBtn.onclick = login;
                 userProfile.style.display = 'none';
                 mobileAuthUI.innerHTML = `<button id="btn-login-mobile" class="bg-blue-500 text-white font-semibold py-2 px-4 rounded-lg text-sm w-full">Login</button>`;
                 document.getElementById('btn-login-mobile').addEventListener('click', login);
@@ -139,29 +246,33 @@
         document.getElementById('btn-login').addEventListener('click', login);
         document.getElementById('btn-logout').addEventListener('click', logout);
         document.getElementById('btn-dashboard').addEventListener('click', showDashboard);
-        homeLink.addEventListener('click', (e) => { e.preventDefault(); showMainContent(); });
+        document.getElementById('btn-login-airdrop').addEventListener('click', login);
+        homeLink.addEventListener('click', async (e) => { 
+            e.preventDefault(); 
+            if (await auth0Client.isAuthenticated()) {
+                showDashboard();
+            } else {
+                showMainContent();
+            }
+        });
 
         const hamburgerBtn = document.getElementById('hamburger-btn');
         const mobileMenu = document.getElementById('mobile-menu');
         hamburgerBtn.addEventListener('click', () => { mobileMenu.classList.toggle('hidden'); hamburgerBtn.classList.toggle('open'); });
+        document.querySelectorAll('.mobile-menu-link').forEach(link => link.addEventListener('click', () => {
+            mobileMenu.classList.add('hidden');
+            hamburgerBtn.classList.remove('open');
+        }));
 
-        mainContent.innerHTML = `
-            <section class="relative text-center py-24 md:py-32 overflow-hidden">
-                <div class="container mx-auto px-6 relative">
-                    <h1 class="text-4xl md:text-6xl font-bold text-white leading-tight tracking-tight mb-4">A Community Token<br>for Strategy Enthusiasts</h1>
-                    <p class="max-w-2xl mx-auto text-lg text-gray-300 mb-8">AFEF is a community-driven project built on the mission of fair distribution and long-term value.</p>
-                </div>
-            </section>
-        `;
-        dashboard.innerHTML = `
-            <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4">
-                <h1 class="text-3xl md:text-4xl font-bold text-white">My Dashboard</h1>
-            </div>
-            <div class="glass-card rounded-2xl p-8">
-                <h2 class="text-2xl font-bold text-white">Welcome!</h2>
-                <p class="text-gray-300 mt-2">This is your personal dashboard. More features coming soon!</p>
-            </div>
-        `;
+        document.getElementById('copy-address-btn').addEventListener('click', () => {
+            const address = document.getElementById('contract-address').textContent;
+            navigator.clipboard.writeText(address).then(() => {
+                const toast = document.getElementById('toast');
+                toast.classList.remove('translate-y-20', 'opacity-0');
+                setTimeout(() => { toast.classList.add('translate-y-20', 'opacity-0'); }, 2000);
+            });
+        });
+
     </script>
 </body>
 </html>
