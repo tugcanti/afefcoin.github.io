@@ -36,7 +36,7 @@
             left: 50%;
             width: 1500px;
             height: 1500px;
-            background: radial-gradient(circle at center, var(--accent-glow) 0%, transparent S60%);
+            background: radial-gradient(circle at center, var(--accent-glow) 0%, transparent 60%);
             transform: translate(-50%, -50%);
             animation: pulse 15s infinite alternate ease-in-out;
             z-index: -1;
@@ -126,7 +126,6 @@
     </header>
 
     <div id="page-content">
-        <!-- Main Landing Page -->
         <main id="main-content" class="container mx-auto px-6 py-16 space-y-24 md:space-y-32">
             <section class="relative text-center pt-16 md:pt-24">
                 <h1 class="text-4xl md:text-6xl font-bold text-white leading-tight tracking-tight mb-4">A Sovereign Token<br>for Strategy Enthusiasts</h1>
@@ -198,7 +197,6 @@
 
         </main>
 
-        <!-- Dashboard / Settings Page -->
         <div id="dashboard" class="hidden container mx-auto px-6 py-16">
              <div id="dashboard-main">
                 <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4">
@@ -243,7 +241,6 @@
         </div>
     </footer>
 
-    <!-- Login Modal -->
     <div id="login-modal" class="fixed inset-0 z-[100] items-center justify-center bg-black/80 hidden">
         <div class="sovereign-card w-full max-w-md m-4 relative">
              <button id="close-modal-btn" class="absolute top-4 right-4 text-gray-400 hover:text-white" aria-label="Close modal"><i data-lucide="x" class="w-6 h-6"></i></button>
@@ -428,4 +425,3 @@
     </script>
 </body>
 </html>
-
