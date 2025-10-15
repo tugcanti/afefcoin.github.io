@@ -7,7 +7,6 @@
     
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-    <!-- Auth0.js kütüphanesini kullanıyoruz -->
     <script src="https://cdn.auth0.com/js/auth0/9.20.0/auth0.min.js"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
 
@@ -74,6 +73,9 @@
         #hamburger-btn.open span:nth-child(1) { top: 11px; transform: rotate(135deg); }
         #hamburger-btn.open span:nth-child(2) { opacity: 0; }
         #hamburger-btn.open span:nth-child(3) { top: 11px; transform: rotate(-135deg); }
+        
+        .avatar-upload-label { cursor: pointer; }
+        .avatar-upload-label:hover .absolute { opacity: 1; }
     </style>
 </head>
 <body class="overflow-x-hidden">
@@ -92,6 +94,7 @@
                     <a href="#tokenomics" class="hover:text-white transition-colors">Tokenomics</a>
                     <a href="#roadmap" class="hover:text-white transition-colors">Roadmap</a>
                     <a href="#airdrop" class="hover:text-white transition-colors">Airdrop</a>
+                    <a href="#news" class="hover:text-white transition-colors">News</a>
                     <a href="#contract" class="hover:text-white transition-colors">Contract</a>
                 </div>
                 <div class="flex items-center gap-4">
@@ -115,6 +118,7 @@
             <a href="#tokenomics" class="mobile-menu-link block py-3 text-gray-300 hover:text-white text-lg">Tokenomics</a>
             <a href="#roadmap" class="mobile-menu-link block py-3 text-gray-300 hover:text-white text-lg">Roadmap</a>
             <a href="#airdrop" class="mobile-menu-link block py-3 text-gray-300 hover:text-white text-lg">Airdrop</a>
+            <a href="#news" class="mobile-menu-link block py-3 text-gray-300 hover:text-white text-lg">News</a>
             <a href="#contract" class="mobile-menu-link block py-3 text-gray-300 hover:text-white text-lg">Contract</a>
             <div id="mobile-auth-ui" class="mt-4 border-t border-white/10 pt-4"></div>
         </div>
@@ -122,7 +126,6 @@
 
     <div id="page-content">
         <main id="main-content" class="container mx-auto px-6 py-16 space-y-24 md:space-y-32">
-            <!-- Main content sections... -->
             <section class="relative text-center pt-16 md:pt-24">
                 <div class="absolute inset-0 -z-10 overflow-hidden"><div class="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-gradient-to-tr from-[var(--accent-purple)] to-[var(--accent-pink)] opacity-20 rounded-full filter blur-3xl"></div></div>
                 <h1 class="text-4xl md:text-6xl font-bold text-white leading-tight tracking-tight mb-4">The New Standard for<br>Community-Driven Tokens</h1>
@@ -180,6 +183,22 @@
                  </div>
             </section>
             
+            <section id="news" class="pt-16">
+                <h2 class="text-3xl font-bold text-center mb-12 text-white">Latest News & Updates</h2>
+                <div class="max-w-4xl mx-auto grid md:grid-cols-2 gap-8">
+                    <div class="auth0-card p-8">
+                        <i data-lucide="shield-check" class="w-12 h-12 text-[var(--accent-purple)] mb-4"></i>
+                        <h3 class="text-xl font-bold mb-3">Security First: Audit Discussions Underway</h3>
+                        <p class="text-text-muted leading-relaxed">To ensure the utmost security and transparency for our community, we have initiated discussions with several leading blockchain security firms to conduct a comprehensive audit of the AFEF smart contract. We are committed to upholding the highest standards of chain security.</p>
+                    </div>
+                    <div class="auth0-card p-8">
+                        <i data-lucide="database-zap" class="w-12 h-12 text-[var(--accent-pink)] mb-4"></i>
+                        <h3 class="text-xl font-bold mb-3">Fortifying the Ecosystem</h3>
+                        <p class="text-text-muted leading-relaxed">Our development team is implementing multi-layered security protocols to safeguard the AFEF ecosystem. Ensuring the integrity of the chain and protecting our holders' assets is our top priority as we approach our next milestones.</p>
+                    </div>
+                </div>
+            </section>
+
             <section id="contract" class="pt-16">
                  <h2 class="text-3xl font-bold text-center mb-12 text-white">Official Contract</h2>
                  <div class="auth0-card p-8 max-w-4xl mx-auto text-center">
@@ -194,40 +213,40 @@
         </main>
         
         <div id="dashboard" class="hidden container mx-auto px-6 py-16">
-             <div id="dashboard-main">
-                 <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4">
-                     <h1 class="text-3xl md:text-4xl font-bold text-white">My Dashboard</h1>
-                     <button id="go-to-settings-btn" class="btn-secondary text-sm flex items-center gap-2 px-4 py-2"><i data-lucide="settings" class="w-4 h-4"></i> Settings</button>
-                 </div>
-                 <div class="auth0-card p-8">
-                     <h2 class="text-2xl font-bold text-white">Welcome Back!</h2>
-                     <p class="text-text-muted mt-2">This is your personal dashboard. More features coming soon!</p>
-                 </div>
-             </div>
-             <div id="dashboard-settings" class="hidden">
-                 <div class="flex items-center mb-8 gap-4">
-                     <button id="back-to-dashboard-btn" class="btn-secondary p-2"><i data-lucide="arrow-left" class="w-5 h-5"></i></button>
-                     <h1 class="text-3xl md:text-4xl font-bold text-white">Profile Settings</h1>
-                 </div>
-                 <div class="auth0-card p-8 max-w-2xl mx-auto">
-                     <div class="space-y-6">
-                         <div>
-                             <label for="displayName" class="block text-sm font-medium text-text-muted mb-2">Display Name</label>
-                             <input type="text" id="displayName" placeholder="Enter your name" class="w-full bg-black/50 text-white px-4 py-3 rounded-lg border border-[var(--border-color)] focus:border-[var(--accent-purple)] focus:ring-0 transition-colors">
-                         </div>
-                         <div>
-                             <label for="displayEmail" class="block text-sm font-medium text-text-muted mb-2">Email Address</label>
-                             <input type="email" id="displayEmail" class="w-full bg-black/50 text-white px-4 py-3 rounded-lg border border-[var(--border-color)]" disabled>
-                         </div>
-                         <button class="w-full btn-primary py-3">Save Changes</button>
-                     </div>
-                 </div>
-             </div>
+            <div id="dashboard-main">
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4">
+                    <h1 class="text-3xl md:text-4xl font-bold text-white">My Dashboard</h1>
+                    <button id="go-to-settings-btn" class="btn-secondary text-sm flex items-center gap-2 px-4 py-2"><i data-lucide="settings" class="w-4 h-4"></i> Settings</button>
+                </div>
+                <div class="auth0-card p-8">
+                    <h2 class="text-2xl font-bold text-white">Welcome Back!</h2>
+                    <p class="text-text-muted mt-2">This is your personal dashboard. More features coming soon!</p>
+                </div>
+            </div>
+            <div id="dashboard-settings" class="hidden">
+                <div class="flex items-center mb-8 gap-4">
+                    <button id="back-to-dashboard-btn" class="btn-secondary p-2"><i data-lucide="arrow-left" class="w-5 h-5"></i></button>
+                    <h1 class="text-3xl md:text-4xl font-bold text-white">Profile Settings</h1>
+                </div>
+                <div class="auth0-card p-8 max-w-2xl mx-auto">
+                    <div class="space-y-6">
+                        <div>
+                            <label for="displayName" class="block text-sm font-medium text-text-muted mb-2">Display Name</label>
+                            <input type="text" id="displayName" placeholder="Enter your name" class="w-full bg-black/50 text-white px-4 py-3 rounded-lg border border-[var(--border-color)] focus:border-[var(--accent-purple)] focus:ring-0 transition-colors">
+                        </div>
+                        <div>
+                            <label for="displayEmail" class="block text-sm font-medium text-text-muted mb-2">Email Address</label>
+                            <input type="email" id="displayEmail" class="w-full bg-black/50 text-white px-4 py-3 rounded-lg border border-[var(--border-color)]" disabled>
+                        </div>
+                        <button class="w-full btn-primary py-3">Save Changes</button>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     
     <footer class="py-12 border-t border-white/10 mt-24">
-        <div class="container mx-auto px-6 text-center">
+       <div class="container mx-auto px-6 text-center">
             <div class="flex justify-center space-x-6 mb-6">
                 <a href="https://x.com/afeftoken?s=21" target="_blank" rel="noopener noreferrer" class="text-text-muted hover:text-[var(--accent-purple)] transition"><i data-lucide="twitter" class="w-6 h-6"></i></a>
                 <a href="https://t.me/afeftoken" target="_blank" rel="noopener noreferrer" class="text-text-muted hover:text-[var(--accent-purple)] transition"><i data-lucide="send" class="w-6 h-6"></i></a>
@@ -241,7 +260,6 @@
         <div class="auth0-card w-full max-w-md m-4 relative">
              <button id="close-modal-btn" class="absolute top-4 right-4 text-gray-400 hover:text-white" aria-label="Close modal"><i data-lucide="x" class="w-6 h-6"></i></button>
             <div class="p-8">
-                <!-- 1. Adım: Giriş Seçenekleri -->
                 <div id="login-options">
                     <h2 class="text-2xl font-bold text-center mb-6">Welcome</h2>
                     <p class="text-center text-text-muted mb-8">Choose your preferred method to continue.</p>
@@ -250,7 +268,6 @@
                         <button id="continue-with-email-btn" class="w-full flex items-center justify-center gap-3 py-3 px-4 btn-secondary"><i data-lucide="mail" class="w-6 h-6"></i><span class="font-semibold">Continue with Email</span></button>
                     </div>
                 </div>
-                <!-- 2. Adım: E-posta Girişi -->
                 <div id="email-login-view" class="hidden">
                     <button id="back-to-options-btn" class="text-gray-400 hover:text-white mb-4 flex items-center gap-2 text-sm"><i data-lucide="arrow-left" class="w-4 h-4"></i> Back</button>
                     <h2 class="text-2xl font-bold text-center mb-6">Enter Your Email</h2>
@@ -260,7 +277,6 @@
                      </div>
                     <p class="text-xs text-text-muted mt-4 text-center">We'll send a verification code to your email.</p>
                 </div>
-                <!-- 3. Adım: Kod Doğrulama Arayüzü (YENİ) -->
                 <div id="email-verify-view" class="hidden">
                     <button id="back-to-email-btn" class="text-gray-400 hover:text-white mb-4 flex items-center gap-2 text-sm"><i data-lucide="arrow-left" class="w-4 h-4"></i> Back</button>
                     <h2 class="text-2xl font-bold text-center mb-2">Check Your Email</h2>
@@ -288,7 +304,7 @@
 
         const auth0Config = {
             domain: "dev-z8y2rl3nibo7ss8j.eu.auth0.com",
-            clientId: "flAocvN0OThbj3JL6ydOBjUFuUw856kk",
+            clientId: "flA_ocvN0OThbj3JL6ydOBjUFuUw856kk", // Corrected clientId
             redirectUri: window.location.origin,
             scope: 'openid profile email',
             responseType: 'token id_token'
@@ -335,7 +351,7 @@
                 
                 document.getElementById('user-avatar').src = userProfile.picture || `https://placehold.co/40x40/6A35FF/FFFFFF?text=${(userProfile.name || userProfile.email || 'A')[0].toUpperCase()}`;
                 document.getElementById('user-identifier').textContent = userProfile.name || userProfile.email;
-                document.getElementById('displayEmail').value = userProfile.email;
+                if(document.getElementById('displayEmail')) document.getElementById('displayEmail').value = userProfile.email;
                 if(document.getElementById('displayName')) document.getElementById('displayName').value = userProfile.name || '';
 
                 mobileAuthUI.innerHTML = `<button id="btn-logout-mobile" class="w-full btn-secondary py-2">Logout</button>`;
@@ -344,7 +360,10 @@
                 authUI.querySelector('.login-trigger').style.display = 'block';
                 userProfileDiv.style.display = 'none';
                 mobileAuthUI.innerHTML = `<button class="login-trigger btn-primary w-full py-2">Login / Register</button>`;
-                document.querySelector('#mobile-auth-ui .login-trigger').addEventListener('click', openLoginModal);
+                const mobileLoginTrigger = mobileAuthUI.querySelector('.login-trigger');
+                if (mobileLoginTrigger) {
+                    mobileLoginTrigger.addEventListener('click', openLoginModal);
+                }
             }
             document.querySelectorAll('.login-trigger').forEach(btn => {
                 btn.style.display = isAuthenticated ? 'none' : 'block';
@@ -360,7 +379,7 @@
         }
 
         function IsAuthenticated() {
-            return new Date().getTime() < expiresAt;
+            return expiresAt && new Date().getTime() < expiresAt;
         }
 
         function handleAuthentication() {
@@ -369,7 +388,7 @@
                     setSession(authResult);
                     showView('dashboard');
                 } else if (err) {
-                    console.log(err);
+                    console.log("Could not get a new token", err);
                     showView('main');
                 }
                  updateUI();
@@ -382,7 +401,7 @@
                 showToast('Please enter a valid email address.', 'error');
                 return;
             }
-            userEmailForVerification = email; // E-postayı sonraki adım için sakla
+            userEmailForVerification = email; 
 
             const button = document.getElementById('btn-passwordless-login');
             button.disabled = true;
@@ -471,7 +490,8 @@
         function showToast(message, type = 'success') {
             const toast = document.getElementById('toast');
             toast.textContent = message;
-            toast.className = toast.className.replace(/from-(red|\[var\(--accent-purple\)\])-[0-9a-zA-Z\(\)]+ to-(red|\[var\(--accent-pink\)\])-[0-9a-zA-Z\(\)]+/, '');
+            toast.classList.remove('from-red-500', 'to-red-600', 'from-[var(--accent-purple)]', 'to-[var(--accent-pink)]');
+            
             if (type === 'error') {
                  toast.classList.add('from-red-500', 'to-red-600');
             } else {
@@ -508,7 +528,7 @@
             });
             document.querySelectorAll('.mobile-menu-link').forEach(link => link.addEventListener('click', closeMobileMenu));
             
-            document.getElementById('home-link').addEventListener('click', (e) => { e.preventDefault(); showView('main'); });
+            document.getElementById('home-link').addEventListener('click', (e) => { e.preventDefault(); showView(IsAuthenticated() ? 'dashboard' : 'main'); });
             document.getElementById('btn-dashboard').addEventListener('click', (e) => { e.preventDefault(); showView('dashboard'); showDashboardView('main'); closeMobileMenu();});
             document.getElementById('go-to-settings-btn').addEventListener('click', () => showDashboardView('settings'));
             document.getElementById('back-to-dashboard-btn').addEventListener('click', () => showDashboardView('main'));
@@ -516,7 +536,7 @@
             // Utility
             document.getElementById('copy-address-btn').addEventListener('click', () => {
                 navigator.clipboard.writeText(document.getElementById('contract-address').textContent)
-                    .then(() => showToast('Address copied to clipboard!'));
+                   .then(() => showToast('Address copied to clipboard!'));
             });
             document.getElementById('year').textContent = new Date().getFullYear();
         }
