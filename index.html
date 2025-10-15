@@ -7,7 +7,8 @@
     
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-    <script src="https://cdn.auth0.com/js/auth0-spa-js/2.0/auth0-spa-js.production.js"></script>
+    <!-- Auth0.js kütüphanesini kullanıyoruz -->
+    <script src="https://cdn.auth0.com/js/auth0/9.20.0/auth0.min.js"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
 
     <style>
@@ -47,6 +48,12 @@
         .btn-primary:hover {
             transform: translateY(-2px);
             box-shadow: 0 6px 20px rgba(106, 53, 255, 0.4);
+        }
+        .btn-primary:disabled {
+            background: #555;
+            cursor: not-allowed;
+            box-shadow: none;
+            transform: none;
         }
 
         .btn-secondary {
@@ -115,6 +122,7 @@
 
     <div id="page-content">
         <main id="main-content" class="container mx-auto px-6 py-16 space-y-24 md:space-y-32">
+            <!-- Main content sections... -->
             <section class="relative text-center pt-16 md:pt-24">
                 <div class="absolute inset-0 -z-10 overflow-hidden"><div class="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-gradient-to-tr from-[var(--accent-purple)] to-[var(--accent-pink)] opacity-20 rounded-full filter blur-3xl"></div></div>
                 <h1 class="text-4xl md:text-6xl font-bold text-white leading-tight tracking-tight mb-4">The New Standard for<br>Community-Driven Tokens</h1>
@@ -233,6 +241,7 @@
         <div class="auth0-card w-full max-w-md m-4 relative">
              <button id="close-modal-btn" class="absolute top-4 right-4 text-gray-400 hover:text-white" aria-label="Close modal"><i data-lucide="x" class="w-6 h-6"></i></button>
             <div class="p-8">
+                <!-- 1. Adım: Giriş Seçenekleri -->
                 <div id="login-options">
                     <h2 class="text-2xl font-bold text-center mb-6">Welcome</h2>
                     <p class="text-center text-text-muted mb-8">Choose your preferred method to continue.</p>
@@ -241,42 +250,65 @@
                         <button id="continue-with-email-btn" class="w-full flex items-center justify-center gap-3 py-3 px-4 btn-secondary"><i data-lucide="mail" class="w-6 h-6"></i><span class="font-semibold">Continue with Email</span></button>
                     </div>
                 </div>
+                <!-- 2. Adım: E-posta Girişi -->
                 <div id="email-login-view" class="hidden">
                     <button id="back-to-options-btn" class="text-gray-400 hover:text-white mb-4 flex items-center gap-2 text-sm"><i data-lucide="arrow-left" class="w-4 h-4"></i> Back</button>
                     <h2 class="text-2xl font-bold text-center mb-6">Enter Your Email</h2>
                      <div class="flex flex-col sm:flex-row gap-3">
                          <input type="email" id="email-input" placeholder="your@email.com" class="w-full bg-black/50 text-white px-4 py-3 rounded-lg border border-[var(--border-color)] focus:border-[var(--accent-purple)] focus:ring-0 transition-colors">
-                         <button id="btn-passwordless-login" class="btn-primary py-3 px-6 whitespace-nowrap">Send Link</button>
+                         <button id="btn-passwordless-login" class="btn-primary py-3 px-6 whitespace-nowrap">Send Code</button>
                      </div>
-                    <p class="text-xs text-text-muted mt-4 text-center">We'll send you a magic link to log in. No password needed.</p>
+                    <p class="text-xs text-text-muted mt-4 text-center">We'll send a verification code to your email.</p>
+                </div>
+                <!-- 3. Adım: Kod Doğrulama Arayüzü (YENİ) -->
+                <div id="email-verify-view" class="hidden">
+                    <button id="back-to-email-btn" class="text-gray-400 hover:text-white mb-4 flex items-center gap-2 text-sm"><i data-lucide="arrow-left" class="w-4 h-4"></i> Back</button>
+                    <h2 class="text-2xl font-bold text-center mb-2">Check Your Email</h2>
+                    <p class="text-center text-text-muted mb-6 text-sm">We sent a verification code to <br><strong id="verify-email-display"></strong></p>
+                    <div class="flex flex-col gap-3">
+                        <input type="text" id="code-input" placeholder="_ _ _ _ _ _" maxlength="6" class="w-full bg-black/50 text-white px-4 py-3 rounded-lg border border-[var(--border-color)] focus:border-[var(--accent-purple)] focus:ring-0 transition-colors text-center text-2xl tracking-[0.5em]">
+                        <button id="btn-verify-code" class="btn-primary py-3 px-6">Verify Code</button>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
     
     <div id="toast" class="fixed bottom-5 right-5 bg-gradient-to-r from-[var(--accent-purple)] to-[var(--accent-pink)] text-white px-6 py-3 rounded-lg shadow-lg transform translate-y-20 opacity-0 transition-all duration-300">
-        Address copied to clipboard!
+        Message here
     </div>
     
     <script>
         // --- App State & Config ---
-        let auth0Client = null;
+        let userProfile;
+        let accessToken;
+        let idToken;
+        let expiresAt;
+        let userEmailForVerification;
+
         const auth0Config = {
             domain: "dev-z8y2rl3nibo7ss8j.eu.auth0.com",
             clientId: "flAocvN0OThbj3JL6ydOBjUFuUw856kk",
-            authorizationParams: { 
-                redirect_uri: window.location.origin 
-            }
+            redirectUri: window.location.origin,
+            scope: 'openid profile email',
+            responseType: 'token id_token'
         };
 
+        const webAuth = new auth0.WebAuth({
+            domain: auth0Config.domain,
+            clientID: auth0Config.clientId,
+            redirectUri: auth0Config.redirectUri,
+            responseType: auth0Config.responseType,
+            scope: auth0Config.scope
+        });
+
         // --- View Management & UI Updates ---
-        const pageContent = document.getElementById('page-content');
         const mainContent = document.getElementById('main-content');
         const dashboard = document.getElementById('dashboard');
         const dashboardMain = document.getElementById('dashboard-main');
         const dashboardSettings = document.getElementById('dashboard-settings');
 
-        const showView = (view) => {
+        function showView(view) {
             mainContent.style.display = 'none';
             dashboard.style.display = 'none';
             if (view === 'main') mainContent.style.display = 'block';
@@ -284,136 +316,189 @@
             window.scrollTo(0, 0);
         };
 
-        const showDashboardView = (view) => {
+        function showDashboardView(view) {
             dashboardMain.style.display = 'none';
             dashboardSettings.style.display = 'none';
             if(view === 'main') dashboardMain.style.display = 'block';
             if(view === 'settings') dashboardSettings.style.display = 'block';
         };
 
-        const updateUI = async () => {
-            const isAuthenticated = await auth0Client.isAuthenticated();
-            const loginTriggers = document.querySelectorAll('.login-trigger');
-            const userProfile = document.getElementById('user-profile');
+        function updateUI() {
+            const isAuthenticated = IsAuthenticated();
+            const userProfileDiv = document.getElementById('user-profile');
             const authUI = document.getElementById('auth-ui');
             const mobileAuthUI = document.getElementById('mobile-auth-ui');
 
             if (isAuthenticated) {
                 authUI.querySelector('.login-trigger').style.display = 'none';
-                userProfile.style.display = 'flex';
+                userProfileDiv.style.display = 'flex';
                 
-                const user = await auth0Client.getUser();
-                document.getElementById('user-avatar').src = user.picture || `https://placehold.co/40x40/6A35FF/FFFFFF?text=${(user.name || user.email || 'A')[0].toUpperCase()}`;
-                document.getElementById('user-identifier').textContent = user.name || user.email;
-                document.getElementById('displayEmail').value = user.email;
-                if(document.getElementById('displayName')) document.getElementById('displayName').value = user.name || '';
+                document.getElementById('user-avatar').src = userProfile.picture || `https://placehold.co/40x40/6A35FF/FFFFFF?text=${(userProfile.name || userProfile.email || 'A')[0].toUpperCase()}`;
+                document.getElementById('user-identifier').textContent = userProfile.name || userProfile.email;
+                document.getElementById('displayEmail').value = userProfile.email;
+                if(document.getElementById('displayName')) document.getElementById('displayName').value = userProfile.name || '';
 
                 mobileAuthUI.innerHTML = `<button id="btn-logout-mobile" class="w-full btn-secondary py-2">Logout</button>`;
                 document.getElementById('btn-logout-mobile').addEventListener('click', logout);
             } else {
                 authUI.querySelector('.login-trigger').style.display = 'block';
-                userProfile.style.display = 'none';
+                userProfileDiv.style.display = 'none';
                 mobileAuthUI.innerHTML = `<button class="login-trigger btn-primary w-full py-2">Login / Register</button>`;
                 document.querySelector('#mobile-auth-ui .login-trigger').addEventListener('click', openLoginModal);
             }
-            // Ensure all login triggers are handled correctly after UI update
             document.querySelectorAll('.login-trigger').forEach(btn => {
-                if (isAuthenticated) {
-                    btn.style.display = 'none';
-                } else {
-                    btn.style.display = 'block'; 
-                }
+                btn.style.display = isAuthenticated ? 'none' : 'block';
             });
         };
         
         // --- Auth Functions ---
-        const configureClient = async () => {
-             auth0Client = await auth0.createAuth0Client(auth0Config);
-        };
+        function setSession(authResult) {
+            expiresAt = (authResult.expiresIn * 1000) + new Date().getTime();
+            accessToken = authResult.accessToken;
+            idToken = authResult.idToken;
+            userProfile = authResult.idTokenPayload;
+        }
+
+        function IsAuthenticated() {
+            return new Date().getTime() < expiresAt;
+        }
+
+        function handleAuthentication() {
+             webAuth.checkSession({}, (err, authResult) => {
+                if (authResult && authResult.accessToken && authResult.idToken) {
+                    setSession(authResult);
+                    showView('dashboard');
+                } else if (err) {
+                    console.log(err);
+                    showView('main');
+                }
+                 updateUI();
+            });
+        }
         
-        const loginPasswordless = async () => {
-             const email = document.getElementById('email-input').value;
-             if (!/^\S+@\S+\.\S+$/.test(email)) {
-                 // Using a toast or custom message instead of alert
+        function startPasswordlessLogin() {
+            const email = document.getElementById('email-input').value;
+            if (!/^\S+@\S+\.\S+$/.test(email)) {
                 showToast('Please enter a valid email address.', 'error');
                 return;
-             }
-            try {
-                await auth0Client.loginWithRedirect({
-                    authorizationParams: {
-                        connection: 'email',
-                        screen_hint: 'signup', // Or 'login' depending on context
-                        login_hint: email
-                    }
-                });
-            } catch (err) {
-                console.error("Passwordless login failed", err);
-                showToast('Login failed. Please try again.', 'error');
             }
-        };
+            userEmailForVerification = email; // E-postayı sonraki adım için sakla
 
-        const connectMetaMask = async () => {
-             showToast('MetaMask integration coming soon!');
-        };
-        
-        const logout = () => {
-            auth0Client.logout({
-                logoutParams: { returnTo: window.location.origin }
+            const button = document.getElementById('btn-passwordless-login');
+            button.disabled = true;
+            button.textContent = "Sending...";
+
+            webAuth.passwordlessStart({
+                connection: 'email',
+                send: 'code',
+                email: email
+            }, (err, res) => {
+                button.disabled = false;
+                button.textContent = "Send Code";
+                if (err) {
+                    console.error(err);
+                    showToast(err.description || 'Failed to send code. Please try again.', 'error');
+                } else {
+                    document.getElementById('verify-email-display').textContent = email;
+                    showLoginModalView('verify');
+                }
             });
         };
 
-        // --- Modal Management ---
+        function verifyCode() {
+            const code = document.getElementById('code-input').value;
+             if (!code || code.length < 6) {
+                showToast('Please enter the 6-digit code.', 'error');
+                return;
+            }
+            const button = document.getElementById('btn-verify-code');
+            button.disabled = true;
+            button.textContent = "Verifying...";
+            
+            webAuth.passwordlessLogin({
+                connection: 'email',
+                email: userEmailForVerification,
+                verificationCode: code
+            }, (err, authResult) => {
+                button.disabled = false;
+                button.textContent = "Verify Code";
+                if (err) {
+                    console.error(err);
+                    showToast(err.description || 'Invalid code. Please try again.', 'error');
+                } else {
+                    setSession(authResult);
+                    closeLoginModal();
+                    showView('dashboard');
+                    updateUI();
+                }
+            });
+        }
+
+        function logout() {
+            accessToken = null;
+            idToken = null;
+            expiresAt = null;
+            userProfile = null;
+            webAuth.logout({
+                returnTo: window.location.origin,
+                clientID: auth0Config.clientId
+            });
+        };
+
+        // --- Modal & View Management ---
         const loginModal = document.getElementById('login-modal');
-        const emailLoginView = document.getElementById('email-login-view');
-        const loginOptions = document.getElementById('login-options');
-        function openLoginModal() { loginModal.style.display = 'flex'; }
-        function closeLoginModal() { 
-            loginModal.style.display = 'none'; 
-            emailLoginView.classList.add('hidden');
-            loginOptions.classList.remove('hidden');
-        }
-        function showEmailView() {
-            loginOptions.classList.add('hidden');
-            emailLoginView.classList.remove('hidden');
-        }
-         function showOptionsView() {
-            emailLoginView.classList.add('hidden');
-            loginOptions.classList.remove('hidden');
-        }
+        const loginViews = {
+            options: document.getElementById('login-options'),
+            email: document.getElementById('email-login-view'),
+            verify: document.getElementById('email-verify-view')
+        };
         
-        // --- Mobile Menu ---
-        function closeMobileMenu() {
-            const mobileMenu = document.getElementById('mobile-menu');
-            const hamburgerBtn = document.getElementById('hamburger-btn');
-            if (!mobileMenu.classList.contains('hidden')) {
-                mobileMenu.classList.add('hidden');
-                hamburgerBtn.classList.remove('open');
+        function openLoginModal() { loginModal.style.display = 'flex'; showLoginModalView('options'); }
+        function closeLoginModal() { loginModal.style.display = 'none'; }
+
+        function showLoginModalView(viewName) {
+            Object.values(loginViews).forEach(view => view.classList.add('hidden'));
+            if (loginViews[viewName]) {
+                loginViews[viewName].classList.remove('hidden');
             }
         }
         
-        // --- Toast Notification ---
+        function closeMobileMenu() {
+            document.getElementById('mobile-menu').classList.add('hidden');
+            document.getElementById('hamburger-btn').classList.remove('open');
+        }
+        
         function showToast(message, type = 'success') {
             const toast = document.getElementById('toast');
             toast.textContent = message;
+            toast.className = toast.className.replace(/from-(red|\[var\(--accent-purple\)\])-[0-9a-zA-Z\(\)]+ to-(red|\[var\(--accent-pink\)\])-[0-9a-zA-Z\(\)]+/, '');
             if (type === 'error') {
-                 toast.className = toast.className.replace('from-[var(--accent-purple)] to-[var(--accent-pink)]', 'from-red-500 to-red-600');
+                 toast.classList.add('from-red-500', 'to-red-600');
             } else {
-                 toast.className = toast.className.replace('from-red-500 to-red-600', 'from-[var(--accent-purple)] to-[var(--accent-pink)]');
+                 toast.classList.add('from-[var(--accent-purple)]', 'to-[var(--accent-pink)]');
             }
             toast.classList.remove('translate-y-20', 'opacity-0');
             setTimeout(() => { toast.classList.add('translate-y-20', 'opacity-0'); }, 3000);
         }
 
-        // --- Event Listeners Setup ---
         function setupEventListeners() {
+            // Modal controls
             document.querySelectorAll('.login-trigger').forEach(btn => btn.addEventListener('click', openLoginModal));
             document.getElementById('close-modal-btn').addEventListener('click', closeLoginModal);
             loginModal.addEventListener('click', (e) => { if(e.target === loginModal) closeLoginModal(); });
-            document.getElementById('continue-with-email-btn').addEventListener('click', showEmailView);
-            document.getElementById('back-to-options-btn').addEventListener('click', showOptionsView);
-            document.getElementById('connect-metamask-btn').addEventListener('click', connectMetaMask);
-            document.getElementById('btn-passwordless-login').addEventListener('click', loginPasswordless);
+            
+            // Modal navigation
+            document.getElementById('continue-with-email-btn').addEventListener('click', () => showLoginModalView('email'));
+            document.getElementById('back-to-options-btn').addEventListener('click', () => showLoginModalView('options'));
+            document.getElementById('back-to-email-btn').addEventListener('click', () => showLoginModalView('email'));
 
+            // Auth actions
+            document.getElementById('connect-metamask-btn').addEventListener('click', () => showToast('MetaMask integration coming soon!'));
+            document.getElementById('btn-passwordless-login').addEventListener('click', startPasswordlessLogin);
+            document.getElementById('btn-verify-code').addEventListener('click', verifyCode);
+            document.getElementById('btn-logout').addEventListener('click', logout);
+
+            // Page navigation
             const hamburgerBtn = document.getElementById('hamburger-btn');
             const mobileMenu = document.getElementById('mobile-menu');
             hamburgerBtn.addEventListener('click', (e) => {
@@ -422,66 +507,26 @@
                 hamburgerBtn.classList.toggle('open');
             });
             document.querySelectorAll('.mobile-menu-link').forEach(link => link.addEventListener('click', closeMobileMenu));
-            document.addEventListener('click', (e) => {
-                if (!mobileMenu.contains(e.target) && !hamburgerBtn.contains(e.target) && !mobileMenu.classList.contains('hidden')) {
-                    closeMobileMenu();
-                }
-            });
-
-            document.getElementById('home-link').addEventListener('click', async (e) => {
-                e.preventDefault();
-                showView('main');
-            });
+            
+            document.getElementById('home-link').addEventListener('click', (e) => { e.preventDefault(); showView('main'); });
             document.getElementById('btn-dashboard').addEventListener('click', (e) => { e.preventDefault(); showView('dashboard'); showDashboardView('main'); closeMobileMenu();});
             document.getElementById('go-to-settings-btn').addEventListener('click', () => showDashboardView('settings'));
             document.getElementById('back-to-dashboard-btn').addEventListener('click', () => showDashboardView('main'));
-            document.getElementById('btn-logout').addEventListener('click', logout);
-
+            
+            // Utility
             document.getElementById('copy-address-btn').addEventListener('click', () => {
-                const address = document.getElementById('contract-address').textContent;
-                 // Use modern clipboard API with fallback
-                if (navigator.clipboard && navigator.clipboard.writeText) {
-                    navigator.clipboard.writeText(address).then(() => {
-                        showToast('Address copied to clipboard!');
-                    });
-                } else {
-                    // Fallback for older browsers
-                    const textArea = document.createElement("textarea");
-                    textArea.value = address;
-                    document.body.appendChild(textArea);
-                    textArea.focus();
-                    textArea.select();
-                    try {
-                        document.execCommand('copy');
-                        showToast('Address copied to clipboard!');
-                    } catch (err) {
-                        showToast('Failed to copy!', 'error');
-                    }
-                    document.body.removeChild(textArea);
-                }
+                navigator.clipboard.writeText(document.getElementById('contract-address').textContent)
+                    .then(() => showToast('Address copied to clipboard!'));
             });
             document.getElementById('year').textContent = new Date().getFullYear();
         }
         
-        // --- App Initialization ---
-        window.onload = async () => {
-            await configureClient();
-            
-            const query = window.location.search;
-            if (query.includes("code=") && query.includes("state=")) {
-                await auth0Client.handleRedirectCallback();
-                window.history.replaceState({}, document.title, "/");
-            }
-            
-            const isAuthenticated = await auth0Client.isAuthenticated();
-            showView(isAuthenticated ? 'dashboard' : 'main');
-            if(isAuthenticated) showDashboardView('main');
-            
-            await updateUI();
+        window.onload = () => {
+            handleAuthentication();
             lucide.createIcons();
             setupEventListeners();
         };
-
     </script>
 </body>
 </html>
+
