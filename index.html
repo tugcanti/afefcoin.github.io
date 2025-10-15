@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>AFEF Token — The Sovereign Platform</title>
+    <title>AFEF Token — The Professional Platform</title>
     
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
@@ -12,53 +12,53 @@
 
     <style>
         :root {
-            --bg-main: #0D0D0D;
-            --accent-primary: #FF4D00; /* Fiery Orange/Red */
-            --accent-glow: rgba(255, 77, 0, 0.5);
-            --text-main: #F5F5F5;
-            --text-muted: #9ca3af;
-            --card-bg: rgba(20, 20, 20, 0.7);
-            --card-border: rgba(255, 77, 0, 0.3);
+            --bg-dark: #10162F;
+            --card-dark: #192040;
+            --text-main: #FFFFFF;
+            --text-muted: #A0AEC0;
+            --accent-purple: #6A35FF;
+            --accent-pink: #E43A8A;
+            --border-color: rgba(255, 255, 255, 0.1);
         }
         html { scroll-behavior: smooth; }
         body { 
             font-family: 'Inter', sans-serif; 
-            background-color: var(--bg-main); 
+            background-color: var(--bg-dark); 
             color: var(--text-main); 
-            background-image: radial-gradient(rgba(255,255,255,0.03) 1px, transparent 1px);
-            background-size: 20px 20px;
         }
         h1, h2, h3, h4, h5, h6 { font-family: 'Poppins', sans-serif; }
         
-        #power-glow {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            width: 1500px;
-            height: 1500px;
-            background: radial-gradient(circle at center, var(--accent-glow) 0%, transparent 60%);
-            transform: translate(-50%, -50%);
-            animation: pulse 15s infinite alternate ease-in-out;
-            z-index: -1;
-            pointer-events: none;
-        }
-
-        @keyframes pulse {
-            0% { transform: translate(-50%, -50%) scale(0.8); opacity: 0.7; }
-            100% { transform: translate(-50%, -50%) scale(1.2); opacity: 1; }
-        }
-
-        .sovereign-card { 
-            background: var(--card-bg); 
-            backdrop-filter: blur(20px); 
-            -webkit-backdrop-filter: blur(20px); 
-            border: 1px solid var(--card-border);
-            box-shadow: 0 0 20px rgba(255, 77, 0, 0.1);
+        .auth0-card { 
+            background-color: var(--card-dark); 
+            border: 1px solid var(--border-color);
+            border-radius: 0.75rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
             transition: all 0.3s ease-in-out;
         }
-        .sovereign-card:hover {
-            border-color: rgba(255, 77, 0, 0.6);
-            box-shadow: 0 0 30px rgba(255, 77, 0, 0.2);
+        
+        .btn-primary {
+            background: linear-gradient(90deg, var(--accent-purple), var(--accent-pink));
+            color: var(--text-main);
+            font-weight: 600;
+            border-radius: 0.5rem;
+            transition: all 0.3s ease-in-out;
+            box-shadow: 0 4px 15px rgba(106, 53, 255, 0.3);
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(106, 53, 255, 0.4);
+        }
+
+        .btn-secondary {
+            background-color: rgba(255,255,255,0.05);
+            color: var(--text-main);
+            font-weight: 600;
+            border-radius: 0.5rem;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease-in-out;
+        }
+        .btn-secondary:hover {
+            background-color: var(--border-color);
         }
 
         #hamburger-btn { width: 24px; height: 24px; position: relative; }
@@ -71,28 +71,16 @@
 </head>
 <body class="overflow-x-hidden">
 
-    <div id="power-glow"></div>
-
-    <header class="sticky top-0 z-50">
-        <nav class="sovereign-card max-w-7xl mx-auto my-4 rounded-xl px-6 py-3">
+    <header class="sticky top-0 z-50 bg-opacity-80 bg-[var(--bg-dark)] backdrop-blur-lg border-b border-white/10">
+        <nav class="container mx-auto px-6 py-4">
             <div class="flex items-center justify-between">
                 <a href="#" id="home-link" class="flex items-center gap-3">
-                    <svg width="40" height="40" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <defs>
-                            <linearGradient id="fireGradient" x1="0%" y1="0%" x2="0%" y2="100%">
-                                <stop offset="0%" style="stop-color: #FFA500;"/>
-                                <stop offset="100%" style="stop-color: #FF4500;"/>
-                            </linearGradient>
-                            <filter id="glow">
-                                <feDropShadow dx="0" dy="0" stdDeviation="2" flood-color="#FF4D00" />
-                            </filter>
-                        </defs>
-                        <path d="M24 44C24 44 6 34 6 21V10L24 4L42 10V21C42 34 24 44 24 44Z" stroke="url(#fireGradient)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" filter="url(#glow)"/>
-                        <path d="M16 23 H32 M16 23 L14 16 L19 18 L24 14 L29 18 L34 16 L32 23 Z" stroke="#FFFFFF" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
+                    <div class="w-10 h-10 bg-gradient-to-br from-[var(--accent-purple)] to-[var(--accent-pink)] rounded-lg flex items-center justify-center">
+                        <svg width="24" height="24" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M24 44C24 44 6 34 6 21V10L24 4L42 10V21C42 34 24 44 24 44Z" stroke="white" stroke-width="3"/><path d="M16 23 H32 M16 23 L14 16 L19 18 L24 14 L29 18 L34 16 L32 23 Z" stroke="#FFFFFF" stroke-width="2.5" fill="none"/></svg>
+                    </div>
                     <span class="text-xl font-bold font-['Poppins'] text-white">AFEF Token</span>
                 </a>
-                <div id="main-nav-links" class="hidden md:flex items-center gap-6 text-sm font-semibold text-gray-300">
+                <div id="main-nav-links" class="hidden md:flex items-center gap-8 text-sm font-semibold text-gray-300">
                     <a href="#about" class="hover:text-white transition-colors">About</a>
                     <a href="#tokenomics" class="hover:text-white transition-colors">Tokenomics</a>
                     <a href="#roadmap" class="hover:text-white transition-colors">Roadmap</a>
@@ -101,13 +89,13 @@
                 </div>
                 <div class="flex items-center gap-4">
                     <div id="auth-ui" class="hidden md:block">
-                        <button class="login-trigger bg-[var(--accent-primary)] hover:opacity-80 transition-opacity text-white font-semibold py-2 px-4 rounded-lg text-sm">Login / Register</button>
+                        <button class="login-trigger btn-secondary py-2 px-4 text-sm">Login</button>
                         <div id="user-profile" class="hidden items-center gap-3 relative group">
                             <span id="user-identifier" class="text-sm font-semibold hidden sm:block"></span>
-                            <img id="user-avatar" class="w-8 h-8 rounded-full border-2 border-[var(--accent-primary)]" src="" alt="Avatar">
-                            <div class="absolute top-full right-0 mt-2 w-48 bg-black/80 backdrop-blur-md border border-white/10 rounded-lg shadow-lg opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto transition-opacity">
-                                <a href="#" id="btn-dashboard" class="block px-4 py-2 text-sm text-gray-300 hover:bg-white/10 rounded-t-lg">Go to Dashboard</a>
-                                <a href="#" id="btn-logout" class="block px-4 py-2 text-sm text-gray-300 hover:bg-white/10 rounded-b-lg">Logout</a>
+                            <img id="user-avatar" class="w-8 h-8 rounded-full border-2 border-[var(--accent-purple)]" src="" alt="Avatar">
+                            <div class="absolute top-full right-0 mt-2 w-48 bg-[var(--card-dark)] border border-[var(--border-color)] rounded-lg shadow-lg opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto transition-opacity">
+                                <a href="#" id="btn-dashboard" class="block px-4 py-2 text-sm text-gray-300 hover:bg-white/5 rounded-t-lg">Go to Dashboard</a>
+                                <a href="#" id="btn-logout" class="block px-4 py-2 text-sm text-gray-300 hover:bg-white/5 rounded-b-lg">Logout</a>
                             </div>
                         </div>
                     </div>
@@ -115,41 +103,42 @@
                 </div>
             </div>
         </nav>
-        <div id="mobile-menu" class="hidden md:hidden sovereign-card max-w-6xl mx-auto rounded-xl p-4 text-center">
-            <a href="#about" class="mobile-menu-link block py-2 text-gray-300 hover:text-white">About</a>
-            <a href="#tokenomics" class="mobile-menu-link block py-2 text-gray-300 hover:text-white">Tokenomics</a>
-            <a href="#roadmap" class="mobile-menu-link block py-2 text-gray-300 hover:text-white">Roadmap</a>
-            <a href="#airdrop" class="mobile-menu-link block py-2 text-gray-300 hover:text-white">Airdrop</a>
-            <a href="#contract" class="mobile-menu-link block py-2 text-gray-300 hover:text-white">Contract</a>
-            <div id="mobile-auth-ui" class="mt-4"></div>
+        <div id="mobile-menu" class="hidden md:hidden bg-[var(--card-dark)]/90 backdrop-blur-md container mx-auto rounded-xl p-4 text-center">
+            <a href="#about" class="mobile-menu-link block py-3 text-gray-300 hover:text-white text-lg">About</a>
+            <a href="#tokenomics" class="mobile-menu-link block py-3 text-gray-300 hover:text-white text-lg">Tokenomics</a>
+            <a href="#roadmap" class="mobile-menu-link block py-3 text-gray-300 hover:text-white text-lg">Roadmap</a>
+            <a href="#airdrop" class="mobile-menu-link block py-3 text-gray-300 hover:text-white text-lg">Airdrop</a>
+            <a href="#contract" class="mobile-menu-link block py-3 text-gray-300 hover:text-white text-lg">Contract</a>
+            <div id="mobile-auth-ui" class="mt-4 border-t border-white/10 pt-4"></div>
         </div>
     </header>
 
     <div id="page-content">
         <main id="main-content" class="container mx-auto px-6 py-16 space-y-24 md:space-y-32">
             <section class="relative text-center pt-16 md:pt-24">
-                <h1 class="text-4xl md:text-6xl font-bold text-white leading-tight tracking-tight mb-4">A Sovereign Token<br>for Strategy Enthusiasts</h1>
-                <p class="max-w-2xl mx-auto text-lg text-gray-300 mb-8">AFEF is a community-driven project forged with the mission of fair distribution and long-term dominance.</p>
-                <button class="login-trigger bg-[var(--accent-primary)] hover:opacity-80 transition-opacity text-white font-bold py-3 px-8 rounded-lg">Claim Your Stake</button>
+                <div class="absolute inset-0 -z-10 overflow-hidden"><div class="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-gradient-to-tr from-[var(--accent-purple)] to-[var(--accent-pink)] opacity-20 rounded-full filter blur-3xl"></div></div>
+                <h1 class="text-4xl md:text-6xl font-bold text-white leading-tight tracking-tight mb-4">The New Standard for<br>Community-Driven Tokens</h1>
+                <p class="max-w-2xl mx-auto text-lg text-text-muted mb-8">AFEF combines secure authentication with decentralized principles to create a trustworthy ecosystem for everyone.</p>
+                <button class="login-trigger btn-primary py-3 px-8 text-lg">Get Started</button>
             </section>
-
+            
             <section id="about" class="pt-16">
                 <h2 class="text-3xl font-bold text-center mb-12 text-white">About AFEF Token</h2>
-                <div class="sovereign-card rounded-2xl p-8 md:p-12 text-center max-w-4xl mx-auto">
-                    <i data-lucide="shield-check" class="w-16 h-16 mx-auto text-[var(--accent-primary)] mb-6"></i>
-                    <p class="text-gray-300 leading-relaxed">AFEF, symbolized by the shield and crown, represents a new standard in decentralized finance. Our core mission is to create a secure, community-governed ecosystem where every member has a voice. We believe in fair launches, transparent tokenomics, and building a project with true long-term utility and value. Join us in forging a new dynasty in the world of crypto.</p>
+                <div class="auth0-card p-8 md:p-12 text-center max-w-4xl mx-auto">
+                    <i data-lucide="shield-check" class="w-16 h-16 mx-auto text-[var(--accent-purple)] mb-6"></i>
+                    <p class="text-text-muted leading-relaxed">AFEF, symbolized by the shield and crown, represents a new standard in decentralized finance. Our core mission is to create a secure, community-governed ecosystem where every member has a voice. We believe in fair launches, transparent tokenomics, and building a project with true long-term utility and value. Join us in forging a new dynasty in the world of crypto.</p>
                 </div>
             </section>
 
             <section id="tokenomics" class="pt-16">
                 <h2 class="text-3xl font-bold text-center mb-12 text-white">Tokenomics</h2>
-                <div class="sovereign-card p-8 md:p-12 max-w-5xl mx-auto flex flex-col md:flex-row items-center gap-12 rounded-2xl">
-                    <div class="w-full md:w-1/3 flex justify-center"><div style="width: 200px; height: 200px; border-radius: 50%; background-image: conic-gradient(#FF4D00 0% 40%, #FFA500 40% 70%, #F5F5F5 70% 90%, #9ca3af 90% 100%);"></div></div>
+                <div class="auth0-card p-8 md:p-12 max-w-5xl mx-auto flex flex-col md:flex-row items-center gap-12">
+                    <div class="w-full md:w-1/3 flex justify-center"><div style="width: 200px; height: 200px; border-radius: 50%; background-image: conic-gradient(#6A35FF 0% 40%, #E43A8A 40% 70%, #FFFFFF 70% 90%, #A0AEC0 90% 100%);"></div></div>
                     <div class="w-full md:w-2/3 grid grid-cols-2 gap-x-8 gap-y-6 text-left">
-                        <div class="flex items-center"><div class="w-4 h-4 rounded-full bg-[var(--accent-primary)] mr-3"></div><div><p class="font-bold text-lg">Liquidity Pool</p><p class="text-muted">40%</p></div></div>
-                        <div class="flex items-center"><div class="w-4 h-4 rounded-full bg-orange-400 mr-3"></div><div><p class="font-bold text-lg">Airdrop & Community</p><p class="text-muted">30%</p></div></div>
-                        <div class="flex items-center"><div class="w-4 h-4 rounded-full bg-gray-200 mr-3"></div><div><p class="font-bold text-lg">Team & Advisors</p><p class="text-muted">20%</p></div></div>
-                        <div class="flex items-center"><div class="w-4 h-4 rounded-full bg-gray-500 mr-3"></div><div><p class="font-bold text-lg">Marketing & Treasury</p><p class="text-muted">10%</p></div></div>
+                        <div class="flex items-center"><div class="w-4 h-4 rounded-full bg-[var(--accent-purple)] mr-3"></div><div><p class="font-bold text-lg">Liquidity Pool</p><p class="text-text-muted">40%</p></div></div>
+                        <div class="flex items-center"><div class="w-4 h-4 rounded-full bg-[var(--accent-pink)] mr-3"></div><div><p class="font-bold text-lg">Airdrop & Community</p><p class="text-text-muted">30%</p></div></div>
+                        <div class="flex items-center"><div class="w-4 h-4 rounded-full bg-gray-200 mr-3"></div><div><p class="font-bold text-lg">Team & Advisors</p><p class="text-text-muted">20%</p></div></div>
+                        <div class="flex items-center"><div class="w-4 h-4 rounded-full bg-gray-500 mr-3"></div><div><p class="font-bold text-lg">Marketing & Treasury</p><p class="text-text-muted">10%</p></div></div>
                     </div>
                 </div>
             </section>
@@ -157,73 +146,72 @@
             <section id="roadmap" class="pt-16">
                  <h2 class="text-3xl font-bold text-center mb-16 text-white">Our Roadmap</h2>
                  <div class="relative max-w-3xl mx-auto">
-                     <div class="absolute left-1/2 h-full w-0.5 bg-white/20 transform -translate-x-1/2"></div>
+                     <div class="absolute left-1/2 h-full w-0.5 bg-white/10 transform -translate-x-1/2"></div>
                      <div class="relative mb-8 flex justify-between items-center w-full">
-                         <div class="w-1/2 pr-8 text-right"><div class="sovereign-card p-4 rounded-lg"><strong>Phase 1:</strong> Project Launch & Airdrop</div></div>
-                         <div class="absolute left-1/2 transform -translate-x-1/2 w-5 h-5 bg-[var(--accent-primary)] rounded-full border-4 border-[var(--bg-main)]"></div>
+                         <div class="w-1/2 pr-8 text-right"><div class="auth0-card p-4"><strong>Phase 1:</strong> Project Launch & Airdrop</div></div>
+                         <div class="absolute left-1/2 transform -translate-x-1/2 w-5 h-5 bg-[var(--accent-purple)] rounded-full border-4 border-[var(--bg-dark)]"></div>
                      </div>
                      <div class="relative mb-8 flex justify-between items-center w-full flex-row-reverse">
-                         <div class="w-1/2 pl-8 text-left"><div class="sovereign-card p-4 rounded-lg"><strong>Phase 2:</strong> CEX Listings & Partnerships</div></div>
-                         <div class="absolute left-1/2 transform -translate-x-1/2 w-5 h-5 bg-[var(--accent-primary)] rounded-full border-4 border-[var(--bg-main)]"></div>
+                         <div class="w-1/2 pl-8 text-left"><div class="auth0-card p-4"><strong>Phase 2:</strong> CEX Listings & Partnerships</div></div>
+                         <div class="absolute left-1/2 transform -translate-x-1/2 w-5 h-5 bg-[var(--accent-purple)] rounded-full border-4 border-[var(--bg-dark)]"></div>
                      </div>
                       <div class="relative mb-8 flex justify-between items-center w-full">
-                         <div class="w-1/2 pr-8 text-right"><div class="sovereign-card p-4 rounded-lg"><strong>Phase 3:</strong> Utility Development (Staking)</div></div>
-                         <div class="absolute left-1/2 transform -translate-x-1/2 w-5 h-5 bg-[var(--accent-primary)] rounded-full border-4 border-[var(--bg-main)]"></div>
+                         <div class="w-1/2 pr-8 text-right"><div class="auth0-card p-4"><strong>Phase 3:</strong> Utility Development (Staking)</div></div>
+                         <div class="absolute left-1/2 transform -translate-x-1/2 w-5 h-5 bg-[var(--accent-purple)] rounded-full border-4 border-[var(--bg-dark)]"></div>
                      </div>
                  </div>
             </section>
 
             <section id="airdrop" class="pt-16">
                  <h2 class="text-3xl font-bold text-center mb-12 text-white">Community Airdrop</h2>
-                 <div class="sovereign-card p-8 md:p-12 max-w-2xl mx-auto rounded-2xl text-center">
-                    <i data-lucide="gift" class="w-16 h-16 mx-auto text-[var(--accent-primary)] mb-6"></i>
+                 <div class="auth0-card p-8 md:p-12 max-w-2xl mx-auto text-center">
+                    <i data-lucide="gift" class="w-16 h-16 mx-auto text-[var(--accent-pink)] mb-6"></i>
                     <h3 class="text-2xl font-bold mb-4">Claim Your Stake</h3>
-                    <p class="text-gray-300 mb-8">Login to check your eligibility for the AFEF airdrop.</p>
-                    <button class="login-trigger bg-[var(--accent-primary)] hover:opacity-80 transition-opacity text-white font-bold py-3 px-8 rounded-lg">Login to Check</button>
+                    <p class="text-text-muted mb-8">Login to check your eligibility for the AFEF airdrop.</p>
+                    <button class="login-trigger btn-primary py-3 px-8">Login to Check</button>
                  </div>
             </section>
             
             <section id="contract" class="pt-16">
                  <h2 class="text-3xl font-bold text-center mb-12 text-white">Official Contract</h2>
-                 <div class="sovereign-card p-8 max-w-4xl mx-auto rounded-2xl text-center">
-                     <p class="text-gray-400 mb-2">Etherscan Contract Address:</p>
+                 <div class="auth0-card p-8 max-w-4xl mx-auto text-center">
+                     <p class="text-text-muted mb-2">Etherscan Contract Address:</p>
                      <div class="flex items-center justify-center bg-black/50 p-3 rounded-lg mb-6 max-w-md mx-auto">
                          <p id="contract-address" class="font-mono text-sm break-all mr-4">0x367a584a928b641330E8B20e7C4739675741f40d</p>
                          <button id="copy-address-btn" title="Copy Address"><i data-lucide="copy" class="w-5 h-5 text-gray-400 hover:text-white"></i></button>
                      </div>
-                     <a href="https://etherscan.io/address/0x367a584a928b641330E8B20e7C4739675741f40d" target="_blank" rel="noopener noreferrer" class="inline-block bg-white/10 hover:bg-white/20 transition-colors text-white font-bold py-3 px-6 rounded-lg">View on Etherscan</a>
+                     <a href="https://etherscan.io/address/0x367a584a928b641330E8B20e7C4739675741f40d" target="_blank" rel="noopener noreferrer" class="inline-block btn-secondary py-3 px-6">View on Etherscan</a>
                  </div>
             </section>
-
         </main>
-
+        
         <div id="dashboard" class="hidden container mx-auto px-6 py-16">
              <div id="dashboard-main">
                 <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4">
                     <h1 class="text-3xl md:text-4xl font-bold text-white">My Dashboard</h1>
-                    <button id="go-to-settings-btn" class="text-sm font-semibold text-gray-300 hover:text-white flex items-center gap-2 bg-white/10 px-4 py-2 rounded-lg"><i data-lucide="settings" class="w-4 h-4"></i> Settings</button>
+                    <button id="go-to-settings-btn" class="btn-secondary text-sm flex items-center gap-2 px-4 py-2"><i data-lucide="settings" class="w-4 h-4"></i> Settings</button>
                 </div>
-                <div class="sovereign-card rounded-2xl p-8">
+                <div class="auth0-card p-8">
                     <h2 class="text-2xl font-bold text-white">Welcome Back!</h2>
-                    <p class="text-gray-300 mt-2">This is your personal dashboard. More features coming soon!</p>
+                    <p class="text-text-muted mt-2">This is your personal dashboard. More features coming soon!</p>
                 </div>
              </div>
              <div id="dashboard-settings" class="hidden">
                 <div class="flex items-center mb-8 gap-4">
-                     <button id="back-to-dashboard-btn" class="text-sm font-semibold text-gray-300 hover:text-white"><i data-lucide="arrow-left" class="w-5 h-5"></i></button>
+                     <button id="back-to-dashboard-btn" class="btn-secondary p-2"><i data-lucide="arrow-left" class="w-5 h-5"></i></button>
                     <h1 class="text-3xl md:text-4xl font-bold text-white">Profile Settings</h1>
                 </div>
-                <div class="sovereign-card rounded-2xl p-8 max-w-2xl mx-auto">
+                <div class="auth0-card p-8 max-w-2xl mx-auto">
                     <div class="space-y-6">
                         <div>
-                            <label for="displayName" class="block text-sm font-medium text-gray-400 mb-2">Display Name</label>
-                            <input type="text" id="displayName" placeholder="Enter your name" class="w-full bg-black/50 text-white px-4 py-3 rounded-lg border border-white/20 focus:border-[var(--accent-primary)] focus:ring-0 transition-colors">
+                            <label for="displayName" class="block text-sm font-medium text-text-muted mb-2">Display Name</label>
+                            <input type="text" id="displayName" placeholder="Enter your name" class="w-full bg-black/50 text-white px-4 py-3 rounded-lg border border-[var(--border-color)] focus:border-[var(--accent-purple)] focus:ring-0 transition-colors">
                         </div>
                          <div>
-                            <label for="displayEmail" class="block text-sm font-medium text-gray-400 mb-2">Email Address</label>
-                            <input type="email" id="displayEmail" class="w-full bg-black/50 text-white px-4 py-3 rounded-lg border border-white/20" disabled>
+                            <label for="displayEmail" class="block text-sm font-medium text-text-muted mb-2">Email Address</label>
+                            <input type="email" id="displayEmail" class="w-full bg-black/50 text-white px-4 py-3 rounded-lg border border-[var(--border-color)]" disabled>
                         </div>
-                        <button class="w-full bg-[var(--accent-primary)] hover:opacity-80 transition-opacity text-white font-bold py-3 px-8 rounded-lg">Save Changes</button>
+                        <button class="w-full btn-primary py-3">Save Changes</button>
                     </div>
                 </div>
              </div>
@@ -233,52 +221,55 @@
     <footer class="py-12 border-t border-white/10 mt-24">
         <div class="container mx-auto px-6 text-center">
             <div class="flex justify-center space-x-6 mb-6">
-                <a href="https://x.com/afeftoken?s=21" target="_blank" rel="noopener noreferrer" class="text-gray-500 hover:text-[var(--accent-primary)] transition"><i data-lucide="twitter" class="w-6 h-6"></i></a>
-                <a href="https://t.me/afeftoken" target="_blank" rel="noopener noreferrer" class="text-gray-500 hover:text-[var(--accent-primary)] transition"><i data-lucide="send" class="w-6 h-6"></i></a>
-                <a href="mailto:empiresfantoken@outlook.com" class="text-gray-500 hover:text-[var(--accent-primary)] transition"><i data-lucide="mail" class="w-6 h-6"></i></a>
+                <a href="https://x.com/afeftoken?s=21" target="_blank" rel="noopener noreferrer" class="text-text-muted hover:text-[var(--accent-purple)] transition"><i data-lucide="twitter" class="w-6 h-6"></i></a>
+                <a href="https://t.me/afeftoken" target="_blank" rel="noopener noreferrer" class="text-text-muted hover:text-[var(--accent-purple)] transition"><i data-lucide="send" class="w-6 h-6"></i></a>
+                <a href="mailto:empiresfantoken@outlook.com" class="text-text-muted hover:text-[var(--accent-purple)] transition"><i data-lucide="mail" class="w-6 h-6"></i></a>
             </div>
-            <p class="text-gray-500 text-sm">&copy; <span id="year"></span> AFEF Token. All rights reserved.</p>
+            <p class="text-text-muted text-sm">&copy; <span id="year"></span> AFEF Token. All rights reserved.</p>
         </div>
     </footer>
 
     <div id="login-modal" class="fixed inset-0 z-[100] items-center justify-center bg-black/80 hidden">
-        <div class="sovereign-card w-full max-w-md m-4 relative">
+        <div class="auth0-card w-full max-w-md m-4 relative">
              <button id="close-modal-btn" class="absolute top-4 right-4 text-gray-400 hover:text-white" aria-label="Close modal"><i data-lucide="x" class="w-6 h-6"></i></button>
             <div class="p-8">
                 <div id="login-options">
-                    <h2 class="text-2xl font-bold text-center mb-6">Login or Register</h2>
+                    <h2 class="text-2xl font-bold text-center mb-6">Welcome</h2>
+                    <p class="text-center text-text-muted mb-8">Choose your preferred method to continue.</p>
                     <div class="space-y-4">
-                        <button id="connect-metamask-btn" class="w-full flex items-center justify-center gap-3 py-3 px-4 bg-white/5 hover:bg-white/10 rounded-lg transition border border-white/20"><img src="https://upload.wikimedia.org/wikipedia/commons/3/36/MetaMask_Fox.svg" class="w-6 h-6" alt="MetaMask Logo"><span class="font-semibold">Connect with MetaMask</span></button>
-                        <button id="continue-with-email-btn" class="w-full flex items-center justify-center gap-3 py-3 px-4 bg-white/5 hover:bg-white/10 rounded-lg transition border border-white/20"><i data-lucide="mail" class="w-6 h-6"></i><span class="font-semibold">Continue with Email</span></button>
+                        <button id="connect-metamask-btn" class="w-full flex items-center justify-center gap-3 py-3 px-4 btn-secondary"><img src="https://upload.wikimedia.org/wikipedia/commons/3/36/MetaMask_Fox.svg" class="w-6 h-6" alt="MetaMask Logo"><span class="font-semibold">Connect with MetaMask</span></button>
+                        <button id="continue-with-email-btn" class="w-full flex items-center justify-center gap-3 py-3 px-4 btn-secondary"><i data-lucide="mail" class="w-6 h-6"></i><span class="font-semibold">Continue with Email</span></button>
                     </div>
                 </div>
                 <div id="email-login-view" class="hidden">
                     <button id="back-to-options-btn" class="text-gray-400 hover:text-white mb-4 flex items-center gap-2 text-sm"><i data-lucide="arrow-left" class="w-4 h-4"></i> Back</button>
                     <h2 class="text-2xl font-bold text-center mb-6">Enter Your Email</h2>
                      <div class="flex flex-col sm:flex-row gap-3">
-                        <input type="email" id="email-input" placeholder="your@email.com" class="w-full bg-black/50 text-white px-4 py-3 rounded-lg border border-white/20 focus:border-[var(--accent-primary)] focus:ring-0 transition-colors">
-                        <button id="btn-passwordless-login" class="bg-[var(--accent-primary)] hover:opacity-80 transition-opacity text-white font-bold py-3 px-6 rounded-lg whitespace-nowrap">Send Link</button>
+                        <input type="email" id="email-input" placeholder="your@email.com" class="w-full bg-black/50 text-white px-4 py-3 rounded-lg border border-[var(--border-color)] focus:border-[var(--accent-purple)] focus:ring-0 transition-colors">
+                        <button id="btn-passwordless-login" class="btn-primary py-3 px-6 whitespace-nowrap">Send Link</button>
                     </div>
-                    <p class="text-xs text-gray-500 mt-4 text-center">We'll send you a magic link to log in. No password needed.</p>
+                    <p class="text-xs text-text-muted mt-4 text-center">We'll send you a magic link to log in. No password needed.</p>
                 </div>
             </div>
         </div>
     </div>
     
-    <div id="toast" class="fixed bottom-5 right-5 bg-[var(--accent-primary)] text-white px-6 py-3 rounded-lg shadow-lg transform translate-y-20 opacity-0 transition-all duration-300">
+    <div id="toast" class="fixed bottom-5 right-5 bg-gradient-to-r from-[var(--accent-purple)] to-[var(--accent-pink)] text-white px-6 py-3 rounded-lg shadow-lg transform translate-y-20 opacity-0 transition-all duration-300">
         Address copied to clipboard!
     </div>
     
     <script>
         // --- App State & Config ---
-let auth0Client = null;
-const auth0Config = {
-    domain: "afeftoken.eu.auth0.com",
-    clientId: "KNrpDdjhDAjk9j1y87gxYJ5tsH11IIhp", 
-    authorizationParams: { redirect_uri: window.location.origin }
-};
+        let auth0Client = null;
+        const auth0Config = {
+            domain: "dev-z8y2rl3nibo7ss8j.eu.auth0.com",
+            clientId: "flAocvN0OThbj3JL6ydOBjUFuUw856kk",
+            authorizationParams: { 
+                redirect_uri: "https://afeftoken.netlify.app" 
+            }
+        };
 
-        // --- View Management ---
+        // --- View Management, UI Update Logic, Auth Functions, etc. are all included below ---
         const pageContent = document.getElementById('page-content');
         const mainContent = document.getElementById('main-content');
         const dashboard = document.getElementById('dashboard');
@@ -299,7 +290,6 @@ const auth0Config = {
             if(view === 'settings') dashboardSettings.style.display = 'block';
         };
 
-        // --- UI Update Logic ---
         const updateUI = async () => {
             const isAuthenticated = await auth0Client.isAuthenticated();
             const loginTriggers = document.querySelectorAll('.login-trigger');
@@ -316,17 +306,16 @@ const auth0Config = {
                 document.getElementById('displayEmail').value = user.email;
                 if(document.getElementById('displayName')) document.getElementById('displayName').value = user.name || '';
 
-                mobileAuthUI.innerHTML = `<button id="btn-logout-mobile" class="bg-red-500/80 hover:bg-red-500 text-white font-semibold py-2 px-4 rounded-lg text-sm w-full">Logout</button>`;
+                mobileAuthUI.innerHTML = `<button id="btn-logout-mobile" class="w-full btn-secondary py-2">Logout</button>`;
                 document.getElementById('btn-logout-mobile').addEventListener('click', logout);
             } else {
                 loginTriggers.forEach(btn => btn.style.display = 'block');
                 userProfile.style.display = 'none';
-                mobileAuthUI.innerHTML = `<button class="login-trigger bg-[var(--accent-primary)] text-white font-semibold py-2 px-4 rounded-lg text-sm w-full">Login / Register</button>`;
+                mobileAuthUI.innerHTML = `<button class="login-trigger btn-primary w-full py-2">Login / Register</button>`;
                 document.querySelector('#mobile-auth-ui .login-trigger').addEventListener('click', openLoginModal);
             }
         };
 
-        // --- Authentication Functions ---
         const configureClient = async () => { auth0Client = await auth0.createAuth0Client(auth0Config); };
         const loginPasswordless = async () => {
              const email = document.getElementById('email-input').value;
@@ -336,7 +325,6 @@ const auth0Config = {
         const connectMetaMask = async () => { alert('MetaMask integration coming soon!'); };
         const logout = () => { auth0Client.logout({ logoutParams: { returnTo: window.location.origin } }); };
 
-        // --- Modal & Menu Logic ---
         const loginModal = document.getElementById('login-modal');
         const emailLoginView = document.getElementById('email-login-view');
         const loginOptions = document.getElementById('login-options');
@@ -363,7 +351,6 @@ const auth0Config = {
             }
         }
         
-        // --- Event Listeners & Initialization ---
         function setupEventListeners() {
             document.querySelectorAll('.login-trigger').forEach(btn => btn.addEventListener('click', openLoginModal));
             document.getElementById('close-modal-btn').addEventListener('click', closeLoginModal);
