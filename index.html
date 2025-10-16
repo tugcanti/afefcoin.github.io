@@ -74,13 +74,8 @@
         #hamburger-btn.open span:nth-child(2) { opacity: 0; }
         #hamburger-btn.open span:nth-child(3) { top: 11px; transform: rotate(-135deg); }
         
-        .sparkle-btn {
-            transition: transform 0.2s ease-in-out, color 0.2s ease-in-out;
-        }
-        .sparkle-btn:hover {
-            transform: scale(1.2);
-            color: var(--accent-pink);
-        }
+        .avatar-upload-label { cursor: pointer; }
+        .avatar-upload-label:hover .absolute { opacity: 1; }
     </style>
 </head>
 <body class="overflow-x-hidden">
@@ -90,7 +85,7 @@
             <div class="flex items-center justify-between">
                 <a href="#" id="home-link" class="flex items-center gap-3">
                     <div class="w-10 h-10 bg-gradient-to-br from-[var(--accent-purple)] to-[var(--accent-pink)] rounded-lg flex items-center justify-center">
-                        <svg width="24" height="24" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg"><g filter="url(#presidential-die-cast)" fill="#B8860B"><path d="M7.8 9.2 C 7.8 8.2, 8.8 7.2, 9.8 6.7 L 16 4.2 L 22.2 6.7 C 23.2 7.2, 24.2 8.2, 24.2 9.2 L 24.2 15.6 C 24.2 22.6, 16 27.8, 16 27.8 C 16 27.8, 7.8 22.6, 7.8 15.6 Z"></path><path d="M16.3,11.5c1.4-0.4,2.8,0.3,3.3,1.5c-0.9-0.4-1.8-0.3-2.6,0.4c0.4,1.4,1.6,2.3,2.9,2.3c0.5,1.3-0.4,2.7-1.7,3.2c-1.4,0.5-3.2-0.2-4.1-1.5c-0.6-1.8-0.1-4.1,2.3-5.4zm-0.5,1.5c-0.9,0.7-0.9,2,0.4,2.8m2.5-2.8c0,0.4-0.4,0.8-0.8,0.8m2.9-1.5c0.1-0.5-0.2-0.9-0.6-1.1m-2.2-0.4c-0.4,0.3-0.8,0.7-1,1.2"></path><path d="M12.5 7.5 L 11.5 9.5 L 14.5 8.5 L 16 6.5 L 17.5 8.5 L 20.5 9.5 L 19.5 7.5 Z"></path></g></svg>
+                        <svg width="24" height="24" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M24 44C24 44 6 34 6 21V10L24 4L42 10V21C42 34 24 44 24 44Z" stroke="white" stroke-width="3"/><path d="M16 23 H32 M16 23 L14 16 L19 18 L24 14 L29 18 L34 16 L32 23 Z" stroke="#FFFFFF" stroke-width="2.5" fill="none"/></svg>
                     </div>
                     <span class="text-xl font-bold font-['Poppins'] text-white">AFEF Token</span>
                 </a>
@@ -163,40 +158,16 @@
                  <h2 class="text-3xl font-bold text-center mb-16 text-white">Our Roadmap</h2>
                  <div class="relative max-w-3xl mx-auto">
                      <div class="absolute left-1/2 h-full w-0.5 bg-white/10 transform -translate-x-1/2"></div>
-                     
                      <div class="relative mb-8 flex justify-between items-center w-full">
-                         <div class="w-1/2 pr-8 text-right">
-                             <div class="auth0-card p-4 relative group">
-                                 <strong>Phase 1:</strong> Project Launch & Airdrop
-                                 <button class="absolute top-2 right-2 text-gray-400 sparkle-btn" data-phase="Project Launch & Airdrop">
-                                     <i data-lucide="sparkles" class="w-5 h-5"></i>
-                                 </button>
-                             </div>
-                         </div>
+                         <div class="w-1/2 pr-8 text-right"><div class="auth0-card p-4"><strong>Phase 1:</strong> Project Launch & Airdrop</div></div>
                          <div class="absolute left-1/2 transform -translate-x-1/2 w-5 h-5 bg-[var(--accent-purple)] rounded-full border-4 border-[var(--bg-dark)]"></div>
                      </div>
-
                      <div class="relative mb-8 flex justify-between items-center w-full flex-row-reverse">
-                         <div class="w-1/2 pl-8 text-left">
-                             <div class="auth0-card p-4 relative group">
-                                <strong>Phase 2:</strong> CEX Listings & Partnerships
-                                <button class="absolute top-2 right-2 text-gray-400 sparkle-btn" data-phase="CEX Listings & Partnerships">
-                                     <i data-lucide="sparkles" class="w-5 h-5"></i>
-                                 </button>
-                             </div>
-                         </div>
+                         <div class="w-1/2 pl-8 text-left"><div class="auth0-card p-4"><strong>Phase 2:</strong> CEX Listings & Partnerships</div></div>
                          <div class="absolute left-1/2 transform -translate-x-1/2 w-5 h-5 bg-[var(--accent-purple)] rounded-full border-4 border-[var(--bg-dark)]"></div>
                      </div>
-
                       <div class="relative mb-8 flex justify-between items-center w-full">
-                         <div class="w-1/2 pr-8 text-right">
-                             <div class="auth0-card p-4 relative group">
-                                 <strong>Phase 3:</strong> Utility Development (Staking)
-                                 <button class="absolute top-2 right-2 text-gray-400 sparkle-btn" data-phase="Utility Development (Staking)">
-                                     <i data-lucide="sparkles" class="w-5 h-5"></i>
-                                 </button>
-                             </div>
-                         </div>
+                         <div class="w-1/2 pr-8 text-right"><div class="auth0-card p-4"><strong>Phase 3:</strong> Utility Development (Staking)</div></div>
                          <div class="absolute left-1/2 transform -translate-x-1/2 w-5 h-5 bg-[var(--accent-purple)] rounded-full border-4 border-[var(--bg-dark)]"></div>
                      </div>
                  </div>
@@ -247,48 +218,78 @@
                     <h1 class="text-3xl md:text-4xl font-bold text-white">My Dashboard</h1>
                     <button id="go-to-settings-btn" class="btn-secondary text-sm flex items-center gap-2 px-4 py-2"><i data-lucide="settings" class="w-4 h-4"></i> Settings</button>
                 </div>
-                <div class="grid md:grid-cols-2 gap-8">
-                    <div class="auth0-card p-8">
-                        <h2 class="text-2xl font-bold text-white">Welcome Back!</h2>
-                        <p class="text-text-muted mt-2">This is your personal dashboard. More features coming soon!</p>
-                    </div>
-                    <div class="auth0-card p-8">
-                        <div class="flex items-center gap-4 mb-4">
-                            <i data-lucide="lightbulb" class="w-8 h-8 text-[var(--accent-pink)]"></i>
-                            <h2 class="text-2xl font-bold text-white">AI Idea Generator</h2>
-                        </div>
-                        <p class="text-text-muted mt-2 mb-4">Generate novel use-cases and ideas for AFEF Token.</p>
-                        <button id="btn-generate-ideas" class="btn-primary w-full py-3">Generate New Ideas</button>
-                    </div>
+                <div class="auth0-card p-8">
+                    <h2 class="text-2xl font-bold text-white">Welcome Back!</h2>
+                    <p class="text-text-muted mt-2">This is your personal dashboard. More features coming soon!</p>
                 </div>
             </div>
             <div id="dashboard-settings" class="hidden">
-                 <!-- Settings UI Here -->
+                <div class="flex items-center mb-8 gap-4">
+                    <button id="back-to-dashboard-btn" class="btn-secondary p-2"><i data-lucide="arrow-left" class="w-5 h-5"></i></button>
+                    <h1 class="text-3xl md:text-4xl font-bold text-white">Profile Settings</h1>
+                </div>
+                <div class="auth0-card p-8 max-w-2xl mx-auto">
+                    <div class="space-y-6">
+                        <div>
+                            <label for="displayName" class="block text-sm font-medium text-text-muted mb-2">Display Name</label>
+                            <input type="text" id="displayName" placeholder="Enter your name" class="w-full bg-black/50 text-white px-4 py-3 rounded-lg border border-[var(--border-color)] focus:border-[var(--accent-purple)] focus:ring-0 transition-colors">
+                        </div>
+                        <div>
+                            <label for="displayEmail" class="block text-sm font-medium text-text-muted mb-2">Email Address</label>
+                            <input type="email" id="displayEmail" class="w-full bg-black/50 text-white px-4 py-3 rounded-lg border border-[var(--border-color)]" disabled>
+                        </div>
+                        <button class="w-full btn-primary py-3">Save Changes</button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
     
     <footer class="py-12 border-t border-white/10 mt-24">
-       <!-- Footer Content Here -->
+       <div class="container mx-auto px-6 text-center">
+            <div class="flex justify-center space-x-6 mb-6">
+                <a href="https://x.com/afeftoken?s=21" target="_blank" rel="noopener noreferrer" class="text-text-muted hover:text-[var(--accent-purple)] transition"><i data-lucide="twitter" class="w-6 h-6"></i></a>
+                <a href="https://t.me/afeftoken" target="_blank" rel="noopener noreferrer" class="text-text-muted hover:text-[var(--accent-purple)] transition"><i data-lucide="send" class="w-6 h-6"></i></a>
+                <a href="mailto:empiresfantoken@outlook.com" class="text-text-muted hover:text-[var(--accent-purple)] transition"><i data-lucide="mail" class="w-6 h-6"></i></a>
+            </div>
+            <p class="text-text-muted text-sm">&copy; <span id="year"></span> AFEF Token. All rights reserved.</p>
+        </div>
     </footer>
 
-    <!-- Login Modal -->
-    <div id="login-modal" class="fixed inset-0 z-[100] hidden items-center justify-center bg-black/80">
-        <!-- Login Modal Content Here -->
-    </div>
-    
-    <!-- AI Response Modal -->
-    <div id="ai-modal" class="fixed inset-0 z-[110] hidden items-center justify-center bg-black/80">
-        <div class="auth0-card w-full max-w-lg m-4 relative">
-            <button id="ai-modal-close" class="absolute top-4 right-4 text-gray-400 hover:text-white"><i data-lucide="x" class="w-6 h-6"></i></button>
+    <div id="login-modal" class="fixed inset-0 z-[100] items-center justify-center bg-black/80 hidden">
+        <div class="auth0-card w-full max-w-md m-4 relative">
+             <button id="close-modal-btn" class="absolute top-4 right-4 text-gray-400 hover:text-white" aria-label="Close modal"><i data-lucide="x" class="w-6 h-6"></i></button>
             <div class="p-8">
-                <h2 id="ai-modal-title" class="text-2xl font-bold text-center mb-6"></h2>
-                <div id="ai-modal-content" class="text-text-muted leading-relaxed"></div>
+                <div id="login-options">
+                    <h2 class="text-2xl font-bold text-center mb-6">Welcome</h2>
+                    <p class="text-center text-text-muted mb-8">Choose your preferred method to continue.</p>
+                    <div class="space-y-4">
+                        <button id="connect-metamask-btn" class="w-full flex items-center justify-center gap-3 py-3 px-4 btn-secondary"><img src="https://upload.wikimedia.org/wikipedia/commons/3/36/MetaMask_Fox.svg" class="w-6 h-6" alt="MetaMask Logo"><span class="font-semibold">Connect with MetaMask</span></button>
+                        <button id="continue-with-email-btn" class="w-full flex items-center justify-center gap-3 py-3 px-4 btn-secondary"><i data-lucide="mail" class="w-6 h-6"></i><span class="font-semibold">Continue with Email</span></button>
+                    </div>
+                </div>
+                <div id="email-login-view" class="hidden">
+                    <button id="back-to-options-btn" class="text-gray-400 hover:text-white mb-4 flex items-center gap-2 text-sm"><i data-lucide="arrow-left" class="w-4 h-4"></i> Back</button>
+                    <h2 class="text-2xl font-bold text-center mb-6">Enter Your Email</h2>
+                     <div class="flex flex-col sm:flex-row gap-3">
+                         <input type="email" id="email-input" placeholder="your@email.com" class="w-full bg-black/50 text-white px-4 py-3 rounded-lg border border-[var(--border-color)] focus:border-[var(--accent-purple)] focus:ring-0 transition-colors">
+                         <button id="btn-passwordless-login" class="btn-primary py-3 px-6 whitespace-nowrap">Send Code</button>
+                     </div>
+                    <p class="text-xs text-text-muted mt-4 text-center">We'll send a verification code to your email.</p>
+                </div>
+                <div id="email-verify-view" class="hidden">
+                    <button id="back-to-email-btn" class="text-gray-400 hover:text-white mb-4 flex items-center gap-2 text-sm"><i data-lucide="arrow-left" class="w-4 h-4"></i> Back</button>
+                    <h2 class="text-2xl font-bold text-center mb-2">Check Your Email</h2>
+                    <p class="text-center text-text-muted mb-6 text-sm">We sent a verification code to <br><strong id="verify-email-display"></strong></p>
+                    <div class="flex flex-col gap-3">
+                        <input type="text" id="code-input" placeholder="_ _ _ _ _ _" maxlength="6" class="w-full bg-black/50 text-white px-4 py-3 rounded-lg border border-[var(--border-color)] focus:border-[var(--accent-purple)] focus:ring-0 transition-colors text-center text-2xl tracking-[0.5em]">
+                        <button id="btn-verify-code" class="btn-primary py-3 px-6">Verify Code</button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
     
-    <!-- Toast Notification -->
     <div id="toast" class="fixed bottom-5 right-5 bg-gradient-to-r from-[var(--accent-purple)] to-[var(--accent-pink)] text-white px-6 py-3 rounded-lg shadow-lg transform translate-y-20 opacity-0 transition-all duration-300">
         Message here
     </div>
@@ -303,7 +304,7 @@
 
         const auth0Config = {
             domain: "dev-z8y2rl3nibo7ss8j.eu.auth0.com",
-            clientId: "flAocvN0OThbj3JL6ydOBjUFuUw856kk", // Corrected clientId
+            clientId: "flA_ocvN0OThbj3JL6ydOBjUFuUw856kk", // Corrected clientId
             redirectUri: window.location.origin,
             scope: 'openid profile email',
             responseType: 'token id_token'
@@ -317,62 +318,63 @@
             scope: auth0Config.scope
         });
 
-        // --- Gemini AI API Function ---
-        const callGemini = async (prompt) => {
-            // Using the 'gemini-2.5-flash-preview-09-2025' model which works without a user-provided API key in this environment.
-            const model = "gemini-2.5-flash-preview-09-2025"; 
-            const apiKey = ""; // API key is injected by the hosting environment.
-            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`;
-
-            try {
-                const response = await fetch(apiUrl, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        contents: [{ parts: [{ text: prompt }] }]
-                    })
-                });
-
-                const result = await response.json();
-
-                if (!response.ok) {
-                    const errorDetails = result?.error?.message || `API request failed with status ${response.status}`;
-                    console.error("API Error Response:", result);
-                    return { error: errorDetails };
-                }
-
-                const text = result.candidates?.[0]?.content?.parts?.[0]?.text;
-                
-                if (!text) {
-                    console.error("No text found in API response:", result);
-                    return { error: 'No content was generated by the AI. The response was empty.' };
-                }
-                
-                return { text: text.replace(/\n/g, '<br>') };
-
-            } catch (error) {
-                console.error('Error calling Gemini API:', error);
-                return { error: error.message };
-            }
-        };
-
         // --- View Management & UI Updates ---
         const mainContent = document.getElementById('main-content');
         const dashboard = document.getElementById('dashboard');
+        const dashboardMain = document.getElementById('dashboard-main');
+        const dashboardSettings = document.getElementById('dashboard-settings');
 
         function showView(view) {
-            mainContent.style.display = view === 'main' ? 'block' : 'none';
-            dashboard.style.display = view === 'dashboard' ? 'block' : 'none';
+            mainContent.style.display = 'none';
+            dashboard.style.display = 'none';
+            if (view === 'main') mainContent.style.display = 'block';
+            if (view === 'dashboard') dashboard.style.display = 'block';
             window.scrollTo(0, 0);
         };
 
+        function showDashboardView(view) {
+            dashboardMain.style.display = 'none';
+            dashboardSettings.style.display = 'none';
+            if(view === 'main') dashboardMain.style.display = 'block';
+            if(view === 'settings') dashboardSettings.style.display = 'block';
+        };
+
         function updateUI() {
-            // Simplified for brevity, original logic remains
+            const isAuthenticated = IsAuthenticated();
+            const userProfileDiv = document.getElementById('user-profile');
+            const authUI = document.getElementById('auth-ui');
+            const mobileAuthUI = document.getElementById('mobile-auth-ui');
+
+            if (isAuthenticated) {
+                authUI.querySelector('.login-trigger').style.display = 'none';
+                userProfileDiv.style.display = 'flex';
+                
+                document.getElementById('user-avatar').src = userProfile.picture || `https://placehold.co/40x40/6A35FF/FFFFFF?text=${(userProfile.name || userProfile.email || 'A')[0].toUpperCase()}`;
+                document.getElementById('user-identifier').textContent = userProfile.name || userProfile.email;
+                if(document.getElementById('displayEmail')) document.getElementById('displayEmail').value = userProfile.email;
+                if(document.getElementById('displayName')) document.getElementById('displayName').value = userProfile.name || '';
+
+                mobileAuthUI.innerHTML = `<button id="btn-logout-mobile" class="w-full btn-secondary py-2">Logout</button>`;
+                document.getElementById('btn-logout-mobile').addEventListener('click', logout);
+            } else {
+                authUI.querySelector('.login-trigger').style.display = 'block';
+                userProfileDiv.style.display = 'none';
+                mobileAuthUI.innerHTML = `<button class="login-trigger btn-primary w-full py-2">Login / Register</button>`;
+                const mobileLoginTrigger = mobileAuthUI.querySelector('.login-trigger');
+                if (mobileLoginTrigger) {
+                    mobileLoginTrigger.addEventListener('click', openLoginModal);
+                }
+            }
+            document.querySelectorAll('.login-trigger').forEach(btn => {
+                btn.style.display = isAuthenticated ? 'none' : 'block';
+            });
         };
         
         // --- Auth Functions ---
         function setSession(authResult) {
             expiresAt = (authResult.expiresIn * 1000) + new Date().getTime();
+            accessToken = authResult.accessToken;
+            idToken = authResult.idToken;
             userProfile = authResult.idTokenPayload;
         }
 
@@ -382,83 +384,161 @@
 
         function handleAuthentication() {
              webAuth.checkSession({}, (err, authResult) => {
-                if (authResult && authResult.idToken) {
+                if (authResult && authResult.accessToken && authResult.idToken) {
                     setSession(authResult);
                     showView('dashboard');
-                } else {
+                } else if (err) {
+                    console.log("Could not get a new token", err);
                     showView('main');
                 }
                  updateUI();
             });
         }
         
+        function startPasswordlessLogin() {
+            const email = document.getElementById('email-input').value;
+            if (!/^\S+@\S+\.\S+$/.test(email)) {
+                showToast('Please enter a valid email address.', 'error');
+                return;
+            }
+            userEmailForVerification = email; 
+
+            const button = document.getElementById('btn-passwordless-login');
+            button.disabled = true;
+            button.textContent = "Sending...";
+
+            webAuth.passwordlessStart({
+                connection: 'email',
+                send: 'code',
+                email: email
+            }, (err, res) => {
+                button.disabled = false;
+                button.textContent = "Send Code";
+                if (err) {
+                    console.error(err);
+                    showToast(err.description || 'Failed to send code. Please try again.', 'error');
+                } else {
+                    document.getElementById('verify-email-display').textContent = email;
+                    showLoginModalView('verify');
+                }
+            });
+        };
+
+        function verifyCode() {
+            const code = document.getElementById('code-input').value;
+             if (!code || code.length < 6) {
+                showToast('Please enter the 6-digit code.', 'error');
+                return;
+            }
+            const button = document.getElementById('btn-verify-code');
+            button.disabled = true;
+            button.textContent = "Verifying...";
+            
+            webAuth.passwordlessLogin({
+                connection: 'email',
+                email: userEmailForVerification,
+                verificationCode: code
+            }, (err, authResult) => {
+                button.disabled = false;
+                button.textContent = "Verify Code";
+                if (err) {
+                    console.error(err);
+                    showToast(err.description || 'Invalid code. Please try again.', 'error');
+                } else {
+                    setSession(authResult);
+                    closeLoginModal();
+                    showView('dashboard');
+                    updateUI();
+                }
+            });
+        }
+
         function logout() {
+            accessToken = null;
+            idToken = null;
             expiresAt = null;
+            userProfile = null;
             webAuth.logout({
                 returnTo: window.location.origin,
                 clientID: auth0Config.clientId
             });
         };
 
-        // --- Modals & Event Listeners ---
-        const aiModal = document.getElementById('ai-modal');
+        // --- Modal & View Management ---
+        const loginModal = document.getElementById('login-modal');
+        const loginViews = {
+            options: document.getElementById('login-options'),
+            email: document.getElementById('email-login-view'),
+            verify: document.getElementById('email-verify-view')
+        };
+        
+        function openLoginModal() { loginModal.style.display = 'flex'; showLoginModalView('options'); }
+        function closeLoginModal() { loginModal.style.display = 'none'; }
 
-        function showAiModal(title, content, showClose = true) {
-            document.getElementById('ai-modal-title').textContent = title;
-            document.getElementById('ai-modal-content').innerHTML = content;
-            document.getElementById('ai-modal-close').style.display = showClose ? 'block' : 'none';
-            aiModal.style.display = 'flex';
-        }
-
-        function closeAiModal() {
-            aiModal.style.display = 'none';
-        }
-
-        async function elaborateOnRoadmapPhase(phaseTitle) {
-            const prompt = `You are an expert crypto project analyst. Elaborate on the roadmap phase titled "${phaseTitle}" for a new community token called AFEF Token. Explain its importance and potential impact in a concise, engaging, and optimistic paragraph (around 100 words). Do not use markdown.`;
-            showAiModal(`Elaborating on: ${phaseTitle}`, '<div class="flex justify-center items-center"><div class="animate-spin rounded-full h-8 w-8 border-b-2 border-white"></div></div>', false);
-            
-            const result = await callGemini(prompt);
-            if (result.text) {
-                document.getElementById('ai-modal-content').innerHTML = result.text;
-            } else {
-                document.getElementById('ai-modal-content').innerHTML = `<p class="text-red-400">An error occurred while contacting the AI.<br><br><strong>Details:</strong> ${result.error || 'Unknown error.'}</p>`;
+        function showLoginModalView(viewName) {
+            Object.values(loginViews).forEach(view => view.classList.add('hidden'));
+            if (loginViews[viewName]) {
+                loginViews[viewName].classList.remove('hidden');
             }
-            document.getElementById('ai-modal-close').style.display = 'block';
         }
-
-        async function generateNewIdeas() {
-            const prompt = "You are a creative strategist for a new community DeFi token called AFEF Token. Brainstorm a novel and exciting real-world utility or feature for the token. Describe it in a short, engaging paragraph (around 100 words). Do not use markdown.";
-            showAiModal('Generating New Ideas...', '<div class="flex justify-center items-center"><div class="animate-spin rounded-full h-8 w-8 border-b-2 border-white"></div></div>', false);
+        
+        function closeMobileMenu() {
+            document.getElementById('mobile-menu').classList.add('hidden');
+            document.getElementById('hamburger-btn').classList.remove('open');
+        }
+        
+        function showToast(message, type = 'success') {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.classList.remove('from-red-500', 'to-red-600', 'from-[var(--accent-purple)]', 'to-[var(--accent-pink)]');
             
-            const result = await callGemini(prompt);
-             if (result.text) {
-                document.getElementById('ai-modal-title').textContent = 'A New Idea for AFEF!';
-                document.getElementById('ai-modal-content').innerHTML = result.text;
+            if (type === 'error') {
+                 toast.classList.add('from-red-500', 'to-red-600');
             } else {
-                document.getElementById('ai-modal-content').innerHTML = `<p class="text-red-400">An error occurred while contacting the AI.<br><br><strong>Details:</strong> ${result.error || 'Unknown error.'}</p>`;
+                 toast.classList.add('from-[var(--accent-purple)]', 'to-[var(--accent-pink)]');
             }
-            document.getElementById('ai-modal-close').style.display = 'block';
+            toast.classList.remove('translate-y-20', 'opacity-0');
+            setTimeout(() => { toast.classList.add('translate-y-20', 'opacity-0'); }, 3000);
         }
 
         function setupEventListeners() {
-            // General Listeners (Login, Logout, etc.)
+            // Modal controls
+            document.querySelectorAll('.login-trigger').forEach(btn => btn.addEventListener('click', openLoginModal));
+            document.getElementById('close-modal-btn').addEventListener('click', closeLoginModal);
+            loginModal.addEventListener('click', (e) => { if(e.target === loginModal) closeLoginModal(); });
             
-            // AI Feature Listeners
-            document.querySelectorAll('.sparkle-btn').forEach(btn => {
-                btn.addEventListener('click', (e) => {
-                    const phase = e.currentTarget.dataset.phase;
-                    elaborateOnRoadmapPhase(phase);
-                });
-            });
-            
-            const btnGenerateIdeas = document.getElementById('btn-generate-ideas');
-            if(btnGenerateIdeas) {
-                 btnGenerateIdeas.addEventListener('click', generateNewIdeas);
-            }
+            // Modal navigation
+            document.getElementById('continue-with-email-btn').addEventListener('click', () => showLoginModalView('email'));
+            document.getElementById('back-to-options-btn').addEventListener('click', () => showLoginModalView('options'));
+            document.getElementById('back-to-email-btn').addEventListener('click', () => showLoginModalView('email'));
 
-            document.getElementById('ai-modal-close').addEventListener('click', closeAiModal);
-            aiModal.addEventListener('click', (e) => { if(e.target === aiModal) closeAiModal(); });
+            // Auth actions
+            document.getElementById('connect-metamask-btn').addEventListener('click', () => showToast('MetaMask integration coming soon!'));
+            document.getElementById('btn-passwordless-login').addEventListener('click', startPasswordlessLogin);
+            document.getElementById('btn-verify-code').addEventListener('click', verifyCode);
+            document.getElementById('btn-logout').addEventListener('click', logout);
+
+            // Page navigation
+            const hamburgerBtn = document.getElementById('hamburger-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            hamburgerBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                mobileMenu.classList.toggle('hidden');
+                hamburgerBtn.classList.toggle('open');
+            });
+            document.querySelectorAll('.mobile-menu-link').forEach(link => link.addEventListener('click', closeMobileMenu));
+            
+            document.getElementById('home-link').addEventListener('click', (e) => { e.preventDefault(); showView(IsAuthenticated() ? 'dashboard' : 'main'); });
+            document.getElementById('btn-dashboard').addEventListener('click', (e) => { e.preventDefault(); showView('dashboard'); showDashboardView('main'); closeMobileMenu();});
+            document.getElementById('go-to-settings-btn').addEventListener('click', () => showDashboardView('settings'));
+            document.getElementById('back-to-dashboard-btn').addEventListener('click', () => showDashboardView('main'));
+            
+            // Utility
+            document.getElementById('copy-address-btn').addEventListener('click', () => {
+                navigator.clipboard.writeText(document.getElementById('contract-address').textContent)
+                   .then(() => showToast('Address copied to clipboard!'));
+            });
+            document.getElementById('year').textContent = new Date().getFullYear();
         }
         
         window.onload = () => {
