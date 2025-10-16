@@ -74,8 +74,8 @@
         #hamburger-btn.open span:nth-child(2) { opacity: 0; }
         #hamburger-btn.open span:nth-child(3) { top: 11px; transform: rotate(-135deg); }
         
-        .avatar-upload-label { cursor: pointer; }
-        .avatar-upload-label:hover .absolute { opacity: 1; }
+        .gemini-modal-content ul { list-style-type: disc; padding-left: 20px; }
+        .gemini-modal-content li { margin-bottom: 0.5rem; }
     </style>
 </head>
 <body class="overflow-x-hidden">
@@ -84,8 +84,11 @@
         <nav class="container mx-auto px-6 py-4">
             <div class="flex items-center justify-between">
                 <a href="#" id="home-link" class="flex items-center gap-3">
-                    <div class="w-10 h-10 bg-gradient-to-br from-[var(--accent-purple)] to-[var(--accent-pink)] rounded-lg flex items-center justify-center">
-                        <svg width="24" height="24" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M24 44C24 44 6 34 6 21V10L24 4L42 10V21C42 34 24 44 24 44Z" stroke="white" stroke-width="3"/><path d="M16 23 H32 M16 23 L14 16 L19 18 L24 14 L29 18 L34 16 L32 23 Z" stroke="#FFFFFF" stroke-width="2.5" fill="none"/></svg>
+                    <div class="w-10 h-10 bg-gradient-to-br from-[var(--accent-purple)] to-[var(--accent-pink)] rounded-lg flex items-center justify-center p-1.5">
+                        <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M6 9 C 6 9, 6 7, 8 6 L 16 4 L 24 6 C 26 7, 26 9, 26 9 L 26 15 C 26 23, 16 28, 16 28 C 16 28, 6 23, 6 15 Z" fill="#FFFFFF" stroke="none"/>
+                            <path d="M12 7 L 11 9 L 14 8 L 16 6 L 18 8 L 21 9 L 20 7 Z" fill="#FFFFFF" stroke="none"/>
+                        </svg>
                     </div>
                     <span class="text-xl font-bold font-['Poppins'] text-white">AFEF Token</span>
                 </a>
@@ -159,15 +162,15 @@
                  <div class="relative max-w-3xl mx-auto">
                      <div class="absolute left-1/2 h-full w-0.5 bg-white/10 transform -translate-x-1/2"></div>
                      <div class="relative mb-8 flex justify-between items-center w-full">
-                         <div class="w-1/2 pr-8 text-right"><div class="auth0-card p-4"><strong>Phase 1:</strong> Project Launch & Airdrop</div></div>
+                         <div class="w-1/2 pr-8 text-right"><div class="auth0-card p-4 flex items-center justify-end gap-3"><span><strong>Phase 1:</strong> Project Launch & Airdrop</span> <button class="gemini-roadmap-btn btn-secondary p-1.5" data-phase="Project Launch & Airdrop">✨</button></div></div>
                          <div class="absolute left-1/2 transform -translate-x-1/2 w-5 h-5 bg-[var(--accent-purple)] rounded-full border-4 border-[var(--bg-dark)]"></div>
                      </div>
                      <div class="relative mb-8 flex justify-between items-center w-full flex-row-reverse">
-                         <div class="w-1/2 pl-8 text-left"><div class="auth0-card p-4"><strong>Phase 2:</strong> CEX Listings & Partnerships</div></div>
+                         <div class="w-1/2 pl-8 text-left"><div class="auth0-card p-4 flex items-center justify-start gap-3"><button class="gemini-roadmap-btn btn-secondary p-1.5" data-phase="CEX Listings & Partnerships">✨</button> <span><strong>Phase 2:</strong> CEX Listings & Partnerships</span></div></div>
                          <div class="absolute left-1/2 transform -translate-x-1/2 w-5 h-5 bg-[var(--accent-purple)] rounded-full border-4 border-[var(--bg-dark)]"></div>
                      </div>
                       <div class="relative mb-8 flex justify-between items-center w-full">
-                         <div class="w-1/2 pr-8 text-right"><div class="auth0-card p-4"><strong>Phase 3:</strong> Utility Development (Staking)</div></div>
+                         <div class="w-1/2 pr-8 text-right"><div class="auth0-card p-4 flex items-center justify-end gap-3"><span><strong>Phase 3:</strong> Utility Development (Staking)</span> <button class="gemini-roadmap-btn btn-secondary p-1.5" data-phase="Utility Development (Staking)">✨</button></div></div>
                          <div class="absolute left-1/2 transform -translate-x-1/2 w-5 h-5 bg-[var(--accent-purple)] rounded-full border-4 border-[var(--bg-dark)]"></div>
                      </div>
                  </div>
@@ -212,15 +215,23 @@
             </section>
         </main>
         
-        <div id="dashboard" class="hidden container mx-auto px-6 py-16">
+        <div id="dashboard" class="hidden container mx-auto px-6 py-16 space-y-8">
             <div id="dashboard-main">
                 <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4">
                     <h1 class="text-3xl md:text-4xl font-bold text-white">My Dashboard</h1>
                     <button id="go-to-settings-btn" class="btn-secondary text-sm flex items-center gap-2 px-4 py-2"><i data-lucide="settings" class="w-4 h-4"></i> Settings</button>
                 </div>
-                <div class="auth0-card p-8">
-                    <h2 class="text-2xl font-bold text-white">Welcome Back!</h2>
-                    <p class="text-text-muted mt-2">This is your personal dashboard. More features coming soon!</p>
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <div class="auth0-card p-8">
+                        <h2 class="text-2xl font-bold text-white mb-4">Welcome Back!</h2>
+                        <p class="text-text-muted">This is your personal dashboard. Check out the AI-powered tools to explore the future of AFEF.</p>
+                    </div>
+                     <div class="auth0-card p-8">
+                        <h2 class="text-2xl font-bold text-white mb-4 flex items-center gap-2">✨ Brainstorm Token Utility</h2>
+                         <p class="text-text-muted mb-6">Let Gemini generate some innovative new use cases for the AFEF Token to inspire the community.</p>
+                         <button id="gemini-brainstorm-btn" class="btn-primary py-2 px-5">Generate New Ideas</button>
+                         <div id="gemini-brainstorm-results-container" class="mt-6 text-text-muted"></div>
+                    </div>
                 </div>
             </div>
             <div id="dashboard-settings" class="hidden">
@@ -256,6 +267,7 @@
         </div>
     </footer>
 
+    <!-- Login Modal -->
     <div id="login-modal" class="fixed inset-0 z-[100] items-center justify-center bg-black/80 hidden">
         <div class="auth0-card w-full max-w-md m-4 relative">
              <button id="close-modal-btn" class="absolute top-4 right-4 text-gray-400 hover:text-white" aria-label="Close modal"><i data-lucide="x" class="w-6 h-6"></i></button>
@@ -290,6 +302,18 @@
         </div>
     </div>
     
+    <!-- Gemini Modal -->
+    <div id="gemini-modal" class="fixed inset-0 z-[100] items-center justify-center bg-black/80 hidden">
+        <div class="auth0-card w-full max-w-xl m-4 relative">
+             <button id="gemini-close-modal-btn" class="absolute top-4 right-4 text-gray-400 hover:text-white" aria-label="Close modal"><i data-lucide="x" class="w-6 h-6"></i></button>
+            <div class="p-8">
+                <h2 id="gemini-modal-title" class="text-2xl font-bold text-center mb-6"></h2>
+                <div id="gemini-modal-content" class="text-text-muted leading-relaxed"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
     <div id="toast" class="fixed bottom-5 right-5 bg-gradient-to-r from-[var(--accent-purple)] to-[var(--accent-pink)] text-white px-6 py-3 rounded-lg shadow-lg transform translate-y-20 opacity-0 transition-all duration-300">
         Message here
     </div>
@@ -304,12 +328,12 @@
 
         const auth0Config = {
             domain: "dev-z8y2rl3nibo7ss8j.eu.auth0.com",
-            clientId: "flA_ocvN0OThbj3JL6ydOBjUFuUw856kk", // Corrected clientId
+            clientId: "flAocvN0OThbj3JL6ydOBjUFuUw856kk",
             redirectUri: window.location.origin,
             scope: 'openid profile email',
             responseType: 'token id_token'
         };
-
+        
         const webAuth = new auth0.WebAuth({
             domain: auth0Config.domain,
             clientID: auth0Config.clientId,
@@ -317,6 +341,48 @@
             responseType: auth0Config.responseType,
             scope: auth0Config.scope
         });
+
+        // --- Gemini API ---
+        const callGemini = async (prompt, retries = 3, delay = 1000) => {
+            const apiKey = ""; 
+            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
+
+            const payload = {
+                contents: [{ parts: [{ text: prompt }] }],
+            };
+            
+            try {
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                if (!response.ok) {
+                    if (response.status === 429 && retries > 0) {
+                        await new Promise(res => setTimeout(res, delay));
+                        return callGemini(prompt, retries - 1, delay * 2);
+                    }
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+
+                const result = await response.json();
+                const candidate = result.candidates?.[0];
+
+                if (candidate && candidate.content?.parts?.[0]?.text) {
+                    return candidate.content.parts[0].text;
+                } else {
+                    return "Sorry, I couldn't generate a response. Please try again.";
+                }
+            } catch (error) {
+                console.error("Gemini API call failed:", error);
+                 if (retries > 0) {
+                    await new Promise(res => setTimeout(res, delay));
+                    return callGemini(prompt, retries - 1, delay * 2);
+                }
+                return "An error occurred while contacting the AI. Please check the console for details.";
+            }
+        };
 
         // --- View Management & UI Updates ---
         const mainContent = document.getElementById('main-content');
@@ -466,6 +532,7 @@
 
         // --- Modal & View Management ---
         const loginModal = document.getElementById('login-modal');
+        const geminiModal = document.getElementById('gemini-modal');
         const loginViews = {
             options: document.getElementById('login-options'),
             email: document.getElementById('email-login-view'),
@@ -474,6 +541,14 @@
         
         function openLoginModal() { loginModal.style.display = 'flex'; showLoginModalView('options'); }
         function closeLoginModal() { loginModal.style.display = 'none'; }
+        
+        function openGeminiModal(title, content) {
+            document.getElementById('gemini-modal-title').textContent = title;
+            document.getElementById('gemini-modal-content').innerHTML = content;
+            geminiModal.style.display = 'flex';
+        }
+        function closeGeminiModal() { geminiModal.style.display = 'none'; }
+
 
         function showLoginModalView(viewName) {
             Object.values(loginViews).forEach(view => view.classList.add('hidden'));
@@ -500,6 +575,46 @@
             toast.classList.remove('translate-y-20', 'opacity-0');
             setTimeout(() => { toast.classList.add('translate-y-20', 'opacity-0'); }, 3000);
         }
+        
+        // --- Gemini Feature Handlers ---
+        async function handleRoadmapClick(event) {
+            const phase = event.currentTarget.dataset.phase;
+            if (!phase) return;
+
+            openGeminiModal(`Elaborating on: ${phase}`, '<p class="text-center">✨ Generating details...</p>');
+            
+            const prompt = `You are a crypto project analyst. Elaborate on the following roadmap phase for the "AFEF Token" in a concise and exciting paragraph of about 80-100 words: "${phase}"`;
+            const result = await callGemini(prompt);
+            
+            openGeminiModal(`Elaborating on: ${phase}`, `<p>${result}</p>`);
+        }
+
+        async function handleBrainstormClick(event) {
+            const button = event.currentTarget;
+            const resultsContainer = document.getElementById('gemini-brainstorm-results-container');
+            
+            button.disabled = true;
+            resultsContainer.innerHTML = '<p>✨ Generating creative ideas...</p>';
+            
+            const prompt = `You are a creative DeFi strategist. Brainstorm and list 3-4 innovative and exciting potential use cases for a community-driven cryptocurrency called 'AFEF Token'. Format the response as a simple markdown list. For each item, give a bold title and a short explanation.`;
+            const result = await callGemini(prompt);
+
+            const htmlResult = result
+                .split('\n')
+                .map(line => line.trim())
+                .filter(line => line.length > 0)
+                .map(line => {
+                    if (line.startsWith('* ') || line.startsWith('- ')) {
+                        // Handle list items, converting markdown bold to HTML bold
+                        return `<li>${line.substring(2).replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')}</li>`;
+                    }
+                    return ''; // Ignore non-list item lines
+                })
+                .join('');
+            
+            resultsContainer.innerHTML = `<ul class="space-y-2">${htmlResult}</ul>`;
+            button.disabled = false;
+        }
 
         function setupEventListeners() {
             // Modal controls
@@ -507,6 +622,10 @@
             document.getElementById('close-modal-btn').addEventListener('click', closeLoginModal);
             loginModal.addEventListener('click', (e) => { if(e.target === loginModal) closeLoginModal(); });
             
+            // Gemini Modal controls
+            document.getElementById('gemini-close-modal-btn').addEventListener('click', closeGeminiModal);
+            geminiModal.addEventListener('click', (e) => { if(e.target === geminiModal) closeGeminiModal(); });
+
             // Modal navigation
             document.getElementById('continue-with-email-btn').addEventListener('click', () => showLoginModalView('email'));
             document.getElementById('back-to-options-btn').addEventListener('click', () => showLoginModalView('options'));
@@ -539,6 +658,10 @@
                    .then(() => showToast('Address copied to clipboard!'));
             });
             document.getElementById('year').textContent = new Date().getFullYear();
+
+            // Gemini Triggers
+            document.querySelectorAll('.gemini-roadmap-btn').forEach(btn => btn.addEventListener('click', handleRoadmapClick));
+            document.getElementById('gemini-brainstorm-btn').addEventListener('click', handleBrainstormClick);
         }
         
         window.onload = () => {
