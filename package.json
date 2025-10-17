@@ -1,0 +1,14 @@
+{
+  "name": "afef-token-functions",
+  "version": "1.0.0",
+  "description": "Serverless functions for AFEF Token project.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "firebase-admin": "^12.1.1"
+  }
+}
