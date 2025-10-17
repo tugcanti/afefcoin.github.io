@@ -77,7 +77,7 @@
         .avatar-upload-label { cursor: pointer; }
         .avatar-upload-label:hover .absolute { opacity: 1; }
 
-        /* --- LIVE CHAT STYLES --- */
+        /* --- DÜZELTİLMİŞ CANLI DESTEK STİLLERİ --- */
         #chat-widget-container {
             position: fixed;
             bottom: 20px;
@@ -94,7 +94,7 @@
             justify-content: center;
             cursor: pointer;
             box-shadow: 0 4px 20px rgba(0,0,0,0.3);
-            transition: transform 0.3s ease;
+            transition: transform 0.3s ease, opacity 0.3s ease;
         }
         #chat-bubble:hover {
             transform: scale(1.1);
@@ -113,6 +113,15 @@
             flex-direction: column;
             box-shadow: 0 10px 40px rgba(0,0,0,0.4);
             transform-origin: bottom right;
+            opacity: 0;
+            transform: translateY(20px) scale(0.95);
+            transition: opacity 0.3s ease, transform 0.3s ease;
+            pointer-events: none;
+        }
+        #chat-window.chat-open {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+            pointer-events: auto;
         }
         .chat-message {
             max-width: 80%;
@@ -139,7 +148,7 @@
 <body class="overflow-x-hidden">
 
     <header class="sticky top-0 z-50 bg-opacity-80 bg-[var(--bg-dark)] backdrop-blur-lg border-b border-white/10">
-        <!-- NAVIGATION CODE REMAINS UNCHANGED -->
+        <!-- NAVİGASYON KODU DEĞİŞMEDİ -->
         <nav class="container mx-auto px-6 py-4">
             <div class="flex items-center justify-between">
                 <a href="#" id="home-link" class="flex items-center gap-3">
@@ -184,7 +193,7 @@
     </header>
 
     <div id="page-content">
-        <!-- MAIN CONTENT CODE REMAINS UNCHANGED -->
+        <!-- ANA İÇERİK KODU DEĞİŞMEDİ -->
         <main id="main-content" class="container mx-auto px-6 py-16 space-y-24 md:space-y-32">
              <section class="relative text-center pt-16 md:pt-24">
                  <div class="absolute inset-0 -z-10 overflow-hidden"><div class="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-gradient-to-tr from-[var(--accent-purple)] to-[var(--accent-pink)] opacity-20 rounded-full filter blur-3xl"></div></div>
@@ -356,7 +365,7 @@
 
     <!-- --- LIVE CHAT HTML CODE --- -->
     <div id="chat-widget-container">
-        <div id="chat-window" class="hidden transition-transform duration-300 ease-in-out">
+        <div id="chat-window" class="transition-transform duration-300 ease-in-out">
             <div class="p-4 bg-opacity-80 bg-[var(--card-dark)] backdrop-blur-lg border-b border-[var(--border-color)] flex justify-between items-center">
                 <h3 class="font-bold text-lg">AFEF Support</h3>
                 <button id="close-chat-btn" class="text-gray-400 hover:text-white">
@@ -630,7 +639,7 @@
             document.getElementById('year').textContent = new Date().getFullYear();
         }
 
-        // --- LIVE CHAT FUNCTIONS ---
+        // --- CORRECTED LIVE CHAT FUNCTIONS ---
         function setupChatEventListeners() {
             const chatBubble = document.getElementById('chat-bubble');
             const chatWindow = document.getElementById('chat-window');
@@ -639,15 +648,17 @@
             const chatInput = document.getElementById('chat-input');
             const chatHistory = document.getElementById('chat-history');
 
+            // Opens the chat window
             chatBubble.addEventListener('click', () => {
-                chatWindow.classList.toggle('hidden');
+                chatWindow.classList.add('chat-open');
                 if (!chatWindow.classList.contains('hidden')) {
-                     lucide.createIcons(); // Re-render icons if needed
+                     lucide.createIcons();
                 }
             });
 
+            // Closes the chat window
             closeChatBtn.addEventListener('click', () => {
-                chatWindow.classList.add('hidden');
+                chatWindow.classList.remove('chat-open');
             });
 
             const addMessage = (message, sender) => {
