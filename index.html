@@ -7,140 +7,43 @@
     
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-    <script src="https://cdn.auth0.com/js/auth0/9.20.0/auth0.min.js"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <!-- Auth0 Kütüphanesi -->
+    <script src="https://cdn.auth0.com/js/auth0/9.20.0/auth0.min.js"></script>
+    
+    <!-- YENİ: Firebase Kütüphaneleri -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
 
     <style>
-        :root {
-            --bg-dark: #10162F;
-            --card-dark: #192040;
-            --text-main: #FFFFFF;
-            --text-muted: #A0AEC0;
-            --accent-purple: #6A35FF;
-            --accent-pink: #E43A8A;
-            --border-color: rgba(255, 255, 255, 0.1);
-        }
+        :root { --bg-dark: #10162F; --card-dark: #192040; --text-main: #FFFFFF; --text-muted: #A0AEC0; --accent-purple: #6A35FF; --accent-pink: #E43A8A; --border-color: rgba(255, 255, 255, 0.1); }
         html { scroll-behavior: smooth; }
-        body { 
-            font-family: 'Inter', sans-serif; 
-            background-color: var(--bg-dark); 
-            color: var(--text-main); 
-        }
+        body { font-family: 'Inter', sans-serif; background-color: var(--bg-dark); color: var(--text-main); }
         h1, h2, h3, h4, h5, h6 { font-family: 'Poppins', sans-serif; }
-        
-        .auth0-card { 
-            background-color: var(--card-dark); 
-            border: 1px solid var(--border-color);
-            border-radius: 0.75rem;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-            transition: all 0.3s ease-in-out;
-        }
-        
-        .btn-primary {
-            background: linear-gradient(90deg, var(--accent-purple), var(--accent-pink));
-            color: var(--text-main);
-            font-weight: 600;
-            border-radius: 0.5rem;
-            transition: all 0.3s ease-in-out;
-            box-shadow: 0 4px 15px rgba(106, 53, 255, 0.3);
-        }
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(106, 53, 255, 0.4);
-        }
-        .btn-primary:disabled {
-            background: #555;
-            cursor: not-allowed;
-            box-shadow: none;
-            transform: none;
-        }
-
-        .btn-secondary {
-            background-color: rgba(255,255,255,0.05);
-            color: var(--text-main);
-            font-weight: 600;
-            border-radius: 0.5rem;
-            border: 1px solid var(--border-color);
-            transition: all 0.3s ease-in-out;
-        }
-        .btn-secondary:hover {
-            background-color: var(--border-color);
-        }
-
+        .auth0-card { background-color: var(--card-dark); border: 1px solid var(--border-color); border-radius: 0.75rem; box-shadow: 0 10px 30px rgba(0,0,0,0.2); transition: all 0.3s ease-in-out; }
+        .btn-primary { background: linear-gradient(90deg, var(--accent-purple), var(--accent-pink)); color: var(--text-main); font-weight: 600; border-radius: 0.5rem; transition: all 0.3s ease-in-out; box-shadow: 0 4px 15px rgba(106, 53, 255, 0.3); }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(106, 53, 255, 0.4); }
+        .btn-primary:disabled { background: #555; cursor: not-allowed; box-shadow: none; transform: none; }
+        .btn-secondary { background-color: rgba(255,255,255,0.05); color: var(--text-main); font-weight: 600; border-radius: 0.5rem; border: 1px solid var(--border-color); transition: all 0.3s ease-in-out; }
+        .btn-secondary:hover { background-color: var(--border-color); }
         #hamburger-btn { width: 24px; height: 24px; position: relative; }
         #hamburger-btn span { display: block; width: 100%; height: 2px; background-color: var(--text-main); border-radius: 2px; position: absolute; transition: all 0.3s ease-in-out; }
         #hamburger-btn span:nth-child(1) { top: 4px; } #hamburger-btn span:nth-child(2) { top: 11px; } #hamburger-btn span:nth-child(3) { top: 18px; }
         #hamburger-btn.open span:nth-child(1) { top: 11px; transform: rotate(135deg); }
         #hamburger-btn.open span:nth-child(2) { opacity: 0; }
         #hamburger-btn.open span:nth-child(3) { top: 11px; transform: rotate(-135deg); }
-        
         .avatar-upload-label { cursor: pointer; }
         .avatar-upload-label:hover .absolute { opacity: 1; }
-
-        /* --- DÜZELTİLMİŞ CANLI DESTEK STİLLERİ --- */
-        #chat-widget-container {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            z-index: 1000;
-        }
-        #chat-bubble {
-            width: 60px;
-            height: 60px;
-            background: linear-gradient(45deg, var(--accent-purple), var(--accent-pink));
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
-            transition: transform 0.3s ease, opacity 0.3s ease;
-        }
-        #chat-bubble:hover {
-            transform: scale(1.1);
-        }
-        #chat-window {
-            position: absolute;
-            bottom: 80px;
-            right: 0;
-            width: 350px;
-            height: 500px;
-            background-color: var(--card-dark);
-            border: 1px solid var(--border-color);
-            border-radius: 1rem;
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.4);
-            transform-origin: bottom right;
-            opacity: 0;
-            transform: translateY(20px) scale(0.95);
-            transition: opacity 0.3s ease, transform 0.3s ease;
-            pointer-events: none;
-        }
-        #chat-window.chat-open {
-            opacity: 1;
-            transform: translateY(0) scale(1);
-            pointer-events: auto;
-        }
-        .chat-message {
-            max-width: 80%;
-            padding: 10px 15px;
-            border-radius: 18px;
-            word-wrap: break-word;
-        }
-        .user-message {
-            background: linear-gradient(90deg, var(--accent-purple), var(--accent-pink));
-            color: white;
-            align-self: flex-end;
-            border-bottom-right-radius: 4px;
-        }
-        .ai-message {
-            background-color: rgba(255,255,255,0.05);
-            color: var(--text-muted);
-            align-self: flex-start;
-            border-bottom-left-radius: 4px;
-        }
+        .stat-card { background-color: rgba(255,255,255,0.03); border: 1px solid var(--border-color); }
+        #chat-widget-container { position: fixed; bottom: 20px; right: 20px; z-index: 1000; }
+        #chat-bubble { width: 60px; height: 60px; background: linear-gradient(45deg, var(--accent-purple), var(--accent-pink)); border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 4px 20px rgba(0,0,0,0.3); transition: transform 0.3s ease, opacity 0.3s ease; }
+        #chat-bubble:hover { transform: scale(1.1); }
+        #chat-window { position: absolute; bottom: 80px; right: 0; width: 350px; height: 500px; background-color: var(--card-dark); border: 1px solid var(--border-color); border-radius: 1rem; overflow: hidden; display: flex; flex-direction: column; box-shadow: 0 10px 40px rgba(0,0,0,0.4); transform-origin: bottom right; opacity: 0; transform: translateY(20px) scale(0.95); transition: opacity 0.3s ease, transform 0.3s ease; pointer-events: none; }
+        #chat-window.chat-open { opacity: 1; transform: translateY(0) scale(1); pointer-events: auto; }
+        .chat-message { max-width: 80%; padding: 10px 15px; border-radius: 18px; word-wrap: break-word; }
+        .user-message { background: linear-gradient(90deg, var(--accent-purple), var(--accent-pink)); color: white; align-self: flex-end; border-bottom-right-radius: 4px; }
+        .ai-message { background-color: rgba(255,255,255,0.05); color: var(--text-muted); align-self: flex-start; border-bottom-left-radius: 4px; }
         #chat-history::-webkit-scrollbar { width: 4px; }
         #chat-history::-webkit-scrollbar-thumb { background: var(--accent-purple); border-radius: 2px; }
     </style>
@@ -148,7 +51,6 @@
 <body class="overflow-x-hidden">
 
     <header class="sticky top-0 z-50 bg-opacity-80 bg-[var(--bg-dark)] backdrop-blur-lg border-b border-white/10">
-        <!-- NAVİGASYON KODU DEĞİŞMEDİ -->
         <nav class="container mx-auto px-6 py-4">
             <div class="flex items-center justify-between">
                 <a href="#" id="home-link" class="flex items-center gap-3">
@@ -193,7 +95,6 @@
     </header>
 
     <div id="page-content">
-        <!-- ANA İÇERİK KODU DEĞİŞMEDİ -->
         <main id="main-content" class="container mx-auto px-6 py-16 space-y-24 md:space-y-32">
              <section class="relative text-center pt-16 md:pt-24">
                  <div class="absolute inset-0 -z-10 overflow-hidden"><div class="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-gradient-to-tr from-[var(--accent-purple)] to-[var(--accent-pink)] opacity-20 rounded-full filter blur-3xl"></div></div>
@@ -287,9 +188,23 @@
                     <h1 class="text-3xl md:text-4xl font-bold text-white">My Dashboard</h1>
                     <button id="go-to-settings-btn" class="btn-secondary text-sm flex items-center gap-2 px-4 py-2"><i data-lucide="settings" class="w-4 h-4"></i> Settings</button>
                 </div>
-                <div class="auth0-card p-8">
+                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="stat-card p-6 rounded-lg">
+                        <div class="flex items-center text-text-muted mb-2"><i data-lucide="wallet" class="w-4 h-4 mr-2"></i><span>AFEF Token Balance</span></div>
+                        <p id="dashboard-balance" class="text-3xl font-bold text-white">0.00</p>
+                    </div>
+                    <div class="stat-card p-6 rounded-lg">
+                        <div class="flex items-center text-text-muted mb-2"><i data-lucide="gift" class="w-4 h-4 mr-2"></i><span>Airdrop Status</span></div>
+                        <p id="dashboard-airdrop" class="text-3xl font-bold text-white">Not Eligible</p>
+                    </div>
+                    <div class="stat-card p-6 rounded-lg">
+                        <div class="flex items-center text-text-muted mb-2"><i data-lucide="calendar" class="w-4 h-4 mr-2"></i><span>Member Since</span></div>
+                        <p id="dashboard-member-since" class="text-3xl font-bold text-white">-</p>
+                    </div>
+                </div>
+                <div class="auth0-card p-8 mt-8">
                     <h2 class="text-2xl font-bold text-white">Welcome Back!</h2>
-                    <p class="text-text-muted mt-2">This is your personal dashboard. More features coming soon!</p>
+                    <p class="text-text-muted mt-2">This is your personal dashboard. More features will be added soon!</p>
                 </div>
             </div>
             <div id="dashboard-settings" class="hidden">
@@ -305,9 +220,9 @@
                         </div>
                         <div>
                             <label for="displayEmail" class="block text-sm font-medium text-text-muted mb-2">Email Address</label>
-                            <input type="email" id="displayEmail" class="w-full bg-black/50 text-white px-4 py-3 rounded-lg border border-[var(--border-color)]" disabled>
+                            <input type="email" id="displayEmail" class="w-full bg-black/50 text-gray-400 px-4 py-3 rounded-lg border border-[var(--border-color)]" disabled>
                         </div>
-                        <button class="w-full btn-primary py-3">Save Changes</button>
+                        <button id="save-profile-btn" class="w-full btn-primary py-3">Save Changes</button>
                     </div>
                 </div>
             </div>
@@ -363,7 +278,6 @@
         Message here
     </div>
 
-    <!-- --- LIVE CHAT HTML CODE --- -->
     <div id="chat-widget-container">
         <div id="chat-window" class="transition-transform duration-300 ease-in-out">
             <div class="p-4 bg-opacity-80 bg-[var(--card-dark)] backdrop-blur-lg border-b border-[var(--border-color)] flex justify-between items-center">
@@ -442,7 +356,7 @@
             const authUI = document.getElementById('auth-ui');
             const mobileAuthUI = document.getElementById('mobile-auth-ui');
 
-            if (isAuthenticated) {
+            if (isAuthenticated && userProfile) { // Added userProfile check
                 authUI.querySelector('.login-trigger').style.display = 'none';
                 userProfileDiv.style.display = 'flex';
                 
@@ -463,7 +377,10 @@
                 }
             }
             document.querySelectorAll('.login-trigger').forEach(btn => {
-                btn.style.display = isAuthenticated ? 'none' : 'block';
+                const parentAuthUI = btn.closest('#auth-ui, #mobile-auth-ui');
+                if (parentAuthUI) {
+                    btn.style.display = isAuthenticated ? 'none' : 'block';
+                }
             });
         };
         
@@ -600,23 +517,19 @@
         
         // --- EVENT LISTENERS ---
         function setupEventListeners() {
-            // Modal controls
             document.querySelectorAll('.login-trigger').forEach(btn => btn.addEventListener('click', openLoginModal));
             document.getElementById('close-modal-btn').addEventListener('click', closeLoginModal);
             loginModal.addEventListener('click', (e) => { if(e.target === loginModal) closeLoginModal(); });
             
-            // Modal navigation
             document.getElementById('continue-with-email-btn').addEventListener('click', () => showLoginModalView('email'));
             document.getElementById('back-to-options-btn').addEventListener('click', () => showLoginModalView('options'));
             document.getElementById('back-to-email-btn').addEventListener('click', () => showLoginModalView('email'));
 
-            // Auth actions
             document.getElementById('connect-metamask-btn').addEventListener('click', () => showToast('MetaMask integration coming soon!'));
             document.getElementById('btn-passwordless-login').addEventListener('click', startPasswordlessLogin);
             document.getElementById('btn-verify-code').addEventListener('click', verifyCode);
             document.getElementById('btn-logout').addEventListener('click', logout);
 
-            // Page navigation
             const hamburgerBtn = document.getElementById('hamburger-btn');
             const mobileMenu = document.getElementById('mobile-menu');
             hamburgerBtn.addEventListener('click', (e) => {
@@ -631,7 +544,6 @@
             document.getElementById('go-to-settings-btn').addEventListener('click', () => showDashboardView('settings'));
             document.getElementById('back-to-dashboard-btn').addEventListener('click', () => showDashboardView('main'));
             
-            // Utility
             document.getElementById('copy-address-btn').addEventListener('click', () => {
                 navigator.clipboard.writeText(document.getElementById('contract-address').textContent)
                     .then(() => showToast('Address copied to clipboard!'));
@@ -639,7 +551,6 @@
             document.getElementById('year').textContent = new Date().getFullYear();
         }
 
-        // --- CORRECTED LIVE CHAT FUNCTIONS ---
         function setupChatEventListeners() {
             const chatBubble = document.getElementById('chat-bubble');
             const chatWindow = document.getElementById('chat-window');
@@ -648,15 +559,11 @@
             const chatInput = document.getElementById('chat-input');
             const chatHistory = document.getElementById('chat-history');
 
-            // Opens the chat window
             chatBubble.addEventListener('click', () => {
                 chatWindow.classList.add('chat-open');
-                if (!chatWindow.classList.contains('hidden')) {
-                     lucide.createIcons();
-                }
+                lucide.createIcons();
             });
 
-            // Closes the chat window
             closeChatBtn.addEventListener('click', () => {
                 chatWindow.classList.remove('chat-open');
             });
@@ -673,19 +580,14 @@
                 const typingDiv = document.createElement('div');
                 typingDiv.id = 'typing-indicator';
                 typingDiv.className = 'ai-message chat-message flex items-center gap-2';
-                typingDiv.innerHTML = `
-                    <div class="w-2 h-2 bg-gray-400 rounded-full animate-pulse"></div>
-                    <div class="w-2 h-2 bg-gray-400 rounded-full animate-pulse" style="animation-delay: 0.2s;"></div>
-                    <div class="w-2 h-2 bg-gray-400 rounded-full animate-pulse" style="animation-delay: 0.4s;"></div>`;
+                typingDiv.innerHTML = `<div class="w-2 h-2 bg-gray-400 rounded-full animate-pulse"></div><div class="w-2 h-2 bg-gray-400 rounded-full animate-pulse" style="animation-delay: 0.2s;"></div><div class="w-2 h-2 bg-gray-400 rounded-full animate-pulse" style="animation-delay: 0.4s;"></div>`;
                 chatHistory.appendChild(typingDiv);
                 chatHistory.scrollTop = chatHistory.scrollHeight;
             };
 
             const removeTypingIndicator = () => {
                 const indicator = document.getElementById('typing-indicator');
-                if (indicator) {
-                    indicator.remove();
-                }
+                if (indicator) { indicator.remove(); }
             };
             
             const sendMessageToAI = async () => {
@@ -698,7 +600,6 @@
                 showTypingIndicator();
 
                 try {
-                    // Send the API request to our secure Netlify function
                     const response = await fetch('/.netlify/functions/gemini-proxy', {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
@@ -706,11 +607,7 @@
                     });
                     
                     removeTypingIndicator();
-
-                    if (!response.ok) {
-                        throw new Error('Network response was not ok.');
-                    }
-
+                    if (!response.ok) { throw new Error('Network response was not ok.'); }
                     const data = await response.json();
                     addMessage(data.response, 'ai');
 
@@ -725,9 +622,7 @@
 
             chatSendBtn.addEventListener('click', sendMessageToAI);
             chatInput.addEventListener('keypress', (e) => {
-                if (e.key === 'Enter') {
-                    sendMessageToAI();
-                }
+                if (e.key === 'Enter') { sendMessageToAI(); }
             });
         }
 
@@ -736,7 +631,7 @@
             handleAuthentication();
             lucide.createIcons();
             setupEventListeners();
-            setupChatEventListeners(); // Initialize the live chat event listeners
+            setupChatEventListeners();
         };
     </script>
 </body>
