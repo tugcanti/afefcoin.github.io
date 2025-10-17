@@ -316,7 +316,7 @@
         const auth0Config = {
             domain: "dev-z8y2rl3nibo7ss8j.eu.auth0.com",
             clientId: "flAocvN0OThbj3JL6ydOBjUFuUw856kk", 
-            redirectUri: window.location.origin,
+            redirectUri: 
             scope: 'openid profile email',
             responseType: 'token id_token'
         };
@@ -324,7 +324,7 @@
         const webAuth = new auth0.WebAuth({
             domain: auth0Config.domain,
             clientID: auth0Config.clientId,
-            redirectUri: auth0Config.redirectUri,
+            redirectUri: window.location.origin,
             responseType: auth0Config.responseType,
             scope: auth0Config.scope
         });
