@@ -76,11 +76,70 @@
         
         .avatar-upload-label { cursor: pointer; }
         .avatar-upload-label:hover .absolute { opacity: 1; }
+
+        /* --- LIVE CHAT STYLES --- */
+        #chat-widget-container {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+        #chat-bubble {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(45deg, var(--accent-purple), var(--accent-pink));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+            transition: transform 0.3s ease;
+        }
+        #chat-bubble:hover {
+            transform: scale(1.1);
+        }
+        #chat-window {
+            position: absolute;
+            bottom: 80px;
+            right: 0;
+            width: 350px;
+            height: 500px;
+            background-color: var(--card-dark);
+            border: 1px solid var(--border-color);
+            border-radius: 1rem;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.4);
+            transform-origin: bottom right;
+        }
+        .chat-message {
+            max-width: 80%;
+            padding: 10px 15px;
+            border-radius: 18px;
+            word-wrap: break-word;
+        }
+        .user-message {
+            background: linear-gradient(90deg, var(--accent-purple), var(--accent-pink));
+            color: white;
+            align-self: flex-end;
+            border-bottom-right-radius: 4px;
+        }
+        .ai-message {
+            background-color: rgba(255,255,255,0.05);
+            color: var(--text-muted);
+            align-self: flex-start;
+            border-bottom-left-radius: 4px;
+        }
+        #chat-history::-webkit-scrollbar { width: 4px; }
+        #chat-history::-webkit-scrollbar-thumb { background: var(--accent-purple); border-radius: 2px; }
     </style>
 </head>
 <body class="overflow-x-hidden">
 
     <header class="sticky top-0 z-50 bg-opacity-80 bg-[var(--bg-dark)] backdrop-blur-lg border-b border-white/10">
+        <!-- NAVIGATION CODE REMAINS UNCHANGED -->
         <nav class="container mx-auto px-6 py-4">
             <div class="flex items-center justify-between">
                 <a href="#" id="home-link" class="flex items-center gap-3">
@@ -125,91 +184,92 @@
     </header>
 
     <div id="page-content">
+        <!-- MAIN CONTENT CODE REMAINS UNCHANGED -->
         <main id="main-content" class="container mx-auto px-6 py-16 space-y-24 md:space-y-32">
-            <section class="relative text-center pt-16 md:pt-24">
-                <div class="absolute inset-0 -z-10 overflow-hidden"><div class="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-gradient-to-tr from-[var(--accent-purple)] to-[var(--accent-pink)] opacity-20 rounded-full filter blur-3xl"></div></div>
-                <h1 class="text-4xl md:text-6xl font-bold text-white leading-tight tracking-tight mb-4">The New Standard for<br>Community-Driven Tokens</h1>
-                <p class="max-w-2xl mx-auto text-lg text-text-muted mb-8">AFEF combines secure authentication with decentralized principles to create a trustworthy ecosystem for everyone.</p>
-                <button class="login-trigger btn-primary py-3 px-8 text-lg">Get Started</button>
-            </section>
-            
-            <section id="about" class="pt-16">
-                <h2 class="text-3xl font-bold text-center mb-12 text-white">About AFEF Token</h2>
-                <div class="auth0-card p-8 md:p-12 text-center max-w-4xl mx-auto">
-                    <i data-lucide="shield-check" class="w-16 h-16 mx-auto text-[var(--accent-purple)] mb-6"></i>
-                    <p class="text-text-muted leading-relaxed">AFEF, symbolized by the shield and crown, represents a new standard in decentralized finance. Our core mission is to create a secure, community-governed ecosystem where every member has a voice. We believe in fair launches, transparent tokenomics, and building a project with true long-term utility and value. Join us in forging a new dynasty in the world of crypto.</p>
-                </div>
-            </section>
+             <section class="relative text-center pt-16 md:pt-24">
+                 <div class="absolute inset-0 -z-10 overflow-hidden"><div class="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-gradient-to-tr from-[var(--accent-purple)] to-[var(--accent-pink)] opacity-20 rounded-full filter blur-3xl"></div></div>
+                 <h1 class="text-4xl md:text-6xl font-bold text-white leading-tight tracking-tight mb-4">The New Standard for<br>Community-Driven Tokens</h1>
+                 <p class="max-w-2xl mx-auto text-lg text-text-muted mb-8">AFEF combines secure authentication with decentralized principles to create a trustworthy ecosystem for everyone.</p>
+                 <button class="login-trigger btn-primary py-3 px-8 text-lg">Get Started</button>
+             </section>
+             
+             <section id="about" class="pt-16">
+                 <h2 class="text-3xl font-bold text-center mb-12 text-white">About AFEF Token</h2>
+                 <div class="auth0-card p-8 md:p-12 text-center max-w-4xl mx-auto">
+                     <i data-lucide="shield-check" class="w-16 h-16 mx-auto text-[var(--accent-purple)] mb-6"></i>
+                     <p class="text-text-muted leading-relaxed">AFEF, symbolized by the shield and crown, represents a new standard in decentralized finance. Our core mission is to create a secure, community-governed ecosystem where every member has a voice. We believe in fair launches, transparent tokenomics, and building a project with true long-term utility and value. Join us in forging a new dynasty in the world of crypto.</p>
+                 </div>
+             </section>
 
-            <section id="tokenomics" class="pt-16">
-                <h2 class="text-3xl font-bold text-center mb-12 text-white">Tokenomics</h2>
-                <div class="auth0-card p-8 md:p-12 max-w-5xl mx-auto flex flex-col md:flex-row items-center gap-12">
-                    <div class="w-full md:w-1/3 flex justify-center"><div style="width: 200px; height: 200px; border-radius: 50%; background-image: conic-gradient(#6A35FF 0% 40%, #E43A8A 40% 70%, #FFFFFF 70% 90%, #A0AEC0 90% 100%);"></div></div>
-                    <div class="w-full md:w-2/3 grid grid-cols-2 gap-x-8 gap-y-6 text-left">
-                        <div class="flex items-center"><div class="w-4 h-4 rounded-full bg-[var(--accent-purple)] mr-3"></div><div><p class="font-bold text-lg">Liquidity Pool</p><p class="text-text-muted">40%</p></div></div>
-                        <div class="flex items-center"><div class="w-4 h-4 rounded-full bg-[var(--accent-pink)] mr-3"></div><div><p class="font-bold text-lg">Airdrop & Community</p><p class="text-text-muted">30%</p></div></div>
-                        <div class="flex items-center"><div class="w-4 h-4 rounded-full bg-gray-200 mr-3"></div><div><p class="font-bold text-lg">Team & Advisors</p><p class="text-text-muted">20%</p></div></div>
-                        <div class="flex items-center"><div class="w-4 h-4 rounded-full bg-gray-500 mr-3"></div><div><p class="font-bold text-lg">Marketing & Treasury</p><p class="text-text-muted">10%</p></div></div>
-                    </div>
-                </div>
-            </section>
-
-            <section id="roadmap" class="pt-16">
-                 <h2 class="text-3xl font-bold text-center mb-16 text-white">Our Roadmap</h2>
-                 <div class="relative max-w-3xl mx-auto">
-                     <div class="absolute left-1/2 h-full w-0.5 bg-white/10 transform -translate-x-1/2"></div>
-                     <div class="relative mb-8 flex justify-between items-center w-full">
-                         <div class="w-1/2 pr-8 text-right"><div class="auth0-card p-4"><strong>Phase 1:</strong> Project Launch & Airdrop</div></div>
-                         <div class="absolute left-1/2 transform -translate-x-1/2 w-5 h-5 bg-[var(--accent-purple)] rounded-full border-4 border-[var(--bg-dark)]"></div>
-                     </div>
-                     <div class="relative mb-8 flex justify-between items-center w-full flex-row-reverse">
-                         <div class="w-1/2 pl-8 text-left"><div class="auth0-card p-4"><strong>Phase 2:</strong> CEX Listings & Partnerships</div></div>
-                         <div class="absolute left-1/2 transform -translate-x-1/2 w-5 h-5 bg-[var(--accent-purple)] rounded-full border-4 border-[var(--bg-dark)]"></div>
-                     </div>
-                      <div class="relative mb-8 flex justify-between items-center w-full">
-                         <div class="w-1/2 pr-8 text-right"><div class="auth0-card p-4"><strong>Phase 3:</strong> Utility Development (Staking)</div></div>
-                         <div class="absolute left-1/2 transform -translate-x-1/2 w-5 h-5 bg-[var(--accent-purple)] rounded-full border-4 border-[var(--bg-dark)]"></div>
+             <section id="tokenomics" class="pt-16">
+                 <h2 class="text-3xl font-bold text-center mb-12 text-white">Tokenomics</h2>
+                 <div class="auth0-card p-8 md:p-12 max-w-5xl mx-auto flex flex-col md:flex-row items-center gap-12">
+                     <div class="w-full md:w-1/3 flex justify-center"><div style="width: 200px; height: 200px; border-radius: 50%; background-image: conic-gradient(#6A35FF 0% 40%, #E43A8A 40% 70%, #FFFFFF 70% 90%, #A0AEC0 90% 100%);"></div></div>
+                     <div class="w-full md:w-2/3 grid grid-cols-2 gap-x-8 gap-y-6 text-left">
+                         <div class="flex items-center"><div class="w-4 h-4 rounded-full bg-[var(--accent-purple)] mr-3"></div><div><p class="font-bold text-lg">Liquidity Pool</p><p class="text-text-muted">40%</p></div></div>
+                         <div class="flex items-center"><div class="w-4 h-4 rounded-full bg-[var(--accent-pink)] mr-3"></div><div><p class="font-bold text-lg">Airdrop & Community</p><p class="text-text-muted">30%</p></div></div>
+                         <div class="flex items-center"><div class="w-4 h-4 rounded-full bg-gray-200 mr-3"></div><div><p class="font-bold text-lg">Team & Advisors</p><p class="text-text-muted">20%</p></div></div>
+                         <div class="flex items-center"><div class="w-4 h-4 rounded-full bg-gray-500 mr-3"></div><div><p class="font-bold text-lg">Marketing & Treasury</p><p class="text-text-muted">10%</p></div></div>
                      </div>
                  </div>
-            </section>
+             </section>
 
-            <section id="airdrop" class="pt-16">
-                 <h2 class="text-3xl font-bold text-center mb-12 text-white">Community Airdrop</h2>
-                 <div class="auth0-card p-8 md:p-12 max-w-2xl mx-auto text-center">
-                     <i data-lucide="gift" class="w-16 h-16 mx-auto text-[var(--accent-pink)] mb-6"></i>
-                     <h3 class="text-2xl font-bold mb-4">Claim Your Stake</h3>
-                     <p class="text-text-muted mb-8">Login to check your eligibility for the AFEF airdrop.</p>
-                     <button class="login-trigger btn-primary py-3 px-8">Login to Check</button>
-                 </div>
-            </section>
-            
-            <section id="news" class="pt-16">
-                <h2 class="text-3xl font-bold text-center mb-12 text-white">Latest News & Updates</h2>
-                <div class="max-w-4xl mx-auto grid md:grid-cols-2 gap-8">
-                    <div class="auth0-card p-8">
-                        <i data-lucide="shield-check" class="w-12 h-12 text-[var(--accent-purple)] mb-4"></i>
-                        <h3 class="text-xl font-bold mb-3">Security First: Audit Discussions Underway</h3>
-                        <p class="text-text-muted leading-relaxed">To ensure the utmost security and transparency for our community, we have initiated discussions with several leading blockchain security firms to conduct a comprehensive audit of the AFEF smart contract. We are committed to upholding the highest standards of chain security.</p>
-                    </div>
-                    <div class="auth0-card p-8">
-                        <i data-lucide="database-zap" class="w-12 h-12 text-[var(--accent-pink)] mb-4"></i>
-                        <h3 class="text-xl font-bold mb-3">Fortifying the Ecosystem</h3>
-                        <p class="text-text-muted leading-relaxed">Our development team is implementing multi-layered security protocols to safeguard the AFEF ecosystem. Ensuring the integrity of the chain and protecting our holders' assets is our top priority as we approach our next milestones.</p>
-                    </div>
-                </div>
-            </section>
+             <section id="roadmap" class="pt-16">
+                  <h2 class="text-3xl font-bold text-center mb-16 text-white">Our Roadmap</h2>
+                  <div class="relative max-w-3xl mx-auto">
+                       <div class="absolute left-1/2 h-full w-0.5 bg-white/10 transform -translate-x-1/2"></div>
+                       <div class="relative mb-8 flex justify-between items-center w-full">
+                           <div class="w-1/2 pr-8 text-right"><div class="auth0-card p-4"><strong>Phase 1:</strong> Project Launch & Airdrop</div></div>
+                           <div class="absolute left-1/2 transform -translate-x-1/2 w-5 h-5 bg-[var(--accent-purple)] rounded-full border-4 border-[var(--bg-dark)]"></div>
+                       </div>
+                       <div class="relative mb-8 flex justify-between items-center w-full flex-row-reverse">
+                           <div class="w-1/2 pl-8 text-left"><div class="auth0-card p-4"><strong>Phase 2:</strong> CEX Listings & Partnerships</div></div>
+                           <div class="absolute left-1/2 transform -translate-x-1/2 w-5 h-5 bg-[var(--accent-purple)] rounded-full border-4 border-[var(--bg-dark)]"></div>
+                       </div>
+                        <div class="relative mb-8 flex justify-between items-center w-full">
+                           <div class="w-1/2 pr-8 text-right"><div class="auth0-card p-4"><strong>Phase 3:</strong> Utility Development (Staking)</div></div>
+                           <div class="absolute left-1/2 transform -translate-x-1/2 w-5 h-5 bg-[var(--accent-purple)] rounded-full border-4 border-[var(--bg-dark)]"></div>
+                       </div>
+                  </div>
+             </section>
 
-            <section id="contract" class="pt-16">
-                 <h2 class="text-3xl font-bold text-center mb-12 text-white">Official Contract</h2>
-                 <div class="auth0-card p-8 max-w-4xl mx-auto text-center">
-                     <p class="text-text-muted mb-2">Etherscan Contract Address:</p>
-                     <div class="flex items-center justify-center bg-black/50 p-3 rounded-lg mb-6 max-w-md mx-auto">
-                         <p id="contract-address" class="font-mono text-sm break-all mr-4">0x367a584a928b641330E8B20e7C4739675741f40d</p>
-                         <button id="copy-address-btn" title="Copy Address"><i data-lucide="copy" class="w-5 h-5 text-gray-400 hover:text-white"></i></button>
+             <section id="airdrop" class="pt-16">
+                  <h2 class="text-3xl font-bold text-center mb-12 text-white">Community Airdrop</h2>
+                  <div class="auth0-card p-8 md:p-12 max-w-2xl mx-auto text-center">
+                       <i data-lucide="gift" class="w-16 h-16 mx-auto text-[var(--accent-pink)] mb-6"></i>
+                       <h3 class="text-2xl font-bold mb-4">Claim Your Stake</h3>
+                       <p class="text-text-muted mb-8">Login to check your eligibility for the AFEF airdrop.</p>
+                       <button class="login-trigger btn-primary py-3 px-8">Login to Check</button>
+                  </div>
+             </section>
+             
+             <section id="news" class="pt-16">
+                 <h2 class="text-3xl font-bold text-center mb-12 text-white">Latest News & Updates</h2>
+                 <div class="max-w-4xl mx-auto grid md:grid-cols-2 gap-8">
+                     <div class="auth0-card p-8">
+                         <i data-lucide="shield-check" class="w-12 h-12 text-[var(--accent-purple)] mb-4"></i>
+                         <h3 class="text-xl font-bold mb-3">Security First: Audit Discussions Underway</h3>
+                         <p class="text-text-muted leading-relaxed">To ensure the utmost security and transparency for our community, we have initiated discussions with several leading blockchain security firms to conduct a comprehensive audit of the AFEF smart contract. We are committed to upholding the highest standards of chain security.</p>
                      </div>
-                     <a href="https://etherscan.io/address/0x367a584a928b641330E8B20e7C4739675741f40d" target="_blank" rel="noopener noreferrer" class="inline-block btn-secondary py-3 px-6">View on Etherscan</a>
+                     <div class="auth0-card p-8">
+                         <i data-lucide="database-zap" class="w-12 h-12 text-[var(--accent-pink)] mb-4"></i>
+                         <h3 class="text-xl font-bold mb-3">Fortifying the Ecosystem</h3>
+                         <p class="text-text-muted leading-relaxed">Our development team is implementing multi-layered security protocols to safeguard the AFEF ecosystem. Ensuring the integrity of the chain and protecting our holders' assets is our top priority as we approach our next milestones.</p>
+                     </div>
                  </div>
-            </section>
+             </section>
+
+             <section id="contract" class="pt-16">
+                  <h2 class="text-3xl font-bold text-center mb-12 text-white">Official Contract</h2>
+                  <div class="auth0-card p-8 max-w-4xl mx-auto text-center">
+                       <p class="text-text-muted mb-2">Etherscan Contract Address:</p>
+                       <div class="flex items-center justify-center bg-black/50 p-3 rounded-lg mb-6 max-w-md mx-auto">
+                           <p id="contract-address" class="font-mono text-sm break-all mr-4">0x367a584a928b641330E8B20e7C4739675741f40d</p>
+                           <button id="copy-address-btn" title="Copy Address"><i data-lucide="copy" class="w-5 h-5 text-gray-400 hover:text-white"></i></button>
+                       </div>
+                       <a href="https://etherscan.io/address/0x367a584a928b641330E8B20e7C4739675741f40d" target="_blank" rel="noopener noreferrer" class="inline-block btn-secondary py-3 px-6">View on Etherscan</a>
+                  </div>
+             </section>
         </main>
         
         <div id="dashboard" class="hidden container mx-auto px-6 py-16">
@@ -253,7 +313,7 @@
                 <a href="mailto:empiresfantoken@outlook.com" class="text-text-muted hover:text-[var(--accent-purple)] transition"><i data-lucide="mail" class="w-6 h-6"></i></a>
             </div>
             <p class="text-text-muted text-sm">&copy; <span id="year"></span> AFEF Token. All rights reserved.</p>
-        </div>
+       </div>
     </footer>
 
     <div id="login-modal" class="fixed inset-0 z-[100] items-center justify-center bg-black/80 hidden">
@@ -293,6 +353,34 @@
     <div id="toast" class="fixed bottom-5 right-5 bg-gradient-to-r from-[var(--accent-purple)] to-[var(--accent-pink)] text-white px-6 py-3 rounded-lg shadow-lg transform translate-y-20 opacity-0 transition-all duration-300">
         Message here
     </div>
+
+    <!-- --- LIVE CHAT HTML CODE --- -->
+    <div id="chat-widget-container">
+        <div id="chat-window" class="hidden transition-transform duration-300 ease-in-out">
+            <div class="p-4 bg-opacity-80 bg-[var(--card-dark)] backdrop-blur-lg border-b border-[var(--border-color)] flex justify-between items-center">
+                <h3 class="font-bold text-lg">AFEF Support</h3>
+                <button id="close-chat-btn" class="text-gray-400 hover:text-white">
+                    <i data-lucide="x" class="w-6 h-6"></i>
+                </button>
+            </div>
+            <div id="chat-history" class="flex-1 p-4 flex flex-col gap-4 overflow-y-auto">
+                <div class="ai-message chat-message">
+                    Hello! I'm the AFEF Token Support assistant. How can I help you with our project today?
+                </div>
+            </div>
+            <div class="p-4 border-t border-[var(--border-color)]">
+                <div class="flex gap-2">
+                    <input type="text" id="chat-input" placeholder="Type your message..." class="w-full bg-black/50 text-white px-4 py-2 rounded-lg border border-[var(--border-color)] focus:border-[var(--accent-purple)] focus:ring-0 transition-colors">
+                    <button id="chat-send-btn" class="btn-primary p-3 flex items-center justify-center">
+                        <i data-lucide="send" class="w-5 h-5"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div id="chat-bubble">
+            <i data-lucide="message-circle" class="w-8 h-8 text-white"></i>
+        </div>
+    </div>
     
     <script>
         // --- App State & Config ---
@@ -304,7 +392,7 @@
 
         const auth0Config = {
             domain: "dev-z8y2rl3nibo7ss8j.eu.auth0.com",
-            clientId: "flA_ocvN0OThbj3JL6ydOBjUFuUw856kk", // Corrected clientId
+            clientId: "flAocvN0OThbj3JL6ydOBjUFuUw856kk", 
             redirectUri: window.location.origin,
             scope: 'openid profile email',
             responseType: 'token id_token'
@@ -384,15 +472,15 @@
 
         function handleAuthentication() {
              webAuth.checkSession({}, (err, authResult) => {
-                if (authResult && authResult.accessToken && authResult.idToken) {
-                    setSession(authResult);
-                    showView('dashboard');
-                } else if (err) {
-                    console.log("Could not get a new token", err);
-                    showView('main');
-                }
-                 updateUI();
-            });
+                 if (authResult && authResult.accessToken && authResult.idToken) {
+                     setSession(authResult);
+                     showView('dashboard');
+                 } else if (err) {
+                     console.log("Could not get a new token", err);
+                     showView('main');
+                 }
+                  updateUI();
+             });
         }
         
         function startPasswordlessLogin() {
@@ -427,9 +515,9 @@
         function verifyCode() {
             const code = document.getElementById('code-input').value;
              if (!code || code.length < 6) {
-                showToast('Please enter the 6-digit code.', 'error');
-                return;
-            }
+                 showToast('Please enter the 6-digit code.', 'error');
+                 return;
+             }
             const button = document.getElementById('btn-verify-code');
             button.disabled = true;
             button.textContent = "Verifying...";
@@ -500,7 +588,8 @@
             toast.classList.remove('translate-y-20', 'opacity-0');
             setTimeout(() => { toast.classList.add('translate-y-20', 'opacity-0'); }, 3000);
         }
-
+        
+        // --- EVENT LISTENERS ---
         function setupEventListeners() {
             // Modal controls
             document.querySelectorAll('.login-trigger').forEach(btn => btn.addEventListener('click', openLoginModal));
@@ -536,15 +625,107 @@
             // Utility
             document.getElementById('copy-address-btn').addEventListener('click', () => {
                 navigator.clipboard.writeText(document.getElementById('contract-address').textContent)
-                   .then(() => showToast('Address copied to clipboard!'));
+                    .then(() => showToast('Address copied to clipboard!'));
             });
             document.getElementById('year').textContent = new Date().getFullYear();
         }
-        
+
+        // --- LIVE CHAT FUNCTIONS ---
+        function setupChatEventListeners() {
+            const chatBubble = document.getElementById('chat-bubble');
+            const chatWindow = document.getElementById('chat-window');
+            const closeChatBtn = document.getElementById('close-chat-btn');
+            const chatSendBtn = document.getElementById('chat-send-btn');
+            const chatInput = document.getElementById('chat-input');
+            const chatHistory = document.getElementById('chat-history');
+
+            chatBubble.addEventListener('click', () => {
+                chatWindow.classList.toggle('hidden');
+                if (!chatWindow.classList.contains('hidden')) {
+                     lucide.createIcons(); // Re-render icons if needed
+                }
+            });
+
+            closeChatBtn.addEventListener('click', () => {
+                chatWindow.classList.add('hidden');
+            });
+
+            const addMessage = (message, sender) => {
+                const messageDiv = document.createElement('div');
+                messageDiv.className = `chat-message ${sender === 'user' ? 'user-message' : 'ai-message'}`;
+                messageDiv.textContent = message;
+                chatHistory.appendChild(messageDiv);
+                chatHistory.scrollTop = chatHistory.scrollHeight;
+            };
+            
+            const showTypingIndicator = () => {
+                const typingDiv = document.createElement('div');
+                typingDiv.id = 'typing-indicator';
+                typingDiv.className = 'ai-message chat-message flex items-center gap-2';
+                typingDiv.innerHTML = `
+                    <div class="w-2 h-2 bg-gray-400 rounded-full animate-pulse"></div>
+                    <div class="w-2 h-2 bg-gray-400 rounded-full animate-pulse" style="animation-delay: 0.2s;"></div>
+                    <div class="w-2 h-2 bg-gray-400 rounded-full animate-pulse" style="animation-delay: 0.4s;"></div>`;
+                chatHistory.appendChild(typingDiv);
+                chatHistory.scrollTop = chatHistory.scrollHeight;
+            };
+
+            const removeTypingIndicator = () => {
+                const indicator = document.getElementById('typing-indicator');
+                if (indicator) {
+                    indicator.remove();
+                }
+            };
+            
+            const sendMessageToAI = async () => {
+                const prompt = chatInput.value.trim();
+                if (!prompt) return;
+
+                addMessage(prompt, 'user');
+                chatInput.value = '';
+                chatSendBtn.disabled = true;
+                showTypingIndicator();
+
+                try {
+                    // Send the API request to our secure Netlify function
+                    const response = await fetch('/.netlify/functions/gemini-proxy', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ prompt: prompt }),
+                    });
+                    
+                    removeTypingIndicator();
+
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok.');
+                    }
+
+                    const data = await response.json();
+                    addMessage(data.response, 'ai');
+
+                } catch (error) {
+                    console.error('Error:', error);
+                    removeTypingIndicator();
+                    addMessage('Sorry, something went wrong. Please try again.', 'ai');
+                } finally {
+                     chatSendBtn.disabled = false;
+                }
+            };
+
+            chatSendBtn.addEventListener('click', sendMessageToAI);
+            chatInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    sendMessageToAI();
+                }
+            });
+        }
+
+        // --- INITIALIZE APP ---
         window.onload = () => {
             handleAuthentication();
             lucide.createIcons();
             setupEventListeners();
+            setupChatEventListeners(); // Initialize the live chat event listeners
         };
     </script>
 </body>
