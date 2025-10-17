@@ -1,8 +1,8 @@
-// Bu dosya, Netlify'ın sunucularında çalışır, kullanıcının tarayıcısında değil.
-// API anahtarınız burada güvendedir.
+// This file runs on Netlify's servers, not in the user's browser.
+// Your API key is secure here.
 
 exports.handler = async function (event, context) {
-    // Sadece POST isteklerine izin ver
+    // Only allow POST requests
     if (event.httpMethod !== 'POST') {
         return { statusCode: 405, body: 'Method Not Allowed' };
     }
@@ -11,11 +11,11 @@ exports.handler = async function (event, context) {
         const { prompt } = JSON.parse(event.body);
 
         if (!prompt) {
-            return { statusCode: 400, body: JSON.stringify({ error: 'Prompt is required.' }) };
+            return { statusCode: 400, body: JSON.stringify({ error: 'A prompt is required.' }) };
         }
 
-        // API anahtarını güvenli ortam değişkenlerinden alıyoruz.
-        // Bu anahtar asla herkese açık kodda yer almaz.
+        // Get the API key from secure environment variables.
+        // This key is never exposed in public-facing code.
         const apiKey = process.env.GEMINI_API_KEY;
 
         if (!apiKey) {
@@ -24,13 +24,14 @@ exports.handler = async function (event, context) {
 
         const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
 
+        // System prompt that defines the AI assistant's personality and knowledge base.
         const systemPrompt = `
-            Sen 'AFEF Token Destek', AFEF Token projesi için oluşturulmuş dost canlısı ve yardımsever bir yapay zeka asistanısın.
-            AFEF Token, oyuncuların oyun içi harcamalarından daha fazla değer elde etmelerine ve kazanç sağlamalarına yardımcı olmak için tasarlanmış bir kripto para projesidir.
-            Misyonu, oyuncular için daha ödüllendirici bir oyun deneyimi yaratmaktır.
-            Kullanıcıların proje hakkındaki sorularını net, kısa ve anlaşılır bir şekilde yanıtla.
-            Eğer bir sorunun cevabını bilmiyorsan, "Bu konuda ekibe danışmam gerekiyor." gibi bir yanıt ver.
-            Her zaman pozitif, cesaretlendirici ve profesyonel ol.
+            You are 'AFEF Token Support', a friendly and helpful AI assistant created for the AFEF Token project.
+            AFEF Token is a cryptocurrency project designed to help gamers get more value from their in-game spending and to provide opportunities to earn.
+            Its mission is to create a more rewarding gaming experience for players.
+            Answer user questions about the project clearly, concisely, and in an understandable way.
+            If you don't know the answer to a question, respond with something like, "I'll need to consult with the team on that."
+            Always be positive, encouraging, and professional.
         `;
 
         const payload = {
@@ -47,12 +48,12 @@ exports.handler = async function (event, context) {
         if (!response.ok) {
             const errorText = await response.text();
             console.error('Gemini API Error:', errorText);
-            return { statusCode: response.status, body: JSON.stringify({ error: 'Failed to get response from Gemini API.' }) };
+            return { statusCode: response.status, body: JSON.stringify({ error: 'Failed to get a response from the Gemini API.' }) };
         }
 
         const data = await response.json();
         
-        const aiResponse = data.candidates?.[0]?.content?.parts?.[0]?.text || "Bu soruya şu anda yanıt veremiyorum. Lütfen farklı bir şekilde sormayı deneyin.";
+        const aiResponse = data.candidates?.[0]?.content?.parts?.[0]?.text || "I can't answer that question right now. Please try asking in a different way.";
 
         return {
             statusCode: 200,
@@ -67,17 +68,4 @@ exports.handler = async function (event, context) {
         };
     }
 };
-```
 
-### Kurulum Adımları (Çok Önemli!)
-
-Bu sistemi çalışır hale getirmek için projenizde birkaç ayarlama yapmanız gerekiyor.
-
-1.  **Klasörleri Oluşturun:** Projenizin ana dizininde `netlify` adında bir klasör oluşturun. Bu klasörün içine de `functions` adında başka bir klasör oluşturun.
-    ```
-    /
-    ├── index.html
-    └── netlify/
-        └── functions/
-            └── gemini-proxy.js  <-- Yeni dosyayı buraya koyun
-    
