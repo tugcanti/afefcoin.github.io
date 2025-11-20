@@ -22,13 +22,24 @@ exports.handler = async function (event, context) {
              return { statusCode: 500, body: JSON.stringify({ error: 'API key is not configured.' }) };
         }
 
-        const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
+        // Use the Gemini 1.5 Flash model (Standard/Stable model)
+        // Or stick to your preview model if you prefer: gemini-2.5-flash-preview-09-2025
+        const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`;
 
         // System prompt that defines the AI assistant's personality and knowledge base.
+        // Updated to reflect AFEF Token specifics you provided earlier.
         const systemPrompt = `
             You are 'AFEF Token Support', a friendly and helpful AI assistant created for the AFEF Token project.
-            AFEF Token is a cryptocurrency project designed to help gamers get more value from their in-game spending and to provide opportunities to earn.
-            Its mission is to create a more rewarding gaming experience for players.
+            
+            PROJECT DETAILS:
+            - Name: AFEF Token (The Professional Platform)
+            - Vision: A decentralized, secure, and community-driven DeFi ecosystem.
+            - Tokenomics: 40% Liquidity Pool, 30% Airdrop & Community, 20% Team & Advisors, 10% Marketing.
+            - Roadmap Phase 1: Project Launch & Airdrop.
+            - Roadmap Phase 2: CEX Listings & Partnerships.
+            - Roadmap Phase 3: Utility Development (Staking).
+            - Contract Address: 0x367a584a928b641330E8B20e7C4739675741f40d
+            
             Answer user questions about the project clearly, concisely, and in an understandable way.
             If you don't know the answer to a question, respond with something like, "I'll need to consult with the team on that."
             Always be positive, encouraging, and professional.
@@ -68,4 +79,3 @@ exports.handler = async function (event, context) {
         };
     }
 };
-
