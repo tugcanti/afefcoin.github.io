@@ -1,11 +1,7 @@
-# Bu dosya Netlify'a projenin nasıl inşa edileceğini söyler.
 [build]
-  # Sitemiz sadece bir HTML dosyası olduğu için özel bir build komutuna ihtiyacımız yok.
-  command = ""
-  # Fonksiyonlarımızın bulunduğu klasör.
   functions = "netlify/functions"
 
-[functions]
-  # Fonksiyonların Node.js 20 sürümünü kullanmasını sağlıyoruz.
-  node_bundler = "esbuild"
-  included_files = ["!node_modules/firebase-admin/src/app/lifecycle.ts"]
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
