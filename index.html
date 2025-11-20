@@ -711,33 +711,45 @@
                 if (indicator) { indicator.remove(); }
             };
             
-            const sendMessageToAI = async () => {
+           const sendMessageToAI = async () => {
                 const prompt = chatInput.value.trim();
                 if (!prompt) return;
 
+                // 1. Kullanıcı mesajını ekrana yaz
                 addMessage(prompt, 'user');
                 chatInput.value = '';
                 chatSendBtn.disabled = true;
                 showTypingIndicator();
 
-                // AI SİMÜLASYONU (Geçici olarak frontend tarafında basit cevap)
-                // Backend endpoint hazır olana kadar bu kod simülasyon yapacak.
-                setTimeout(() => {
-                    removeTypingIndicator();
-                    addMessage("Thank you for your message! Our AI integration is being upgraded. For now, please check our Whitepaper for more details.", 'ai');
-                    chatSendBtn.disabled = false;
-                }, 1500);
-                
-                /* Backend hazır olduğunda burayı açabilirsin:
                 try {
+                    // 2. Backend'e (Netlify Function) İstek Gönder
+                    // Bu kısım senin gemini-proxy.js dosyana bağlanır.
                     const response = await fetch('/.netlify/functions/gemini-proxy', {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({ prompt: prompt }),
+                        body: JSON.stringify({ prompt: prompt })
                     });
-                    // ...
-                } 
-                */
+
+                    const data = await response.json();
+                    
+                    // Yazıyor animasyonunu kaldır
+                    removeTypingIndicator();
+
+                    if (!response.ok || data.error) {
+                        console.error("API Error:", data.error);
+                        addMessage("Üzgünüm, şu an bağlantıda bir sorun var. Lütfen daha sonra tekrar deneyin.", 'ai');
+                    } else {
+                        // 3. Gerçek Yapay Zeka Cevabını Yaz
+                        addMessage(data.response, 'ai');
+                    }
+
+                } catch (error) {
+                    console.error('Network Error:', error);
+                    removeTypingIndicator();
+                    addMessage('Bağlantı hatası oluştu. İnternetinizi kontrol edin.', 'ai');
+                } finally {
+                    chatSendBtn.disabled = false;
+                }
             };
 
             chatSendBtn.addEventListener('click', sendMessageToAI);
