@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>AFEF Token — The Professional Platform</title>
     
+    <!-- Stil ve Font Kütüphaneleri -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/lucide@latest"></script>
@@ -12,30 +13,77 @@
     <!-- Auth0 Kütüphanesi -->
     <script src="https://cdn.auth0.com/js/auth0/9.20.0/auth0.min.js"></script>
     
-    <!-- YENİ: Firebase Kütüphaneleri -->
+    <!-- Web3 Entegrasyonu (Ethers.js) - YENİ EKLENDİ -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/5.7.2/ethers.umd.min.js"></script>
+    
+    <!-- Firebase Kütüphaneleri (Gelecek kullanım için tutuldu) -->
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
 
     <style>
-        :root { --bg-dark: #10162F; --card-dark: #192040; --text-main: #FFFFFF; --text-muted: #A0AEC0; --accent-purple: #6A35FF; --accent-pink: #E43A8A; --border-color: rgba(255, 255, 255, 0.1); }
+        :root { 
+            --bg-dark: #10162F; 
+            --card-dark: #192040; 
+            --text-main: #FFFFFF; 
+            --text-muted: #A0AEC0; 
+            --accent-purple: #6A35FF; 
+            --accent-pink: #E43A8A; 
+            --border-color: rgba(255, 255, 255, 0.1); 
+        }
+        
         html { scroll-behavior: smooth; }
-        body { font-family: 'Inter', sans-serif; background-color: var(--bg-dark); color: var(--text-main); }
+        body { font-family: 'Inter', sans-serif; background-color: var(--bg-dark); color: var(--text-main); overflow-x: hidden; }
         h1, h2, h3, h4, h5, h6 { font-family: 'Poppins', sans-serif; }
-        .auth0-card { background-color: var(--card-dark); border: 1px solid var(--border-color); border-radius: 0.75rem; box-shadow: 0 10px 30px rgba(0,0,0,0.2); transition: all 0.3s ease-in-out; }
+
+        /* YENİ: Hareketli Arka Plan (Mesh Gradient) */
+        .animated-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -20;
+            background: radial-gradient(circle at 15% 50%, rgba(106, 53, 255, 0.15), transparent 25%), 
+                        radial-gradient(circle at 85% 30%, rgba(228, 58, 138, 0.15), transparent 25%);
+            animation: bg-pulse 10s ease-in-out infinite alternate;
+        }
+
+        @keyframes bg-pulse {
+            0% { transform: scale(1); opacity: 0.8; }
+            100% { transform: scale(1.2); opacity: 1; }
+        }
+
+        /* GÜNCELLENDİ: Glassmorphism Efektli Kartlar */
+        .auth0-card { 
+            background: rgba(25, 32, 64, 0.6); /* Daha transparan */
+            backdrop-filter: blur(12px); /* Buzlu cam efekti */
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 0.75rem; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2); 
+            transition: all 0.3s ease-in-out; 
+        }
+
         .btn-primary { background: linear-gradient(90deg, var(--accent-purple), var(--accent-pink)); color: var(--text-main); font-weight: 600; border-radius: 0.5rem; transition: all 0.3s ease-in-out; box-shadow: 0 4px 15px rgba(106, 53, 255, 0.3); }
         .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(106, 53, 255, 0.4); }
         .btn-primary:disabled { background: #555; cursor: not-allowed; box-shadow: none; transform: none; }
+        
         .btn-secondary { background-color: rgba(255,255,255,0.05); color: var(--text-main); font-weight: 600; border-radius: 0.5rem; border: 1px solid var(--border-color); transition: all 0.3s ease-in-out; }
         .btn-secondary:hover { background-color: var(--border-color); }
+        
         #hamburger-btn { width: 24px; height: 24px; position: relative; }
         #hamburger-btn span { display: block; width: 100%; height: 2px; background-color: var(--text-main); border-radius: 2px; position: absolute; transition: all 0.3s ease-in-out; }
         #hamburger-btn span:nth-child(1) { top: 4px; } #hamburger-btn span:nth-child(2) { top: 11px; } #hamburger-btn span:nth-child(3) { top: 18px; }
         #hamburger-btn.open span:nth-child(1) { top: 11px; transform: rotate(135deg); }
         #hamburger-btn.open span:nth-child(2) { opacity: 0; }
         #hamburger-btn.open span:nth-child(3) { top: 11px; transform: rotate(-135deg); }
-        .avatar-upload-label { cursor: pointer; }
-        .avatar-upload-label:hover .absolute { opacity: 1; }
-        .stat-card { background-color: rgba(255,255,255,0.03); border: 1px solid var(--border-color); }
+        
+        .stat-card { 
+            background: rgba(255, 255, 255, 0.03); 
+            backdrop-filter: blur(8px);
+            border: 1px solid var(--border-color); 
+        }
+        
         #chat-widget-container { position: fixed; bottom: 20px; right: 20px; z-index: 1000; }
         #chat-bubble { width: 60px; height: 60px; background: linear-gradient(45deg, var(--accent-purple), var(--accent-pink)); border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 4px 20px rgba(0,0,0,0.3); transition: transform 0.3s ease, opacity 0.3s ease; }
         #chat-bubble:hover { transform: scale(1.1); }
@@ -48,13 +96,16 @@
         #chat-history::-webkit-scrollbar-thumb { background: var(--accent-purple); border-radius: 2px; }
     </style>
 </head>
-<body class="overflow-x-hidden">
+<body>
+    <!-- YENİ: Arka Plan Efekti Div -->
+    <div class="animated-bg"></div>
 
     <header class="sticky top-0 z-50 bg-opacity-80 bg-[var(--bg-dark)] backdrop-blur-lg border-b border-white/10">
         <nav class="container mx-auto px-6 py-4">
             <div class="flex items-center justify-between">
                 <a href="#" id="home-link" class="flex items-center gap-3">
                     <div class="w-10 h-10 bg-gradient-to-br from-[var(--accent-purple)] to-[var(--accent-pink)] rounded-lg flex items-center justify-center">
+                        <!-- Logo -->
                         <svg width="24" height="24" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M24 44C24 44 6 34 6 21V10L24 4L42 10V21C42 34 24 44 24 44Z" stroke="white" stroke-width="3"/><path d="M16 23 H32 M16 23 L14 16 L19 18 L24 14 L29 18 L34 16 L32 23 Z" stroke="#FFFFFF" stroke-width="2.5" fill="none"/></svg>
                     </div>
                     <span class="text-xl font-bold font-['Poppins'] text-white">AFEF Token</span>
@@ -97,6 +148,7 @@
     <div id="page-content">
         <main id="main-content" class="container mx-auto px-6 py-16 space-y-24 md:space-y-32">
              <section class="relative text-center pt-16 md:pt-24">
+                 <!-- Glow efekti CSS ile daha modern hale getirildi, ama buradaki statik glow'u da tutuyoruz -->
                  <div class="absolute inset-0 -z-10 overflow-hidden"><div class="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-gradient-to-tr from-[var(--accent-purple)] to-[var(--accent-pink)] opacity-20 rounded-full filter blur-3xl"></div></div>
                  <h1 class="text-4xl md:text-6xl font-bold text-white leading-tight tracking-tight mb-4">The New Standard for<br>Community-Driven Tokens</h1>
                  <p class="max-w-2xl mx-auto text-lg text-text-muted mb-8">AFEF combines secure authentication with decentralized principles to create a trustworthy ecosystem for everyone.</p>
@@ -127,19 +179,19 @@
              <section id="roadmap" class="pt-16">
                   <h2 class="text-3xl font-bold text-center mb-16 text-white">Our Roadmap</h2>
                   <div class="relative max-w-3xl mx-auto">
-                       <div class="absolute left-1/2 h-full w-0.5 bg-white/10 transform -translate-x-1/2"></div>
-                       <div class="relative mb-8 flex justify-between items-center w-full">
-                           <div class="w-1/2 pr-8 text-right"><div class="auth0-card p-4"><strong>Phase 1:</strong> Project Launch & Airdrop</div></div>
-                           <div class="absolute left-1/2 transform -translate-x-1/2 w-5 h-5 bg-[var(--accent-purple)] rounded-full border-4 border-[var(--bg-dark)]"></div>
-                       </div>
-                       <div class="relative mb-8 flex justify-between items-center w-full flex-row-reverse">
-                           <div class="w-1/2 pl-8 text-left"><div class="auth0-card p-4"><strong>Phase 2:</strong> CEX Listings & Partnerships</div></div>
-                           <div class="absolute left-1/2 transform -translate-x-1/2 w-5 h-5 bg-[var(--accent-purple)] rounded-full border-4 border-[var(--bg-dark)]"></div>
-                       </div>
+                        <div class="absolute left-1/2 h-full w-0.5 bg-white/10 transform -translate-x-1/2"></div>
                         <div class="relative mb-8 flex justify-between items-center w-full">
-                           <div class="w-1/2 pr-8 text-right"><div class="auth0-card p-4"><strong>Phase 3:</strong> Utility Development (Staking)</div></div>
-                           <div class="absolute left-1/2 transform -translate-x-1/2 w-5 h-5 bg-[var(--accent-purple)] rounded-full border-4 border-[var(--bg-dark)]"></div>
-                       </div>
+                            <div class="w-1/2 pr-8 text-right"><div class="auth0-card p-4"><strong>Phase 1:</strong> Project Launch & Airdrop</div></div>
+                            <div class="absolute left-1/2 transform -translate-x-1/2 w-5 h-5 bg-[var(--accent-purple)] rounded-full border-4 border-[var(--bg-dark)]"></div>
+                        </div>
+                        <div class="relative mb-8 flex justify-between items-center w-full flex-row-reverse">
+                            <div class="w-1/2 pl-8 text-left"><div class="auth0-card p-4"><strong>Phase 2:</strong> CEX Listings & Partnerships</div></div>
+                            <div class="absolute left-1/2 transform -translate-x-1/2 w-5 h-5 bg-[var(--accent-purple)] rounded-full border-4 border-[var(--bg-dark)]"></div>
+                        </div>
+                         <div class="relative mb-8 flex justify-between items-center w-full">
+                            <div class="w-1/2 pr-8 text-right"><div class="auth0-card p-4"><strong>Phase 3:</strong> Utility Development (Staking)</div></div>
+                            <div class="absolute left-1/2 transform -translate-x-1/2 w-5 h-5 bg-[var(--accent-purple)] rounded-full border-4 border-[var(--bg-dark)]"></div>
+                        </div>
                   </div>
              </section>
 
@@ -204,7 +256,7 @@
                 </div>
                 <div class="auth0-card p-8 mt-8">
                     <h2 class="text-2xl font-bold text-white">Welcome Back!</h2>
-                    <p class="text-text-muted mt-2">This is your personal dashboard. More features will be added soon!</p>
+                    <p class="text-text-muted mt-2">This is your personal dashboard. Connect your wallet to see your AFEF holdings.</p>
                 </div>
             </div>
             <div id="dashboard-settings" class="hidden">
@@ -248,7 +300,12 @@
                     <h2 class="text-2xl font-bold text-center mb-6">Welcome</h2>
                     <p class="text-center text-text-muted mb-8">Choose your preferred method to continue.</p>
                     <div class="space-y-4">
-                        <button id="connect-metamask-btn" class="w-full flex items-center justify-center gap-3 py-3 px-4 btn-secondary"><img src="https://upload.wikimedia.org/wikipedia/commons/3/36/MetaMask_Fox.svg" class="w-6 h-6" alt="MetaMask Logo"><span class="font-semibold">Connect with MetaMask</span></button>
+                        <!-- YENİ: MetaMask Butonu -->
+                        <button id="connect-metamask-btn" class="w-full flex items-center justify-center gap-3 py-3 px-4 btn-secondary">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/3/36/MetaMask_Fox.svg" class="w-6 h-6" alt="MetaMask Logo">
+                            <span class="font-semibold">Connect with MetaMask</span>
+                        </button>
+                        
                         <button id="continue-with-email-btn" class="w-full flex items-center justify-center gap-3 py-3 px-4 btn-secondary"><i data-lucide="mail" class="w-6 h-6"></i><span class="font-semibold">Continue with Email</span></button>
                     </div>
                 </div>
@@ -356,7 +413,7 @@
             const authUI = document.getElementById('auth-ui');
             const mobileAuthUI = document.getElementById('mobile-auth-ui');
 
-            if (isAuthenticated && userProfile) { // Added userProfile check
+            if (isAuthenticated && userProfile) {
                 authUI.querySelector('.login-trigger').style.display = 'none';
                 userProfileDiv.style.display = 'flex';
                 
@@ -384,7 +441,69 @@
             });
         };
         
-        // --- Auth Functions ---
+        // --- WEB3 / METAMASK LOGIC (YENİ) ---
+        async function connectWallet() {
+            const btn = document.getElementById('connect-metamask-btn');
+            
+            // MetaMask (veya diğer web3 cüzdanları) yüklü mü?
+            if (typeof window.ethereum !== 'undefined') {
+                try {
+                    btn.disabled = true;
+                    btn.innerHTML = '<span class="animate-spin">↻</span> Connecting...';
+
+                    // Bağlantı isteği gönder
+                    const provider = new ethers.providers.Web3Provider(window.ethereum);
+                    await provider.send("eth_requestAccounts", []);
+                    
+                    const signer = provider.getSigner();
+                    const address = await signer.getAddress();
+                    const balanceBigInt = await signer.getBalance();
+                    const balanceEth = ethers.utils.formatEther(balanceBigInt);
+
+                    // Başarılı bağlantı sonrası işlemleri yap
+                    showToast('Wallet Connected Successfully!');
+                    
+                    // Dashboard'u cüzdan verileriyle güncelle
+                    updateDashboardWithWallet(address, balanceEth);
+                    
+                    // Sanal bir oturum aç
+                    userProfile = { name: address, email: 'Web3 User' };
+                    expiresAt = new Date().getTime() + 3600000; // 1 saat
+                    
+                    // UI güncelle ve Yönlendir
+                    closeLoginModal();
+                    showView('dashboard');
+                    updateUI(); // Navbar'ı güncelle
+
+                } catch (error) {
+                    console.error(error);
+                    showToast('Connection Request Rejected or Error', 'error');
+                } finally {
+                    btn.disabled = false;
+                    btn.innerHTML = '<img src="https://upload.wikimedia.org/wikipedia/commons/3/36/MetaMask_Fox.svg" class="w-6 h-6" alt="MetaMask Logo"><span class="font-semibold">Connect with MetaMask</span>';
+                }
+            } else {
+                showToast('MetaMask is not installed!', 'error');
+                window.open('https://metamask.io/download.html', '_blank');
+            }
+        }
+
+        function updateDashboardWithWallet(address, balance) {
+            // Dashboard metinlerini güncelle
+            const shortAddress = address.substring(0, 6) + "..." + address.substring(38);
+            document.getElementById('user-identifier').textContent = shortAddress;
+            document.getElementById('user-avatar').src = "https://upload.wikimedia.org/wikipedia/commons/3/36/MetaMask_Fox.svg"; 
+            
+            // Bakiyeyi yazdır
+            document.getElementById('dashboard-balance').textContent = parseFloat(balance).toFixed(4) + " ETH";
+            document.getElementById('dashboard-member-since').textContent = "Web3 User";
+            
+            // Settings kısmındaki inputları doldur (sadece görüntü amaçlı)
+            if(document.getElementById('displayName')) document.getElementById('displayName').value = shortAddress;
+            if(document.getElementById('displayEmail')) document.getElementById('displayEmail').value = "Wallet Connected";
+        }
+
+        // --- Auth0 Functions ---
         function setSession(authResult) {
             expiresAt = (authResult.expiresIn * 1000) + new Date().getTime();
             accessToken = authResult.accessToken;
@@ -405,7 +524,7 @@
                      console.log("Could not get a new token", err);
                      showView('main');
                  }
-                  updateUI();
+                 updateUI();
              });
         }
         
@@ -525,7 +644,9 @@
             document.getElementById('back-to-options-btn').addEventListener('click', () => showLoginModalView('options'));
             document.getElementById('back-to-email-btn').addEventListener('click', () => showLoginModalView('email'));
 
-            document.getElementById('connect-metamask-btn').addEventListener('click', () => showToast('MetaMask integration coming soon!'));
+            // YENİ: MetaMask Bağlantısı
+            document.getElementById('connect-metamask-btn').addEventListener('click', connectWallet);
+            
             document.getElementById('btn-passwordless-login').addEventListener('click', startPasswordlessLogin);
             document.getElementById('btn-verify-code').addEventListener('click', verifyCode);
             document.getElementById('btn-logout').addEventListener('click', logout);
@@ -599,25 +720,24 @@
                 chatSendBtn.disabled = true;
                 showTypingIndicator();
 
+                // AI SİMÜLASYONU (Geçici olarak frontend tarafında basit cevap)
+                // Backend endpoint hazır olana kadar bu kod simülasyon yapacak.
+                setTimeout(() => {
+                    removeTypingIndicator();
+                    addMessage("Thank you for your message! Our AI integration is being upgraded. For now, please check our Whitepaper for more details.", 'ai');
+                    chatSendBtn.disabled = false;
+                }, 1500);
+                
+                /* Backend hazır olduğunda burayı açabilirsin:
                 try {
                     const response = await fetch('/.netlify/functions/gemini-proxy', {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify({ prompt: prompt }),
                     });
-                    
-                    removeTypingIndicator();
-                    if (!response.ok) { throw new Error('Network response was not ok.'); }
-                    const data = await response.json();
-                    addMessage(data.response, 'ai');
-
-                } catch (error) {
-                    console.error('Error:', error);
-                    removeTypingIndicator();
-                    addMessage('Sorry, something went wrong. Please try again.', 'ai');
-                } finally {
-                     chatSendBtn.disabled = false;
-                }
+                    // ...
+                } 
+                */
             };
 
             chatSendBtn.addEventListener('click', sendMessageToAI);
